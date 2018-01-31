@@ -10,6 +10,18 @@ import matplotlib.pyplot as plt
 def note(*args, **kwds):
     '''
     These are notes of Peefy CLRS chapter1
+
+    Parameters
+    =
+    *args : a tuple like
+    **kwds : a dict like
+
+    Returns
+    =
+    None
+
+    Example
+    =
     >>> print('chapter1 note as follow:')
     '''  
     print('1.矩阵乘法满足结合律 矩阵连乘 使用动态规划满足减小运算复杂度')
