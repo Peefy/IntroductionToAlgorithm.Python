@@ -11,10 +11,19 @@
 
 # Quick Start
 
+### Step 1
+
 >git clone https://github.com/Peefy/CLRS_dugu_code-master
 
+### Step 2
+
 > cd CLRS_dugu_code-master
+
+### Step 3
+
 > python main.py
+
+Then enjoy it.
 
 # Tip
 
