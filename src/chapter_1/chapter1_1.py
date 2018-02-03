@@ -81,14 +81,15 @@ class Chapter1:
         print('  算法是当代计算机中用到的大部分技术的核心。拿网络路由算法举例：算法的目的是找到一条从源路由器到目的路由器的“好”路径（即具有最低费用最短时间的路径)')
         print('  基本的路由算法：LS算法或者Dijkstra算法，链路向量选路算法，距离向量算法')
         # 定义numpy的一个数组，速度快
-        n = arange(1, 50, 0.2)
+        interval = 0.2
+        n = arange(1, 50, interval)
         # for in 遍历求函数值
         y1_2_2 = [8 * i ** 2 for i in n]
         y2_2_2 = [64 * i * math.log2(i) for i in n]   
         # 利用matplotlib仿matlab画图
         # plot(n, y1_2_2, n, y2_2_2)
         #show()        
-        index = [math.floor(i / 5 + 1) + 1 for i in range(1, len(y1_2_2)) if y1_2_2[i] <= y2_2_2[i]]
+        index = [math.floor(i * interval + 1) + 1 for i in range(1, len(y1_2_2)) if y1_2_2[i] <= y2_2_2[i]]
         # 使用仿Java的string.format()写法
         print('练习1.2-2:当n的范围在{}与{}之间时，插入排序的性能要优于合并排序'.format(index[0], index[-1]))        
         n = arange(1, 15, 0.2)
@@ -98,7 +99,7 @@ class Chapter1:
         #figure()
         #plot(n, y1_2_3, n, y2_2_3)
         #show()
-        index = [math.floor(i / 5 + 1) + 1 for i in range(1, len(y1_2_3)) if y1_2_3[i] <= y2_2_3[i]]
+        index = [math.floor(i * interval + 1) + 1 for i in range(1, len(y1_2_3)) if y1_2_3[i] <= y2_2_3[i]]
         print('练习1.2-3:n的最小取值：', index[0])
         n = 1
         t1flag = False;
