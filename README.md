@@ -8,6 +8,7 @@
 * *pip package*
 * *numpy package*
 * *matplotlib package*
+* *sympy package*
 
 # Quick Start
 
