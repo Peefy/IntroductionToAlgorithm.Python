@@ -26,7 +26,7 @@ class Chapter1:
     def __str__(self):
         return 'self.ok' + str(self.ok);
 
-    def note(*args, **kwargs):
+    def note(self, *args, **kwargs):
         '''
         These are notes of Peefy CLRS chapter1
 
