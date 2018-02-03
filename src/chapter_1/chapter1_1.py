@@ -100,6 +100,53 @@ class Chapter1:
         #show()
         index = [math.floor(i / 5 + 1) + 1 for i in range(1, len(y1_2_3)) if y1_2_3[i] <= y2_2_3[i]]
         print('练习1.2-3:n的最小取值：', index[0])
+        n = 1
+        t1flag = False;
+        t2flag = False;
+        t3flag = False;
+        t4flag = False;
+        t5flag = False;
+        t6flag = False;
+        t7flag = False;
+        t8flag = False;
+        while True:
+            if t1flag == False:
+                t1 = math.log2(n) * 1e-6
+            if t2flag == False:
+                t2 = math.sqrt(n) * 1e-6
+            if t3flag == False:
+                t3 = n * 1e-6
+            if t4flag == False:
+                t4 = n * math.log2(n) * 1e-6
+            if t5flag == False:
+                t5 = n ** 2 * 1e-6
+            if t6flag == False:
+                t6 = n ** 3 * 1e-6
+            if t7flag == False:
+                t7 = 2 ** n * 1e-6
+            if t8flag == False:
+                t8 = 1 * 1e-6
+            for i in range(1, n):
+                t8 = t8 * i
+            if t8 >= 1 and t8flag == False:
+                print('思考题1-1:n!:', n)
+                t8flag = True
+            if t7 >= 1 and t7flag == False:
+                print('思考题1-1:2**n:', n)
+                t7flag = True
+            if t6 >= 1 and t6flag == False:
+                print('思考题1-1:n**3:', n)
+                t6flag = True
+            if t5 >= 1 and t5flag == False:
+                print('思考题1-1:n**2:', n)
+                t5flag = True
+                break
+            n = n + 1
+        print('思考题1-1:n*lg(n):太大了循环不过来', )
+        print('思考题1-1:lg(n):太大了循环不过来')
+        print('思考题1-1:sqrt(n):太大了循环不过来')
+        print('思考题1-1:n:1e6')
+
         
     def chapter1_1(*args, **kwargs):
         '''
