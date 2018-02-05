@@ -287,6 +287,7 @@ class Chapter2:
         print(' 因为在第n-1次比较选择的时候已经比较出了最大元素和次大元素并选择，所以这时选择完之后第n个元素已经是最大值，没有必要再比较下去了')
         print('练习题2.2-3:线性查找最好情况是o(1),最坏情况是o(n)，平均情况是(n)')
         print('要使算法具有较好的最佳情况运行时间就一定要对输入进行控制，使之偏向能够使得算法具有最佳运行情况的排列。')
+
         #python src/chapter_2/chapter2.py
         #python3 src/chapter_2/chapter2.py
         return self
