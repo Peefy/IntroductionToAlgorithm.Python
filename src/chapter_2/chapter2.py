@@ -1,6 +1,6 @@
 
-## python src/chapter_1/chapter1.py
-## python3 src/chapter_1/chapter1.py
+## python src/chapter_2/chapter2.py
+## python3 src/chapter_2/chapter2.py
 
 import sys
 import numpy as nm
@@ -228,8 +228,12 @@ class Chapter2:
         print('  21在序列A中的索引为(索引从0开始)：', self.arrayContains(A, 21))  
         print('练习2.1-4：两个n位二进制数相加的算法(适用于FPGA中。参考一位加法器的逻辑表达式或者数学表达式)：')
         print(' 两个n位二进制数的和为：', self.twoNBinNumAdd([1, 1, 0, 1], [1, 0, 0, 0]))
+        # range函数和arange函数都是左闭右开区间
         print('range(0,4)的值为：', [i for i in range(0,4)])
         print('2.2 算法分析')
+        #python src/chapter_2/chapter2.py
+        #python3 src/chapter_2/chapter2.py
+        print()
         return self
 
 if __name__ == '__main__':
@@ -242,6 +246,6 @@ else:
         'python3 src/chapter_1/chapter1.py')
     print()
 
-## python src/chapter_1/chapter1.py
-## python3 src/chapter_1/chapter1.py
+## python src/chapter_2/chapter2.py
+## python3 src/chapter_2/chapter2.py
 
