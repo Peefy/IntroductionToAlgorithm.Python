@@ -87,8 +87,8 @@ class Chapter1:
         y1_2_2 = [8 * i ** 2 for i in n]
         y2_2_2 = [64 * i * math.log2(i) for i in n]   
         # 利用matplotlib仿matlab画图
-        # plot(n, y1_2_2, n, y2_2_2)
-        #show()        
+        plot(n, y1_2_2, n, y2_2_2)
+        show()        
         index = [math.floor(i * interval + 1) + 1 for i in range(1, len(y1_2_2)) if y1_2_2[i] <= y2_2_2[i]]
         # 使用仿Java的string.format()写法
         print('练习1.2-2:当n的范围在{}与{}之间时，插入排序的性能要优于合并排序'.format(index[0], index[-1]))        
@@ -96,9 +96,9 @@ class Chapter1:
         y1_2_3 = [100 * i ** 2 for i in n]
         y2_2_3 = [2 ** i for i in n]
         # 可以画图验证两条函数曲线的交点
-        #figure()
-        #plot(n, y1_2_3, n, y2_2_3)
-        #show()
+        figure()
+        plot(n, y1_2_3, n, y2_2_3)
+        show()
         index = [math.floor(i * interval + 1) + 1 for i in range(1, len(y1_2_3)) if y1_2_3[i] <= y2_2_3[i]]
         print('练习1.2-3:n的最小取值：', index[0])
         n = 1
