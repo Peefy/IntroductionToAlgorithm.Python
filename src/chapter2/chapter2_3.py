@@ -12,7 +12,7 @@ if __name__ == '__main__':
     from chapter2 import Chapter2
 else:
     from .chapter2 import Chapter2
-    
+
 class Chapter2_3:
     '''
     CLRS 第二章 2.3
@@ -33,6 +33,8 @@ class Chapter2_3:
         =
         None
         '''
+        # python中变量名和对象是分离的
+        # 此时A是array的一个引用
         A = array
         # 求数组的长度 然后分成两堆([p..q],[q+1..r]) ([0..q],[q+1..n-1])
         n = len(A)
@@ -54,16 +56,16 @@ class Chapter2_3:
             L[i] = A[p + i]
         for j in range(n2):
             R[j] = A[q + j + 1]
-        # 加入“哨兵牌”
+        # 加入无穷大“哨兵牌”, 对不均匀分堆的完美解决
         L[n1] = math.inf
         R[n2] = math.inf
         # 因为合并排序的前提是两堆牌是已经排序好的，所以这里排序一下
         chapter2 = Chapter2()
         L = chapter2.selectSortAscending(L)
         R = chapter2.selectSortAscending(R)
-        # 比较大小放入新的堆中
+        # 一直比较两堆牌的顶部大小大小放入新的堆中
         i, j = 0, 0
-        for k in range(p, r):
+        for k in range(p, n):
             if L[i] <= R[j]:
                 A[k] = L[i]
                 i += 1
@@ -100,7 +102,10 @@ class Chapter2_3:
         # 合并排序针对的是两堆已经排序好的两堆牌，这样时间复杂度为O(n)
         A = [12.1, 2.2, 45.6, 32, 56.2, 10]
         print('合并排序前的待排序数组', A)
-        print('合并排序后的数组', self.mergeSort(A, 2))
+        print('合并排序后的数组(均匀分堆)', self.mergeSort(A, 2))
+        B = [23, 45, 67, 32, 34, 45, 12, 34]
+        print('合并排序前的待排序数组', B)
+        print('合并排序后的数组(非均匀分堆)', self.mergeSort(B, 2))
 
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
