@@ -33,6 +33,9 @@ class Chapter2:
         '''
         self.ok = ok
 
+    def __hello():
+        pass
+
     def insertSortAscending(self, array = []):
         '''
         Summary

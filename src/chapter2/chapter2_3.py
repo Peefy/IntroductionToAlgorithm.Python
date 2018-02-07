@@ -4,9 +4,13 @@
 
 import sys
 import math
+
 from copy import copy
 from copy import deepcopy
+
+import numpy as np
 from numpy import arange
+
 from matplotlib.pyplot import plot
 from matplotlib.pyplot import figure
 from matplotlib.pyplot import show
@@ -151,6 +155,7 @@ class Chapter2_3:
         # 浅拷贝
         A_copy = copy(A)
         print('总体合并算法应用，排序', A_copy, '结果:', self.mergeSort(A))
+        print('2.3.2 分治法分析')
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
         print('')
