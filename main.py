@@ -1,25 +1,21 @@
 # python main.py
 # python3 main.py
+from src.numpyAndmatplot.test import testMatplot
+from src.numpyAndmatplot.test import testNumpy
+from src.chapter1.chapter1_1 import Chapter1
+from src.chapter2.chapter2 import Chapter2
+from src.chapter2.chapter2_3 import Chapter2_3
 
-import sys
-import numpy as nm
-import numpy.fft as fft
-import matplotlib.pyplot as plt
-
-## totol test nm.array plot fft
-X = nm.array([1, 2, 3, 4])
-Q = nm.array([1, 2, 3, 4])
-T = nm.arange(1, 100, 0.1)
-S = nm.sin(T)
-print(X)
-plt.plot(T, S)
-plt.figure()
-freq = fft.fftfreq(T.shape[-1])
-plt.plot(freq, fft.fft(S))
-plt.show()
-
-## Chapter.1
-
+if __name__ == '__main__':
+    ## Matplotlib and Numpy Test
+    testNumpy()
+    testMatplot()
+    ## Chapter.1
+    Chapter1().note()
+    Chapter2().note()
+    Chapter2_3().note()
+else:
+    pass
 
 # python main.py
 # python3 main.py

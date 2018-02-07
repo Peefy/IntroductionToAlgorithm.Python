@@ -66,6 +66,7 @@ class Chapter1:
         print('    算法的可读性是指一个算法可供人们阅读的容易程度。')
         print('  健壮性')
         print('    健壮性是指一个算法对不合理数据输入的反应能力和处理能力，也成为容错性。')
+        print('使用下界函数Omega或者上界函数Theta则分别表示算法运行的最快和最慢时间。')
         print('练习题1. 1-3：数组与链表的优缺点；数组:优点：使用方便 ，查询效率 比链表高，内存为一连续的区域 缺点：大小固定，不适合动态存储，不方便动态添加' +
             '链表：优点：可动态添加删除,大小可变;缺点：只能通过顺次指针访问，查询效率低')   
         print('练习题1. 1-4：最短路径问题：SPFA算法、Dijkstra算法；旅行商人问题(组合优化问题):最近邻点法,插入法，贪心法;' + 
@@ -160,7 +161,7 @@ if __name__ == '__main__':
     print('single chapter one!')
     Chapter1().note()
 else:
-    print('please in your cmd input as follow:\n python src/chapter_1/chapter1_1.py or \n' + 
+    print('if you want to run single test, please in your cmd input as follow:\n python src/chapter_1/chapter1_1.py or \n' + 
         'python3 src/chapter_1/chapter1_1.py')
     print()
 

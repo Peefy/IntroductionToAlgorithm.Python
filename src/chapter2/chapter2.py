@@ -296,7 +296,7 @@ if __name__ == '__main__':
     print('Run main : single chapter two!')
     Chapter2().note()
 else:
-    print('please in your cmd input as follow:\n' + 
+    print('if you want to run single test, please in your cmd input as follow:\n' + 
         'python src/chapter_2/chapter2.py or \n' + 
         'python3 src/chapter_1/chapter1.py')
     print()
