@@ -24,6 +24,79 @@ class Chapter2_3:
     '''
     CLRS 第二章 2.3
     '''
+
+    def __mergeSortOne2(self, array, p ,q, r):
+        '''
+        一步合并两堆牌排序算法过程
+
+        Args
+        =
+        array : a array like
+
+        Returns:
+        =
+        sortedArray : 排序好的数组
+
+        Raises:
+        =
+        None
+        '''
+        # python中变量名和对象是分离的
+        # 此时A是array的一个深拷贝，改变A不会改变array
+        A = deepcopy(array)
+        # 求数组的长度 然后分成两堆([p..q],[q+1..r]) ([0..q],[q+1..n-1])
+        n = r + 1
+
+        # 检测输入参数是否合理
+        if q < 0 or q > n - 1:
+            raise Exception("arg 'q' must not be in (0,len(array) range)")
+        # n1 + n2 = n
+        # 求两堆牌的长度
+        n1 = q - p + 1
+        n2 = r - q
+        # 构造两堆牌(包含“哨兵牌”)
+        L = arange(n1, dtype=float)
+        R = arange(n2, dtype=float)
+        # 将A分堆
+        for i in range(n1):
+            L[i] = A[p + i]
+        for j in range(n2):
+            R[j] = A[q + j + 1]
+        # 因为合并排序的前提是两堆牌是已经排序好的，所以这里排序一下
+        # chapter2 = Chapter2()
+        # L = chapter2.selectSortAscending(L)
+        # R = chapter2.selectSortAscending(R)
+        # 一直比较两堆牌的顶部大小大小放入新的堆中
+        i, j = 0, 0
+        for k in range(p, n):
+            if L[i] <= R[j]:
+                A[k] = L[i]
+                i += 1
+            else:
+                A[k] = R[j]
+                j += 1
+            # 如果L牌堆放完了
+            if i == n1:
+                # R牌堆剩下的牌数量
+                remainCount = n2 - j
+                # 把R牌堆剩下的按顺序放到新的牌堆中
+                for m in range(remainCount):
+                    k += 1
+                    A[k] = R[j]
+                    j += 1
+                break
+            # 如果R牌堆放完了
+            if i == n2:
+                # L牌堆剩下的牌数量
+                remainCount = n1 - i
+                # 把L牌堆剩下的按顺序放到新的牌堆中
+                for m in range(remainCount):
+                    k += 1
+                    A[k] = L[i]
+                    i += 1
+                break
+        return A
+
     def __mergeSortOne(self, array, p ,q, r):
         '''
         一步合并两堆牌排序算法过程
@@ -116,7 +189,60 @@ class Chapter2_3:
         return array    
 
     def mergeSort(self, array):
+        '''
+        归并排序：最优排序复杂度n * O(log2(n)), 空间复杂度O(n)
+
+        Args:
+        =
+        array : 待排序的数组
+
+        Returns:
+        =
+        sortedArray : 排序好的数组
+
+        Example:
+        >>> Chapter2_3().mergeSort([6, 5, 4, 3, 2, 1])
+        >>> [1, 2, 3, 4, 5, 6]
+
+        '''
         return self.__mergeSort(array, 0, len(array) - 1)
+
+    def __insertSort(self, array, num):
+        key = array[num]
+        for i in range(num):
+            index = num - i - 1
+            # 右移           
+            if(key <= array[index]):
+                array[index + 1] = array[index]
+            # 插入
+            else:
+                array[index + 1] = key
+                break
+        return array
+
+    def insertSort(self, array, num):
+        '''
+        递归版本的插入排序
+
+        Args:
+        ====
+        array : 待排序的数组
+
+        Return: 
+        ======
+        sortedArray : 排序好的数组
+
+        Example: 
+        =
+        >>> Chapter2_3().insertSort([6, 5, 4, 3, 2, 1])
+        >>> [1, 2, 3, 4, 5, 6]
+        '''
+        if num > 0:
+            # O(1)
+            self.insertSort(array, num - 1)  
+            # O(n)
+            self.__insertSort(array, num)   
+        return array
 
     def note(self):
         '''
@@ -156,9 +282,34 @@ class Chapter2_3:
         A_copy = copy(A)
         print('总体合并算法应用，排序', A_copy, '结果:', self.mergeSort(A))
         print('2.3.2 分治法分析')
+        print(' 当一个算法中含有对其自身的递归调用时，其运行时间可用一个递归方程(递归式)来表示')
+        print(' 如果问题的规模足够小，则得到直接解的时间为O(1)')
+        print(' 把原问题分解成a个子问题，每一个问题的大小是原问题的1/b，分解该问题和合并解的时间为D(n)和C(n)')
+        print(' 递归式：T(n) = aT(n/b) + D(n) + C(n)')
+        print('合并排序算法分析')
+        print('合并算法在元素是奇数个时仍然可以正确地工作，假定原问题的规模是2的幂次')
+        print('当排序规模为1时，需要常量时间，D(n) = O(1)')
+        print(' 分解：这一步仅仅是计算出子数组的中间位置，需要常量时间，所以D(n) = O(1)')
+        print(' 解决：递归地解两个规模为n/2的子问题，时间为2T(n/2)')
+        print(' 合并：在含有n个元素的子数组上，单步分解合并的时间C(n) = O(n)')
+        print(' 合并排序算法的递归表达式T(n) = O(1) n = 1;2T(n/2) + O(n)')
+        print('最后解得T(n) = O(n * log2(n))')
+        print('练习2.3-1：将输入数组A分解为八个数，然后从底层做合并排序，3和41合并为3,41；52和26合并为26,52，再合并为3,26,41,52,后四个数同理，然后做总的合并')
+        A = [3, 41, 52, 26, 38, 57, 9, 49]
+        print('数组A=[3,41,52,26,38,57,9,49]的合并排序结果为：', self.mergeSort(A))
+        print('练习2.3-2：(tip:哨兵牌可以的)')
+        A = [3, 41, 52, 16, 38, 57, 79, 99]
+        print('数组A=[3, 41, 52, 16, 38, 57, 79, 99]的单步分解合并排序结果为：', self.__mergeSortOne2(A, 0, 2, len(A) - 1))
+        print('练习2.3-3：每一步的递推公式 + 上一步的递推公式左右两边*2即可得通式T(n) = nlog2(n)')
+        print('练习2.3-4: 递归插入方法')
+        A = [1, 2, 3, 5, 6, 4]
+        print('数组A=[1, 2, 3, 5, 6, 4]的递归单步插入排序结果为：', self.__insertSort(A, len(A) - 1))
+        A = [3, 41, 12, 56, 68, 27, 19, 29]
+        print('数组A=[3, 41, 12, 56, 68, 27, 19, 29]的递归插入排序结果为：', self.insertSort(A, len(A) - 1))
+        print('递归插入的T(1) = O(1) ; T(n) = T(n-1) + n')
+        print('练习2.3-6')
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
-        print('')
 
 if __name__ == '__main__':
     Chapter2_3().note()
