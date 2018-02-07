@@ -5,9 +5,14 @@ from numpy import arange
 import numpy.fft as fft
 import matplotlib.pyplot as plt
 
+def testAll():
+    testNumpy()
+    testMatplot()
+    testSympy()
+
 def testNumpy():
     '''
-    Test numpy package fft show plot
+    Test numpy package arange
 
     Args:
     =
@@ -48,3 +53,6 @@ def testMatplot():
     freq = fft.fftfreq(T.shape[-1])
     plt.plot(freq, fft.fft(S))
     plt.show()
+
+def testSympy():
+    pass

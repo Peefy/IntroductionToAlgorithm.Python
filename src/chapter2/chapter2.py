@@ -9,7 +9,9 @@ import matplotlib as mat
 import matplotlib.pyplot as plt
 
 class Chapter2:
-
+    '''
+    CLRS 第二章 2.1 2.2
+    '''
     def __init__(self, ok = 1, *args, **kwargs):       
         '''
         Summary
@@ -296,10 +298,7 @@ if __name__ == '__main__':
     print('Run main : single chapter two!')
     Chapter2().note()
 else:
-    print('if you want to run single test, please in your cmd input as follow:\n' + 
-        'python src/chapter_2/chapter2.py or \n' + 
-        'python3 src/chapter_1/chapter1.py')
-    print()
+    pass
 
 ## python src/chapter_2/chapter2.py
 ## python3 src/chapter_2/chapter2.py

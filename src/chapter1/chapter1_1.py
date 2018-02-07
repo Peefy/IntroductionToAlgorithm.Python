@@ -19,7 +19,9 @@ from sympy import symbols, Symbol
 from sympy import solve, poly, exp, log
 
 class Chapter1:
-
+    '''
+    CLRS 第一章
+    '''
     def __init__(self, ok = 1, *args, **kwargs):
         self.ok = ok
 
@@ -161,9 +163,7 @@ if __name__ == '__main__':
     print('single chapter one!')
     Chapter1().note()
 else:
-    print('if you want to run single test, please in your cmd input as follow:\n python src/chapter_1/chapter1_1.py or \n' + 
-        'python3 src/chapter_1/chapter1_1.py')
-    print()
+    pass
 
 ## python src/chapter_1/chapter1_1.py
 ## python3 src/chapter_1/chapter1_1.py
