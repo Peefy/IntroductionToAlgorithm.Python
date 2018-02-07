@@ -1,6 +1,6 @@
 
-# python src/chapter_2/chapter2_3.py
-# python3 src/chapter_2/chapter2_3.py 
+# python src/chapter2/chapter2_3.py
+# python3 src/chapter2/chapter2_3.py 
 import sys
 import math
 from numpy import arange
@@ -8,7 +8,11 @@ from matplotlib.pyplot import plot
 from matplotlib.pyplot import figure
 from matplotlib.pyplot import show
 
-from .chapter2 import Chapter2
+if __name__ == '__main__':
+    from chapter2 import Chapter2
+else:
+    from .chapter2 import Chapter2
+    
 class Chapter2_3:
     '''
     CLRS 第二章 2.3
@@ -57,7 +61,7 @@ class Chapter2_3:
         chapter2 = Chapter2()
         L = chapter2.selectSortAscending(L)
         R = chapter2.selectSortAscending(R)
-        #
+        # 比较大小放入新的堆中
         i, j = 0, 0
         for k in range(p, r):
             if L[i] <= R[j]:
@@ -66,7 +70,7 @@ class Chapter2_3:
             else:
                 A[k] = R[j]
                 j += 1
-        return array
+        return A
 
     def note(self):
         '''
@@ -98,8 +102,8 @@ class Chapter2_3:
         print('合并排序前的待排序数组', A)
         print('合并排序后的数组', self.mergeSort(A, 2))
 
-        # python src/chapter_2/chapter2_3.py
-        # python3 src/chapter_2/chapter2_3.py
+        # python src/chapter2/chapter2_3.py
+        # python3 src/chapter2/chapter2_3.py
         print('')
 
 if __name__ == '__main__':
@@ -107,6 +111,6 @@ if __name__ == '__main__':
 else:
     pass
 
-# python src/chapter_2/chapter2_3.py
-# python3 src/chapter_2/chapter2_3.py
+# python src/chapter2/chapter2_3.py
+# python3 src/chapter2/chapter2_3.py
 

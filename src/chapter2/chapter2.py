@@ -1,6 +1,6 @@
 
-## python src/chapter_2/chapter2.py
-## python3 src/chapter_2/chapter2.py
+## python src/chapter2/chapter2.py
+## python3 src/chapter2/chapter2.py
 
 import sys
 import numpy as nm
@@ -290,8 +290,8 @@ class Chapter2:
         print('练习题2.2-3:线性查找最好情况是o(1),最坏情况是o(n)，平均情况是(n)')
         print('要使算法具有较好的最佳情况运行时间就一定要对输入进行控制，使之偏向能够使得算法具有最佳运行情况的排列。')
 
-        #python src/chapter_2/chapter2.py
-        #python3 src/chapter_2/chapter2.py
+        #python src/chapter2/chapter2.py
+        #python3 src/chapter2/chapter2.py
         return self
 
 if __name__ == '__main__':
@@ -300,6 +300,6 @@ if __name__ == '__main__':
 else:
     pass
 
-## python src/chapter_2/chapter2.py
-## python3 src/chapter_2/chapter2.py
+## python src/chapter2/chapter2.py
+## python3 src/chapter2/chapter2.py
 
