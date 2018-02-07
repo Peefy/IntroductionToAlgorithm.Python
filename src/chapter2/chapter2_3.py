@@ -1,8 +1,11 @@
 
 # python src/chapter2/chapter2_3.py
 # python3 src/chapter2/chapter2_3.py 
+
 import sys
 import math
+from copy import copy
+from copy import deepcopy
 from numpy import arange
 from matplotlib.pyplot import plot
 from matplotlib.pyplot import figure
@@ -17,9 +20,9 @@ class Chapter2_3:
     '''
     CLRS 第二章 2.3
     '''
-    def mergeSort(self, array, q):
+    def __mergeSortOne(self, array, p ,q, r):
         '''
-        合并排序算法过程
+        一步合并两堆牌排序算法过程
 
         Args
         =
@@ -37,12 +40,10 @@ class Chapter2_3:
         # 此时A是array的一个引用
         A = array
         # 求数组的长度 然后分成两堆([p..q],[q+1..r]) ([0..q],[q+1..n-1])
-        n = len(A)
-        # 将p和r替换为0和n-1
-        p = 0
-        r = n - 1
+        n = r + 1
+
         # 检测输入参数是否合理
-        if q <= 0 or q >= n - 1:
+        if q < 0 or q > n - 1:
             raise Exception("arg 'q' must not be in (0,len(array) range)")
         # n1 + n2 = n
         # 求两堆牌的长度
@@ -60,9 +61,9 @@ class Chapter2_3:
         L[n1] = math.inf
         R[n2] = math.inf
         # 因为合并排序的前提是两堆牌是已经排序好的，所以这里排序一下
-        chapter2 = Chapter2()
-        L = chapter2.selectSortAscending(L)
-        R = chapter2.selectSortAscending(R)
+        # chapter2 = Chapter2()
+        # L = chapter2.selectSortAscending(L)
+        # R = chapter2.selectSortAscending(R)
         # 一直比较两堆牌的顶部大小大小放入新的堆中
         i, j = 0, 0
         for k in range(p, n):
@@ -73,6 +74,45 @@ class Chapter2_3:
                 A[k] = R[j]
                 j += 1
         return A
+
+    def __mergeSort(self, array, start, end):
+        '''
+        合并排序总过程
+
+        Args:
+        =
+        array : 待排序数组
+        start : 排序起始索引
+        end : 排序结束索引
+
+        Return:
+        =
+        sortedArray : 排序好的数组
+
+        Example:
+        >>> Chapter2_3().mergeSort([6, 5, 4, 3, 2, 1])
+        >>> [1, 2, 3, 4, 5, 6]
+        '''
+        # python一切皆对象和引用，所以要拷贝...特别是递归调用的时候
+        r = deepcopy(end)
+        p = deepcopy(start)
+        if p < r:
+            # 待排序序列劈成两半
+            middle = int((r + p) / 2)
+            q = deepcopy(middle)
+            # 递归调用
+            # array =  self.__mergeSort(array, start, middle)
+            self.__mergeSort(array, p, q)
+            # 递归调用
+            # array = self.__mergeSort(array, middle + 1, end)
+            self.__mergeSort(array, q + 1, r)
+            # 劈成的两半牌合并
+            # array = self.__mergeSortOne(array, start ,middle, end)
+            self.__mergeSortOne(array, p, q, r)
+        return array    
+
+    def mergeSort(self, array):
+        return self.__mergeSort(array, 0, len(array) - 1)
 
     def note(self):
         '''
@@ -100,13 +140,17 @@ class Chapter2_3:
         print(' 用扑克牌类比合并排序过程，假设有两堆牌都已经排序好，牌面朝上且最小的牌在最上面，期望结果是这两堆牌合并成一个排序好的输出堆，牌面朝下放在桌上')
         print(' 步骤是从两堆牌的顶部的两张牌取出其中较小的一张放在新的堆中，循环这个步骤一直到两堆牌中的其中一堆空了为止，再将剩下所有的牌放到堆上即可')
         # 合并排序针对的是两堆已经排序好的两堆牌，这样时间复杂度为O(n)
-        A = [12.1, 2.2, 45.6, 32, 56.2, 10]
-        print('合并排序前的待排序数组', A)
-        print('合并排序后的数组(均匀分堆)', self.mergeSort(A, 2))
-        B = [23, 45, 67, 32, 34, 45, 12, 34]
-        print('合并排序前的待排序数组', B)
-        print('合并排序后的数组(非均匀分堆)', self.mergeSort(B, 2))
-
+        A = [2.1, 12.2, 45.6, 12, 36.2, 50]
+        print('单步合并排序前的待排序数组', A)
+        print('单步合并排序后的数组(均匀分堆)', self.__mergeSortOne(A, 0, 2, len(A) - 1))
+        B = [23, 45, 67, 12, 24, 35, 42, 54]
+        print('单步合并排序前的待排序数组', B)
+        print('单步合并排序后的数组(非均匀分堆)', self.__mergeSortOne(B, 0, 2, len(B) - 1))
+        print('单步合并排序在两堆牌已经是有序的条件下时间复杂度是O(n),因为不包含双重for循环')
+        A = [6, 5, 4, 3, 2, 1]
+        # 浅拷贝
+        A_copy = copy(A)
+        print('总体合并算法应用，排序', A_copy, '结果:', self.mergeSort(A))
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
         print('')
