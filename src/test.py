@@ -6,6 +6,9 @@ import numpy.fft as fft
 import matplotlib.pyplot as plt
 
 def testAll():
+    '''
+    Test required packet
+    '''
     testNumpy()
     testMatplot()
     testSympy()
@@ -55,4 +58,7 @@ def testMatplot():
     plt.show()
 
 def testSympy():
+    '''
+    test sympy
+    '''
     pass
