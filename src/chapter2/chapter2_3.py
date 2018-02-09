@@ -263,7 +263,8 @@ class Chapter2_3:
         >>> 24
 
         '''
-        if n == 0:
+        # Don't forget to terminate the iterations
+        if n <= 0:
             return 1
         return n * self.factorial(n - 1)
 
@@ -280,6 +281,7 @@ class Chapter2_3:
         sortedArray : 排序好的数组
 
         Example:
+        =
         >>> Chapter2_3().insertSortDichotomy([6, 5, 4, 3, 2, 1])
         >>> [1, 2, 3, 4, 5, 6]
 
@@ -334,9 +336,11 @@ class Chapter2_3:
             x : 待判断的元素
 
             Return:
+            =
             result -> bool : 是否存在
 
             Example:
+            =
             >>> Chapter2_3().sumOfTwoNumbersEqual([1, 2, 3], 3)
             >>> True
             >>> Chapter2_3().sumOfTwoNumbersEqual([2, 2, 3], 9)
@@ -413,7 +417,7 @@ class Chapter2_3:
         A = [6, 5, 4, 3, 2, 1]
         print('数组A=[1, 2, 3, 5, 6, 4]的二分法插入排序结果为：', self.insertSortDichotomy(A, len(A) - 1))
         print('阶乘的递归', self.factorial(4))
-        print('练习2.3-7(鉴戒并归排序的思路，递归)', self.factorial(4))
+        print('练习2.3-7(鉴戒并归排序的思路或者阶乘的思路，递归)', self.factorial(4))
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
 
