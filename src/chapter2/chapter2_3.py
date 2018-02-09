@@ -420,6 +420,7 @@ class Chapter2_3:
         print('数组A=[1, 2, 3, 5, 6, 4]的二分法插入排序结果为：', self.insertSortDichotomy(A, len(A) - 1))
         print('阶乘的递归', self.factorial(4))
         print('练习2.3-7(鉴戒并归排序的思路或者阶乘的思路，递归)', self.factorial(4))
+        
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
 
