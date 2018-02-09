@@ -209,6 +209,7 @@ class Chapter2_3:
 
     def __insertSort(self, array, num):
         key = array[num]
+        # 反向查找
         for i in range(num):
             index = num - i - 1
             # 右移           
@@ -243,6 +244,57 @@ class Chapter2_3:
             # O(n)
             self.__insertSort(array, num)   
         return array
+
+    def insertSortDichotomy(self, array, index):
+        '''
+        二分法插入排序
+
+        Args:
+        =
+        array : 待排序的数组
+
+        Return:
+        =
+        sortedArray : 排序好的数组
+
+        Example:
+        >>> Chapter2_3().insertSortDichotomy([6, 5, 4, 3, 2, 1])
+        >>> [1, 2, 3, 4, 5, 6]
+
+        '''
+        A = deepcopy(array)
+        n = len(A)
+        if index >= n or index < 0 : 
+            raise Exception("arg 'index' must be in range [0,len(array))")
+        for j in range(1, index + 1):
+            ## Insert A[j] into the sorted sequece A[1...j-1] 前n - 1 张牌
+            # 下标j指示了待插入到手中的当前牌，所以j的索引从数组的第二个元素开始
+            # 后来摸的牌
+            key = A[j]
+            # 之前手中的已经排序好的牌的最大索引
+            i = j - 1
+            low = 0
+            high = i
+            insertIndex = 0
+            # 二分法寻找插入的位置
+            while low <= high :
+                middle = int((low + high) / 2)
+                if key >= A[middle] and key <= A[middle + 1] :
+                    insertIndex = middle + 1
+                if key > A[middle]:
+                    high = middle - 1
+                if key < A[middle]:
+                    low = middle + 1
+            # 移动牌
+            while(i >= insertIndex):
+                # 向右移动牌
+                A[i + 1] = A[i]
+                # 遍历之前的牌
+                i = i - 1
+            # 后来摸的牌插入相应的位置
+            A[i + 1] = key
+        # 输出升序排序后的牌
+        return A
 
     def note(self):
         '''
@@ -307,7 +359,10 @@ class Chapter2_3:
         A = [3, 41, 12, 56, 68, 27, 19, 29]
         print('数组A=[3, 41, 12, 56, 68, 27, 19, 29]的递归插入排序结果为：', self.insertSort(A, len(A) - 1))
         print('递归插入的T(1) = O(1) ; T(n) = T(n-1) + n')
-        print('练习2.3-6')
+        print('练习2.3-6:二分法插入排序')
+        # 插入排序最坏情况
+        A = [6, 5, 4, 3, 2, 1]
+        print('数组A=[1, 2, 3, 5, 6, 4]的二分法插入排序结果为：', self.insertSortDichotomy(A, len(A) - 1))
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
 
