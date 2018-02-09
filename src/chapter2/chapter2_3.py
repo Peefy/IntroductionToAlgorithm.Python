@@ -245,6 +245,28 @@ class Chapter2_3:
             self.__insertSort(array, num)   
         return array
 
+    def factorial(self, n):
+        '''
+        Factorial of n
+
+        Args:
+        =
+        n : the factorial number
+
+        Return:
+        =
+        factorial : the factorial of the number
+
+        Example:
+        =
+        >>> Chapter2_3().factorial(4)
+        >>> 24
+
+        '''
+        if n == 0:
+            return 1
+        return n * self.factorial(n - 1)
+
     def insertSortDichotomy(self, array, index):
         '''
         二分法插入排序
@@ -295,6 +317,33 @@ class Chapter2_3:
             A[i + 1] = key
         # 输出升序排序后的牌
         return A
+
+        def __sumOfTwoNumbersEqual(a ,b, x):
+            sum = a + b
+            if x == sum:
+                return True
+            return False
+
+        def sumOfTwoNumbersEqual(array, x):
+            '''
+            判断出array中是否存在有两个其和等于x的元素
+
+            Args:
+            =
+            array : 待判断的集合
+            x : 待判断的元素
+
+            Return:
+            result -> bool : 是否存在
+
+            Example:
+            >>> Chapter2_3().sumOfTwoNumbersEqual([1, 2, 3], 3)
+            >>> True
+            >>> Chapter2_3().sumOfTwoNumbersEqual([2, 2, 3], 9)
+            >>> False
+            '''
+            
+            return False
 
     def note(self):
         '''
@@ -363,6 +412,8 @@ class Chapter2_3:
         # 插入排序最坏情况
         A = [6, 5, 4, 3, 2, 1]
         print('数组A=[1, 2, 3, 5, 6, 4]的二分法插入排序结果为：', self.insertSortDichotomy(A, len(A) - 1))
+        print('阶乘的递归', self.factorial(4))
+        print('练习2.3-7(鉴戒并归排序的思路，递归)', self.factorial(4))
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
 
