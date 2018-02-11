@@ -321,35 +321,50 @@ class Chapter2_3:
             A[i + 1] = key
         # 输出升序排序后的牌
         return A
-
-        def __sumOfTwoNumbersEqual(a ,b, x):
-            sum = a + b
-            if x == sum:
+        
+    def __sumOfTwoNumbersEqual(self, array ,lastIndex, x):
+        n = len(array)
+        for i in range(0, lastIndex):
+            if abs(array[i] + array[lastIndex] - x) < 10e-5:
                 return True
-            return False
+        return False 
 
-        def sumOfTwoNumbersEqual(array, x):
-            '''
-            判断出array中是否存在有两个其和等于x的元素
+    def __internalSumOfTwoNumbersEqual(self, array, index, x):
+        isFind = False
+        n = deepcopy(index)
+        # 如果n<0就结束递归
+        if n < 0:
+            return
+        A = deepcopy(array)
+        # 如果存在就结束递归
+        result = self.__internalSumOfTwoNumbersEqual(A, n - 1, x)
+        if result == True:
+            return True
+        return self.__sumOfTwoNumbersEqual(A, n, x) 
 
-            Args:
-            =
-            array : 待判断的集合
-            x : 待判断的元素
+    def sumOfTwoNumbersEqual(self, array, x):
+        '''
+        判断出array中是否存在有两个其和等于x的元素
 
-            Return:
-            =
-            result -> bool : 是否存在
+        Args:
+        =
+        array : 待判断的集合
+        x : 待判断的元素
 
-            Example:
-            =
-            >>> Chapter2_3().sumOfTwoNumbersEqual([1, 2, 3], 3)
-            >>> True
-            >>> Chapter2_3().sumOfTwoNumbersEqual([2, 2, 3], 9)
-            >>> False
-            '''
-            
-            return False
+        Return:
+        =
+        result -> bool : 是否存在
+
+        Example:
+        =
+        >>> A = [1, 2, 3]
+        >>> Chapter2_3().sumOfTwoNumbersEqual(A, 3)
+        >>> True
+        >>> A = [1, 2, 3, 4]
+        >>> Chapter2_3().sumOfTwoNumbersEqual(A, 9)
+        >>> False
+        '''
+        return self.__internalSumOfTwoNumbersEqual(array, len(array) - 1, x)
 
     def note(self):
         '''
@@ -419,8 +434,10 @@ class Chapter2_3:
         A = [6, 5, 4, 3, 2, 1]
         print('数组A=[1, 2, 3, 5, 6, 4]的二分法插入排序结果为：', self.insertSortDichotomy(A, len(A) - 1))
         print('阶乘的递归', self.factorial(4))
-        print('练习2.3-7(鉴戒并归排序的思路或者阶乘的思路，递归)', self.factorial(4))
-        
+        print('练习2.3-7(鉴戒并归排序的思路或者阶乘的思路，递归)')
+        print('[6,5,4,3,2,1]中找5的结果是：', self.sumOfTwoNumbersEqual(A, 5))
+        print('[6,5,4,3,2,1]中找11的结果是：', self.sumOfTwoNumbersEqual(A, 11))
+        print('[6,5,4,3,2,1]中找12的结果是：', self.sumOfTwoNumbersEqual(A, 12))
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
 
