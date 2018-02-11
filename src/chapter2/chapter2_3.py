@@ -25,6 +25,44 @@ class Chapter2_3:
     CLRS 第二章 2.3
     '''
 
+    def insertSortWithIndex(self, array, start ,end):
+        '''
+        Summary
+        =
+        插入排序的升序排列
+        
+        Parameter
+        =
+        array : a list like
+        start : sort start index
+        end : sort end index
+
+        Return
+        =
+        sortedArray : 排序好的数组
+        >>> array = [6, 5, 4, 3, 2, 1]
+        >>> Chapter2_3().insert(array, 1, 4)
+        >>> [6 ,2, 3, 4, 5, 1]
+        '''
+        A = deepcopy(array)
+        for j in range(start + 1, end + 1):
+            ## Insert A[j] into the sorted sequece A[1...j-1] 前n - 1 张牌
+            # 下标j指示了待插入到手中的当前牌，所以j的索引从数组的第二个元素开始
+            # 后来摸的牌
+            key = A[j]
+            # 之前手中的已经排序好的牌的最大索引
+            i = j - 1
+            # 开始寻找插入的位置并且移动牌
+            while(i >= 0 and A[i] > key):
+                # 向右移动牌
+                A[i + 1] = A[i]
+                # 遍历之前的牌
+                i = i - 1
+            # 后来摸的牌插入相应的位置
+            A[i + 1] = key
+        # 输出升序排序后的牌
+        return A
+
     def __mergeSortOne2(self, array, p ,q, r):
         '''
         一步合并两堆牌排序算法过程
@@ -438,6 +476,12 @@ class Chapter2_3:
         print('[6,5,4,3,2,1]中找5的结果是：', self.sumOfTwoNumbersEqual(A, 5))
         print('[6,5,4,3,2,1]中找11的结果是：', self.sumOfTwoNumbersEqual(A, 11))
         print('[6,5,4,3,2,1]中找12的结果是：', self.sumOfTwoNumbersEqual(A, 12))
+        print('思考题2-1:在并归排序中对小数组采用插入排序')
+        print(' 带索引的插入排序')
+        print('[6,5,4,3,2,1]从索引1到4的排序为：', self.insertSortWithIndex(A, 1, 4))
+        print('思考题2-2:冒泡排序的正确性')
+        print('思考题2-3:霍纳规则的正确性')
+        print('思考题2-4:逆序对')
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
 
