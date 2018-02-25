@@ -30,7 +30,7 @@ class Chapter3_2:
         >>> Chapter3_2().note()
         '''
         print('3.2 标准记号和常用函数')
-        
+        print('单调性：一个函数f(n)是单调递增的，若m<=n,则有f(m)<=f(n)，反之单调递减，将小于等于号换成小于号，即变为严格不等式，则函数是严格单调递增的')
         # python src/chapter3/chapter3_2.py
         # python3 src/chapter3/chapter3_2.py
         
