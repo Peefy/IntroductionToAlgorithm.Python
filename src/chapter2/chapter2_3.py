@@ -247,26 +247,26 @@ class Chapter2_3:
         '''
         return self.__mergeSort(array, 0, len(array) - 1)
 
-    def __mergeSortWithSmallArrayInsertSort(self, array, start, end):
-        k = 4
+    def __mergeSortWithSmallArrayInsertSort(self, array, start, end, k):
         p = deepcopy(start)
         r = deepcopy(end)        
         if r - p + 1 > k:
             # 待排序序列劈成两半
             middle = int((r + p) / 2)
             q = deepcopy(middle)
-            self.__mergeSortWithSmallArrayInsertSort(array, p, q)
-            self.__mergeSortWithSmallArrayInsertSort(array, q + 1, r)
+            self.__mergeSortWithSmallArrayInsertSort(array, p, q, k)
+            self.__mergeSortWithSmallArrayInsertSort(array, q + 1, r, k)
             self.__mergeSortOne(array, p, q, r)
         return self.insertSortWithIndex(array, p, r)
 
-    def mergeSortWithSmallArrayInsertSort(self, array):
+    def mergeSortWithSmallArrayInsertSort(self, array, k = 4):
         '''
         合并排序 ： 将待排序数组拆分到一定程度(而不是单个元素数组时),子问题足够小时采用插入排序
 
         Args:
         =
         array : 待排序的数组
+        k : 子问题采用插入排序的最小规模
 
         Returns:
         =
@@ -278,7 +278,7 @@ class Chapter2_3:
         >>> [1, 2, 3, 4, 5, 6]
 
         '''
-        return self.__mergeSortWithSmallArrayInsertSort(array, 0, len(array) - 1)
+        return self.__mergeSortWithSmallArrayInsertSort(array, 0, len(array) - 1, k)
 
     def __insertSort(self, array, num):
         key = array[num]
@@ -513,7 +513,9 @@ class Chapter2_3:
         print(' 带索引的插入排序如下：')
         print(' [6,5,4,3,2,1]从索引1到4的排序为：', self.insertSortWithIndex(A, 1, 4))
         A = [8, 7, 6, 5, 4, 3, 2, 1]
-        print(' [8,7,6,5,4,3,2,1]从小问题采用插入排序的合并排序结果为：', self.mergeSortWithSmallArrayInsertSort(A))
+        print(' [8,7,6,5,4,3,2,1]从小问题采用插入排序的合并排序结果为：', 
+            self.mergeSortWithSmallArrayInsertSort(A))
+        print('最坏的情况下，n/k个子列表')
         print('思考题2-2:冒泡排序的正确性')
         print('思考题2-3:霍纳规则的正确性')
         print('思考题2-4:逆序对')
