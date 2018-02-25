@@ -526,6 +526,42 @@ class Chapter2_3:
             y = a_array[i] + x * y
         return y
 
+    def __inversion(self, array, end):
+        # 进行深拷贝保护变量
+        list = deepcopy([])
+        n = deepcopy(end)
+        A = deepcopy(array)
+        if n > 1 :
+            newList = self.__inversion(array, n - 1)
+            # 相当于C#中的foreach(var x in newList); list.Append(x);
+            for i in newList:
+                list.append(i)
+        lastIndex = n - 1
+        for i in range(lastIndex):
+            if A[i] > A[lastIndex]:
+                list.append((i, lastIndex))
+        return list
+
+    def inversion(self, array):
+        '''
+        递归方式求得数组中的所有逆序对，时间复杂度O(n * lg(n))
+
+        Args
+        =
+        array : 代求逆序对的数组
+
+        Return
+        =
+        list : 所有逆序对索引的集合，集合中的每一个元素都为逆序对的元组
+
+        Example
+        =
+        >>> A = [2, 3, 8, 6, 1]
+        >>> Chapter2_3().inversion(A)
+        >>> [(0, 4), (1, 4), (2, 3), (2, 4), (3, 4)]      
+        '''
+        return self.__inversion(array, len(array))
+
     def note(self):
         '''
         Summary
@@ -618,6 +654,11 @@ class Chapter2_3:
         print('不采用霍纳规则(时间复杂度为O(n ** 2))：', self.calPolynomial([2, 2, 1], 2))
         print('采用霍纳规则(时间复杂度为O(n))：', self.calPolynomialWithHornerRule([2, 2, 1], 2))
         print('思考题2-4:逆序对')
+        print('逆序对的定义：对于一个数组A，如果数组的索引在i<j的情况下，有A[i] > A[j],则(i,j)就称为数组A中的一个逆序对inversion')
+        print('列出数组[2,3,8,6,1]的5个逆序对：', self.inversion([2, 3, 8, 6, 1]))
+        print('列出数组[1,2,3,4,5]的逆序对：', self.inversion([1, 2, 3, 4, 5]))
+        print('列出数组[5,4,3,2,1]的逆序对：', self.inversion([5, 4, 3, 2, 1]))
+
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
 
