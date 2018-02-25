@@ -14,7 +14,7 @@
 
 ### Step 1
 
->git clone https://github.com/Peefy/CLRS_dugu_code-master
+> git clone https://github.com/Peefy/CLRS_dugu_code-master
 
 ### Step 2
 
