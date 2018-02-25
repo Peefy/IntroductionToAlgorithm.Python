@@ -437,6 +437,43 @@ class Chapter2_3:
         '''
         return self.__internalSumOfTwoNumbersEqual(array, len(array) - 1, x)
 
+    def __bubbleSort(self, array, start, end):
+        A = deepcopy(array)
+        p = deepcopy(start)
+        q = deepcopy(end)
+        if p > q:
+            raise Exception('The start index must be less than the end index')
+        length = q + 1
+        for i in range(p, length):
+            for j in range(i + 1, length):
+                if A[j] < A[j - 1]:
+                    # 禁止python的方便写法：A[j], A[j - 1] = A[j - 1], A[j]
+                    # temp = A[j]
+                    # A[j] = A[j - 1]
+                    # A[j - 1] = temp
+                    A[j], A[j - 1] = A[j - 1], A[j]
+        return A
+
+    def bubbleSort(self, array):
+        '''
+        冒泡排序，时间复杂度o(n ** 2)
+
+        Args
+        ====
+        array : 排序前的数组
+
+        Return
+        ======
+        sortedArray : 使用冒泡排序排好的数组
+
+        Example:
+        >>> A = [6, 5, 4, 3, 2, 1]
+        >>> Chapter2_3().bubbleSort(A)
+        >>> [1, 2, 3, 4, 5, 6]
+
+        '''
+        return self.__bubbleSort(array, 0, len(array) - 1)
+
     def note(self):
         '''
         Summary
@@ -515,9 +552,16 @@ class Chapter2_3:
         A = [8, 7, 6, 5, 4, 3, 2, 1]
         print(' [8,7,6,5,4,3,2,1]从小问题采用插入排序的合并排序结果为：', 
             self.mergeSortWithSmallArrayInsertSort(A))
-        print('最坏的情况下，n/k个子列表')
+        print(' [8,7,6,5,4,3,2,1]从小问题采用插入排序的合并排序结果为(最小规模为3)：', 
+            self.mergeSortWithSmallArrayInsertSort(A, 3))
+        print(' 1.最坏的情况下，n/k个子列表(每个子列表的长度为k)可以用插入排序在O(nk)时间内完成排序')
+        print(' 2.这些子列表可以在O(nlg(n/k)最坏情况时间内完成合并)')
+        print(' 3.修改后的合并排序算法的最坏情况运行时间为O(nk+nlg(n/k)),k的最大渐进值为1/n')
+        print(' 4.在实践中，k的值应该按实际情况选取')
         print('思考题2-2:冒泡排序的正确性')
-        print('思考题2-3:霍纳规则的正确性')
+        print(' [8,7,6,5,4,3,2,1]的冒泡排序结果为：', 
+            self.bubbleSort(A))
+        print('思考题2-3:用于计算多项式的霍纳规则的正确性')
         print('思考题2-4:逆序对')
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
