@@ -29,7 +29,7 @@ class Chapter2_3:
         '''
         Summary
         =
-        插入排序的升序排列
+        插入排序的升序排列(带排序索引)
         
         Parameter
         =
@@ -246,6 +246,39 @@ class Chapter2_3:
 
         '''
         return self.__mergeSort(array, 0, len(array) - 1)
+
+    def __mergeSortWithSmallArrayInsertSort(self, array, start, end):
+        k = 4
+        p = deepcopy(start)
+        r = deepcopy(end)        
+        if r - p + 1 > k:
+            # 待排序序列劈成两半
+            middle = int((r + p) / 2)
+            q = deepcopy(middle)
+            self.__mergeSortWithSmallArrayInsertSort(array, p, q)
+            self.__mergeSortWithSmallArrayInsertSort(array, q + 1, r)
+            self.__mergeSortOne(array, p, q, r)
+        return self.insertSortWithIndex(array, p, r)
+
+    def mergeSortWithSmallArrayInsertSort(self, array):
+        '''
+        合并排序 ： 将待排序数组拆分到一定程度(而不是单个元素数组时),子问题足够小时采用插入排序
+
+        Args:
+        =
+        array : 待排序的数组
+
+        Returns:
+        =
+        sortedArray : 排序好的数组
+
+        Example:
+        =
+        >>> Chapter2_3().mergeSortWithSmallArrayInsertSort([6, 5, 4, 3, 2, 1])
+        >>> [1, 2, 3, 4, 5, 6]
+
+        '''
+        return self.__mergeSortWithSmallArrayInsertSort(array, 0, len(array) - 1)
 
     def __insertSort(self, array, num):
         key = array[num]
@@ -477,8 +510,10 @@ class Chapter2_3:
         print('[6,5,4,3,2,1]中找11的结果是：', self.sumOfTwoNumbersEqual(A, 11))
         print('[6,5,4,3,2,1]中找12的结果是：', self.sumOfTwoNumbersEqual(A, 12))
         print('思考题2-1:在并归排序中对小数组采用插入排序')
-        print(' 带索引的插入排序')
-        print('[6,5,4,3,2,1]从索引1到4的排序为：', self.insertSortWithIndex(A, 1, 4))
+        print(' 带索引的插入排序如下：')
+        print(' [6,5,4,3,2,1]从索引1到4的排序为：', self.insertSortWithIndex(A, 1, 4))
+        A = [8, 7, 6, 5, 4, 3, 2, 1]
+        print(' [8,7,6,5,4,3,2,1]从小问题采用插入排序的合并排序结果为：', self.mergeSortWithSmallArrayInsertSort(A))
         print('思考题2-2:冒泡排序的正确性')
         print('思考题2-3:霍纳规则的正确性')
         print('思考题2-4:逆序对')
