@@ -658,7 +658,7 @@ class Chapter2_3:
         print('列出数组[2,3,8,6,1]的5个逆序对：', self.inversion([2, 3, 8, 6, 1]))
         print('列出数组[1,2,3,4,5]的逆序对：', self.inversion([1, 2, 3, 4, 5]))
         print('列出数组[5,4,3,2,1]的逆序对：', self.inversion([5, 4, 3, 2, 1]))
-
+        
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
 
