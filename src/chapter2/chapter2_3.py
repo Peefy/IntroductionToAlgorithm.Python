@@ -473,6 +473,58 @@ class Chapter2_3:
 
         '''
         return self.__bubbleSort(array, 0, len(array) - 1)
+    
+    def calPolynomial(self, a_array, x):
+        '''
+        计算多项式
+
+        Args
+        ====
+        a_array : 多项式系数的数组
+        x : 待计算的多项式的代入未知数
+
+        Return
+        ======
+        y : 计算的多项式的值
+
+        Example
+        =
+        2x^2 + 2x + 1, x = 2, 2 * 2 ** 2 + 2 * 2 + 1 = 13
+        >>> a_array = [2, 2, 1] 
+        >>> Chapter2_3().hornerRule(a_array, 2)      
+        >>> 13       
+        '''
+        n = len(a_array)
+        total =0
+        for i in range(n):
+            total = total + a_array[i] * x ** (n - 1 - i)
+        return total
+  
+    def calPolynomialWithHornerRule(self, a_array, x):
+        '''
+        用霍纳规则计算多项式
+
+        Args
+        ====
+        a_array : 多项式系数的数组
+        x : 待计算的多项式的代入未知数
+
+        Return
+        ======
+        y : 计算的多项式的值
+
+        Example
+        =
+        2x^2 + 2x + 1, x = 2, 2 * 2 ** 2 + 2 * 2 + 1 = 13
+        >>> a_array = [2, 2, 1] 
+        >>> Chapter2_3().hornerRule(a_array, 2)      
+        >>> 13       
+        '''
+        y = 0
+        n = len(a_array)
+        for i in range(n):
+            y = a_array[i] + x * y
+        return y
 
     def note(self):
         '''
@@ -561,7 +613,10 @@ class Chapter2_3:
         print('思考题2-2:冒泡排序的正确性')
         print(' [8,7,6,5,4,3,2,1]的冒泡排序结果为：', 
             self.bubbleSort(A))
-        print('思考题2-3:用于计算多项式的霍纳规则的正确性')
+        print('思考题2-3:用于计算多项式的霍纳规则的正确性')      
+        print('分别是否采用霍纳规则计算多项式2x^2+2x+1的值分别如下')
+        print('不采用霍纳规则(时间复杂度为O(n ** 2))：', self.calPolynomial([2, 2, 1], 2))
+        print('采用霍纳规则(时间复杂度为O(n))：', self.calPolynomialWithHornerRule([2, 2, 1], 2))
         print('思考题2-4:逆序对')
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
