@@ -20,7 +20,7 @@ from sympy import solve, poly, exp, log
 
 class Chapter1:
     '''
-    CLRS 第一章
+    CLRS 第一章 算法函数和笔记
     '''
     def __init__(self, ok = 1, *args, **kwargs):
         self.ok = ok

@@ -17,7 +17,7 @@ from matplotlib.pyplot import show
 
 class Chapter3_1:
     '''
-    CLRS 第三章 3.1
+    CLRS 第三章 3.1 算法函数和笔记
     '''
     def note(self):
         '''

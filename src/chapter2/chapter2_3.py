@@ -22,7 +22,7 @@ else:
 
 class Chapter2_3:
     '''
-    CLRS 第二章 2.3
+    CLRS 第二章 2.3 算法函数和笔记
     '''
 
     def insertSortWithIndex(self, array, start ,end):

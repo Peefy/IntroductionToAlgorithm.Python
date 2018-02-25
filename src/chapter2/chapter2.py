@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 class Chapter2:
     '''
-    CLRS 第二章 2.1 2.2
+    CLRS 第二章 2.1 2.2 算法函数和笔记
     '''
     def __init__(self, ok = 1, *args, **kwargs):       
         '''
