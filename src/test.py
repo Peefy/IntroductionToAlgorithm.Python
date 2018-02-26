@@ -1,4 +1,5 @@
 
+import math
 import sys
 import numpy as np
 from numpy import arange
@@ -62,3 +63,8 @@ def testSympy():
     test sympy
     '''
     pass
+
+if __name__ == '__main__':
+    print(math.log2(3))
+
+# python src/test.py
