@@ -29,7 +29,8 @@ class Chapter4_3:
         =
         >>> Chapter4_3().note()
         '''
-        print('4.3')
+        print('4.3 主方法')
+        print('主方法给出求解形如 T(n) = aT(n/b)+f(n) 的递归式子的解，其中')
         # python src/chapter4/chapter4_3.py
         # python3 src/chapter4/chapter4_3.py
         

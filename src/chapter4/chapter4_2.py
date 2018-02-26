@@ -51,11 +51,12 @@ class Chapter4_2:
         print('容忍这些误差，而来证明上界O(nlgn)的猜测是正确的')
         print('事实上，可以用代换法来证明O(nlgn)是递归式解的上界。下面证明T(n)<=dnlgn,当d是一个合适的正值常数')
         print('T(n)<=T(n/3)+T(2n/3)+cn<=dnlgn;成立条件是d>=c/(lg3-(2/3)),因此没有必要准确地计算递归树中的代价')
-        print('练习4.2-1:树的深度为lgn,等比数列求和公式为S=a1(1-q^n)/(1-q),所以树的总代价为dn^2+Θ(n^lg3)')
+        print('练习4.2-1:树的深度为lgn,等比数列求和公式为S=a1(1-q^n)/(1-q),所以树的总代价为Θ(1*n)，对数性质a^(logb(c))=c^(logb(a))')
+        print(' 再用代换法验证一下T(n)=3T(n/2)+n<=3cn/2+n显然,T(n)=3T(n/2)+n>=3cn/2+n显然,渐进确界Θ')
         print('练习4.2-2:书中已经证明过了')
-        print('练习4.2-3:')
-        print('练习4.2-4:')
-        print('练习4.2-5:')
+        print('练习4.2-3:树的深度为log4(n),证明同4.2-1，渐进确界Θ(n)')
+        print('练习4.2-4:略')
+        print('练习4.2-5:书中有例子，渐进上界O(nlgn)')
         # python src/chapter4/chapter4_2.py
         # python3 src/chapter4/chapter4_2.py
         
