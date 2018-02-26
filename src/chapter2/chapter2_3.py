@@ -657,10 +657,10 @@ class Chapter2_3:
         print('逆序对的定义：对于一个数组A，如果数组的索引在i<j的情况下，有A[i] > A[j],则(i,j)就称为数组A中的一个逆序对inversion')
         print('列出数组[2,3,8,6,1]的5个逆序对：', self.inversion([2, 3, 8, 6, 1]))
         print('列出数组[1,2,3,4,5]的逆序对：', self.inversion([1, 2, 3, 4, 5]))
-        print('列出数组[5,4,3,2,1]的逆序对：', self.inversion([5, 4, 3, 2, 1]))
-        
+        print('列出数组[5,4,3,2,1]的逆序对：', self.inversion([5, 4, 3, 2, 1]))       
         # python src/chapter2/chapter2_3.py
         # python3 src/chapter2/chapter2_3.py
+        return self
 
 if __name__ == '__main__':
     Chapter2_3().note()

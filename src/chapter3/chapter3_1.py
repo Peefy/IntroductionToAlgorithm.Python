@@ -97,6 +97,7 @@ class Chapter3_1:
         print('练习3.1-8：略')
         # python src/chapter3/chapter3_1.py
         # python3 src/chapter3/chapter3_1.py
+        return self
         
 if __name__ == '__main__':
     print('Run main : single chapter three!')

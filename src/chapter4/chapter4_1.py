@@ -74,6 +74,7 @@ class Chapter4_1:
         print('练习4.1-6：令m=lgn')
         # python src/chapter4/chapter4_1.py
         # python3 src/chapter4/chapter4_1.py
+        return self
         
 if __name__ == '__main__':
     print('Run main : single chapter four!')

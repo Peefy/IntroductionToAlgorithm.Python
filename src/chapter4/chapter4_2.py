@@ -59,6 +59,7 @@ class Chapter4_2:
         print('练习4.2-5:书中有例子，渐进上界O(nlgn)')
         # python src/chapter4/chapter4_2.py
         # python3 src/chapter4/chapter4_2.py
+        return self
         
 if __name__ == '__main__':
     print('Run main : single chapter four!')

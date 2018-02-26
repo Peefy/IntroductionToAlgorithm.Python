@@ -54,6 +54,7 @@ class Chapter3_2:
         print('练习题和思考题略')
         # python src/chapter3/chapter3_2.py
         # python3 src/chapter3/chapter3_2.py
+        return self
         
 if __name__ == '__main__':
     print('Run main : single chapter three!')

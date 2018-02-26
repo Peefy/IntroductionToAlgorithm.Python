@@ -150,7 +150,7 @@ class Chapter1:
         print('思考题1-1:lg(n):太大了循环不过来')
         print('思考题1-1:sqrt(n):太大了循环不过来')
         print('思考题1-1:n:1e6')
-
+        return self
         
     def chapter1_1(*args, **kwargs):
         '''

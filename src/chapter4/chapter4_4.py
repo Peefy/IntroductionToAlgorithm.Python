@@ -39,6 +39,7 @@ class Chapter4_4:
         print('思考题4-7')
         # python src/chapter4/chapter4_4.py
         # python3 src/chapter4/chapter4_4.py
+        return self
         
 if __name__ == '__main__':
     print('Run main : single chapter four!')
