@@ -37,6 +37,7 @@ class Chapter4_1:
         print('2.递归树方法：将递归式转换为树形结构')
         print('3.主方法：给出递归形式T(n)=aT(n/b)+f(n),a>=1;b>1;f(n)是给定的函数')
         print('4.1 代换法')
+        print('代换法解递归式的两个步骤')
         # python src/chapter4/chapter4_1.py
         # python3 src/chapter4/chapter4_1.py
         
