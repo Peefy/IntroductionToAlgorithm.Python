@@ -1,4 +1,4 @@
 
 # python main.py
 # python3 main.py
-# pdf.51 page.43
+# pdf.58 page.50

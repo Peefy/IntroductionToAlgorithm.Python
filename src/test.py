@@ -66,5 +66,6 @@ def testSympy():
 
 if __name__ == '__main__':
     print(math.log2(3))
+    print(math.log2(7))
 
 # python src/test.py

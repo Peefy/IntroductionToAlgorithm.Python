@@ -29,7 +29,14 @@ class Chapter4_4:
         =
         >>> Chapter4_4().note()
         '''
-        print('4.4')
+        print('4.4 主定理的证明 page45 pdf53 画递归树证明 详细过程略')
+        print('思考题4-1')
+        print('思考题4-2')
+        print('思考题4-3')
+        print('思考题4-4')
+        print('思考题4-5')
+        print('思考题4-6')
+        print('思考题4-7')
         # python src/chapter4/chapter4_4.py
         # python3 src/chapter4/chapter4_4.py
         
