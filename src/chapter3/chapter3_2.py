@@ -17,7 +17,7 @@ from matplotlib.pyplot import show
 
 class Chapter3_2:
     '''
-    CLRS 第三章 3.1 算法函数和笔记
+    CLRS 第三章 3.2 算法函数和笔记
     '''
     def note(self):
         '''
@@ -44,7 +44,14 @@ class Chapter3_2:
         print('阶乘函数的一个更紧确的上界和下界：')
         print('n!=o(n^n) n!=ω(2^n) lg(n!)=Θ(nlgn)')
         print('函数迭代的定义和性质')
-        print('多重对数函数：用记号lg * n(读作n的log星)来表示多重对数，定义为lg * n=min(i>=0,)')
+        print('多重对数函数：用记号lg * n(读作n的log星)来表示多重对数，定义为lg * n=min(i>=0;lg^(i)n<=1)')
+        print('多重函数是一种增长很慢的函数')
+        print('lg * 2 = 1; lg * 4 = 2; lg * 16 = 3; lg * 65536 = 4; lg * 2^65536 = 5')
+        print('宇宙中可以观察到的原子数目估计约有10^80，远远小于2^65536,因此很少会遇到一个使lg * n > 5的一个n输入规模')
+        print('斐波那契数列：F0 = 0 F1 = 1 F(i) = F(i-1) + F(i-2),产生的序列为0,1,1,2,3,5,8,13,21,34,55,……')
+        print('斐波那契数列和黄金分割率φ以及共轭有关系')
+        print('φ=((1+sqrt(5))/2=1.61803 和它的共轭(1-sqrt(5))/2=-0.61803)')
+        print('练习题和思考题略')
         # python src/chapter3/chapter3_2.py
         # python3 src/chapter3/chapter3_2.py
         
