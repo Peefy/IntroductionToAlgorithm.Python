@@ -52,7 +52,7 @@ class Chapter4_3:
         print('练习4.3-2 算法A的运行时间解由主定理求得T(n)=Θ(n^2),a最大整数值为16')
         print('练习4.3-3 属于主定理的第二种情况T(n)=Θ(lgn)')
         print('练习4.3-4 不能用主定理给出渐进确界')
-        print('练习4.3-5 ')
+        print('练习4.3-5 略')
         # python src/chapter4/chapter4_3.py
         # python3 src/chapter4/chapter4_3.py
         return self
