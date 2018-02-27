@@ -1,15 +1,21 @@
 # python main.py
 # python3 main.py
 from src.test import testAll
+
 from src.chapter1.chapter1_1 import Chapter1
+
 from src.chapter2.chapter2 import Chapter2
 from src.chapter2.chapter2_3 import Chapter2_3
+
 from src.chapter3.chapter3_1 import Chapter3_1
 from src.chapter3.chapter3_2 import Chapter3_2
+
 from src.chapter4.chapter4_1 import Chapter4_1
 from src.chapter4.chapter4_2 import Chapter4_2
 from src.chapter4.chapter4_3 import Chapter4_3
 from src.chapter4.chapter4_4 import Chapter4_4
+
+from src.chapter5.chapter5_1 import Chapter5_1
 
 if __name__ == '__main__':
     ## Test required packet
@@ -32,6 +38,8 @@ if __name__ == '__main__':
     Chapter4_3().note()
     ## Chapter 4 (4.4)
     Chapter4_4().note()
+    ## Chapter 5 (5.1)
+    Chapter5_1().note()
 else:
     pass
 
