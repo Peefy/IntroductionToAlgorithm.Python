@@ -30,6 +30,7 @@ class Chapter5_1:
         >>> Chapter5_1().note()
         '''
         print('第五章 概率分析和随机算法')
+        print('5.1 雇佣问题')
         # python src/chapter5/chapter5_1.py
         # python3 src/chapter5/chapter5_1.py
         return self
