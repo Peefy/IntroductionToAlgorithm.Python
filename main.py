@@ -1,5 +1,8 @@
 # python main.py
 # python3 main.py
+
+import src
+
 from src.test import testAll
 
 from src.chapter1.chapter1_1 import Chapter1
@@ -16,6 +19,7 @@ from src.chapter4.chapter4_3 import Chapter4_3
 from src.chapter4.chapter4_4 import Chapter4_4
 
 from src.chapter5.chapter5_1 import Chapter5_1
+
 
 if __name__ == '__main__':
     ## Test required packet
