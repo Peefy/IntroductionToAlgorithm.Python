@@ -562,6 +562,26 @@ class Chapter2_3:
         '''
         return self.__inversion(array, len(array))
 
+    def inversionListNum(self, array):
+        '''
+        递归方式求得数组中的所有逆序对，时间复杂度O(n * lg(n))
+
+        Args
+        =
+        array : 代求逆序对的数组
+
+        Return
+        =
+        list_num : 所有逆序对索引的集合的长度
+
+        Example
+        =
+        >>> A = [2, 3, 8, 6, 1]
+        >>> Chapter2_3().inversionListNum(A)
+        >>> 5     
+        '''
+        return len(self.inversion(array))
+
     def note(self):
         '''
         Summary

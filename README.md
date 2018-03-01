@@ -28,7 +28,9 @@ Then enjoy it.
 
 # Tip
 
-If you like it or it may help.Thanks for **Fork** and *Star*!
+If you like it or it may help.Thanks for **Fork** and **Star**!
+
+And it is better to use Jupyter Notebook!
 
 ## LICENSE
 

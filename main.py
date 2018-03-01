@@ -1,6 +1,8 @@
 # python main.py
 # python3 main.py
 
+# Jupyter Notebook
+
 import src
 
 from src.test import testAll
@@ -19,7 +21,8 @@ from src.chapter4.chapter4_3 import Chapter4_3
 from src.chapter4.chapter4_4 import Chapter4_4
 
 from src.chapter5.chapter5_1 import Chapter5_1
-
+from src.chapter5.chapter5_2 import Chapter5_2
+from src.chapter5.chapter5_3 import Chapter5_3
 
 if __name__ == '__main__':
     ## Test required packet
@@ -44,6 +47,10 @@ if __name__ == '__main__':
     Chapter4_4().note()
     ## Chapter 5 (5.1)
     Chapter5_1().note()
+    ## Chapter 5 (5.2)
+    Chapter5_2().note()
+    ## Chapter 5 (5.2)
+    Chapter5_3().note()
 else:
     pass
 
