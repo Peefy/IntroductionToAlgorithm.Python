@@ -147,7 +147,7 @@ class Chapter5_3:
         A = _deepcopy(array)
         for i in range(n):
             dest = i + offset
-            if offset >= n:
+            if dest >= n:
                 dest = dest - n
             A[dest] = array[i]
         return A
@@ -214,8 +214,9 @@ class Chapter5_3:
             self.permute_with_all([1, 2, 3, 4, 5]), 
             self.permute_with_all([5, 4, 3, 2, 1]))
         print('练习5.3-4 使用随机产生非同一排列的算法[1,2,3,4,5,6]的两个随机排列', 
-            self.permute_with_all([1, 2, 3, 4, 5, 6]), 
-            self.permute_with_all([6, 5, 4, 3, 2, 1]))
+            self.permute_by_cyclic([1, 2, 3, 4, 5, 6]), 
+            self.permute_by_cyclic([6, 5, 4, 3, 2, 1]))
+        print(' 上述算法肯定不对啊，物理意义就是把数组元素循环向右平移随机个位置，但是元素的相对位置没变')
         print('练习5.3-5 略')
         print('练习5.3-6 略')
         # python src/chapter5/chapter5_3.py
