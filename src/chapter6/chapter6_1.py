@@ -25,7 +25,9 @@ class Chapter6_1:
         =
         >>> Chapter6_1().note()
         '''
-        
+        print('第二部分 排序和顺序统计学')
+        print('这一部分将给出几个排序问题的算法')
+        print('排序算法是算法学习中最基本的问题')
         # python src/chapter6/chapter6_1.py
         # python3 src/chapter6/chapter6_1.py
         return self
