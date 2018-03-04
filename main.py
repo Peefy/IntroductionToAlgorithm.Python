@@ -24,6 +24,8 @@ from src.chapter5.chapter5_1 import Chapter5_1
 from src.chapter5.chapter5_2 import Chapter5_2
 from src.chapter5.chapter5_3 import Chapter5_3
 
+from src.chapter6.chapter6_1 import Chapter6_1
+
 if __name__ == '__main__':
     ## Test required packet
     testAll()
@@ -49,8 +51,12 @@ if __name__ == '__main__':
     Chapter5_1().note()
     ## Chapter 5 (5.2)
     Chapter5_2().note()
-    ## Chapter 5 (5.2)
+    ## Chapter 5 (5.3)
     Chapter5_3().note()
+    ## Chapter 5 (5.4)
+    Chapter5_4().note()
+    ## Chapter 6 (6.1)
+    Chapter6_1().note()
 else:
     pass
 
