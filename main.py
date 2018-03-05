@@ -23,6 +23,7 @@ from src.chapter4.chapter4_4 import Chapter4_4
 from src.chapter5.chapter5_1 import Chapter5_1
 from src.chapter5.chapter5_2 import Chapter5_2
 from src.chapter5.chapter5_3 import Chapter5_3
+from src.chapter5.chapter5_4 import Chapter5_4
 
 from src.chapter6.chapter6_1 import Chapter6_1
 
