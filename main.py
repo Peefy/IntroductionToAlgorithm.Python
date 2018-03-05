@@ -26,6 +26,7 @@ from src.chapter5.chapter5_3 import Chapter5_3
 from src.chapter5.chapter5_4 import Chapter5_4
 
 from src.chapter6.chapter6_1 import Chapter6_1
+from src.chapter6.chapter6_2 import Chapter6_2
 
 if __name__ == '__main__':
     ## Test required packet
