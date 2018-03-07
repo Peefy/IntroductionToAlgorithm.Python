@@ -31,6 +31,19 @@ class Chapter6_4:
         >>> Chapter6_4().note()
         '''
         print('6.4 堆排序算法')
+        print('设n = len(A)-1,堆排序算法先用BuildMaxHeap将输入数组 A[0..n]构造成一个最大堆')
+        print('因为数组中的最大元素在根A[0]，则可以通过把它与A[n]互换来达到最终正确的位置')
+        print('现在如果从堆中去掉结点n(通过减小heapsize[A]),可以很容易地将A[1..n-1]建成最大堆，',
+            '原来根的子女仍然是最大堆,而新的元素可能违背了最大堆的性质，这时调用MaxHeapify(A, 0)就可以保持这一个性质')
+        print('堆排序算法不断重复这个过程，堆的大小由n-1一直降到2')    
+        print('堆排序算法的一个举例[7, 6, 5, 4, 3, 2, 1]', heap.heapsort([1, 2, 3, 4, 5, 6, 7]))
+        print('HeapSort过程的时间代价O(nlgn)')
+        print('调用heap.buildmaxheap的时间为O(n),n-1次heap.maxheapify中每一次的时间代价为O(lgn)')
+        print('练习6.4-1')
+        print('练习6.4-2')
+        print('练习6.4-3')
+        print('练习6.4-4')
+        print('练习6.4-5')
         # python src/chapter6/chapter6_4.py
         # python3 src/chapter6/chapter6_4.py
         return self
