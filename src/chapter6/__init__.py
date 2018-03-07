@@ -7,3 +7,6 @@
 
 # python src/chapter6/chapter6_3.py
 # python3 src/chapter6/chapter6_3.py
+
+# python src/chapter6/chapter6_4.py
+# python3 src/chapter6/chapter6_4.py

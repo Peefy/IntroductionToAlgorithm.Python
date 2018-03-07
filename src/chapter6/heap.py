@@ -1,3 +1,6 @@
+'''
+二叉堆的一系列操作
+'''
 
 def left(i):
     return int(2 * i + 1)
@@ -71,9 +74,10 @@ def buildmaxheap(A):
     '''
     对一个数组建立最大堆的过程
     '''
-    count = range(len(A) // 2)
-    for i in range(count):
+    count = int(len(A) // 2)
+    for i in range(count + 1):
         maxheapify(A, count - i)
+    return A
 
 
 
