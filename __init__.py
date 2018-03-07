@@ -5,4 +5,4 @@
 # python main.py
 # python3 main.py
 
-# pdf.84 page.76
+# pdf.86 page.78

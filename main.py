@@ -25,9 +25,8 @@ from src.chapter5.chapter5_2 import Chapter5_2
 from src.chapter5.chapter5_3 import Chapter5_3
 from src.chapter5.chapter5_4 import Chapter5_4
 
-from src.chapter6.chapter6_1 import Chapter6_1
-from src.chapter6.chapter6_2 import Chapter6_2
-from src.chapter6.chapter6_3 import Chapter6_3
+from src.chapter6.test import chapter6_printall
+
 
 if __name__ == '__main__':
     ## Test required packet
@@ -58,12 +57,8 @@ if __name__ == '__main__':
     Chapter5_3().note()
     ## Chapter 5 (5.4)
     Chapter5_4().note()
-    ## Chapter 6 (6.1)
-    Chapter6_1().note()
-    ## Chapter 6 (6.2)
-    Chapter6_2().note()
-    ## Chapter 6 (6.3)
-    Chapter6_3().note()
+    ## Chapter 6 
+    chapter6_printall()
 else:
     pass
 
