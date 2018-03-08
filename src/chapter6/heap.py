@@ -22,7 +22,7 @@ def parent(i):
 
 def heapsize(A):
     '''
-    求一个数组形式的二叉堆的堆大小
+    求一个数组形式的:二叉堆:的:堆大小:
     '''
     return len(A) - 1
 

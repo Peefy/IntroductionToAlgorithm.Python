@@ -39,11 +39,13 @@ class Chapter6_4:
         print('堆排序算法的一个举例[7, 6, 5, 4, 3, 2, 1]', heap.heapsort([1, 2, 3, 4, 5, 6, 7]))
         print('HeapSort过程的时间代价O(nlgn)')
         print('调用heap.buildmaxheap的时间为O(n),n-1次heap.maxheapify中每一次的时间代价为O(lgn)')
-        print('练习6.4-1')
-        print('练习6.4-2')
-        print('练习6.4-3')
-        print('练习6.4-4')
-        print('练习6.4-5')
+        A = [5 ,13, 2, 25, 7, 17, 20, 8, 4]
+        print('练习6.4-1 数组', _deepcopy(A), '的heapsort过程结果为：', heap.heapsort(A))
+        print('练习6.4-2 证明循环不变式的过程略')
+        print('练习6.4-3 按递增排序的数组A已经是一个最大堆，buildmaxheap的时间较少，但是交换元素花费时间较多')
+        print(' 若A的元素按降序排列，则buildmaxheap的花费时间较多，元素交换时间差不多')
+        print('练习6.4-4 略')
+        print('练习6.4-5 略')
         # python src/chapter6/chapter6_4.py
         # python3 src/chapter6/chapter6_4.py
         return self

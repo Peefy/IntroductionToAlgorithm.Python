@@ -30,7 +30,7 @@ class Chapter6_5:
         =
         >>> Chapter6_5().note()
         '''
-        print('6.4 优先级队列')
+        print('6.5 优先级队列')
 
         # python src/chapter6/chapter6_5.py
         # python3 src/chapter6/chapter6_5.py
