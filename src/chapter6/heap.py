@@ -2,6 +2,9 @@
 :二叉堆:的一系列操作
 '''
 
+# python src/chapter6/heap.py
+# python3 src/chapter6/heap.py
+
 import math as _math
 from numpy import arange as _arange
 
@@ -263,5 +266,14 @@ def maxheapdelete(A, i):
 
 def buildmaxheap_usesort(A):
     '''
-    将数组A构建成为一个:最大堆:
+    将数组A构建成为一个:最大堆:,使用:插入:的方法
     '''
+    heapsizeA = 1
+    length = len(A)
+    B = [A[0]]
+    for i in range(1, length):
+        maxheapinsert(B, A[i])
+    return B
+
+# python src/chapter6/heap.py
+# python3 src/chapter6/heap.py

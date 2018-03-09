@@ -12,8 +12,10 @@ from numpy import arange as _arange
 
 if __name__ == '__main__':
     import heap
+    import young
 else:
     from . import heap
+    from . import young
     
 class Chapter6_5:
     '''
@@ -58,10 +60,18 @@ class Chapter6_5:
         A = [15, 13, 9, 5, 12, 8, 7, 4, 0, 6, 2, 1]
         print('练习6.5-7 数组A=', _deepcopy(A), '执行HEAP-DELETE(A, 2)操作的过程为：', heap.maxheapdelete(A, 2))
         print('练习6.5-8 略(不会)')
+        A = [1, 2, 3, 4, 5, 6, 7]
         print('思考题6-1 用插入的方法建堆')
+        print(' 数组A=', _deepcopy(A), '使用插入方法构建最大堆:', heap.buildmaxheap_usesort(A))
         print('思考题6-2 对d叉堆的分析')
+        print(' 含有n个元素的d叉堆的高度为logd(n),或者为lgn/lgd')
         print('思考题6-3 Young氏矩阵')
-        print('')
+        print(' Young氏矩阵的元素从左到右，从上到下都是排序好的')
+        print(' 将Young氏矩阵斜过来看成一个交叉堆即可')
+        A = [9, 16, 3, 2, 4, 8, 5, 14, 12]
+        print(' 矩阵A', _deepcopy(A), '变换成一个young矩阵为：', young.array2youngmatrix(A, 3, 3))
+        A = [9, 16, 3, 2, 4, 8, 5, 14, 12]
+        print(' 矩阵A', _deepcopy(A), '使用young矩阵排序为：', young.youngsort(A))
         # python src/chapter6/chapter6_5.py
         # python3 src/chapter6/chapter6_5.py
         return self
