@@ -37,7 +37,8 @@ class QuickSort:
         ======
         A : 使用快速排序排好的数组:(本地排序):
 
-        Example:
+        Example
+        ==
         >>> import quicksort
         >>> A = [6, 5, 4, 3, 2, 1]
         >>> quicksort.quicksort(A)

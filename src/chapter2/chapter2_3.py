@@ -231,17 +231,18 @@ class Chapter2_3:
         '''
         归并排序：最优排序复杂度n * O(log2(n)), 空间复杂度O(n)
 
-        Args:
-        =
+        Args
+        ==
         array : 待排序的数组
 
-        Returns:
-        =
+        Returns
+        ==
         sortedArray : 排序好的数组
 
-        Example:
-        =
+        Example
+        ==
         >>> Chapter2_3().mergeSort([6, 5, 4, 3, 2, 1])
+        
         >>> [1, 2, 3, 4, 5, 6]
 
         '''

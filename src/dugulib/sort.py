@@ -11,7 +11,7 @@ from copy import deepcopy as _deepcopy
 from numpy import arange as _arange
 
 __all__ = ['insertsort', 'selectsort', 'bubblesort',
-               'mergesort', 'heapsort']
+               'mergesort', 'heapsort', 'quicksort']
 
 class Sort:
     '''
@@ -20,14 +20,14 @@ class Sort:
     def insertsort(self, array):
         '''
         Summary
-        =
+        ===
         插入排序的升序排列,时间复杂度:O(n^2):
     
         Parameter
-        =
+        ===
         array : a list like
         Return
-        =
+        ===
         sortedarray : 排序好的数组
         >>> import sort
         >>> array = [1, 3, 5, 2, 4, 6]
@@ -57,15 +57,19 @@ class Sort:
     def selectsort(self, array = []):
         '''
         Summary
-        =
+        ===
         选择排序的升序排列,时间复杂度:O(n^2):
         
-        Parameter
-        =
+        Args
+        ===
         array : a list like
+
         Return
-        =
+        ===
         sortedArray : 排序好的数组
+
+        Example
+        ===
         >>> import sort
         >>> array = [1, 3, 5, 2, 4, 6]
         >>> sort.selectsort(array)
@@ -98,7 +102,8 @@ class Sort:
         ======
         sortedArray : 使用冒泡排序排好的数组
 
-        Example:
+        Example
+        ===
         >>> import sort
         >>> A = [6, 5, 4, 3, 2, 1]
         >>> sort.bubblesort(A)
@@ -117,15 +122,15 @@ class Sort:
         一步合并两堆牌排序算法过程
 
         Args
-        =
+        ==
         array : a array like
 
-        Returns:
-        =
+        Returns
+        ==
         sortedArray : 排序好的数组
 
-        Raises:
-        =
+        Raises
+        ==
         None
         '''
         # python中变量名和对象是分离的
@@ -171,18 +176,18 @@ class Sort:
         '''
         合并排序总过程
 
-        Args:
-        =
+        Args
+        ==
         array : 待排序数组
         start : 排序起始索引
         end : 排序结束索引
 
-        Return:
-        =
+        Return
+        ==
         sortedArray : 排序好的数组
 
-        Example:
-        =
+        Example
+        ==
         >>> Chapter2_3().mergeSort([6, 5, 4, 3, 2, 1])
         >>> [1, 2, 3, 4, 5, 6]
         '''
@@ -208,16 +213,16 @@ class Sort:
         '''
         归并排序/合并排序：最优排序复杂度:n * O(log2(n)):, 空间复杂度:O(n):
 
-        Args:
-        =
+        Args
+        ==
         array : 待排序的数组
 
-        Returns:
-        =
+        Returns
+        ==
         sortedArray : 排序好的数组
 
-        Example:
-        =
+        Example
+        ==
         >>> import sort
         >>> sort.mergesort([6, 5, 4, 3, 2, 1])
         >>> [1, 2, 3, 4, 5, 6]
@@ -283,15 +288,15 @@ class Sort:
         堆排序算法过程, 时间代价为:O(nlgn):
 
         Args
-        =
+        ===
         A : 待排序的数组A
 
         Return
-        =
+        ====
         sortedA : 排序好的数组
 
         Example
-        =
+        ====
         >>> import heap
         >>> heap.heapsort([7, 6, 5, 4, 3, 2, 1])
         >>> [1, 2, 3, 4, 5, 6, 7]
@@ -342,12 +347,61 @@ class Sort:
             __maxheapify(A, 0)
         return A
 
+    def partition(self, A, p, r):
+        '''
+        快速排序的数组划分子程序
+        '''
+        x = A[r]
+        i = p - 1
+        j = p - 1
+        for j in range(p, r):
+            if A[j] <= x:
+                i = i + 1
+                A[i], A[j] = A[j], A[i]
+            if A[j] == x:
+                j = j + 1
+        A[i + 1], A[r] = A[r], A[i + 1]
+        if j == r:
+            return (p + r) // 2
+        return i + 1
+
+    def __quicksort(self, A, p, r):
+        left = _deepcopy(p)
+        right = _deepcopy(r)
+        if left < right:
+            middle = _deepcopy(self.partition(A, left, right))
+            self.__quicksort(A, left, middle - 1)
+            self.__quicksort(A, middle + 1, right)
+
+    def quicksort(self, A):
+        '''
+        快速排序，时间复杂度:o(n^2):,但是期望的平均时间较好:Θ(nlgn):
+
+        Args
+        ====
+        A : 排序前的数组:(本地排序):
+
+        Return
+        ======
+        A : 使用快速排序排好的数组:(本地排序):
+
+        Example
+        =====
+        >>> import quicksort
+        >>> A = [6, 5, 4, 3, 2, 1]
+        >>> quicksort.quicksort(A)
+        >>> [1, 2, 3, 4, 5, 6]
+        '''
+        self.__quicksort(A, 0, len(A) - 1)
+        return A
+
 _inst = Sort()
 insertsort = _inst.insertsort
 selectsort = _inst.selectsort
 bubblesort = _inst.bubblesort
 mergesort = _inst.mergesort
 heapsort = _inst.heapsort
+quicksort = _inst.quicksort
 
 def test():
     '''
@@ -360,12 +414,15 @@ def test():
     sort.mergesort test
 
     sort.heapsort test
+
+    sort.quicksort test
     '''
-    print(insertsort([8, 7, 6, 5, 4, 3, 2, 1]))
-    print(selectsort([8, 7, 6, 5, 4, 3, 2, 1]))
-    print(bubblesort([8, 7, 6, 5, 4, 3, 2, 1]))
-    print(mergesort([8, 7, 6, 5, 4, 3, 2, 1]))
-    print(heapsort([8, 7, 6, 5, 4, 3, 2, 1]))
+    print(insertsort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
+    print(selectsort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
+    print(bubblesort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
+    print(mergesort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
+    print(heapsort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
+    print(quicksort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print('module sort test successful!!')
 
 if __name__ == '__main__':

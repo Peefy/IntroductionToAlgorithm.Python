@@ -128,6 +128,7 @@ class Chapter7_3:
         >>> Chapter7_2().note()
         '''
         print('chapter7.3 note as follow')
+        print('7.3 快速排序的随机化版本')
         # python src/chapter7/chapter7note.py
         # python3 src/chapter7/chapter7note.py
 
