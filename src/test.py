@@ -5,7 +5,11 @@ import numpy as np
 from numpy import arange
 import numpy.fft as fft
 import matplotlib.pyplot as plt
-from dugulib import sort
+
+if __name__ == '__main__':
+    from dugulib import sort
+else:
+    from .dugulib import sort
 
 def testAll():
     '''
