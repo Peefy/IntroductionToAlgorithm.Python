@@ -1,6 +1,12 @@
 # python src/chapter7/chapter7note.py
 # python3 src/chapter7/chapter7note.py
+'''
+Class Chapter7_1
 
+Class Chapter7_2
+
+Class Chapter7_3
+'''
 import sys as _sys
 import math as _math
 import random as _random
@@ -55,6 +61,18 @@ class Chapter7_1:
         print(' 6.      exchange A[i] <-> A[j]')
         print(' 7. exchange A[i+1] <-> A[r]')
         print(' 8. return i + 1')
+        A = [8, 9, 6, 7, 4, 5, 2, 3, 1]
+        print('数组A', _deepcopy(A), '的快速排序过程为:', quicksort.quicksort(A))
+        A = [13, 19, 9, 5, 12, 8, 7, 4, 11, 2, 6, 21]
+        print('练习7.1-1 数组A', _deepcopy(A), 
+            '的一步partition过程得到middle索引为：', quicksort.partition(A, 0, len(A) - 1))
+        A = [11, 11, 11, 11, 11]
+        print('练习7.1-2 数组A', _deepcopy(A), 
+            '的一步partition过程得到middle索引为：', quicksort.partition(A, 0, len(A) - 1))
+        print('练习7.1-3 就一个长度为n的for循环，且一定会执行，所以时间复杂度为Θ(n)，然后用确界的夹逼定义证明')
+        print('练习7.1-4 不等号方向改变即可')
+        # python src/chapter7/chapter7note.py
+        # python3 src/chapter7/chapter7note.py
 
 class Chapter7_2:
     def note(self):
@@ -68,6 +86,9 @@ class Chapter7_2:
         >>> Chapter7_2().note()
         '''
         print('chapter7.2 note as follow')
+        print('7.2 快速排序的性能')
+        # python src/chapter7/chapter7note.py
+        # python3 src/chapter7/chapter7note.py
 
 class Chapter7_3:
     '''
@@ -86,17 +107,25 @@ class Chapter7_3:
         >>> Chapter7_2().note()
         '''
         print('chapter7.3 note as follow')
+        # python src/chapter7/chapter7note.py
+        # python3 src/chapter7/chapter7note.py
 
 chapter7_1 = Chapter7_1()
 chapter7_2 = Chapter7_2()
 chapter7_3 = Chapter7_3()
 
-# python src/chapter7/chapter7note.py
-# python3 src/chapter7/chapter7note.py
-if __name__ == '__main__':  
+def printchapter7note():
+    '''
+    print chapter7 note.
+    '''
     print('Run main : single chapter seven!')  
     chapter7_1.note()
     chapter7_2.note()
     chapter7_3.note()
+
+# python src/chapter7/chapter7note.py
+# python3 src/chapter7/chapter7note.py
+if __name__ == '__main__':  
+    printchapter7note()
 else:
     pass

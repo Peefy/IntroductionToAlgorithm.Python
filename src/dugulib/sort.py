@@ -191,7 +191,7 @@ class Sort:
         p = _deepcopy(start)
         if p < r:
             # 待排序序列劈成两半
-            middle = int((r + p) / 2)
+            middle = (r + p) // 2
             q = _deepcopy(middle)
             # 递归调用
             # array =  self.__mergeSort(array, start, middle)
