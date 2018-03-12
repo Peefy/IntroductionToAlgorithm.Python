@@ -5,16 +5,13 @@
 
 # python src/dugulib/sort.py
 # python3 src/dugulib/sort.py
-
+import math as _math
+import random as _random
 from copy import deepcopy as _deepcopy
-import sys as _sys
+from numpy import arange as _arange
 
-if __name__ == '__main__':
-    _sys.path.append("..")
-    from ..chapter6.heap import heapsort
-else:
-    from ..chapter6.heap import heapsort
-
+__all__ = ['insertsort', 'selectsort', 'bubblesort',
+               'mergesort', 'heapsort']
 
 class Sort:
     '''
@@ -145,16 +142,16 @@ class Sort:
         n1 = q - p + 1
         n2 = r - q
         # 构造两堆牌(包含“哨兵牌”)
-        L = arange(n1 + 1, dtype=float)
-        R = arange(n2 + 1, dtype=float)
+        L = _arange(n1 + 1, dtype=float)
+        R = _arange(n2 + 1, dtype=float)
         # 将A分堆
         for i in range(n1):
             L[i] = A[p + i]
         for j in range(n2):
             R[j] = A[q + j + 1]
         # 加入无穷大“哨兵牌”, 对不均匀分堆的完美解决
-        L[n1] = math.inf
-        R[n2] = math.inf
+        L[n1] = _math.inf
+        R[n2] = _math.inf
         # 因为合并排序的前提是两堆牌是已经排序好的，所以这里排序一下
         # chapter2 = Chapter2()
         # L = chapter2.selectSortAscending(L)
@@ -190,12 +187,12 @@ class Sort:
         >>> [1, 2, 3, 4, 5, 6]
         '''
         # python一切皆对象和引用，所以要拷贝...特别是递归调用的时候
-        r = deepcopy(end)
-        p = deepcopy(start)
+        r = _deepcopy(end)
+        p = _deepcopy(start)
         if p < r:
             # 待排序序列劈成两半
             middle = int((r + p) / 2)
-            q = deepcopy(middle)
+            q = _deepcopy(middle)
             # 递归调用
             # array =  self.__mergeSort(array, start, middle)
             self.__mergeSort(array, p, q)
@@ -228,22 +225,153 @@ class Sort:
         '''
         return self.__mergeSort(array, 0, len(array) - 1)
 
+    def left(self, i):
+        '''
+        求:二叉堆:一个下标i的:左儿子:的下标
+        '''
+        return int(2 * i + 1)
+
+    def right(self, i):
+        '''
+        求:二叉堆:一个下标i的:右儿子:的下标
+        '''
+        return int(2 * i + 2)
+
+    def parent(self, i):
+        '''
+        求:二叉堆:一个下标i的:父节点:的下标
+        '''
+        return (i + 1) // 2 - 1
+
+    def heapsize(self, A):
+        '''
+        求一个数组形式的:二叉堆:的:堆大小:
+        '''
+        return len(A) - 1
+
+    def maxheapify(self, A, i):
+        '''
+        保持堆使某一个结点i成为最大堆(其子树本身已经为最大堆) :不使用递归算法:
+        '''
+        count = len(A)
+        largest = count
+        while largest != i:
+            l = self.left(i)
+            r = self.right(i)
+            if l <= self.heapsize(A) and A[l] >= A[i]:
+                largest = l
+            else:
+                largest = i
+            if r <= self.heapsize(A) and A[r] >= A[largest]:
+                largest = r
+            if largest != i:
+                A[i], A[largest] = A[largest], A[i]
+                i, largest = largest, count
+        return A
+
+    def buildmaxheap(self, A):
+        '''
+        对一个数组建立最大堆的过程, 时间代价为:O(n):
+        '''
+        count = int(len(A) // 2)
+        for i in range(count + 1):
+            self.maxheapify(A, count - i)
+        return A
+
+    def heapsort(self, A):
+        '''
+        堆排序算法过程, 时间代价为:O(nlgn):
+
+        Args
+        =
+        A : 待排序的数组A
+
+        Return
+        =
+        sortedA : 排序好的数组
+
+        Example
+        =
+        >>> import heap
+        >>> heap.heapsort([7, 6, 5, 4, 3, 2, 1])
+        >>> [1, 2, 3, 4, 5, 6, 7]
+        '''
+        heapsize = len(A) - 1
+
+        def left(i):
+            '''
+            求:二叉堆:一个下标i的:左儿子:的下标
+            '''
+            return int(2 * i + 1)
+
+        def right(i):
+            '''
+            求:二叉堆:一个下标i的:右儿子:的下标
+            '''
+            return int(2 * i + 2)
+
+        def parent(i):
+            '''
+            求:二叉堆:一个下标i的:父节点:的下标
+            '''
+            return (i + 1) // 2 - 1
+
+        def __maxheapify(A, i):
+            count = len(A)
+            largest = count
+            while largest != i:
+                l = left(i)
+                r = right(i)
+                if  l <= heapsize and A[l] >= A[i]:
+                    largest = l
+                else:
+                    largest = i
+                if r <= heapsize and A[r] >= A[largest]:
+                    largest = r
+                if largest != i:
+                    A[i], A[largest] = A[largest], A[i]
+                    i, largest = largest, count
+            return A
+
+        self.buildmaxheap(A)
+        length = len(A)   
+        for i in range(length - 1):
+            j = length - 1 - i
+            A[0], A[j] = A[j], A[0]
+            heapsize = heapsize - 1
+            __maxheapify(A, 0)
+        return A
 
 _inst = Sort()
 insertsort = _inst.insertsort
 selectsort = _inst.selectsort
 bubblesort = _inst.bubblesort
 mergesort = _inst.mergesort
-heapsort = heapsort
+heapsort = _inst.heapsort
 
-if __name__ == '__main__':
-    # python src/dugulib/sort.py
-    # python3 src/dugulib/sort.py
+def test():
+    '''
+    sort.insertsort test
+
+    sort.selectsort test
+
+    sort.bubblesort test
+
+    sort.mergesort test
+
+    sort.heapsort test
+    '''
     print(insertsort([8, 7, 6, 5, 4, 3, 2, 1]))
     print(selectsort([8, 7, 6, 5, 4, 3, 2, 1]))
     print(bubblesort([8, 7, 6, 5, 4, 3, 2, 1]))
     print(mergesort([8, 7, 6, 5, 4, 3, 2, 1]))
     print(heapsort([8, 7, 6, 5, 4, 3, 2, 1]))
+    print('module sort test successful!!')
+
+if __name__ == '__main__':
+    # python src/dugulib/sort.py
+    # python3 src/dugulib/sort.py
+    test()
 else:
     pass
 
