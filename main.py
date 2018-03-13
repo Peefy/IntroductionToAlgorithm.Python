@@ -60,6 +60,7 @@ if __name__ == '__main__':
     Chapter5_4().note()
     ## Chapter 6 
     chapter6_printall()
+    ## chapter 7
     printchapter7note()
 else:
     pass

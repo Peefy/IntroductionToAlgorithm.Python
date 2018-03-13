@@ -62,13 +62,16 @@ class Chapter7_1:
         print(' 7. exchange A[i+1] <-> A[r]')
         print(' 8. return i + 1')
         A = [8, 9, 6, 7, 4, 5, 2, 3, 1]
-        print('数组A', _deepcopy(A), '的快速排序过程为:', quicksort.quicksort(A))
+        print('数组A', _deepcopy(A), '的快速排序过程为:', 
+            quicksort.quicksort(A))
         A = [13, 19, 9, 5, 12, 8, 7, 4, 11, 2, 6, 21]
         print('练习7.1-1 数组A', _deepcopy(A), 
-            '的一步partition过程得到middle索引为：', quicksort.partition(A, 0, len(A) - 1))
+            '的一步partition过程得到middle索引为：', 
+            quicksort.partition(A, 0, len(A) - 1))
         A = [11, 11, 11, 11, 11]
         print('练习7.1-2 数组A', _deepcopy(A), 
-            '的一步partition过程得到middle索引为：', quicksort.partition(A, 0, len(A) - 1))
+            '的一步partition过程得到middle索引为：', 
+            quicksort.partition(A, 0, len(A) - 1))
         print('练习7.1-3 就一个长度为n的for循环，且一定会执行，所以时间复杂度为Θ(n)，然后用确界的夹逼定义证明')
         print('练习7.1-4 不等号方向改变即可')
         # python src/chapter7/chapter7note.py
