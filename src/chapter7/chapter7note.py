@@ -6,6 +6,8 @@ Class Chapter7_1
 Class Chapter7_2
 
 Class Chapter7_3
+
+Class Chapter7_4
 '''
 import sys as _sys
 import math as _math
@@ -24,11 +26,11 @@ class Chapter7_1:
     def note(self):
         '''
         Summary
-        =
+        ====
         Print chapter7.1 note
 
         Example
-        =
+        ====
         >>> Chapter7_1().note()
         '''
         print('chapter7.1 note as follow')
@@ -81,11 +83,11 @@ class Chapter7_2:
     def note(self):
         '''
         Summary
-        =
+        ====
         Print chapter7.2 note
 
         Example
-        =
+        ====
         >>> Chapter7_2().note()
         '''
         print('chapter7.2 note as follow')
@@ -116,28 +118,67 @@ class Chapter7_2:
 
 class Chapter7_3:
     '''
+    chapter7.3 content : note, function, etc..
+
     See Also
-    =
-    Chapter7_1 Chapter7_2
+    ========
+    Chapter7_1 Chapter7_2 Chapter7_4
     '''
     def note(self):
         '''
         Summary
-        =
+        ====
         Print chapter7.3 note
 
         Example
-        =
-        >>> Chapter7_2().note()
+        ====
+        >>> Chapter7_3().note()
         '''
         print('chapter7.3 note as follow')
         print('7.3 快速排序的随机化版本')
+        print('在探讨快速排序的平均性态过程中，假定输入数据的所有排列都是等可能的')
+        print('但在工程中，这个假设就不会总是成立')
+        print('虽然第五章介绍过一些随机算法，但是如果采用一种不同的，称为随机取样的随机化技术的话，可以使分析更加简单')
+        print('在这种方法中，不是时钟采用A[r]作为主元，而是从子数组A[p..r]中随机选择一个元素')
+        print('然后将这个随机元素与A[r]交换作为主元')
+        print('因为主元元素是随机选择的，在期望的平均情况下，对输入数组的划分比较对称')
+        A = [8, 7, 6, 5, 4, 3, 2, 1]    
+        print('数组[8, 7, 6, 5, 4, 3, 2, 1]的随机化快速排序：', 
+            quicksort.randomized_quicksort(A))
+        print('练习7.3-1:大部分时候输入的待排序序列我们是不知道的，而对于快速排序来讲，一个平均的输入才能反映其算法性能，最坏情况出现的概率比较小')
+        print('练习7.3-2:最佳情况调用Θ(n)次，最坏情况调用Θ(n^2)次')
+        # python src/chapter7/chapter7note.py
+        # python3 src/chapter7/chapter7note.py
+
+class Chapter7_4:
+    '''
+    chapter7.4 content : note, function, etc..
+
+    See Also
+    ========
+    Chapter7_1 Chapter7_2 Chapter7_3
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter7.4 note
+
+        Example
+        ====
+        ``Chapter7_4().note()``
+        '''
+        print('chapter7.4 note as follow')
+        print('7.4 快速排序分析')
+        print('7.4.1 最坏情况分析')
+        print('如果快速排序中每一层')
         # python src/chapter7/chapter7note.py
         # python3 src/chapter7/chapter7note.py
 
 chapter7_1 = Chapter7_1()
 chapter7_2 = Chapter7_2()
 chapter7_3 = Chapter7_3()
+chapter7_4 = Chapter7_4()
 
 def printchapter7note():
     '''
@@ -147,6 +188,7 @@ def printchapter7note():
     chapter7_1.note()
     chapter7_2.note()
     chapter7_3.note()
+    chapter7_4.note()
 
 # python src/chapter7/chapter7note.py
 # python3 src/chapter7/chapter7note.py
