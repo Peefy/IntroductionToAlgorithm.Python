@@ -1,6 +1,66 @@
 
 '''
 排序算法集合
+
+First
+=====
+
+冒泡排序 :O(n^2):      ok
+
+鸡尾酒排序(双向冒泡排序) :O(n^2):
+
+插入排序 :O(n^2):      ok
+
+桶排序 :O(n):
+
+计数排序 :O(n + k):
+
+合并排序 :O(nlgn):      ok
+
+原地合并排序 :O(n^2):    ok
+
+二叉排序树排序 :O(nlgn):   
+
+鸽巢排序 :O(n+k):
+
+基数排序 :O(nk):
+
+Gnome排序 :O(n^2):
+
+图书馆排序 :O(nlgn):
+
+Second
+======
+
+选择排序 :O(n^2):    ok
+
+希尔排序 :O(nlgn):   
+
+组合排序 :O(nlgn):
+
+堆排序  :O(nlgn):   ok
+
+平滑排序  :O(nlgn):
+
+快速排序   :O(nlgn):
+
+Intro排序  :O(nlgn):
+
+Patience排序 :O(nlgn + k):
+
+Third
+=====
+
+Bogo排序 :O(n*n!):
+
+Stupid排序 :O(n^3):
+
+珠排序  :O(n) or O(sqrt(n)):
+
+Pancake排序   :O(n):
+
+Stooge排序  :O(n^2.7):   ok
+
 '''
 
 # python src/dugulib/sort.py
@@ -11,7 +71,8 @@ from copy import deepcopy as _deepcopy
 from numpy import arange as _arange
 
 __all__ = ['insertsort', 'selectsort', 'bubblesort',
-               'mergesort', 'heapsort', 'quicksort']
+               'mergesort', 'heapsort', 'quicksort', 
+               'stoogesort'].sort()
 
 class Sort:
     '''
@@ -395,6 +456,22 @@ class Sort:
         self.__quicksort(A, 0, len(A) - 1)
         return A
 
+    def __stoogesort(self,  A, i, j):
+        if A[i] > A[j]:
+            A[i], A[j] = A[j], A[i]
+        if i + 1 >= j:
+            return A
+        k = (j - i + 1) // 3
+        __stoogesort(A, i, j - k)
+        __stoogesort(A, i + k, j)
+        return __stoogesort(A, i, j - k)
+
+    def stoogesort(self, A):
+        '''
+        Stooge原地排序 时间复杂度为:O(n^2.7):
+        '''
+        return __stoogesort(A, 0, len(A) - 1)
+
 _inst = Sort()
 insertsort = _inst.insertsort
 selectsort = _inst.selectsort
@@ -402,6 +479,7 @@ bubblesort = _inst.bubblesort
 mergesort = _inst.mergesort
 heapsort = _inst.heapsort
 quicksort = _inst.quicksort
+stoogesort = _inst.stoogesort
 
 def test():
     '''

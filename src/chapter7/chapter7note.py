@@ -19,8 +19,10 @@ from numpy import arange as _arange
 
 if __name__ == '__main__':
     import quicksort
+    import stooge
 else:
     from . import quicksort
+    from . import stooge
 
 class Chapter7_1:
     def note(self):
@@ -171,7 +173,42 @@ class Chapter7_4:
         print('chapter7.4 note as follow')
         print('7.4 快速排序分析')
         print('7.4.1 最坏情况分析')
-        print('如果快速排序中每一层')
+        print('如果快速排序中每一层递归上所做的都是最坏情况划分，则运行时间为Θ(n^2)')
+        print('7.4.2 期望的运行时间')
+        print('RANDOMZIED-QUICKSORT的平均情况运行时间为O(nlgn)')
+        print('运行时间和比较')
+        print('quicksort的运行时间是由花在过程PARTITION上的时间所决定的。')
+        print('每当PARTITION过程被调用时，就要选出一个主元元素，后续对QUICKSORT和PARTITION的各次递归调用中，都不会包含该元素')
+        print('于是，在快速排序算法的整个执行过程中，最多只可能调用PARTITION过程n次，调用一次PARTITION的时间为O(1)在加上一段时间')
+        print('引理7.1 设当QUICKSORT在一个包含n个元素的数组上运行时，PARTITION在第四行所做的比较次数为X,那么QUICKSORT的运行时间为O(n+X)')
+        print('练习7.4-1 递归式子T(n)=max(T(q)+T(n-q-1)+Θ(n))中，T(n)=Ω(n^2)')
+        print('练习7.4-2 快速排序的最佳情况运行时间为Ω(nlgn)')
+        print('练习7.4-3 略')
+        print('练习7.4-4 RANDOMIZED-QUICKSORT算法期望的运行时间为Ω(nlgn)')
+        print('练习7.4-5 对插入排序来说，当其输入已经是几乎排好序的，运行时间是很快的')
+        print(' 当在一个长度小于k的子数组上调用快速排序时，让它不做任何排序就返回。', 
+            '当顶层的快速排序调用返回后，对整个数组运行插入排序来完成排序过程。', 
+            '这一排序算法的期望运行时间为O(nk+nlg(n/k))')
+        print('练习7.4-6 PARTITION过程做这样的修改，从数组A中随机地选出三个元素，并围绕这三个数的中数(即这三个元素的中间值)进行划分', 
+            '求出以a的函数形式表示的、最坏情况中a:(1-a)划分的近似概率')
+        A = [13, 19, 9, 5, 12, 8, 7, 4, 11, 2, 6, 21]
+        print('思考题7-1：数组A', _deepcopy(A), '的HOARE-PARTITION算法过程为:', 
+            quicksort.hoare_partition(A, 0, len(A) - 1))
+        print('数组A', _deepcopy(A), '的HOARE-QUICKSORT的过程为：', quicksort.hoare_quicksort(A))
+        print('思考题7-2:对快速排序算法的另一种分析')
+        print(' 着重关注每一次QUICKSORT递归调用的期望运行时间，而不是执行的比较次数')
+        print(' a) 给定一个大小为n的数组，任何特定元素被选为主元的概率为1/n')
+        print('思考题7-3 Stooge排序')
+        A = [8, 7, 56, 43, 21]
+        print('数组A', _deepcopy(A), '的Stooge排序结果为:', stooge.stoogesort(A), A)
+        print('思考题7-4 快速排序的堆栈深度')
+        print(' 7.1中的快速排序算法包含有两个对其自身的递归调用,但是第二个递归不是必须的')
+        A = [8, 7, 56, 43, 21]
+        print('数组A', _deepcopy(A), '的尾递归快速排序结果为:', quicksort.morequicksort(A))
+        print('思考题7-5 \"三数取中\"划分 也就是主元素RANDOMIZED-QUICKSORT的RANDOMIZED-PARTITION过程')
+        print(' 三数取中方法仅仅影响其运行时间Ω(nlgn)中的常数因子')
+        print('思考题7-6 对区间的模糊排序:算法的目标是对这些区间进行模糊排序')
+        print('模糊排序算法的期望运行时间为Θ(nlgn),但当所有区间都重叠时，期望的运行时间为Θ(n)')
         # python src/chapter7/chapter7note.py
         # python3 src/chapter7/chapter7note.py
 
