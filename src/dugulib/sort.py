@@ -82,18 +82,23 @@ class Sort:
         '''
         Summary
         ===
-        插入排序的升序排列,时间复杂度:O(n^2):
+        插入排序的升序排列,时间复杂度`O(n^2)`
     
         Parameter
         ===
-        array : a list like
+        `array` : a list like
         Return
         ===
-        sortedarray : 排序好的数组
+        `sortedarray` : 排序好的数组
+
+        Example
+        ===
+        ```python
         >>> import sort
         >>> array = [1, 3, 5, 2, 4, 6]
         >>> sort.insertsort(array)
         >>> [1, 2, 3, 4, 5, 6]
+        ```
         '''
         A = array
         n = len(A)
@@ -123,18 +128,20 @@ class Sort:
         
         Args
         ===
-        array : a list like
+        `array` : a list like
 
         Return
         ===
-        sortedArray : 排序好的数组
+        `sortedArray` : 排序好的数组
 
         Example
         ===
+        ```python
         >>> import sort
         >>> array = [1, 3, 5, 2, 4, 6]
         >>> sort.selectsort(array)
         >>> [1, 2, 3, 4, 5, 6]
+        ```
         '''
         A = array
         length = len(A)
@@ -157,19 +164,20 @@ class Sort:
 
         Args
         ====
-        array : 排序前的数组
+        `array` : 排序前的数组
 
         Return
         ======
-        sortedArray : 使用冒泡排序排好的数组
+        `sortedArray` : 使用冒泡排序排好的数组
 
         Example
         ===
+        ```python
         >>> import sort
         >>> A = [6, 5, 4, 3, 2, 1]
         >>> sort.bubblesort(A)
         >>> [1, 2, 3, 4, 5, 6]
-
+        ```
         '''
         nums = _deepcopy(array)
         for i in range(len(nums) - 1):    
@@ -249,8 +257,11 @@ class Sort:
 
         Example
         ==
-        >>> Chapter2_3().mergeSort([6, 5, 4, 3, 2, 1])
+        ```python
+        >>> import sort
+        >>> sort.mergeSort([6, 5, 4, 3, 2, 1])
         >>> [1, 2, 3, 4, 5, 6]
+        ```
         '''
         # python一切皆对象和引用，所以要拷贝...特别是递归调用的时候
         r = _deepcopy(end)
@@ -275,19 +286,20 @@ class Sort:
         归并排序/合并排序：最优排序复杂度:n * O(log2(n)):, 空间复杂度:O(n):
 
         Args
-        ==
+        ===
         array : 待排序的数组
 
         Returns
-        ==
+        ===
         sortedArray : 排序好的数组
 
         Example
-        ==
+        ===
+        ```python
         >>> import sort
         >>> sort.mergesort([6, 5, 4, 3, 2, 1])
         >>> [1, 2, 3, 4, 5, 6]
-
+        ```
         '''
         return self.__mergeSort(array, 0, len(array) - 1)
 
@@ -358,9 +370,11 @@ class Sort:
 
         Example
         ====
-        >>> import heap
-        >>> heap.heapsort([7, 6, 5, 4, 3, 2, 1])
+        ```python
+        >>> import sort
+        >>> sort.heapsort([7, 6, 5, 4, 3, 2, 1])
         >>> [1, 2, 3, 4, 5, 6, 7]
+        ```
         '''
         heapsize = len(A) - 1
 
@@ -447,10 +461,11 @@ class Sort:
         A : 使用快速排序排好的数组:(本地排序):
 
         Example
-        =====
-        >>> import quicksort
+        ===
+        ```python
+        >>> import sort
         >>> A = [6, 5, 4, 3, 2, 1]
-        >>> quicksort.quicksort(A)
+        >>> sort.quicksort(A)
         >>> [1, 2, 3, 4, 5, 6]
         '''
         self.__quicksort(A, 0, len(A) - 1)
@@ -469,6 +484,10 @@ class Sort:
     def stoogesort(self, A):
         '''
         Stooge原地排序 时间复杂度为:O(n^2.7):
+
+        Args
+        ===
+        A : 排序前的数组:(本地排序):
         '''
         return __stoogesort(A, 0, len(A) - 1)
 
