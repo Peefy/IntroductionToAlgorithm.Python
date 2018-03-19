@@ -29,6 +29,8 @@ from src.chapter6.test import chapter6_printall
 
 from src.chapter7.chapter7note import printchapter7note
 
+from src.chapter8.chapter8note import printchapter8note
+
 if __name__ == '__main__':
     ## Test required packet
     testAll()
@@ -62,6 +64,8 @@ if __name__ == '__main__':
     chapter6_printall()
     ## chapter 7
     printchapter7note()
+    ## chapter8
+    printchapter8note()
 else:
     pass
 
