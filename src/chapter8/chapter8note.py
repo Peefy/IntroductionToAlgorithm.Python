@@ -54,7 +54,11 @@ class Chapter8_1:
         print('练习8.1-3 对于长度为n的n!种输入，至少一半而言，不存在线性运行时间的比较排序算法')
         print('练习8.1-4 现有n个元素需要排序，它包含n/k个子序列，每一个包含n个元素')
         print(' 每个子序列的所有元素都小于后续序列的所有元素，所以对n/k个子序列排序，就可以得到整个输入长度的排序')
-        print(' 这个排序问题中所需的问题都需要有一个下界Ω(nlgk)')
+        print(' 这个排序问题中所需的问题都需要有一个下界Θ(nlgk)')
+        print('计数排序的基本思想是对每一个输入元素x，确定出小于x的元素个数，有了这一信息，', 
+            '就可以把x直接放到最终输出数组中的位置上。例如有17个元素小于x，则x位于第18个位置上（元素互补相同）')
+        print('在计数排序的代码中，假定输入是个数组A[1..n],length[A]=n')
+        print('另外还需要两个数组，存放排序结果的B[1..n],以及提供临时存储区的C[0..k]')
         # python src/chapter8/chapter8note.py
         # python3 src/chapter8/chapter8note.py
 
@@ -62,6 +66,43 @@ class Chapter8_2:
     '''
     chpater8.2 note and function
     '''
+    def countingsort(self, A, k):
+        '''
+
+        计数排序，无需比较，非原地排序，时间复杂度`Θ(n)`
+
+        Args
+        ===
+        `A` : 待排序数组
+
+        `k` : 数组中的元素都不大于k
+
+        Return
+        ===
+        `sortedarray` : 排序好的数组
+
+        Example
+        ===
+        ```python
+        >>> Chapter8_2().countingsort([0,1,1,3,4,6,5,3,5], 6)
+        >>> [0,1,1,3,3,4,5,5,6]
+        ```
+        '''
+        C = []
+        B = _deepcopy(A)
+        for i in range(k):
+            C.append(0)
+        length = len(A)
+        for j in range(length):
+            C[A[j]] = C[A[j]] + 1
+        for i in range(1, k):
+            C[i] = C[i] + C[i - 1]
+        for i in range(length):
+            j = length - 1 - i
+            B[C[A[j]] - 1] = A[j]
+            C[A[j]] = C[A[j]] - 1
+        return B
+    
     def note(self):
         '''
         Summary
@@ -75,9 +116,55 @@ class Chapter8_2:
         ```
         '''
         print('chapter8.2 note as follow')
+        print('8.2 计数排序')
+        print('计数排序假设n个输入元素的每一个都是介于0到k之间的整数，', 
+            '此处k为某个整数，k=O(n),计数排序的时间为O(n)')
+        A = [5, 5, 4, 2, 1, 0, 3, 2, 1]
+        print('数组A:', _deepcopy(A), '的计数排序：', self.countingsort(A, 6))
+        print('计数排序虽然时间复杂度低并且算法稳定，但是空间复杂度高，并且需要先验知识`所有元素都不大于k`')
+        print('计数排序的稳定性应用非常重要，而且经常作为基数排序的子程序，对于计数排序的正确性证明很重要')
+        A = [6, 0, 2, 0, 1, 3, 4, 6, 1, 3, 2]
+        print('练习8.2-1 数组A:', _deepcopy(A), '的计数排序：', self.countingsort(A, 7))
+        print('练习8.2-2 计数算法是稳定的')
+        print('练习8.2-3 修改后算法不稳定，最好先放大数再放小数')
+        print('练习8.2-4 略 不会')
+
+class Chapter8_3:
+    '''
+    chpater8.3 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter8.3 note
+
+        Example
+        ====
+        ```python
+        Chapter8_3().note()
+        ```
+        '''
+        print('chapter8.3 note as follow')
+        print('8.3 基数排序')
+        print('基数排序是用在老式穿卡机上的算法')
+        print('关于这个算法就是按位排序要稳定')
+        print('引理8.3 给定n个d位数，每一个数位有k个可能取值，基数排序算法能够以Θ(d(n+k))的时间正确地对这些数排序')
+        print('引理8.4 给定n个b位数，和任何正整数r<=b，RADIX-SORT能以Θ((b/r)(n+2^r))的时间内正确地排序')
+        print('基数排序的时间复杂度表达式中常数项比较大，若取b=O(lgn),r=lgn,则基数排序的时间复杂度为Θ(n)')
+        print('练习8.3-1')
+        print('练习8.3-2')
+        print('练习8.3-3')
+        print('练习8.3-4')
+        print('练习8.3-5')
+        print('')
+        print('')
+        print('')
+        print('')
 
 chapter8_1 = Chapter8_1()
 chapter8_2 = Chapter8_2()
+chapter8_3 = Chapter8_3()
 
 def printchapter8note():
     '''
@@ -86,6 +173,7 @@ def printchapter8note():
     print('Run main : single chapter eight!')  
     chapter8_1.note()
     chapter8_2.note()
+    chapter8_3.note()
 
 # python src/chapter8/chapter8note.py
 # python3 src/chapter8/chapter8note.py
