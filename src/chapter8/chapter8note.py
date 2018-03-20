@@ -6,6 +6,7 @@ Class Chapter8_1
 
 Class Chapter8_2
 
+Class Chapter8_3
 '''
 import sys as _sys
 import math as _math
@@ -66,9 +67,30 @@ class Chapter8_2:
     '''
     chpater8.2 note and function
     '''
+
+    def countingsort2(self, A):
+        '''
+        计数排序，无需比较，非原地排序，时间复杂度`Θ(n)`
+
+        Args
+        ===
+        `A` : 待排序数组
+
+        Return
+        ===
+        `sortedarray` : 排序好的数组
+
+        Example
+        ===
+        ```python
+        >>> Chapter8_2().countingsort2([0,1,1,3,4,6,5,3,5])
+        >>> [0,1,1,3,3,4,5,5,6]
+        ```
+        '''
+        return self.countingsort(A, max(A) + 1)
+
     def countingsort(self, A, k):
         '''
-
         计数排序，无需比较，非原地排序，时间复杂度`Θ(n)`
 
         Args
@@ -125,14 +147,116 @@ class Chapter8_2:
         print('计数排序的稳定性应用非常重要，而且经常作为基数排序的子程序，对于计数排序的正确性证明很重要')
         A = [6, 0, 2, 0, 1, 3, 4, 6, 1, 3, 2]
         print('练习8.2-1 数组A:', _deepcopy(A), '的计数排序：', self.countingsort(A, 7))
+        A = [6, 0, 2, 0, 1, 3, 4, 6, 1, 3, 2]
+        print(' 数组A:', _deepcopy(A), '另一种计数排序：', self.countingsort2(A))
         print('练习8.2-2 计数算法是稳定的')
         print('练习8.2-3 修改后算法不稳定，最好先放大数再放小数')
         print('练习8.2-4 略 不会')
+        # python src/chapter8/chapter8note.py
+        # python3 src/chapter8/chapter8note.py
 
 class Chapter8_3:
     '''
     chpater8.3 note and function
     '''
+    def getarraystr_subarray(self, A ,k):
+        '''
+        取一个数组中每个元素第k位构成的子数组
+
+        Args
+        ===
+        `A` : 待取子数组的数组
+
+        `k` : 第1位是最低位，第d位是最高位
+
+        Return
+        ===
+        `subarray` : 取好的子数组
+
+        Example 
+        ===
+        ```python
+        Chapter8_3().getarraystr_subarray(['ABC', 'DEF', 'OPQ'], 1)
+        ['C', 'F', 'Q']
+        ```
+        '''
+        B = []
+        length = len(A)
+        for i in range(length):
+            B.append(int(str(A[i])[-k]))
+        return B
+    
+    def countingsort(self, A, k):
+        '''
+        计数排序，无需比较，非原地排序，时间复杂度`Θ(n)`
+
+        Args
+        ===
+        `A` : 待排序数组
+
+        `k` : 数组中的元素都不大于k
+
+        Return
+        ===
+        `sortedarray` : 排序好的数组
+
+        Example
+        ===
+        ```python
+        >>> Chapter8_2().countingsort([0,1,1,3,4,6,5,3,5], 6)
+        >>> [0,1,1,3,3,4,5,5,6]
+        ```
+        '''
+        C = []
+        B = _deepcopy(A)
+        k = 27
+        for i in range(k):
+            C.append(0)
+        length = len(A)
+        for j in range(length):
+            C[A[j]] = C[A[j]] + 1
+        for i in range(1, k):
+            C[i] = C[i] + C[i - 1]
+        for i in range(length):
+            j = length - 1 - i
+            B[C[A[j]] - 1] = A[j]
+            C[A[j]] = C[A[j]] - 1
+        return B
+
+    def radixsort(self, A, d):
+        '''
+        基数排序 平均时间复杂度为`Θ(nlgn)`
+
+        Args
+        ===
+        `A` : 待排序的数组
+
+        `d` : 数组A中每个元素都有d位数字/长度,其中第1位是最低位，第d位是最高位
+
+        Return
+        ===
+        `sortedarray` : 排序好的数组 
+
+        Example
+        ===
+        ```python
+        >>> Chapter8_3().radixsort([54,43,32,21,11], 2)
+        >>> [11, 21, 32, 43, 54]
+        ```
+        '''
+        length = len(A)
+        B = []
+        for i in range(d):
+            B.append(self.getarraystr_subarray(A, i + 1))
+        for k in range(d):
+            B[k] = self.countingsort(B[k], max(B[k]) + 1)
+        C = _arange(length)
+        for j in range(length):
+            for i in range(d):            
+                C[j] += B[i][j] * 10 ** i
+            C[j] = C[j] - j
+        return C 
+
     def note(self):
         '''
         Summary
@@ -149,18 +273,26 @@ class Chapter8_3:
         print('8.3 基数排序')
         print('基数排序是用在老式穿卡机上的算法')
         print('关于这个算法就是按位排序要稳定')
-        print('引理8.3 给定n个d位数，每一个数位有k个可能取值，基数排序算法能够以Θ(d(n+k))的时间正确地对这些数排序')
-        print('引理8.4 给定n个b位数，和任何正整数r<=b，RADIX-SORT能以Θ((b/r)(n+2^r))的时间内正确地排序')
-        print('基数排序的时间复杂度表达式中常数项比较大，若取b=O(lgn),r=lgn,则基数排序的时间复杂度为Θ(n)')
-        print('练习8.3-1')
-        print('练习8.3-2')
-        print('练习8.3-3')
-        print('练习8.3-4')
-        print('练习8.3-5')
+        print('引理8.3 给定n个d位数，每一个数位有k个可能取值，', 
+            '基数排序算法能够以Θ(d(n+k))的时间正确地对这些数排序')
+        print('引理8.4 给定n个b位数，和任何正整数r<=b，', 
+            'RADIX-SORT能以Θ((b/r)(n+2^r))的时间内正确地排序')
+        print('基数排序的时间复杂度表达式中常数项比较大，',
+            '若取b=O(lgn),r=lgn,则基数排序的时间复杂度为Θ(n)')
+        A = ['ABC', 'DEF', 'OPQ']
+        # print('数组A', _deepcopy(A), '的一个取子数组的样例：', self.getarraystr_subarray(A, 1))
+        words = [54,43,32,21,11]
+        print('练习8.3-1 数组words', _deepcopy(words), '的基数排序为:', self.radixsort(words, 2))
+        print('练习8.3-2 ')
+        print('练习8.3-3 ')
+        print('练习8.3-4 ')
+        print('练习8.3-5 ')
         print('')
         print('')
         print('')
         print('')
+        # python src/chapter8/chapter8note.py
+        # python3 src/chapter8/chapter8note.py
 
 chapter8_1 = Chapter8_1()
 chapter8_2 = Chapter8_2()
