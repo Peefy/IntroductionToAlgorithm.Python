@@ -7,6 +7,8 @@ Class Chapter8_1
 Class Chapter8_2
 
 Class Chapter8_3
+
+Class Chapter8_4
 '''
 import sys as _sys
 import math as _math
@@ -283,20 +285,42 @@ class Chapter8_3:
         # print('数组A', _deepcopy(A), '的一个取子数组的样例：', self.getarraystr_subarray(A, 1))
         words = [54,43,32,21,11]
         print('练习8.3-1 数组words', _deepcopy(words), '的基数排序为:', self.radixsort(words, 2))
-        print('练习8.3-2 ')
-        print('练习8.3-3 ')
-        print('练习8.3-4 ')
-        print('练习8.3-5 ')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('练习8.3-2 排序算法的稳定性：假定在待排序的记录序列中，存在多个具有相同的关键字的记录，',
+            '若经过排序，这些记录的相对次序保持不变，即在原序列中，r_i=r_j，且r_i在r_j之前，而在排序后的序列中，', 
+            'r_i仍在r_j之前，则称这种排序算法是稳定的，否则成为不稳定的')
+        print(' 常见排序算法的稳定性：堆排序，快速排序，希尔排序，直接选择排序不是稳定的排序算法，',
+            '而基数排序，冒泡排序，直接插入排序，折半插入排序，合并排序时稳定的排序算法')
+        print('练习8.3-3 证明过程中，计数排序要是稳定的才行，不然的话拆分子数组过程在复原后',
+            '会导致相应的位数匹配不上，导致结果不正确')
+        print('练习8.3-4 使用变形的计数排序，开辟n^2个空间')
+        print('练习8.3-5 不会....看管d堆卡片吧')
+        # python src/chapter8/chapter8note.py
+        # python3 src/chapter8/chapter8note.py
+
+class Chapter8_4:
+    '''
+    chpater8.4 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter8.4 note
+
+        Example
+        ====
+        ```python
+        Chapter8_4().note()
+        ```
+        '''
+        print('chapter8.4 note as follow')
         # python src/chapter8/chapter8note.py
         # python3 src/chapter8/chapter8note.py
 
 chapter8_1 = Chapter8_1()
 chapter8_2 = Chapter8_2()
 chapter8_3 = Chapter8_3()
+chapter8_4 = Chapter8_4()
 
 def printchapter8note():
     '''
@@ -306,6 +330,7 @@ def printchapter8note():
     chapter8_1.note()
     chapter8_2.note()
     chapter8_3.note()
+    chapter8_4.note()
 
 # python src/chapter8/chapter8note.py
 # python3 src/chapter8/chapter8note.py
