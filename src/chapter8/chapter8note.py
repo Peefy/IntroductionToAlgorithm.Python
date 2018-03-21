@@ -314,6 +314,13 @@ class Chapter8_4:
         ```
         '''
         print('chapter8.4 note as follow')
+        print('当桶排序的输入符合均匀分布时，即可以以线性时间运行，与计数排序类似，桶排序也对输入作了某种假设')
+        print('具体来说，计数排序假设输入是由一个小范围内的整数构成，而桶排序则假设输入由一个随机过程产生，该过程将元素均匀地分布在区间[0,1)上')
+        print('桶排序的思想就是把区间[0,1)划分成n个相同大小的子区间，或称桶。然后将n个输入分布到各个桶中去')
+        print('因为输入数均匀分布在[0,1)上，所以一般不会有很多数落在一个桶中的情况')
+        print('')
+        print('')
+        print('')
         # python src/chapter8/chapter8note.py
         # python3 src/chapter8/chapter8note.py
 
