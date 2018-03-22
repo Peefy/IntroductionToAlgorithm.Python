@@ -28,21 +28,28 @@ class Chapter2_3:
     def insertSortWithIndex(self, array, start ,end):
         '''
         Summary
-        =
+        ===
         插入排序的升序排列(带排序索引)
         
         Parameter
-        =
-        array : a list like
-        start : sort start index
-        end : sort end index
+        ===
+        `array` : a list like
+
+        `start` : sort start index
+
+        `end` : sort end index
 
         Return
-        =
-        sortedArray : 排序好的数组
+        ===
+        `sortedArray` : 排序好的数组
+
+        Example
+        ===
+        ```python
         >>> array = [6, 5, 4, 3, 2, 1]
         >>> Chapter2_3().insert(array, 1, 4)
         >>> [6 ,2, 3, 4, 5, 1]
+        ```
         '''
         A = deepcopy(array)
         for j in range(start + 1, end + 1):

@@ -18,6 +18,7 @@ from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
 
+
 class Chapter8_1:
     '''
     chpater8.1 note and function
@@ -93,7 +94,9 @@ class Chapter8_2:
 
     def countingsort(self, A, k):
         '''
-        计数排序，无需比较，非原地排序，时间复杂度`Θ(n)`
+        针对数组`A`计数排序，无需比较，非原地排序，当`k=O(n)`时，算法时间复杂度为`Θ(n)`,
+        3个n for 循环
+        需要预先知道数组元素都不大于`k`
 
         Args
         ===
@@ -301,6 +304,74 @@ class Chapter8_4:
     '''
     chpater8.4 note and function
     '''
+    def insertsort(self, array):
+        '''
+        Summary
+        ===
+        插入排序的升序排列,时间复杂度`O(n^2)`
+    
+        Parameter
+        ===
+        `array` : a list like
+        Return
+        ===
+        `sortedarray` : 排序好的数组
+
+        Example
+        ===
+        ```python
+        >>> import sort
+        >>> array = [1, 3, 5, 2, 4, 6]
+        >>> sort.insertsort(array)
+        >>> [1, 2, 3, 4, 5, 6]
+        ```
+        '''
+        A = array
+        n = len(A)
+        for j in range(1, n):
+            ## Insert A[j] into the sorted sequece A[1...j-1] 前n - 1 张牌
+            # 下标j指示了待插入到手中的当前牌，所以j的索引从数组的第二个元素开始
+            # 后来摸的牌
+            key = A[j]
+            # 之前手中的已经排序好的牌的最大索引
+            i = j - 1
+            # 开始寻找插入的位置并且移动牌
+            while(i >= 0 and A[i] > key):
+                # 向右移动牌
+                A[i + 1] = A[i]
+                # 遍历之前的牌
+                i = i - 1
+            # 后来摸的牌插入相应的位置
+            A[i + 1] = key
+        # 输出升序排序后的牌
+        return A
+
+    def bucketsort(self, A):
+        '''
+        桶排序,期望时间复杂度`Θ(n)`(满足输入分布条件`[0,1)`的情况下)
+        需要`链表list`额外的数据结构和存储空间
+
+        Args
+        ===
+        `A` : 待排序的数组
+
+        Return
+        ===
+        `sortedarray` : 排序好的数组
+
+        Example
+        ===
+        ```python
+        >>> Chapter8_4().bucketsort([0.5, 0.4, 0.3, 0.2, 0.1])
+        >>> [0.1, 0.2, 0.3, 0.4, 0.5]
+        ```
+        '''
+        n = len(A)
+        B = []
+        for i in range(n):
+            B.insert(int(n * A[i]), A[i])
+        return self.insertsort(B)
+        
     def note(self):
         '''
         Summary
@@ -318,9 +389,24 @@ class Chapter8_4:
         print('具体来说，计数排序假设输入是由一个小范围内的整数构成，而桶排序则假设输入由一个随机过程产生，该过程将元素均匀地分布在区间[0,1)上')
         print('桶排序的思想就是把区间[0,1)划分成n个相同大小的子区间，或称桶。然后将n个输入分布到各个桶中去')
         print('因为输入数均匀分布在[0,1)上，所以一般不会有很多数落在一个桶中的情况')
-        print('')
-        print('')
-        print('')
+        print('为了得到结果，先对桶中的数进行排序，然后按次序把桶中的元素列出来即可。')
+        print('在桶排序的算法当中')
+        print('桶排序算法中，假设输入的是一个含n个元素的数组A，且每个元素满足[0,1)')
+        print('还需要一个辅助数组B[0..n-1]来存放链表(桶)，并假设可以用某种机制来维护这些表')
+        print('桶排序的期望时间复杂度为Θ(n),证明过程略')
+        A = [0.79, 0.13, 0.16, 0.64, 0.39, 0.20, 0.89, 0.53, 0.71, 0.42]
+        print('练习8.4-1 数组A', _deepcopy(A), '的桶排序过程为:', self.bucketsort(A))
+        print('练习8.4-2 略')
+        print('练习8.4-3 E(X^2)=DX+E^2(X)=9/16+1 E^2(X)=E(X)E(X)=1')
+        print('练习8.4-4 所有点到圆心的距离都服从均匀分布，所以采用桶排序')
+        print('练习8.4-5 略')
+        print('思考题8-1 给定n个不同的输入元素，对于任何确定或随机的比较排序算法，其期望运行时间都有下界Ω(nlgn)')
+        print('思考题8-2 以线性时间原地置换排序:假设有一个由n个数据记录组成的数组要排序，且每个记录的关键字的值0或1')
+        print(' 算法的运行时间为O(n),算法是稳定的,算法是原地排序的')
+        print('思考题8-3 排序不同长度的数据项，字符串所有字符串字符的ascii码都不大于z，所以用基数排序，O(n)')
+        print('思考题8-4 水壶')
+        print('思考题8-5 ')
+        print('思考题8-6 ')
         # python src/chapter8/chapter8note.py
         # python3 src/chapter8/chapter8note.py
 
