@@ -18,7 +18,7 @@ from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
 
-
+import neurolab as nl
 class Chapter8_1:
     '''
     chpater8.1 note and function
@@ -157,6 +157,7 @@ class Chapter8_2:
         print('练习8.2-2 计数算法是稳定的')
         print('练习8.2-3 修改后算法不稳定，最好先放大数再放小数')
         print('练习8.2-4 略 不会')
+
         # python src/chapter8/chapter8note.py
         # python3 src/chapter8/chapter8note.py
 
@@ -372,6 +373,37 @@ class Chapter8_4:
             B.insert(int(n * A[i]), A[i])
         return self.insertsort(B)
         
+    def __find_matching_kettle(self, kettles1, kettles2):
+        '''
+        思考题8.4，找到匹配的水壶，并返回匹配索引集合
+
+        Example
+        ===
+        ```python
+        >>> list(find_matching_kettle([1,2,3,4,5], [5,4,3,2,1]))
+        [(0, 4), (1, 3), (2, 2), (3, 1), (4, 0)]
+        ```
+        '''
+        assert len(kettles1) == len(kettles2)
+        n = len(kettles1)
+        for i in range(n):
+            for j in range(n):
+                if kettles1[i] == kettles2[j]:
+                    yield (i, j)
+
+    def find_matching_kettle(self, kettles1, kettles2):
+        '''
+        思考题8.4，找到匹配的水壶，并返回匹配索引集合
+
+        Example
+        ===
+        ```python
+        >>> list(find_matching_kettle([1,2,3,4,5], [5,4,3,2,1]))
+        [(0, 4), (1, 3), (2, 2), (3, 1), (4, 0)]
+        ```
+        '''      
+        return list(self.__find_matching_kettle(kettles1, kettles2))
+
     def note(self):
         '''
         Summary
@@ -404,9 +436,19 @@ class Chapter8_4:
         print('思考题8-2 以线性时间原地置换排序:假设有一个由n个数据记录组成的数组要排序，且每个记录的关键字的值0或1')
         print(' 算法的运行时间为O(n),算法是稳定的,算法是原地排序的')
         print('思考题8-3 排序不同长度的数据项，字符串所有字符串字符的ascii码都不大于z，所以用基数排序，O(n)')
-        print('思考题8-4 水壶')
-        print('思考题8-5 ')
-        print('思考题8-6 ')
+        print('思考题8-4 水壶：假设给定了n个红色的水壶和n个蓝色的水壶，他们的形状尺寸都不相同，所有红色水壶中所盛水的量都不同。')
+        print(' 所有红色水壶中所盛水的量都不一样，蓝色水壶也是一样的；此外，对于每一个红色的水壶，都有一个对应的蓝色水壶，两者所盛的水量是一样的，反之亦然')
+        print(' 任务是将匹配的红色水壶和蓝色水壶找出来，假设用1,2,3,4,5代表不同的水量')
+        print('[1,2,3,4,5]和[5,4,3,2,1]的匹配为：', 
+            self.find_matching_kettle([1,2,3,4,5], [5,4,3,2,1]))
+        print(' 只会双重循环比较算法，对于下界为O(nlgn),考虑二叉树和递归算法吧,随机化算法也不会')
+        print('思考题8-5 k排序，1排序就是完全排序')
+        print(' 一个n元素的数组是k排序的，当且仅当对所有元素，当前A[i]<=A[i+k]')
+        print('思考题8-6 合并已排序列表的下界')
+        print(' 合并两个已知已排序列表这样的问题是经常出现的。它是合并排序的一个子过程')
+        print(' 决策树说明比较次数有一个下界2n-o(n),还有一个更紧确的2n-1界')
+        print('Han将排序算法的界改善至O(nlglgnlglglgn),尽管这些算法在理论上有重要的突破，', 
+            '但都相当复杂，在目前来看，不太可能与现有的，正在实践中使用的排序算法竞争')
         # python src/chapter8/chapter8note.py
         # python3 src/chapter8/chapter8note.py
 
