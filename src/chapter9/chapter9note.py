@@ -23,11 +23,15 @@ class Chapter9_1:
     chpater9.1 note and function
     '''
 
-    def minimum(self, A : list) -> float|int:
+    def minimum(self, A : list) -> float:
         '''
         求集合中的最小值
         '''
-        min
+        min = A[0]
+        for i in range(1, len(A)):
+            if min > A[i]:
+                min = A[i]
+        return min
 
     def note(self):
         '''
@@ -56,7 +60,9 @@ class Chapter9_1:
         print('选择问题可以在O(nlgn)时间内解决，因为可以用堆排序或合并排序对输入数据进行排序')
         print(' 然后在输出数组中标出第i个元素即可。但是还有其他更快的方法')
         print('9.1 最小值和最大值')
-
+        A = [61, 52, 43, 34, 25, 16, 17]
+        print('数组A', _deepcopy(A), '中元素的最小的元素为:', self.minimum(A))
+        print('可以通过n-1次比较找出一个数组中的上界和下界')
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
 
