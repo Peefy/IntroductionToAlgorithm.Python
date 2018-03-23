@@ -89,7 +89,16 @@ class Chapter9_2:
         ```
         '''
         print('chapter9.2 note as follow')
+        print('9.2 以期望线性时间做选择')
         print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
 
@@ -110,6 +119,15 @@ class Chapter9_3:
         ```
         '''
         print('chapter9.3 note as follow')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
 
@@ -130,6 +148,16 @@ class Chapter9_4:
         ```
         '''
         print('chapter9.4 note as follow')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
 
