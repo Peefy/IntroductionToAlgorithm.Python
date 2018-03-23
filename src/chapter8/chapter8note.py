@@ -18,7 +18,6 @@ from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
 
-import neurolab as nl
 class Chapter8_1:
     '''
     chpater8.1 note and function

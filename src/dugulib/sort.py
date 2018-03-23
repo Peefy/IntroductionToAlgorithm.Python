@@ -120,7 +120,7 @@ class Sort:
         # 输出升序排序后的牌
         return A
 
-    def selectsort(self, array = [] : list) -> list:
+    def selectsort(self, array : list = []) -> list:
         '''
         Summary
         ===
@@ -356,7 +356,7 @@ class Sort:
             self.maxheapify(A, count - i)
         return A
 
-    def heapsort(self, A : list) : list:
+    def heapsort(self, A : list) -> list:
         '''
         堆排序算法过程, 时间代价为:O(nlgn):
 
