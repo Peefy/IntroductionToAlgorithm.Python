@@ -41,15 +41,18 @@ def testMatplot():
     Test matplotlib package fft show plot
 
     Args:
-    =
+    ===
     None
 
     Return:
-    =
+    ===
     None
 
     Example:
+    ===
+    ```python
     >>> test.testMatplot()
+    ```
     '''
     ## totol test nm.array plot fft
     X = np.array([1, 2, 3, 4])

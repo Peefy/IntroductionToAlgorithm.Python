@@ -5,61 +5,61 @@
 First
 =====
 
-冒泡排序 :O(n^2):      ok
+冒泡排序 `O(n^2)`      ok
 
-鸡尾酒排序(双向冒泡排序) :O(n^2):
+鸡尾酒排序(双向冒泡排序) `O(n^2)`
 
-插入排序 :O(n^2):      ok
+插入排序 `O(n^2)`      ok
 
-桶排序 :O(n):
+桶排序 `O(n)`          ok
 
-计数排序 :O(n + k):
+计数排序 `O(n + k)`     ok
 
-合并排序 :O(nlgn):      ok
+合并排序 `O(nlgn)`      ok
 
-原地合并排序 :O(n^2):    ok
+原地合并排序 `O(n^2)`    ok
 
-二叉排序树排序 :O(nlgn):   
+二叉排序树排序 `O(nlgn)`  ok
 
-鸽巢排序 :O(n+k):
+鸽巢排序 `O(n+k)`
 
-基数排序 :O(nk):
+基数排序 `O(nk)`        ok
 
-Gnome排序 :O(n^2):
+Gnome排序 `O(n^2)`
 
-图书馆排序 :O(nlgn):
+图书馆排序 `O(nlgn)`
 
 Second
 ======
 
-选择排序 :O(n^2):    ok
+选择排序 `O(n^2)`    ok
 
-希尔排序 :O(nlgn):   
+希尔排序 `O(nlgn)`   
 
-组合排序 :O(nlgn):
+组合排序 `O(nlgn)`
 
-堆排序  :O(nlgn):   ok
+堆排序  `O(nlgn)`   ok
 
-平滑排序  :O(nlgn):
+平滑排序  `O(nlgn)`
 
-快速排序   :O(nlgn):
+快速排序   `O(nlgn)`
 
-Intro排序  :O(nlgn):
+Intro排序  `O(nlgn)`
 
-Patience排序 :O(nlgn + k):
+Patience排序 `O(nlgn + k)`
 
 Third
 =====
 
-Bogo排序 :O(n*n!):
+Bogo排序 `O(n*n!)`
 
-Stupid排序 :O(n^3):
+Stupid排序 `O(n^3)`
 
-珠排序  :O(n) or O(sqrt(n)):
+珠排序  `O(n) or O(sqrt(n))`
 
-Pancake排序   :O(n):
+Pancake排序   `O(n)`
 
-Stooge排序  :O(n^2.7):   ok
+Stooge排序  `O(n^2.7)`   ok
 
 '''
 
@@ -78,7 +78,7 @@ class Sort:
     '''
     排序算法集合类
     '''
-    def insertsort(self, array):
+    def insertsort(self, array : list) -> list:
         '''
         Summary
         ===
@@ -120,7 +120,7 @@ class Sort:
         # 输出升序排序后的牌
         return A
 
-    def selectsort(self, array = []):
+    def selectsort(self, array = [] : list) -> list:
         '''
         Summary
         ===
@@ -158,9 +158,9 @@ class Sort:
             A[j] = min
         return A
 
-    def bubblesort(self, array):
+    def bubblesort(self, array : list) -> list:
         '''
-        冒泡排序,时间复杂度:O(n^2):
+        冒泡排序,时间复杂度`O(n^2)`
 
         Args
         ====
@@ -186,21 +186,21 @@ class Sort:
                     nums[j], nums[j + 1] = nums[j + 1], nums[j]
         return nums
 
-    def __mergeSortOne(self, array, p ,q, r):
+    def __mergeSortOne(self, array : list, p : int ,q : int, r : int) -> list:
         '''
         一步合并两堆牌排序算法过程
 
         Args
-        ==
-        array : a array like
+        ===
+        `array` : a array like
 
         Returns
-        ==
-        sortedArray : 排序好的数组
+        ===
+        `sortedArray` : 排序好的数组
 
         Raises
-        ==
-        None
+        ===
+        `None`
         '''
         # python中变量名和对象是分离的
         # 此时A是array的一个引用
@@ -241,22 +241,22 @@ class Sort:
                 j += 1
         return A
 
-    def __mergeSort(self, array, start, end):
+    def __mergeSort(self, array : list, start : int, end : int) -> list:
         '''
         合并排序总过程
 
         Args
-        ==
-        array : 待排序数组
-        start : 排序起始索引
-        end : 排序结束索引
+        ===
+        `array` : 待排序数组
+        `start` : 排序起始索引
+        `end` : 排序结束索引
 
         Return
-        ==
-        sortedArray : 排序好的数组
+        ===
+        `sortedArray` : 排序好的数组
 
         Example
-        ==
+        ===
         ```python
         >>> import sort
         >>> sort.mergeSort([6, 5, 4, 3, 2, 1])
@@ -281,7 +281,7 @@ class Sort:
             self.__mergeSortOne(array, p, q, r)
         return array    
 
-    def mergesort(self, array):
+    def mergesort(self, array : list) -> list:
         '''
         归并排序/合并排序：最优排序复杂度:n * O(log2(n)):, 空间复杂度:O(n):
 
@@ -303,31 +303,31 @@ class Sort:
         '''
         return self.__mergeSort(array, 0, len(array) - 1)
 
-    def left(self, i):
+    def left(self, i : int) -> int:
         '''
         求:二叉堆:一个下标i的:左儿子:的下标
         '''
         return int(2 * i + 1)
 
-    def right(self, i):
+    def right(self, i : int) -> int:
         '''
         求:二叉堆:一个下标i的:右儿子:的下标
         '''
         return int(2 * i + 2)
 
-    def parent(self, i):
+    def parent(self, i : int) -> int:
         '''
         求:二叉堆:一个下标i的:父节点:的下标
         '''
         return (i + 1) // 2 - 1
 
-    def heapsize(self, A):
+    def heapsize(self, A : list) -> int:
         '''
         求一个数组形式的:二叉堆:的:堆大小:
         '''
         return len(A) - 1
 
-    def maxheapify(self, A, i):
+    def maxheapify(self, A : list, i : int) -> list:
         '''
         保持堆使某一个结点i成为最大堆(其子树本身已经为最大堆) :不使用递归算法:
         '''
@@ -347,7 +347,7 @@ class Sort:
                 i, largest = largest, count
         return A
 
-    def buildmaxheap(self, A):
+    def buildmaxheap(self, A : list) -> list:
         '''
         对一个数组建立最大堆的过程, 时间代价为:O(n):
         '''
@@ -356,7 +356,7 @@ class Sort:
             self.maxheapify(A, count - i)
         return A
 
-    def heapsort(self, A):
+    def heapsort(self, A : list) : list:
         '''
         堆排序算法过程, 时间代价为:O(nlgn):
 
@@ -378,25 +378,25 @@ class Sort:
         '''
         heapsize = len(A) - 1
 
-        def left(i):
+        def left(i : int):
             '''
             求:二叉堆:一个下标i的:左儿子:的下标
             '''
             return int(2 * i + 1)
 
-        def right(i):
+        def right(i : int):
             '''
             求:二叉堆:一个下标i的:右儿子:的下标
             '''
             return int(2 * i + 2)
 
-        def parent(i):
+        def parent(i : int):
             '''
             求:二叉堆:一个下标i的:父节点:的下标
             '''
             return (i + 1) // 2 - 1
 
-        def __maxheapify(A, i):
+        def __maxheapify(A : list, i : int):
             count = len(A)
             largest = count
             while largest != i:
@@ -422,7 +422,7 @@ class Sort:
             __maxheapify(A, 0)
         return A
 
-    def partition(self, A, p, r):
+    def partition(self, A : list, p : int, r : int):
         '''
         快速排序的数组划分子程序
         '''
@@ -440,7 +440,7 @@ class Sort:
             return (p + r) // 2
         return i + 1
 
-    def __quicksort(self, A, p, r):
+    def __quicksort(self, A : list, p : int, r : int):
         left = _deepcopy(p)
         right = _deepcopy(r)
         if left < right:
@@ -448,17 +448,17 @@ class Sort:
             self.__quicksort(A, left, middle - 1)
             self.__quicksort(A, middle + 1, right)
 
-    def quicksort(self, A):
+    def quicksort(self, A : list):
         '''
-        快速排序，时间复杂度:o(n^2):,但是期望的平均时间较好:Θ(nlgn):
+        快速排序，时间复杂度`o(n^2)`,但是期望的平均时间较好`Θ(nlgn)`
 
         Args
         ====
-        A : 排序前的数组:(本地排序):
+        `A` : 排序前的数组`(本地排序)`
 
         Return
         ======
-        A : 使用快速排序排好的数组:(本地排序):
+        `A` : 使用快速排序排好的数组`(本地排序)`
 
         Example
         ===
@@ -471,7 +471,7 @@ class Sort:
         self.__quicksort(A, 0, len(A) - 1)
         return A
 
-    def __stoogesort(self,  A, i, j):
+    def __stoogesort(self, A, i, j):
         if A[i] > A[j]:
             A[i], A[j] = A[j], A[i]
         if i + 1 >= j:
@@ -481,13 +481,13 @@ class Sort:
         __stoogesort(A, i + k, j)
         return __stoogesort(A, i, j - k)
 
-    def stoogesort(self, A):
+    def stoogesort(self, A : list) -> list:
         '''
         Stooge原地排序 时间复杂度为:O(n^2.7):
 
         Args
         ===
-        A : 排序前的数组:(本地排序):
+        `A` : 排序前的数组:(本地排序):
         '''
         return __stoogesort(A, 0, len(A) - 1)
 

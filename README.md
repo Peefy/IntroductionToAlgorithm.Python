@@ -4,11 +4,12 @@
 
 # Requirement:
 
-* *Python3+ Sdk*
+* *Python3.5+ Sdk*
 * *pip package*
 * *numpy package*
-* *matplotlib package*
 * *sympy package*
+* *scipy package*
+* *matplotlib package*
 
 # Quick Start
 
