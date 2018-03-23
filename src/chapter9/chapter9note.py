@@ -22,6 +22,13 @@ class Chapter9_1:
     '''
     chpater9.1 note and function
     '''
+
+    def minimum(self, A : list) -> float|int:
+        '''
+        求集合中的最小值
+        '''
+        min
+
     def note(self):
         '''
         Summary
@@ -35,6 +42,21 @@ class Chapter9_1:
         ```
         '''
         print('chapter9.1 note as follow')
+        print('第9章 中位数和顺序统计学')
+        print('在一个由n个元素组成的集合中，第i个顺序统计量是该集合中第i小的元素。')
+        print('非形式地说：一个中位数是它所在集合的\"中点元素\"')
+        print('当n为奇数时，中位数是唯一的，出现在i=(n+1)/2处；')
+        print('当n为偶数时，存在两个中位数，分别出现在i=n/2和i=n/2+1处')
+        print('不考虑n的奇偶性，中位数总是出现在i=[(n+1)/2]处(下中位数)和i=[(n+1)/2]处(上中位数)')
+        print('简单起见，书中的中位数总是指下中位数')
+        print('本章讨论从一个由n个不同数值构成的集合中选择其第i个顺序统计量的问题，假设集合中的数互异')
+        print('如下形式化地定义选择问题：')
+        print(' 输入：一个包含n个(不同的)数的集合A和一个数i,1<=i<=n')
+        print(' 输出：元素x属于A，它恰好大于A中其他i-1个数')
+        print('选择问题可以在O(nlgn)时间内解决，因为可以用堆排序或合并排序对输入数据进行排序')
+        print(' 然后在输出数组中标出第i个元素即可。但是还有其他更快的方法')
+        print('9.1 最小值和最大值')
+
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
 
