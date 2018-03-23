@@ -63,6 +63,12 @@ class Chapter9_1:
         A = [61, 52, 43, 34, 25, 16, 17]
         print('数组A', _deepcopy(A), '中元素的最小的元素为:', self.minimum(A))
         print('可以通过n-1次比较找出一个数组中的上界和下界')
+        print('在某些应用中同时找出最小值和最大值')
+        print('要设计出一个算法，使之通过渐进最优的Θ(n)次比较，能从n个元素中找出最小值和最大值')
+        print('只要独立地找出最小值和最大值，各用n-1次比较，共有2n-2次比较')
+        print('事实上，至多3[n/2]次比较久足以同时找出最小值和最大值，做法是记录比较过程中遇到的最大值和最小值')
+        print('练习9.1-1 在最坏情况下，利用n+[lgn]-2次比较，即可找到n个元素中的第2小元素')
+        print('练习9.1-2 在最坏情况下，同时找到n个数字中的最大值和最小值需要[3n/2]-2次比较')
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
 
@@ -83,6 +89,7 @@ class Chapter9_2:
         ```
         '''
         print('chapter9.2 note as follow')
+        print('')
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
 
