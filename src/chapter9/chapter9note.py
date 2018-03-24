@@ -76,6 +76,65 @@ class Chapter9_2:
     '''
     chpater9.2 note and function
     '''
+    def partition(self, A : list, p : int, r : int) -> int:
+        '''
+        快速排序分堆子过程(并且避免了元素都相同时分堆进入最差情况)
+        '''
+        x = A[r]
+        i = p - 1
+        j = p - 1
+        for j in range(p, r):
+            if A[j] <= x:
+                i = i + 1
+                A[i], A[j] = A[j], A[i]
+            if A[j] == x:
+                j = j + 1
+        A[i + 1], A[r] = A[r], A[i + 1]
+        if j == r:
+            return (p + r) // 2
+        return i + 1
+
+    def randomized_partition(self, A : list, p : int, r : int):
+        '''
+        快速排序随机分堆子过程
+        '''
+        i = _randint(p, r)
+        A[r], A[i] = A[i], A[r]
+        return self.partition(A, p, r)
+
+    def __randomized_select(self, A : list, p : int, r : int, i : int):
+        '''
+        解决选择问题的分治算法,期望运行时间为`Θ(n)`
+        '''
+        assert p < r      
+        if len(A) == 0:
+            return None
+        if p == r:
+            return A[p]
+        q = self.randomized_partition(A, p, r)
+        k = q - p + 1
+        if i == k:
+            return A[q]
+        elif i < k:
+            return self.__randomized_select(A, p, q - 1, i)
+        return self.__randomized_select(A, q + 1, r, i - k)
+
+    def randomized_select(self, A : list, i : int):
+        '''
+        解决选择问题的分治算法,期望运行时间为`Θ(n)`,利用了`快速排序`分堆的方法(递归调用)
+        '''
+        assert i <= len(A) and i > 0
+        return self.__randomized_select(A, 0, len(A) - 1, i)
+
+    def randomized_select(self, A : list, i : int):
+        '''
+        解决选择问题的分治算法,期望运行时间为`Θ(n)`,利用了`快速排序`分堆的方法(迭代调用)
+        '''
+        assert i <= len(A) and i > 0
+        if len(A) == 0:
+            return None
+        return A[i - 1]
+
     def note(self):
         '''
         Summary
@@ -90,15 +149,20 @@ class Chapter9_2:
         '''
         print('chapter9.2 note as follow')
         print('9.2 以期望线性时间做选择')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-
+        print('一般选择问题看起来比找最小值的简单选择问题更难。但是，两种问题的渐进运行时间却是相同的：都是Θ(n)')
+        print('将介绍一种用来解决选择问题的分治算法，Randomized-select算法，以排序算法为基本模型')
+        print('如同排序在快速排序当中一样，此算法的思想也是对输入数组进行递归划分')
+        print('但和快速排序不同的是，快速排序会递归处理划分的两边，而Randomized-select只处理划分的一边')
+        print('所以快速排序的期望运行时间是Θ(n),而Randomized-select的期望运行时间为Θ(n),证明过程略')
+        print('练习9.2-1 在Randomized-select中，对长度为0的数组，不会进行递归调用')
+        print('练习9.2-2 指示器随机变量X_k和T(max(k-1,n-k))是独立的')
+        print('练习9.2-3 略')
+        A = [3, 2, 9, 0, 7, 5, 4, 8, 6, 1]
+        print('练习9.2-4 数组A', _deepcopy(A), "的第1小选择元素为：", self.randomized_select(A, 1))
+        A = [3, 2, 9, 0, 7, 5, 4, 8, 6, 1]
+        print('练习9.2-4 数组A', _deepcopy(A), "的第2小选择元素为：", self.randomized_select(A, 2))
+        A = [3, 2, 9, 0, 7, 5, 4, 8, 6, 1]
+        print('练习9.2-4 数组A', _deepcopy(A), "的第3小选择元素为：", self.randomized_select(A, 3))
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
 

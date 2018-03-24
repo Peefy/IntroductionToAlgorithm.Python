@@ -122,10 +122,12 @@ class QuickSort:
 
         Example
         =======
+        ```python
         import quicksort
         >>> A = [6, 5, 4, 3, 2, 1]        
         >>> quicksort.randomized_quicksort(A)       
         >>> [1, 2, 3, 4, 5, 6]
+        ```
         '''        
         return self.__hoare_quicksort(A, 0, len(A) - 1)
 
@@ -153,13 +155,12 @@ class QuickSort:
 
         Example
         =======
+        ```python
         import quicksort
-
         A = [6, 5, 4, 3, 2, 1]
-
         quicksort.randomized_quicksort(A)
-
         [1, 2, 3, 4, 5, 6]
+        ```
         '''       
         return self.__morequicksort(A, 0, len(A) - 1) 
 
