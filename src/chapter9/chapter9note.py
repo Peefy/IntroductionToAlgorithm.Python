@@ -170,6 +170,24 @@ class Chapter9_3:
     '''
     chpater9.3 note and function
     '''
+    def partition(self, A : list, p : int, r : int) -> int:
+        '''
+        快速排序分堆子过程(并且避免了元素都相同时分堆进入最差情况)
+        '''
+        x = A[r]
+        i = p - 1
+        j = p - 1
+        for j in range(p, r):
+            if A[j] <= x:
+                i = i + 1
+                A[i], A[j] = A[j], A[i]
+            if A[j] == x:
+                j = j + 1
+        A[i + 1], A[r] = A[r], A[i + 1]
+        if j == r:
+            return (p + r) // 2
+        return i + 1
+
     def note(self):
         '''
         Summary
@@ -183,53 +201,51 @@ class Chapter9_3:
         ```
         '''
         print('chapter9.3 note as follow')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('9.3 最坏情况线性时间的选择')
+        print('现在来看一个最坏情况运行时间为O(n)的选择算法Select')
+        print('像9.2中的randomized_select一样，select通过对输入数组的递归划分来找出所求元素')
+        print('但是，该算法的基本思想是要保证对数组的划分是个好的划分')
+        print('select采用了取自快速排序的确定性划分算法patition并作出了一些修改，把划分主元元素作为其参数')
+        print('算法SELECT通过执行下列步骤来确定一个有n>1个元素的输入数组中的第i小的元素。')
+        print(' 1.将输入数组的n个元素划分为[n/5]组，每组5个元素，且至多只有一个组由剩下的n mod 5个元素组成')
+        print(' 2.寻找[n/5]个组中每一组的中位数，首先对每组中的元素(至多为5个)进行插入排序，然后从排序过的序列中选出中位数')
+        print(' 3.对第2步中找出的[n/5]个中位数，递归调用SELECT以找出其下中位数x')
+        print(' 4.利用修改过的partition过程，按中位数的中位数x对输入数组进行划分。让k比划分低区的元素数目多1')
+        print('  所以x是第k小的元素，并且有n-k个元素在划分的高区')
+        print(' 5.如果i=k,则返回x。否则如果i<k,则在低区递归调用SELECT以找出第i小的元素，如果i>k,则在高区找第(i-k)个最小元素')
+        print('因此，在[n/5]个组中，除了那个所包含元素可能少于5的组和包含x的那个组之外，至少有一半的组有3个元素大于x')
+        print('类似地，小于x的原宿至少有3n/10-6个。因此，在最坏情况下，在第5步中最多有7n/10+6个元素递归调用select')
+        print('步骤1,2,4需要O(n)的时间（步骤2对大小为O(1)的集合要调用O(n)次插入排序）')
+        print('步骤3花时间T([n/5])，步骤5所需时间至多为T(7n/10+6),假设T是单调递增的')
+        print('还需要做如下假设：即任何等于或少于140个元素的输入需要O(1)的时间；这个魔力常数140的起源很快就变得清晰了')
+        print('在此假设下，可以得到递归式：')
+        print('T(n)=Θ(1), n<=140; T(n)=T([n/5])+T(7n/10+6)+O(n), n>140)')
+        print('用定义可以证明T(n)=O(n)')
+        print('因此，select的最坏情况运行时间是线性的')
+        print('与比较排序一样，select和randomized_select仅仅通过元素间的比较来确定它们之间的相对次序。')
+        print('在第8章中，我们知道在比较模型中，即使是在平均情况下，排序仍然需要Ω(nlgn)')
+        print('第8章的线性时间排序算法在输入上作了假设。相反地，本章的线性时间选择算法不需要关于输入的任何假设')
+        print('它们不受下界Ω(nlgn)的约束，因为没有使用排序就解决了选择问题')
+        print('所以本章中选择算法之所以具有线性运行时间，是因为这些算法没有进行排序；线性时间的行为并不是因为对输入做假设所得到的结果')
+        print('第8章中的排序算法就是这么做的。在比较模型中，即使是在平均情况下，排序仍然需要Ω(nlgn)的时间')
+        print('练习9.3-1')
+        print('练习9.3-2')
+        print('练习9.3-3')
+        print('练习9.3-4')
+        print('练习9.3-5')
+        print('练习9.3-6')
+        print('练习9.3-7')
+        print('练习9.3-8')
+        print('练习9.3-9')
+        print('思考题9-1')
+        print('思考题9-2')
+        print('思考题9-3')
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
-
-class Chapter9_4:
-    '''
-    chpater9.4 note and function
-    '''
-    def note(self):
-        '''
-        Summary
-        ====
-        Print chapter9.4 note
-
-        Example
-        ====
-        ```python
-        Chapter9_4().note()
-        ```
-        '''
-        print('chapter9.4 note as follow')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        # python src/chapter9/chapter9note.py
-        # python3 src/chapter9/chapter9note.py
-
 
 chapter9_1 = Chapter9_1()
 chapter9_2 = Chapter9_2()
 chapter9_3 = Chapter9_3()
-chapter9_4 = Chapter9_4()
 
 def printchapter9note():
     '''
@@ -239,7 +255,6 @@ def printchapter9note():
     chapter9_1.note()
     chapter9_2.note()
     chapter9_3.note()
-    chapter9_4.note()
 
 # python src/chapter9/chapter9note.py
 # python3 src/chapter9/chapter9note.py
