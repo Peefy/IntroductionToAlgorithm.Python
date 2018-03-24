@@ -18,6 +18,8 @@ from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
 
+import pandas as pd
+
 class Chapter9_1:
     '''
     chpater9.1 note and function
@@ -188,6 +190,13 @@ class Chapter9_3:
             return (p + r) // 2
         return i + 1
 
+    def select(self, A : list, i : int):
+        '''
+        在一个数组中选择出第i小的元素(当i=1时，即找出最小元素
+        '''
+        assert i <= len(A)
+        return A[i]
+
     def note(self):
         '''
         Summary
@@ -228,18 +237,20 @@ class Chapter9_3:
         print('它们不受下界Ω(nlgn)的约束，因为没有使用排序就解决了选择问题')
         print('所以本章中选择算法之所以具有线性运行时间，是因为这些算法没有进行排序；线性时间的行为并不是因为对输入做假设所得到的结果')
         print('第8章中的排序算法就是这么做的。在比较模型中，即使是在平均情况下，排序仍然需要Ω(nlgn)的时间')
-        print('练习9.3-1')
-        print('练习9.3-2')
-        print('练习9.3-3')
-        print('练习9.3-4')
-        print('练习9.3-5')
-        print('练习9.3-6')
-        print('练习9.3-7')
-        print('练习9.3-8')
-        print('练习9.3-9')
-        print('思考题9-1')
-        print('思考题9-2')
-        print('思考题9-3')
+        print('练习9.3-1 在算法select中，输入元素被分为每组5个元素')
+        print(' 如果分成每组3个元素，select无法在线性时间内运行')
+        print('练习9.3-2 证明如果n>=140,则至少有[n/4]个元素大于中位数的中位数x，并且至少有[n/4]个元素小于x')
+        print('练习9.3-3 怎么让快速排序在最坏情况下以O(nlgn),随机化输入数组多次，使最坏情况发生的概率接近于0,但是运行时间常数项会增加')
+        print('练习9.3-4 假设对一个包含有n个元素的集合，某算法只用比较来确定第i小的元素。')
+        print(' 证明：无需另外的比较操作，它也能找到比i小的i-1个原宿和比i大的n-i个元素')
+        print('练习9.3-5 ')
+        print('练习9.3-6 ')
+        print('练习9.3-7 ')
+        print('练习9.3-8 ')
+        print('练习9.3-9 ')
+        print('思考题9-1 ')
+        print('思考题9-2 ')
+        print('思考题9-3 ')
         # python src/chapter9/chapter9note.py
         # python3 src/chapter9/chapter9note.py
 
