@@ -8,7 +8,6 @@ Class Chapter9_2
 
 Class Chapter9_3
 
-Class Chapter9_4
 '''
 import sys as _sys
 import math as _math
@@ -17,8 +16,6 @@ import time as _time
 from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
-
-import pandas as pd
 
 class Chapter9_1:
     '''
