@@ -135,6 +135,15 @@ class Chapter10_2:
         ```
         '''
         print('chapter10.2 note as follow')
+        print('10.2 链表')
+        print('在链表这种数据结构中，各对象按照线性顺序排序')
+        print('链表与数组不同')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 
