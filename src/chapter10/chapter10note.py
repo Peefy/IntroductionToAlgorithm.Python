@@ -13,12 +13,12 @@ from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
 
+
 if __name__ == '__main__':
-    import stack
-    import queue
+    import collection as c
 else:
-    from . import stack
-    from . import queue
+    from . import collection as c
+    from . import collection as c
 
 class Chapter10_1:
     '''
@@ -64,7 +64,7 @@ class Chapter10_1:
         print('要检查一个栈为空可以使用查询操作isEmpty,试图对一个空栈做弹出操作，则称栈下溢')
         print('如果top[S]超过了n，则称栈上溢')
         print('以上三种栈操作的时间均为O(1)')
-        s = stack.Stack()
+        s = c.Stack()
         print(s.isEmpty())
         s.push('123')
         s.push(1)
@@ -76,16 +76,16 @@ class Chapter10_1:
         print('用一个数组Q[1..n]实现一个队列，队列具有属性head[Q]指向队列的头，属性tail[Q]指向新元素会被插入的地方')
         print('当元素排列为一个环形时为环形队列，当队列为空时，试图删除一个元素会导致队列的下溢')
         print('当haed[Q]=tail[Q]+1时，队列是满的，这时如果插入一个元素会导致队列的上溢')
-        q = queue.Queue([1, 2, 3])
+        q = c.Queue([1, 2, 3])
         print(q.length())
         q.enqueue(4)
         q.dequeue()
         print(q.array)
-        s = stack.Stack()
+        s = c.Stack()
         s.push(4);s.push(1);s.push(3);s.pop();s.push(8);s.pop()
         
         print('练习10.1-1: stack:', s.array)
-        s = stack.TwoStack()
+        s = c.TwoStack()
         s.one_push(1)
         s.two_push(9)
         s.one_push(2)
@@ -97,21 +97,21 @@ class Chapter10_1:
             s.two_push(8)
         except Exception as err:
             print(' ', err)
-        q = queue.Queue()
+        q = c.Queue()
         q.enqueue(4);q.enqueue(1);q.enqueue(3);q.dequeue();q.enqueue(8);q.dequeue()
         print('练习10.1-3: queue:', q.array)
         try:
-            q = queue.Queue()
+            q = c.Queue()
             q.dequeue()
         except Exception as err:
             print('练习10.1-4: ')
-        dq = queue.DoubleQueue()
+        dq = c.DoubleQueue()
         dq.enqueue(1);dq.enqueue(2);dq.enqueue_reverse(3)
         print('练习10.1-5: 双端队列：', dq.array)
-        q = queue.QueueUsingStack()
+        q = c.QueueUsingStack()
         q.enqueue(1);q.enqueue(2);q.enqueue(3)
         print('练习10.1-6: ', q.dequeue(), q.dequeue(), q.dequeue())
-        s = stack.StackUsingQueue()
+        s = c.StackUsingQueue()
         s.push(1);s.push(2);s.push(3)
         print('练习10.1-7: ', s.pop(), s.pop(), s.pop())
         
