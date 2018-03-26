@@ -1,4 +1,6 @@
 
+import queue
+
 class Stack:
     '''
     栈
@@ -81,6 +83,14 @@ class TwoStack:
                 array.append(self.__array[i])
         return array
 
+    def two_all(self):
+        array = []
+        if self.__two_top != self.__size:
+            for i in range(self.__two_top, self.__size):
+                index = self.__size + self.__two_top - i - 1
+                array.append(self.__array[index])
+        return array
+
     def __judgeisfull(self):
         if self.__one_top + 1 == self.__two_top:
             raise Exception('Exception: stack is full!')
@@ -88,3 +98,22 @@ class TwoStack:
     def __judgeisempty(self):
         if self.__one_top == -1 or self.__two_top == self.__size:
             raise Exception('stack is full!')
+
+class StackUsingQueue:
+    def __init__(self, iterable = None):
+        self.__queue1 = queue.Queue()
+        self.__queue2 = queue.Queue()
+    
+    def push(self, item):
+        self.__queue1.enqueue(item)
+
+    def pop(self):
+        for i in range(self.__queue1.length() - 1):
+            self.__queue2.enqueue(self.__queue1.dequeue())
+        x = self.__queue1.dequeue()
+        for i in range(self.__queue2.length()):
+            self.__queue1.enqueue(self.__queue2.dequeue())
+        return x
+        
+    def count(self):
+        return self.__queue1.length()

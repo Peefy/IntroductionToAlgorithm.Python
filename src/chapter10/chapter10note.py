@@ -83,9 +83,8 @@ class Chapter10_1:
         print(q.array)
         s = stack.Stack()
         s.push(4);s.push(1);s.push(3);s.pop();s.push(8);s.pop()
-        q = queue.Queue()
-        q.enqueue(4);q.enqueue(1);q.enqueue(3);q.dequeue();q.enqueue(8);q.dequeue()
-        print('练习10.1-1: stack:', s.array, 'queue:', q.array)
+        
+        print('练习10.1-1: stack:', s.array)
         s = stack.TwoStack()
         s.one_push(1)
         s.two_push(9)
@@ -93,23 +92,28 @@ class Chapter10_1:
         s.one_push(3)
         s.one_push(4)
         print('练习10.1-2: ')
-        print(' ', s.one_all())
+        print(' ', s.one_all(), s.two_all())
         try:
             s.two_push(8)
         except Exception as err:
             print(' ', err)
-        print('练习10.1-3: ')
-        print('练习10.1-4: ')
-        print('练习10.1-5: ')
-        print('练习10.1-6: ')
-        print('练习10.1-7: ')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        q = queue.Queue()
+        q.enqueue(4);q.enqueue(1);q.enqueue(3);q.dequeue();q.enqueue(8);q.dequeue()
+        print('练习10.1-3: queue:', q.array)
+        try:
+            q = queue.Queue()
+            q.dequeue()
+        except Exception as err:
+            print('练习10.1-4: ')
+        dq = queue.DoubleQueue()
+        dq.enqueue(1);dq.enqueue(2);dq.enqueue_reverse(3)
+        print('练习10.1-5: 双端队列：', dq.array)
+        q = queue.QueueUsingStack()
+        q.enqueue(1);q.enqueue(2);q.enqueue(3)
+        print('练习10.1-6: ', q.dequeue(), q.dequeue(), q.dequeue())
+        s = stack.StackUsingQueue()
+        s.push(1);s.push(2);s.push(3)
+        print('练习10.1-7: ', s.pop(), s.pop(), s.pop())
         
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
