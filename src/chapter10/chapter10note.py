@@ -12,12 +12,15 @@ import time as _time
 from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
+import numpy as np
+
+import numpy.fft as fft
+from numpy import matrix
 
 
 if __name__ == '__main__':
     import collection as c
 else:
-    from . import collection as c
     from . import collection as c
 
 class Chapter10_1:
@@ -117,7 +120,6 @@ class Chapter10_1:
         
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
-
 class Chapter10_2:
     '''
     chpater10.2 note and function
@@ -137,12 +139,14 @@ class Chapter10_2:
         print('chapter10.2 note as follow')
         print('10.2 链表')
         print('在链表这种数据结构中，各对象按照线性顺序排序')
-        print('链表与数组不同')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('链表与数组不同,数组的线性序是由数组的下标决定的，而链表中的顺序是由各对象中的指针决定的')
+        print('链表可以用来简单而灵活地表示动态集合，但效率可能不一定很高')
+        print('双链表L的每一个元素都是一个对象，每个对象包含一个关键字域和两个指针域：next和prev,也可以包含一些其他的卫星数据')
+        print('对链表中的某个元素x，next[x]指向链表中x的后继元素，而prev[x]则指向链表中x的前驱元素。')
+        print('如果prev[x]=NIL,则元素x没有前驱结点，即它是链表的第一个元素，也就是头(head);')
+        print('如果next(x)=NIL,则元素x没有后继结点，即它是链表的最后一个元素，也就是尾')
+        print('属性head[L]指向表的第一个元素。如果head[L]=NIL,则该链表为空')
+        print('一个链表可以呈现为好几种形式。它可以是单链接的或双链接的，已排序的或未排序的，环形的或非环形的')
         print('')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
