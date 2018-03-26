@@ -15,8 +15,10 @@ from numpy import arange as _arange
 
 if __name__ == '__main__':
     import stack
+    import queue
 else:
     from . import stack
+    from . import queue
 
 class Chapter10_1:
     '''
@@ -74,8 +76,40 @@ class Chapter10_1:
         print('用一个数组Q[1..n]实现一个队列，队列具有属性head[Q]指向队列的头，属性tail[Q]指向新元素会被插入的地方')
         print('当元素排列为一个环形时为环形队列，当队列为空时，试图删除一个元素会导致队列的下溢')
         print('当haed[Q]=tail[Q]+1时，队列是满的，这时如果插入一个元素会导致队列的上溢')
+        q = queue.Queue([1, 2, 3])
+        print(q.length())
+        q.enqueue(4)
+        q.dequeue()
+        print(q.array)
         s = stack.Stack()
-        print(s.isEmpty())
+        s.push(4);s.push(1);s.push(3);s.pop();s.push(8);s.pop()
+        q = queue.Queue()
+        q.enqueue(4);q.enqueue(1);q.enqueue(3);q.dequeue();q.enqueue(8);q.dequeue()
+        print('练习10.1-1: stack:', s.array, 'queue:', q.array)
+        s = stack.TwoStack()
+        s.one_push(1)
+        s.two_push(9)
+        s.one_push(2)
+        s.one_push(3)
+        s.one_push(4)
+        print('练习10.1-2: ')
+        print(' ', s.one_all())
+        try:
+            s.two_push(8)
+        except Exception as err:
+            print(' ', err)
+        print('练习10.1-3: ')
+        print('练习10.1-4: ')
+        print('练习10.1-5: ')
+        print('练习10.1-6: ')
+        print('练习10.1-7: ')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
