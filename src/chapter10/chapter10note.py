@@ -147,7 +147,8 @@ class Chapter10_2:
         print('如果next(x)=NIL,则元素x没有后继结点，即它是链表的最后一个元素，也就是尾')
         print('属性head[L]指向表的第一个元素。如果head[L]=NIL,则该链表为空')
         print('一个链表可以呈现为好几种形式。它可以是单链接的或双链接的，已排序的或未排序的，环形的或非环形的')
-        print('')
+        print('在本节余下的部分，假定所处理的链表都是无序的和双向链接的')
+        print('链表的搜索操作：简单的线性查找方法')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 

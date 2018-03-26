@@ -96,7 +96,6 @@ class TwoStack:
     def __judgeisempty(self):
         if self.__one_top == -1 or self.__two_top == self.__size:
             raise Exception('stack is full!')
-
 class StackUsingQueue:
     def __init__(self, iterable = None):
         self.__queue1 = Queue()
@@ -115,8 +114,6 @@ class StackUsingQueue:
         
     def count(self):
         return self.__queue1.length()
-
-
 class Queue:
 
     def __init__(self, iterable = None):
@@ -147,7 +144,6 @@ class Queue:
 
     def length(self):
         return len(self.array)
-
 class DoubleQueue:
     def __init__(self, iterable = None):
         self.tail = 0
@@ -202,3 +198,54 @@ class QueueUsingStack:
     
     def count(self):
         return self.__stack1.count()
+
+class ListNode:
+    def __init__(self, value = None):
+        self.value = value
+        self.key = -1      
+        self.prev = ListNode()
+        self.next = ListNode()
+
+    def getisNone(self):
+        return self.key == None
+
+    isNone = property(getisNone, None)
+
+class List:       
+    def __init__(self):
+        self.head = ListNode()
+        self.tail = ListNode()
+        self.next = ListNode()
+        self.__length = 0
+
+    def search(self, k):
+        '''
+        最坏情况为`Θ(n)`
+        '''
+        x = self.head
+        while self.head.value != None and self.head.key != k:
+            x = self.next
+        return x
+
+    def insert(self, x):
+        self.__insert(ListNode(x))
+
+    def __insert(self, x : ListNode):
+        x.key = self.__length;
+        self.__length += 1
+        x.next = self.head
+        if self.head.isNone == False:
+            self.head.prev = x
+        self.head = x
+        x.prev = ListNode()
+
+    def __delete(self, x : ListNode):
+        if x.prev.isNone == False:
+            x.prev.next = x.next
+        else:
+            self.head = x.next
+        if x.next.isNone == False:
+            x.next.prev = x.prev
+
+    def __increse_lenth(self):
+        self.__length += 1       
