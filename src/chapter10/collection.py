@@ -200,52 +200,117 @@ class QueueUsingStack:
         return self.__stack1.count()
 
 class ListNode:
+    '''
+    链表节点
+    '''
     def __init__(self, value = None):
+        '''
+        链表节点
+        ```python
+        >>> ListNode() 空节点   
+        >>> ListNode(value) 值为value的链表节点
+        ```
+        '''
         self.value = value
         self.key = -1      
-        self.prev = ListNode()
-        self.next = ListNode()
+        self.prev = None
+        self.next = None
 
     def getisNone(self):
+        '''
+        链表节点是否为空
+        '''
         return self.key == None
 
     isNone = property(getisNone, None)
 
 class List:       
     def __init__(self):
-        self.head = ListNode()
-        self.tail = ListNode()
-        self.next = ListNode()
+        '''
+        初始化一个空链表
+        '''
+        self.head = None
+        self.tail = None
+        self.next = None
         self.__length = 0
 
     def search(self, k):
         '''
-        最坏情况为`Θ(n)`
+        找出键值为k的链表节点元素，最坏情况为`Θ(n)`
         '''
         x = self.head
-        while self.head.value != None and self.head.key != k:
-            x = self.next
+        while x.value != None and x.key != k:
+            x = x.next
         return x
 
     def insert(self, x):
+        '''
+        链表插入元素x
+        '''
         self.__insert(ListNode(x))
 
     def __insert(self, x : ListNode):
-        x.key = self.__length;
-        self.__length += 1
+        # 插入的元素按增量键值去
+        x.key = self.__length;   
+        # 把上一个头节点放到下一个节点去   
         x.next = self.head
-        if self.head.isNone == False:
+        # 判断是否第一次插入元素
+        if self.head != None and self.head.isNone == False:
             self.head.prev = x
+        # 新插入的元素放到头节点去
         self.head = x
-        x.prev = ListNode()
+        # 新插入的节点前面没有元素
+        x.prev = None
+        self.__increse_length()
 
-    def __delete(self, x : ListNode):
-        if x.prev.isNone == False:
+    def delete(self, item, key):
+        '''
+        链表删除元素x
+        '''
+        if type(item) is not ListNode:
+            x = ListNode(item)
+            x.key = key
+        else:
+            x = item
+        if x.prev != None and x.prev.isNone == False:
             x.prev.next = x.next
         else:
             self.head = x.next
-        if x.next.isNone == False:
+        if x.next != None and x.next.isNone == False:
             x.next.prev = x.prev
+        self.__length -= 1
 
-    def __increse_lenth(self):
+    def delete_bykey(self, k : int) -> ListNode:
+        '''
+        根据键值删除元素
+        '''
+        x = self.search(k)
+        self.delete(x, x.key)
+
+    def count(self):
+        '''
+        返回链表中元素的数量总和
+        '''
+        return self.__length
+
+    def all(self):
+        '''
+        返回链表中所有元素组成的集合
+        '''
+        array = []
+        x = self.head
+        count = self.count()
+        while x != None:
+            value = x.value
+            if value != None:
+                array.append(value)
+            x = x.next
+        array.reverse()
+        return array
+
+    def __increse_length(self):
         self.__length += 1       
+
+    def __reduce_length(self):
+        self.__length -= 1
+

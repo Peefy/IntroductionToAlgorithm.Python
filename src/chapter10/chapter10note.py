@@ -149,6 +149,27 @@ class Chapter10_2:
         print('一个链表可以呈现为好几种形式。它可以是单链接的或双链接的，已排序的或未排序的，环形的或非环形的')
         print('在本节余下的部分，假定所处理的链表都是无序的和双向链接的')
         print('链表的搜索操作：简单的线性查找方法')
+        print('链表的插入：给定一个已经设置了关键字的新元素x，过程LIST-INSERT将x插到链表的前端')
+        print('链表的删除：从链表L中删除一个元素x，它需要指向x的指针作为参数')
+        print('但是，如果希望删除一个具有给定关键字的元素，则要先调用LIST-SEARCH过程，', 
+            '因而在最坏情况下的时间为Θ(n)')
+        print('哨兵(sentinel)是个哑(dummy)对象，可以简化边界条件')
+        l = c.List()
+        l.insert(1);l.insert(2);l.insert(3)     
+        print('链表中的元素总和:', l.all(), l.head.value, 
+            l.head.next.value, l.head.next.next.value, l.count())
+        l.delete_bykey(0)
+        print(l.all())
+        l.delete_bykey(2)
+        print(l.all())
+        print('练习10.2-1 动态集合上的操作INSERT能否用一个单链表在O(1)时间内实现')
+        print('练习10.2-2 ')
+        print('练习10.2-3 ')
+        print('练习10.2-4 ')
+        print('练习10.2-5 ')
+        print('练习10.2-6 ')
+        print('练习10.2-7 ')
+        print('练习10.2-8 ')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 
