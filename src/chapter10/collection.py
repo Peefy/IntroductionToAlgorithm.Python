@@ -243,6 +243,13 @@ class List:
             x = x.next
         return x
 
+    def findtail(self):
+        x = self.head
+        while x != None and x.value != None:
+            prev = x
+            x = x.next
+        return prev
+
     def insert(self, x):
         '''
         链表插入元素x
@@ -286,6 +293,7 @@ class List:
         '''
         x = self.search(k)
         self.delete(x, x.key)
+        return x.value
 
     def count(self):
         '''
@@ -314,3 +322,44 @@ class List:
     def __reduce_length(self):
         self.__length -= 1
 
+class QueueUsingList:
+    def __init__(self):
+        self.__list = List()
+        self.__length = 0
+
+    def enqueue(self, item):
+        self.__list.insert(item)
+        self.__length += 1
+
+    def dequeue(self):
+        x = self.__list.findtail()
+        self.__list.delete(x, x.key)
+        self.__length -= 1
+        return x.value
+
+    def count(self):
+        self.__length()
+
+    def all(self):
+        return self.__list.all()
+
+class StackUsingList:
+    def __init__(self):
+        self.__list = List()
+        self.__length = 0
+
+    def push(self, item):
+        self.__list.insert(item)
+        self.__length += 1
+
+    def pop(self):
+        x = self.__list.head
+        self.__list.delete(x, x.key)
+        self.__length -= 1
+        return x.value
+
+    def count(self):
+        self.__length()
+
+    def all(self):
+        return self.__list.all()

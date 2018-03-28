@@ -85,8 +85,7 @@ class Chapter10_1:
         q.dequeue()
         print(q.array)
         s = c.Stack()
-        s.push(4);s.push(1);s.push(3);s.pop();s.push(8);s.pop()
-        
+        s.push(4);s.push(1);s.push(3);s.pop();s.push(8);s.pop()      
         print('练习10.1-1: stack:', s.array)
         s = c.TwoStack()
         s.one_push(1)
@@ -162,14 +161,22 @@ class Chapter10_2:
         print(l.all())
         l.delete_bykey(2)
         print(l.all())
-        print('练习10.2-1 动态集合上的操作INSERT能否用一个单链表在O(1)时间内实现')
-        print('练习10.2-2 ')
-        print('练习10.2-3 ')
-        print('练习10.2-4 ')
-        print('练习10.2-5 ')
-        print('练习10.2-6 ')
-        print('练习10.2-7 ')
-        print('练习10.2-8 ')
+        print('练习10.2-1: 动态集合上的操作INSERT能用一个单链表在O(1)时间内实现')
+        s = c.StackUsingList()
+        s.push(1);s.push(2);s.push(3);s.pop()
+        print('练习10.2-2: ', s.all())
+        q = c.QueueUsingList()
+        q.enqueue(1);q.enqueue(2);q.enqueue(3);q.dequeue()
+        print('练习10.2-3: ', q.all())
+        print('练习10.2-4: 不用哨兵NIL就可以了')
+        print('练习10.2-5: 用环形单链表来实现字典操作INSERT,DELETE和SEARCH，以及运行时间')
+        print('练习10.2-6: 应该选用一种合适的表数据结构，以便之处在O(1)时间内的Union操作')
+        print('练习10.2-7: 链表反转过程Θ(n)的非递归过程，对含有n个元素的单链表的链进行逆转')
+        print(' 除了链表本身占用的空间外，该过程仅适用固定量的存储空间')
+        print('练习10.2-8: 如何对每个元素仅用一个指针np[x](而不是两个指针next和prev)来实现双链表')
+        print(' 假设所有指针值都是k位整型数，且定义np[x] = next[x] XOR prev[x],即next[x]和')
+        print(' prev[x]的k位异或(Nil用0表示)。注意要说明访问表头所需的信息，以及如何实现在该表上的SEARCH,INSERT和DELETE操作')
+        print(' 如何在O(1)时间内实现这样的表')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 
@@ -190,6 +197,20 @@ class Chapter10_3:
         ```
         '''
         print('chapter10.3 note as follow')
+        print('指针和对象的实现')
+        print('有些语言(如FORTRAN)中不提供指针与对象数据类型')
+        print('对象的多重数组表示')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 
