@@ -185,6 +185,21 @@ class Chapter10_3:
     chpater10.3 note and function
     '''
 
+    free = None
+    node = c.ListNode()
+    
+    def allocate_object(self):
+        if self.free == None:
+            raise Exception('Exception: out of space')
+        else:
+            self.node = self.free
+            self.free = self.node.next
+            return node
+
+    def free_object(self, x : c.ListNode):
+        x.next = self.free
+        self.free = x
+
     def note(self):
         '''
         Summary
@@ -225,21 +240,42 @@ class Chapter10_3:
         print(' 该自由表的头被置于全局变量free中。当链表L表示的动态集合非空时，自由表将与表L交错在一起')
         print('自由表是一个栈：下一个分配的对象是最近被释放的那个。可以用栈操作PUSH和POP的表实现方式来分别实现对象的分配和去分配过程。')
         print('假设全局变量free指向自由表的第一个元素')
-        print('练习10.3-1: ')
-        print('练习10.3-2: ')
-        print('练习10.3-3: ')
-        print('练习10.3-4: ')
-        print('练习10.3-5: ')
-        print('')
-        print('')
-        print('')
-        print('')
+        l = c.List()
+        l.insert(13);l.insert(4);l.insert(8);l.insert(19);l.insert(5);l.insert(11);
+        print('练习10.3-1: 序列[13,4,8,19,5,11]的单链表所有元素的表示为：', l.all())
+        print('练习10.3-2: 用一组用单数组表示实现的同构对象，写出其过程ALLOCATE-OBJECT和FREE-OBJECT')
+        print('练习10.3-3: 在过程ALLOCATE-OBJECT和FREE-OBJECT的实现中，不需要置或重置对象的prev域')
+        print('练习10.3-4: 希望一个双链表中的所有元素在存储器中能够紧凑地排列在一起，例如使用多重数组表示中的前m下标位置')
+        print('练习10.3-5: 设L是一个长度为m的双链表，存储在长度为n的数组key、next和prev中。')
+        print(' 结社这些数组由维护双链自由表F的两个过程ALLOCATE-OBJECT和FREE-OBJECT')
+        # python src/chapter10/chapter10note.py
+        # python3 src/chapter10/chapter10note.py
+
+class Chapter10_4:
+    '''
+    chpater10.4 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter10.4 note
+
+        Example
+        ====
+        ```python
+        Chapter10_4().note()
+        ```
+        '''
+        print('chapter10.4 note as follow')
+        print('10.4 有根树的表示')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 
 chapter10_1 = Chapter10_1()
 chapter10_2 = Chapter10_2()
 chapter10_3 = Chapter10_3()
+chapter10_4 = Chapter10_4()
 
 def printchapter10note():
     '''
@@ -249,6 +285,7 @@ def printchapter10note():
     chapter10_1.note()
     chapter10_2.note()
     chapter10_3.note()
+    chapter10_4.note()
 
 # python src/chapter10/chapter10note.py
 # python3 src/chapter10/chapter10note.py
