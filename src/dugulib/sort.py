@@ -283,7 +283,7 @@ class Sort:
 
     def mergesort(self, array : list) -> list:
         '''
-        归并排序/合并排序：最优排序复杂度:n * O(log2(n)):, 空间复杂度:O(n):
+        归并排序/合并排序：最优排序复杂度`O(n * log2(n))`, 空间复杂度`O(n)`
 
         Args
         ===
