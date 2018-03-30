@@ -306,6 +306,9 @@ class Chapter10_4:
         print('练习10.4-6 在任意有根树的每个左儿子，右儿子都有三个指针left-child,right-child,parent')
         print(' 从任意结点出发，都可以在常数时间到达其父亲结点；可以在与子女数成线性关系的时间到达其孩子')
         print(' 并且只利用两个指针和一个布尔值')
+        print('思考题10-1 ')
+        print('思考题10-2 ')
+        print('思考题10-3 ')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 
