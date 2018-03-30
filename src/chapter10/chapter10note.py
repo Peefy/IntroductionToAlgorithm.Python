@@ -17,7 +17,6 @@ import numpy as np
 import numpy.fft as fft
 from numpy import matrix
 
-
 if __name__ == '__main__':
     import collection as c
 else:
@@ -269,6 +268,43 @@ class Chapter10_4:
         '''
         print('chapter10.4 note as follow')
         print('10.4 有根树的表示')
+        print('前一节中链表的表示方法可以推广至任意同构的数据结构上。用链接数据结构表示有根树')
+        print('首先讨论二叉树，然后提出一种适用于结点子女数任意的有根树表示方法')
+        print('二叉树')
+        print(' 用域p,left,right来存放指向二叉树T中的父亲，左儿子和右儿子的指针')
+        print(' 如果P[x]=NIL,则x为根。如果结点无左儿子，则left[x]=NIL,对右儿子也类似。')
+        print(' 整个树T的根由属性root[T]指向。如果root[T]=NIL,则树为空')
+        print('分支数无限制的有根树')
+        print('上面二叉树的表示方法可以推广至每个结点的子女数至多为常数k的任意种类树；')
+        print('用child_1,child_2,...,child_k来取代left和right域。')
+        print('如果树种结点的子女数是无限制的，那么这种方法就不适用了，')
+        print('此外，即使结点的子女数k以一个很大的常数为界，但多数结点只有少量子女，则会浪费大量的存储空间')
+        print('可以用二叉树很方便地表示具有任意子女数的树。')
+        print('这种方法的优点是对任意含n个结点的有根树仅用O(n)的空间')
+        print('树的其他表示：有时，可以用另外一些方法来表示有根树。', 
+            '例如在第六章中，用一个数组加上下标的形式来表示基于完全二叉树的堆')
+        print('将在第21章中出现的树可只由叶向根的方向遍历，故只用到父指针，而没有指向子女的指针')
+        print('练习10.4-1 下列域表示的，根在下标6处的二叉树')
+        print(' 索引为 6 1 4 7 3 5 9')
+        print(' 键值为18 12 10 7 4 2 21')
+        btree = c.BinaryTree()    
+        btree.addnode(None, None, 7, 7)
+        btree.addnode(10, None, 3, 4)
+        btree.addnode(None, None, 5, 2)
+        btree.addnode(None, None, 9, 21)
+        btree.addnode(7, 3, 1, 12)
+        btree.addnode(5, 9, 4, 10)
+        btree.addnode(1, 4, 6, 18)
+        btree.renewall()
+        print(' 所有节点的索引和键值为：', btree.all())
+        print(' 所有节点的索引和键值为：', btree.findleftrightnode(btree.lastnode))
+        print('练习10.4-2 请写出一个O(n)时间的递归过程，在给定含n个结点的二叉树后，它可以将树中每个结点的关键字输出来')
+        print('练习10.4-3 请写出一个O(n)时间的非递归过程，将给定的n结点二叉树中每个结点的关键字输出出来。可以利用栈作为辅助数据结构')
+        print('练习10.4-4 对于任意的用左孩子，右兄弟表示存储的，含n个结点的有根树，写出一个O(n)时间过程来输出每个结点的关键字')
+        print('练习10.4-5 ')
+        print('练习10.4-6 ')
+        print('')
+        print('')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 

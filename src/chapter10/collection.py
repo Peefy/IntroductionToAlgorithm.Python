@@ -1,4 +1,4 @@
-
+import json as _json
 class Stack:
     '''
     栈
@@ -363,3 +363,67 @@ class StackUsingList:
 
     def all(self):
         return self.__list.all()
+
+class BTreeNode:
+    def __init__(self, left = None, right = None, index = None, key = None, leftindex = None, rightindex = None):
+        self.leftindex = leftindex
+        self.rightindex = rightindex
+        self.left = left
+        self.right = right
+        self.index = index
+        self.key = key
+
+class BinaryTree:
+
+    def __init__(self):
+        self.lastnode = None
+        self.root = None
+        self.nodes = []
+
+    def addnode(self, leftindex, rightindex, selfindex, selfkey):
+        leftnode = self.findnode(leftindex)
+        rightnode = self.findnode(rightindex)
+        x = BTreeNode(leftnode, rightnode, selfindex, selfkey, leftindex, rightindex)
+        self.nodes.append(x)
+        self.lastnode = x
+        
+    def renewall(self):
+        for node in self.nodes:
+            node.left = self.findnode(node.leftindex)
+            node.right = self.findnode(node.rightindex)
+    
+    def __findleftrightnode(self, node : BTreeNode):
+        array = []
+        left = node.left
+        if left != None:
+            array.append({ "index":left.index,"key" : left.key})
+        right = node.right
+        if right != None:
+            array.append({ "index":right.index,"key" : right.key})
+        return array
+
+    def findleftrightnode(self, node : BTreeNode):
+        array = []
+        if node != None:
+            leftnodes = self.findleftrightnode(node.left)
+            rightnodes = self.findleftrightnode(node.right)
+            if leftnodes != None:
+                array.append(leftnodes)
+            if rightnodes != None:
+                array.append(rightnodes)
+            array.append({ "index":node.index,"key" : node.key})
+            return array
+
+    def all(self):
+        array = []
+        for node in self.nodes:
+            array.append({ "index":node.index,"key" : node.key})
+        return array
+
+    def findnode(self, index) -> BTreeNode:
+        if index == None:
+            return None
+        for node in self.nodes:
+            if node.index == index:
+                return node
+        return None
