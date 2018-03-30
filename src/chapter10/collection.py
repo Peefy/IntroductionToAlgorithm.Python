@@ -1,12 +1,11 @@
 import json as _json
+from random import randint as _randint
 class Stack:
     '''
     栈
     '''
-
-    __top = -1
-
     def __init__(self, iterable = None):
+        self.__top = -1
         self.array = []
         if iterable != None:
             self.array = list(iterable)
@@ -216,6 +215,9 @@ class ListNode:
         self.prev = None
         self.next = None
 
+    def __str__(self):
+        return "key:" + str(self.key) + ";value:" + str(self.value)
+
     def getisNone(self):
         '''
         链表节点是否为空
@@ -242,6 +244,62 @@ class List:
         while x.value != None and x.key != k:
             x = x.next
         return x
+
+    def get_random_node(self) -> ListNode:
+        num = _randint(0, self.count() - 1)
+        j = self.head
+        for iterate in range(num):
+            j = j.next
+        return j
+
+    def compact_search(self, k):
+        '''
+        已经排序的链表中找出键值为k的链表节点元素，期望情况为`O(sqrt(n))`
+
+        Args
+        ===
+        `k` : 待寻找元素的键值
+
+        '''
+        n = self.count()
+        i = self.head
+        while i != None and i.key > k:
+            num = _randint(0, n - 1)
+            j = self.get_random_node()
+            if i.key < j.key and j.key <= k:
+                i = j
+                if i.key == k:
+                    return i
+            i = i.next
+        if i == None or i.key < k:
+            return None
+        else:
+            return i
+
+    def compact_list_search(self, k, t):
+        '''
+        已经排序的链表中找出键值为k的链表节点元素，期望情况为`O(sqrt(n))`
+
+        Args
+        ===
+        `k` : 待寻找元素的键值
+
+        `t` : 循环迭代次数上界
+
+        '''
+        i = self.head
+        for q in range(t):
+            j = self.get_random_node()
+            if i.key > j.key:
+                i = j
+                if i.key == k:
+                    return i
+        while i != None and i.key < k:
+            i = i.next
+        if i != None and i.key > k:
+            return None
+        else:
+            return i
 
     def findtail(self):
         x = self.head

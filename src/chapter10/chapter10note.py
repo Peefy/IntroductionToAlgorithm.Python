@@ -306,9 +306,21 @@ class Chapter10_4:
         print('练习10.4-6 在任意有根树的每个左儿子，右儿子都有三个指针left-child,right-child,parent')
         print(' 从任意结点出发，都可以在常数时间到达其父亲结点；可以在与子女数成线性关系的时间到达其孩子')
         print(' 并且只利用两个指针和一个布尔值')
-        print('思考题10-1 ')
-        print('思考题10-2 ')
-        print('思考题10-3 ')
+        print('思考题10-1 链表之间的比较:对下表中的四种列表，每一种动态集合操作的渐进最坏情况运行时间是什么')
+        print(' 未排序的单链表，已排序的单链表，未排序的双链表，已排序的双链表')
+        print(' SEARCH(L,k),INSERT(L,x),DELETE(L,x),SUCCESSOR(L,x),PREDECESSOR(L,x)')
+        print(' MINIMUM(L),MAXIMUM(L)')
+        print('思考题10-2 用链表实现的可合并堆')
+        print(' 一个可合并堆支持这样几种操作：MAKE-HEAP(创建一个空的可合并堆)，INSERT,MINIMUM,EXTRACT-MIN和UNION')
+        print('思考题10-3 在已排序的紧凑链表中搜索')
+        print(' 在一个数组的前n个位置中紧凑地维护一个含n个元素的表。假设所有关键字均不相同，且紧凑表是排序的')
+        print(' 若next[i]!=None,有key[i]<key[next[i]],在这些假设下，试说明如下算法能在O(sqrt(n))期望时间内完成链表搜索')
+        l = c.List()
+        l.insert(1);l.insert(2);l.insert(3);l.insert(4);l.insert(5);l.insert(6);
+        print('key为3的链表节点为：', l.compact_search(3))
+        print('key为4的链表节点为：', l.compact_search(4))
+        print('key为3的链表节点为：', l.compact_list_search(1, 6))
+        print('key为4的链表节点为：', l.compact_list_search(2, 6))
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 
