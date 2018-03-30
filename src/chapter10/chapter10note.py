@@ -296,15 +296,16 @@ class Chapter10_4:
         btree.addnode(5, 9, 4, 10)
         btree.addnode(1, 4, 6, 18)
         btree.renewall()
-        print(' 所有节点的索引和键值为：', btree.all())
-        print(' 所有节点的索引和键值为：', btree.findleftrightnode(btree.lastnode))
         print('练习10.4-2 请写出一个O(n)时间的递归过程，在给定含n个结点的二叉树后，它可以将树中每个结点的关键字输出来')
+        print(' 递归过程（还必须找出根节点在哪里）所有节点的索引和键值为：', btree.findleftrightnode(btree.lastnode))
         print('练习10.4-3 请写出一个O(n)时间的非递归过程，将给定的n结点二叉树中每个结点的关键字输出出来。可以利用栈作为辅助数据结构')
+        print(' 非递归过程所有节点的索引和键值为：', btree.all())
         print('练习10.4-4 对于任意的用左孩子，右兄弟表示存储的，含n个结点的有根树，写出一个O(n)时间过程来输出每个结点的关键字')
-        print('练习10.4-5 ')
-        print('练习10.4-6 ')
-        print('')
-        print('')
+        print(' 所有键值集合:', btree.keys())
+        print('练习10.4-5 写出一个O(n)时间的非递归过程，输出给定的含n个结点的二叉树中每个结点的关键字')
+        print('练习10.4-6 在任意有根树的每个左儿子，右儿子都有三个指针left-child,right-child,parent')
+        print(' 从任意结点出发，都可以在常数时间到达其父亲结点；可以在与子女数成线性关系的时间到达其孩子')
+        print(' 并且只利用两个指针和一个布尔值')
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
 
