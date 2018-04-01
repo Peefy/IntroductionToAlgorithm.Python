@@ -70,6 +70,8 @@ import random as _random
 from copy import deepcopy as _deepcopy
 from numpy import arange as _arange
 
+from __future__ import division, absolute_import, print_function
+
 __all__ = ['insertsort', 'selectsort', 'bubblesort',
                'mergesort', 'heapsort', 'quicksort', 
                'stoogesort'].sort()
