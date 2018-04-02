@@ -1,6 +1,6 @@
 
-# python src/chapter10/chapter10note.py
-# python3 src/chapter10/chapter10note.py
+# python src/chapter11/chapter11note.py
+# python3 src/chapter11/chapter11note.py
 '''
 Class Chapter11_1
 
@@ -18,6 +18,17 @@ class Chapter11_1:
     '''
     chpater11.1 note and function
     '''
+
+    def ELFhash(self, key : str, mod):
+        h = 0
+        for c in key:
+            h = (h << 4) + ord(c)
+            g = h & 0xF0000000
+            if g != 0:
+                h ^= g >> 24;
+            h &= ~g;  
+        return h // mod  
+
     def note(self):
         '''
         Summary
@@ -32,6 +43,15 @@ class Chapter11_1:
         '''
         print('chapter11.1 note as follow')
         print('第11章 散列表')
+        print('散列表(hash table 哈希表)，是根据关键码值(key value)而直接进行访问的数据结构')
+        print(' 通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度')
+        print(' 这个函数叫做散列函数，存放记录的数组叫散列表')
+        print('对不同的关键字可能得到同一散列地址，即k1≠k2，而f(k1)=f(k2)，这种现象称为碰撞', 
+            '（英语：Collision）。具有相同函数值的关键字对该散列函数来说称做同义词。', 
+            '综上所述，根据散列函数f(k)和处理碰撞的方法将一组关键字映射到一个有限的连续的地址集', 
+            '（区间）上，并以关键字在地址集中的“像”作为记录在表中的存储位置，这种表便称为散列表，', 
+            '这一映射过程称为散列造表或散列，所得的存储位置称散列地址。')
+        print('字符串dugu的一个哈希值为：', self.ELFhash('dugu', 31))
         print('在很多应用中，都要用到一种动态集合结构，它仅支持INSERT,SEARCH的DELETE字典操作')
         print('实现字典的一种有效数据结构为散列表(HashTable)')
         print('在最坏情况下，在散列表中，查找一个元素的时间在与链表中查找一个元素的时间相同')
