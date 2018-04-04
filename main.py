@@ -10,6 +10,8 @@ from src.test import testAll
 if __name__ == '__main__':
     ## Test required packet
     testAll()
+    ## output all src files
+    print(src.__all__)
     ## Chapter 1
     src.Chapter1().note()
     ## Chapter 2 (2.1 2.2)
@@ -46,8 +48,10 @@ if __name__ == '__main__':
     src.printchapter9note()
     ## chapter10
     src.printchapter10note()
-    ## chapter10
+    ## chapter11
     src.printchapter11note()
+    ## chapter12
+    src.printchapter12note()
 else:
     pass
 

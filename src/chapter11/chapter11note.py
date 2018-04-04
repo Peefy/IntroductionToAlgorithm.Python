@@ -4,6 +4,14 @@
 '''
 Class Chapter11_1
 
+Class Chapter11_2
+
+Class Chapter11_3
+
+Class Chapter11_4
+
+Class Chapter11_5
+
 '''
 import sys as _sys
 import math as _math
@@ -364,8 +372,8 @@ def printchapter11note():
     chapter11_4.note()
     chapter11_5.note()
 
-# python src/chapter10/chapter10note.py
-# python3 src/chapter10/chapter10note.py
+# python src/chapter11/chapter11note.py
+# python3 src/chapter11/chapter11note.py
 if __name__ == '__main__':  
     printchapter11note()
 else:

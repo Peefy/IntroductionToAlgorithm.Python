@@ -2,11 +2,17 @@
 This packet includes CLRS notes of each chapter
 '''
 
-__all__ = ['TestResult', 'TestCase', 'TestSuite',
-           'TextTestRunner', 'TestLoader', 'FunctionTestCase', 'main',
-           'defaultTestLoader', 'SkipTest', 'skip', 'skipIf', 'skipUnless',
-           'expectedFailure', 'TextTestResult', 'installHandler',
-           'registerResult', 'removeResult', 'removeHandler']
+__all__ = ['Chapter1', 'Chapter2', 'Chapter2_3',
+           'Chapter3_1', 'Chapter3_2', 'Chapter4_1', 
+           'Chapter4_2', 'Chapter4_3', 'Chapter4_4', 
+           'Chapter5_1', 'Chapter5_2', 'Chapter5_3', 
+           'Chapter5_4', 'chapter6_printall',
+           'printchapter7note',
+           'printchapter8note',
+           'printchapter9note',
+           'printchapter10note',
+           'printchapter11note',
+           'printchapter12note',]
 
 from .chapter1.chapter1_1 import Chapter1
 
@@ -37,3 +43,5 @@ from .chapter9.chapter9note import printchapter9note
 from .chapter10.chapter10note import printchapter10note
 
 from .chapter11.chapter11note import printchapter11note
+
+from .chapter12.chapter12note import printchapter12note

@@ -65,12 +65,11 @@ Stooge排序  `O(n^2.7)`   ok
 
 # python src/dugulib/sort.py
 # python3 src/dugulib/sort.py
+from __future__ import division, absolute_import, print_function
 import math as _math
 import random as _random
 from copy import deepcopy as _deepcopy
 from numpy import arange as _arange
-
-from __future__ import division, absolute_import, print_function
 
 __all__ = ['insertsort', 'selectsort', 'bubblesort',
                'mergesort', 'heapsort', 'quicksort', 
