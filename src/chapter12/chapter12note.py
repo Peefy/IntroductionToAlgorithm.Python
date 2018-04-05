@@ -55,7 +55,28 @@ class Chapter12_1:
         print('二叉查找树，对任何结点x，其左子树中的关键字最大不超过key[x],其右子树中的关键字最小不小于key[x]')
         print('不同的二叉查找树可以表示同一组值，在有关查找树的操作中，大部分操作的最坏情况运行时间与树的高度是成正比的')
         print('二叉查找树中关键字的存储方式总是满足以下的二叉树查找树性质')
-        print('')
+        print('根据二叉查找树的性质，可以用一个递归算法按排列顺序输出树中的所有关键字。')
+        print('这种算法成为中序遍历算法，因为一子树根的关键字在输出时介于左子树和右子树的关键字之间')
+        print('前序遍历中根的关键字在其左右子树中的关键字输出之前输出，', 
+            '而后序遍历中根的关键字再其左右子树中的关键字之后输出')
+        print('只要调用INORDER-TREE-WALK(root[T]),就可以输出一棵二叉查找树T中的全部元素')
+        print('INORDER-TREE-WALK(x)')
+        print('if x != None')
+        print('  INORDER-TREE-WALK(left[x])')
+        print('  print key[x]')
+        print('  INORDER-TREE-WALK(right[x])')
+        print('  遍历一棵含有n个结点的二叉树所需的时间为Θ(n),因为在第一次调用遍历过程后，', 
+            '对树中的每个结点，该过程都要被递归调用两次')
+        print('定理12.1 如果x是一棵包含n个结点的子树的根上，调用INORDER-TREE-WALK过程所需的时间。对于一棵空子树')
+        print(' INORDER-TREE-WALK只需很少的一段常量时间(测试x!=None),因而有T(0)=c,c为某一正常数')
+        print('练习12.1-1 基于关键字集合{1,4,5,10,16,17,21}画出高度为2,3,4,5,6的二叉查找树')
+        print('练习12.1-2 二叉查找树性质与最小堆性质之间有什么区别。能否利用最小堆性质在O(n)时间内，')
+        print('  按序输出含有n个结点的树中的所有关键字')
+        print('练习12.1-3 给出一个非递归的中序树遍历算法')
+        print('  有两种方法，在较为容易的方法中，可以采用栈作为辅助数据结构，在较为复杂的方法中，不采用栈结构')
+        print('练习12.1-4 对一棵含有n个结点的树，给出能在Θ(n)时间内，完成前序遍历和后序遍历的递归算法')
+        print('练习12.1-5 在比较模型中，最坏情况下排序n个元素的时间为Ω(nlgn),则为从任意的n个元素中构造出一棵二叉查找树')
+        print('  任何一个基于比较的算法在最坏情况下，都要花Ω(nlgn)的时间')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 
@@ -76,6 +97,21 @@ class Chapter12_2:
         ```
         '''
         print('chapter12.2 note as follow')
+        print('12.2 查询二叉查找树')
+        print('对于二叉查找树，最常见的操作是查找树中的某个关键字。')
+        print('除了SEARCH操作外，二叉查找树还能支持诸如MINIMUM,MAXIMUM,SUCCESSOR和PREDECESSOR等查询')
+        print('并说明对高度为h的树，它们都可以在O(h)时间内完成')
+        print('查找')
+        print(' 我们用下面的过程在树中查找一个给定的关键字。给定指向树根的指针和关键字k，', 
+            '过程TREE-SEARCH返回包含关键字k的结点(如果存在的话)的指针，否则返回None')
+        print('TREE-SEARCH(x,k)')
+        print('if x = None or k=key[x]')
+        print('  return x')
+        print('if k < key[x]')
+        print('  return TREE-SEARCH(left[x],k)')
+        print('else')
+        print('  return TREE-SEARCH(right[x],k)')
+        print('最大关键字元素和最小关键字元素')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 
