@@ -115,6 +115,32 @@ class Chapter12_2:
         print('else')
         print('  return TREE-SEARCH(right[x],k)')
         print('最大关键字元素和最小关键字元素')
+        print('要查找二叉树中具有最小关键字的元素，只要从根结点开始，沿着各结点的left指针查找下去，直至遇到None时为止')
+        print('二叉查找树性质保证了TREE-MINIMUM的正确性。如果一个结点x无子树，', 
+            '其右子树中的每个关键字都至少和key[x]一样大')
+        print('对高度为h的树，这两个过程的运行时间都是O(h),这是因为，如在TREE-SEARCH过程中一样，', 
+            '所遇到的结点序列构成了一条沿着结点向下的路径')
+        print('前趋和后继')
+        print('给定一个二叉查找树中的结点，有时候要求找出在中序遍历顺序下它的后继')
+        print('如果所有的关键字均不相同，则某一结点x的后继即具有大于key[x]中关键字中最小者的那个结点')
+        print('根据二叉查找树的结构，不用对关键字做任何比较，就可以找到某个结点的后继')
+        print('定理12.2 对一棵高度为h的二叉查找树，动态集合操作SEARCH,MINIMUM,', 
+            'MAXIMUM,SUCCESSOR和PREDECESSOR等的运行时间为O(h)')
+        print('练习12.2-1 假设在某二叉查找树中，有1到1000之间的一些数，现要找出363这个数。')
+        print(' 下列的结点序列中，哪一个不可能是所检查的序列 b),c),e)')
+        print('a) 2,252,401,398,330,344,397,363')
+        print('b) 924,220,911,244,898,258,362,363')
+        print('c) 925,202,911,240,912,245,363')
+        print('d) 2,399,387,219,266,382,381,278,363')
+        print('e) 935,278,347,621,299,392,358,363')
+        print('练习12.2-2 写出TREE-MINIMUM和TREE-MAXIMUM过程的递归版本')
+        print('练习12.2-3 写出TREE-PREDECESSOR过程')
+        print('练习12.2-4 ')
+        print('练习12.2-5 ')
+        print('练习12.2-6 ')
+        print('练习12.2-7 ')
+        print('练习12.2-8 ')
+        print('练习12.2-9 ')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 

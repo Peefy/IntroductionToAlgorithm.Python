@@ -516,7 +516,7 @@ class BinaryTree:
                 array = array + leftnodes
             if rightnodes != None and len(rightnodes) != 0:
                 # 连接两个集合
-                array= array + rightnodes
+                array = array + rightnodes
             # 将自己本身的结点也加入集合
             array.append({ "index":node.index, "key" : node.key})
             if len(array) == 0:
