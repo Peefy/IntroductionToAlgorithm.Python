@@ -156,4 +156,5 @@ class SearchTree:
     def delete(self):
         pass
 
-
+    def count(self):
+        return len(self.nodes)

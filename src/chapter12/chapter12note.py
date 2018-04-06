@@ -135,12 +135,20 @@ class Chapter12_2:
         print('e) 935,278,347,621,299,392,358,363')
         print('练习12.2-2 写出TREE-MINIMUM和TREE-MAXIMUM过程的递归版本')
         print('练习12.2-3 写出TREE-PREDECESSOR过程')
-        print('练习12.2-4 ')
-        print('练习12.2-5 ')
-        print('练习12.2-6 ')
-        print('练习12.2-7 ')
-        print('练习12.2-8 ')
-        print('练习12.2-9 ')
+        print('练习12.2-4 假设在二叉查找树中，对某关键字k的查找在一个叶结点处结束，考虑三个集合')
+        print(' A 包含查找路径左边的关键字；')
+        print(' B 包含查找路径上的关键字；')
+        print(' C 包含查找路径右边的关键字；')
+        print(' 任何三个关键字a∈A,b∈B,c∈C 必定满足a<=b<=c,请给出该命题的一个最小可能的反例')
+        print('练习12.2-5 性质：如果二叉查找树中的某结点有两个子女，则其后继没有左子女，其前趋没有右子女')
+        print('练习12.2-6 考虑一棵其关键字各不相同的二叉查找树T。证明：如果T中某个结点x的右子树为空，且x有一个后继y')
+        print('  那么y就是x的最低祖先，且其左孩子也是x的祖先。')
+        print('练习12.2-7 对于一棵包含n个结点的二叉查找树，其中序遍历可以这样来实现；先用TREE-MINIMUM找出树中的最小元素')
+        print(' 然后再调用n-1次TREE-SUCCESSOR。证明这个算法的运行时间为Θ(n)')
+        print('练习12.2-8 证明：在一棵高度为h的二叉查找树中，无论从哪一个结点开始')
+        print(' 连续k次调用TREE-SUCCESSOR所需的时间都是O(k+h)')
+        print('练习12.2-9 设T为一棵其关键字均不相同的二叉查找树，并设x为一个叶子结点，y为其父结点。')
+        print(' 证明：key[y]或者是T中大于key[x]的最小关键字，或者是T中小于key[x]的最大关键字')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 
@@ -161,6 +169,7 @@ class Chapter12_3:
         ```
         '''
         print('chapter12.3 note as follow')
+        print('12.3 插入和删除')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 
