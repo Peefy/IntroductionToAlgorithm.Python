@@ -8,7 +8,6 @@ class SearchTreeNode:
     二叉查找树的结点
     '''
     def __init__(self, key, index, \
-        leftindex = None, rightindex = None, \
         p = None, left = None, right = None):
         '''
 
@@ -20,13 +19,9 @@ class SearchTreeNode:
 
         `right`  : SearchTreeNode : 右儿子结点
 
-        `key` : 结点自身索引值
+        `index` : 结点自身索引值
 
-        `value` : 结点自身键值
-
-        `leftkey` : 左儿子结点索引值
-
-        `rightkey` : 右儿子结点索引值
+        `key` : 结点自身键值
 
         `p` : 父节点
 
@@ -35,8 +30,6 @@ class SearchTreeNode:
         self.right = right
         self.key = key
         self.index = index
-        self.leftindex = leftindex
-        self.rightindex = rightindex
         self.p = p
 
     def __str__(self):
@@ -53,6 +46,9 @@ class SearchTree:
         self.nodes = []
 
     def inorder_tree_walk(self, x : SearchTreeNode):
+        '''
+        从二叉查找树的`x`结点后序遍历
+        '''
         array = []
         if x != None:
             left = self.inorder_tree_walk(x.left)
@@ -79,7 +75,6 @@ class SearchTree:
                 return self.tree_search(x.right, key)            
         except :
             return None
-
 
     def iterative_tree_search(self, x : SearchTreeNode, key):
         '''
@@ -108,15 +103,33 @@ class SearchTree:
             x = x.left
         return x
 
+    def __minimum_recursive(self, x : SearchTreeNode) -> list:
+        '''
+        最小关键字元素(递归版本) 
+
+        时间复杂度：`O(h)`, `h`为树的高度
+        '''
+        array = []
+        if x != None:
+            ex = self.__minimum_recursive(x.left)
+            if ex == []:
+                z = x
+                array.append(z)
+                return array
+            else:
+                array = array + ex
+        return array
+
     def minimum_recursive(self, x : SearchTreeNode):
         '''
         最小关键字元素(递归版本) 
 
         时间复杂度：`O(h)`, `h`为树的高度
         '''
-        if x != None and x.left != None:
-            self.minimum_recursive(x.left)
-        return x
+        array = self.__minimum_recursive(x)
+        if len(array) != 0:
+            return array.pop()
+        return None
 
     def maximum(self, x : SearchTreeNode):
         '''
@@ -129,15 +142,33 @@ class SearchTree:
             x = x.right
         return x
     
+    def __maximum_recursive(self, x : SearchTreeNode):
+        '''
+        最大关键字元素(递归版本)
+
+        时间复杂度：`O(h)`, `h`为树的高度
+        '''
+        array = []
+        if x != None:
+            ex = self.__maximum_recursive(x.right)
+            if ex == []:
+                z = x
+                array.append(z)
+                return array
+            else:
+                array = array + ex
+        return array
+
     def maximum_recursive(self, x : SearchTreeNode):
         '''
         最大关键字元素(递归版本)
 
         时间复杂度：`O(h)`, `h`为树的高度
         '''
-        while x != None and x.right != None:
-            self.maximum_recursive(x.right)
-        return x
+        array = self.__maximum_recursive(x)
+        if len(array) != 0:
+            return array.pop()
+        return None
 
     def successor(self, x : SearchTreeNode):
         '''
@@ -190,11 +221,28 @@ class SearchTree:
             y.right = z
         self.nodes.append(z) 
 
+    def __insertfrom(self, z : SearchTreeNode, x : SearchTreeNode, lastparent : SearchTreeNode):
+        if x != None:
+            if z.key < x.key:
+                self.__insertfrom(z, x.left, x)
+            else:
+                self.__insertfrom(z, x.right, x)
+        else:
+            z.p = lastparent
+            if z.key < lastparent.key:
+                lastparent.left = z
+            else:
+                lastparent.right = z
+
     def insert_recursive(self, z : SearchTreeNode):
         '''
         插入元素(递归版本)，时间复杂度`O(h)` `h`为树的高度
         '''
-        pass
+        if self.root == None:
+            self.root = z
+        else:  
+            self.__insertfrom(z, self.root, None)
+        self.nodes.append(z) 
 
     def delete(self, z : SearchTreeNode):
         '''
@@ -223,9 +271,6 @@ class SearchTree:
         self.nodes.remove(z) 
         return y
         
-    def update(self):
-        pass
-
     def all(self) -> list:
         '''
         返回二叉查找树中所有结点索引值，键值构成的集合
@@ -235,5 +280,17 @@ class SearchTree:
             array.append({ "index":node.index,"key" : node.key})
         return array
 
-    def count(self):
+    def count(self) -> int:
+        '''
+        二叉查找树中的结点总数
+        '''
         return len(self.nodes)
+
+    def getheight(self) -> int:
+        '''
+        二叉查找树的高度
+        '''
+        
+
+    height = property(getheight)
+
