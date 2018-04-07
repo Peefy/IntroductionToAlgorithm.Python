@@ -20,6 +20,11 @@ from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
 import numpy as np
 
+if __name__ == '__main__':
+    from searchtree import SearchTree, SearchTreeNode
+else:
+    from .searchtree import SearchTree, SearchTreeNode
+
 class Chapter12_1:
     '''
     chpater12.1 note and function
@@ -170,6 +175,36 @@ class Chapter12_3:
         '''
         print('chapter12.3 note as follow')
         print('12.3 插入和删除')
+        print('插入和删除操作会引起二叉查找树表示的动态集合的变化，要反映出这种变化，就要修改数据结构')
+        print('但在修改的同时，还要保持二叉查找树性质')
+        print('插入一个新元素而修改树的结构相对来说比较简单,但在执行删除操作时情况要复杂一些')
+        print('插入：为将一个新值v插入到二叉查找树T中，可以调用TREE-INSERT')
+        print(' 传给该过程的参数是个结点z，并且有key[z]=v,left[z]=None,right[z]=None')
+        print(' 该过程修改T和z的某些域，并把z插入到树中的合适位置')
+        print('定理12.3 对高度为h的二叉查找树，动态集合操作INSERT和DELETE的运行时间为O(h)')
+        tree = SearchTree()
+        tree.insert(SearchTreeNode(12, 0))
+        tree.insert(SearchTreeNode(11, 1))
+        tree.insert(SearchTreeNode(10, 2))
+        tree.insert(SearchTreeNode(15, 3))
+        tree.insert(SearchTreeNode(9, 3))
+        print(tree.all())
+        print(tree.count())
+        print(tree.inorder_tree_walk(tree.root))
+        print(tree.tree_search(tree.root, 15))
+        print(tree.tree_search(tree.root, 8))
+        print(tree.iterative_tree_search(tree.root, 10))
+        print(tree.iterative_tree_search(tree.root, 7))
+        print(tree.maximum(tree.root))
+        print(tree.minimum(tree.root))
+        print(tree.successor(tree.root))
+        print(tree.predecessor(tree.root))
+        print('练习12.3-1 ')
+        print('练习12.3-2 ')
+        print('练习12.3-3 ')
+        print('练习12.3-4 ')
+        print('练习12.3-5 ')
+        print('练习12.3-6 ')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 
@@ -190,6 +225,7 @@ class Chapter12_4:
         ```
         '''
         print('chapter12.4 note as follow')
+        print('12.4 随机构造的二叉查找树')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 
