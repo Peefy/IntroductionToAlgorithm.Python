@@ -1,8 +1,28 @@
+---
+layout: post
+title: "用Python实现的二叉查找树SearchTree"
+description: "用Python实现的二叉查找树SearchTree"
+categories: [Python]
+tags: [python]
+redirect_from:
+  - /2018/04/07/
+---
+
+## 用Python实现的二叉查找树SearchTree
+
+Module
+
+```python
 
 from __future__ import absolute_import, print_function
 
 from copy import deepcopy as _deepcopy
 
+```
+
+首先定义二叉查找树节点
+
+```python
 class SearchTreeNode:
     '''
     二叉查找树的结点
@@ -35,7 +55,11 @@ class SearchTreeNode:
     def __str__(self):
         return 'key:' + str(self.key) + ','\
                 'index:' + str(self.index)
+```
 
+定义二叉查找树
+
+```python
 class SearchTree:
     '''
     二叉查找树
@@ -305,7 +329,11 @@ class SearchTree:
         二叉查找树中的结点总数
         '''
         return len(self.nodes)
+```
 
+二叉查找树测试程序
+
+```python
 if __name__ == '__main__':
     tree = SearchTree()
     tree.insert_recursive(SearchTreeNode(12, 0))
@@ -330,3 +358,7 @@ if __name__ == '__main__':
     # python3 src/chapter12/searchtree.py
 else:
     pass
+```
+
+[Github Code](https://github.com/Peefy/CLRS_dugu_code-master/blob/master/src/chapter12)
+

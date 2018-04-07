@@ -201,12 +201,15 @@ class Chapter12_3:
         print(tree.minimum_recursive(tree.root))
         print(tree.successor(tree.root))
         print(tree.predecessor(tree.root))
-        print('练习12.3-1 完成！')
-        print('练习12.3-2 ')
-        print('练习12.3-3 ')
-        print('练习12.3-4 ')
-        print('练习12.3-5 ')
-        print('练习12.3-6 ')
+        print('练习12.3-1 TREE-INSERT的递归版本测试成功！')
+        print('练习12.3-2 假设通过反复插入不同的关键字的做法来构造一棵二叉查找树。论证：为在树中查找一个关键字')
+        print(' 所检查的结点数等于插入该关键字所检查的结点数加1')
+        print('练习12.3-3 这个排序算法的最好时间和最坏时间:O(h) * n * O(h)', tree.allkey())
+        print('练习12.3-4 假设另有一种数据结构中包含指向二叉查找树中某结点y的指针，并假设用过程TREE-DELETE来删除y的前趋z')
+        print(' 这样做会出现哪些问题呢，如何改写TREE-DELETE来解决这些问题')
+        print('练习12.3-5 删除操作是可以交换的，先删除x再删除y和先删除y再删除x是一样的')
+        print('练习12.3-6 当TREE-DELETE中的结点z有两个子结点时，可以将其前趋(而不是后继)拼接掉')
+        print(' 提出了一种公平的策略，即为前趋和后继结点赋予相同的优先级，从而可以得到更好地经验性能。')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 
