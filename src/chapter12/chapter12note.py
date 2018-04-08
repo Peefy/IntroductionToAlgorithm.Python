@@ -21,9 +21,9 @@ from numpy import arange as _arange
 import numpy as np
 
 if __name__ == '__main__':
-    from searchtree import SearchTree, SearchTreeNode
+    from searchtree import SearchTree, SearchTreeNode, RandomSearchTree
 else:
-    from .searchtree import SearchTree, SearchTreeNode
+    from .searchtree import SearchTree, SearchTreeNode, RandomSearchTree
 
 class Chapter12_1:
     '''
@@ -207,7 +207,7 @@ class Chapter12_3:
         print('练习12.3-3 这个排序算法的最好时间和最坏时间:O(h) * n * O(h)', tree.allkey())
         print('练习12.3-4 假设另有一种数据结构中包含指向二叉查找树中某结点y的指针，并假设用过程TREE-DELETE来删除y的前趋z')
         print(' 这样做会出现哪些问题呢，如何改写TREE-DELETE来解决这些问题')
-        print('练习12.3-5 删除操作是可以交换的，先删除x再删除y和先删除y再删除x是一样的')
+        print('练习12.3-5 删除操作是不可以交换的，先删除x再删除y和先删除y再删除x是不一样的，会影响树的结构')
         print('练习12.3-6 当TREE-DELETE中的结点z有两个子结点时，可以将其前趋(而不是后继)拼接掉')
         print(' 提出了一种公平的策略，即为前趋和后继结点赋予相同的优先级，从而可以得到更好地经验性能。')
         # python src/chapter12/chapter12note.py
@@ -233,19 +233,42 @@ class Chapter12_4:
         print('12.4 随机构造的二叉查找树')
         print('二叉查找树上各基本操作的运行时间都是O(h),h为树的高度。', 
             '但是，随着元素的插入或删除，树的高度会发生变化')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('例如各元素是按严格增长的顺序插入的，那么构造出来的树就是一个高度为n-1的链')
+        print('要使树的高度尽量平均最小，所以采用随机化技术来随机插入结点')
+        print('插入顺序不同则树的结构不同')
+        print('如在快速排序中那样，可以证明其平均情况下的行为更接近于最佳情况下的行为，', 
+            '而不是接近最坏情况下的行为')
+        print('不幸的是，如果在构造二叉查找树时，既用到了插入操作，又用到了删除，那么就很难确定树的平均高度到底是多少')
+        print('如果仅用插入操作来构造树，则分析相对容易些。可以定义在n个不同的关键字上的一棵随机构造的二叉查找树')
+        print('它是通过按随机的顺序，将各关键字插入一棵初始为空的树而形成的，并且各输入关键字的n!种排列是等可能的')
+        print('这一概念不同于假定n个关键字上的每棵二叉查找树都是等可能的')
+        print('这一节要证明对于在n个关键字上随机构造的二叉查找树，其期望高度为O(lgn)。假设所有关键字都是不同的')
+        print('首先定义三个随机变量，它们有助于测度一棵随机构造的二叉查找树的高度：Xn表示高度')
+        print('定义指数高度Yn=2^Xn,Rn表示一个随机变量，存放了该关键字在这n个关键字中的序号')
+        print('Rn的值取集合{1,2,...,n}中的任何元素的可能性都是相同的')
+        print('定理12.4：一棵在n个关键字上随机构造的二叉查找树的期望高度为O(lgn)')
+        random_tree = RandomSearchTree()
+        random_tree.randominsertkey(1)
+        random_tree.randominsertkey(2)
+        random_tree.randominsertkey(3)
+        random_tree.randominsertkey(4)
+        random_tree.randominsertkey(5)
+        random_tree.update()
+        random_tree.insertkey(0)
+        print(random_tree.all())
+        print(random_tree.allkey())
+        print(random_tree.inorder_tree_walk(random_tree.root))
+        print('练习12.4-1 证明恒等式∑i=0,n-1(i+3, 3)=(n+3, 4)')
+        print('练习12.4-2 请描述这样一个的一棵二叉查找树：其中每个结点的平均深度Θ(lgn)，但是树的深度为ω(lgn)')
+        print(' 对于一棵含n个结点的二叉查找树，如果其中每个结点的平均深度为Θ(lgn),给出其高度的一个渐进上界O(nlgn)')
+        print('练习12.4-3 说明基于n个关键字的随机选择二叉查找树概念(每棵包含n个结点的树被选到的可能性相同)，与本节中介绍的随机构造二叉查找树的概念是不同的')
+        print('练习12.4-4 证明f(x)=2^x是凸函数')
+        print('练习12.4-5 现对n个输入数调用RANDOMIZED-QUICKSORT。', 
+            '证明：对任何常数k>0,输入数的所有n!中排列中，除了其中的O(1/n^k)中排列之外，都有O(nlgn)的运行时间')
+        print('思考题12-1 ')
+        print('思考题12-2 ')
+        print('思考题12-3 ')
+        print('思考题12-4 ')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 
