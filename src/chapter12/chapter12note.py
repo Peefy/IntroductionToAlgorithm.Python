@@ -231,6 +231,21 @@ class Chapter12_4:
         '''
         print('chapter12.4 note as follow')
         print('12.4 随机构造的二叉查找树')
+        print('二叉查找树上各基本操作的运行时间都是O(h),h为树的高度。', 
+            '但是，随着元素的插入或删除，树的高度会发生变化')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 
