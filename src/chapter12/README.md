@@ -391,7 +391,6 @@ class RandomSearchTree(SearchTree):
         self.__buffers.clear()
 ```
 
-
 二叉查找树测试程序
 
 ```python
