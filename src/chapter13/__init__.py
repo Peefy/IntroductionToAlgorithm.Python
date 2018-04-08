@@ -1,3 +1,3 @@
 
-# python src/chapter10/chapter10note.py
-# python3 src/chapter10/chapter10note.py
+# python src/chapter13/chapter13note.py
+# python3 src/chapter13/chapter13note.py
