@@ -271,9 +271,13 @@ class Chapter12_4:
         print(' 可以对TREE-INSERT做一些改进，即在第5行的前面测试key[z]==key[x],在第11行前面测试key[z]==key[y]')
         print(' 在结点x处设一个布尔标志b[x],并根据b[x]的不同值，置x为left[x]或right[x],', 
             '每当插入一个与x具有相同关键字的结点时，b[x]取TRUE或FALSE,随机地将x置为left[x]或right[x]')
-        print('思考题12-2 ')
-        print('思考题12-3 ')
-        print('思考题12-4 ')
+        print('思考题12-2 基数树RadixTree数据结构')
+        print(' 给定两个串a=a0a1...ap和b=b0b1...bp,其中每一个ai和每一个bj都属于某有序字符集')
+        print(' 例如，如果a和b是位串,则根据规则10100<10110, 10100<101000,这与英语字典中的排序很相似')
+        print(' 设S为一组不同的二进制串构成的集合，各串的长度之和为n，说明如何咯用基数树，在Θ(n)时间内将S按字典序排序')
+        print('思考题12-3 随机构造的二叉查找树中的平均结点深度')
+        print('思考题12-4 证明在一棵随机构造的二叉查找树中，n个结点的平均深度为O(lgn)')
+        print(' 与RANDOMIZED-QUICKSORT的运行机制之间的令人惊奇的相似性')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
 

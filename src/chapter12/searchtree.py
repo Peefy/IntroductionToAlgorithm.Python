@@ -233,15 +233,27 @@ class SearchTree:
             y = x
             if z.key < x.key:
                 x = x.left
-            else:
+            elif z.key > x.key:
                 x = x.right
+            else:
+                # 处理相同结点的方式，随机分配左右结点
+                if _randint(0, 1) == 0:
+                    x = x.left
+                else:
+                    x = x.right
         z.p = y
         if y == None:
             self.root = z
         elif z.key < y.key:
             y.left = z
-        else:
+        elif z.key > y.key:
             y.right = z
+        else:
+            # 处理相同结点的方式，随机分配左右结点
+            if _randint(0, 1) == 0:
+                y.left = z
+            else:
+                y.right = z
         self.nodes.append(z) 
 
     def __insertfrom(self, z : SearchTreeNode, x : SearchTreeNode, lastparent : SearchTreeNode):
