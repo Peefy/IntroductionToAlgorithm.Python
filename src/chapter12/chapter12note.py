@@ -265,7 +265,12 @@ class Chapter12_4:
         print('练习12.4-4 证明f(x)=2^x是凸函数')
         print('练习12.4-5 现对n个输入数调用RANDOMIZED-QUICKSORT。', 
             '证明：对任何常数k>0,输入数的所有n!中排列中，除了其中的O(1/n^k)中排列之外，都有O(nlgn)的运行时间')
-        print('思考题12-1 ')
+        print('思考题12-1 具有相同关键字的二叉查找树')
+        print(' 具有相同关键字的存在，给二叉查找树的实现带来了一些问题')
+        print(' 当用TREE-INSERT将n个具有相同关键字的数据项插入到一棵初始为空的二叉查找树中，该算法的渐进性能如何')
+        print(' 可以对TREE-INSERT做一些改进，即在第5行的前面测试key[z]==key[x],在第11行前面测试key[z]==key[y]')
+        print(' 在结点x处设一个布尔标志b[x],并根据b[x]的不同值，置x为left[x]或right[x],', 
+            '每当插入一个与x具有相同关键字的结点时，b[x]取TRUE或FALSE,随机地将x置为left[x]或right[x]')
         print('思考题12-2 ')
         print('思考题12-3 ')
         print('思考题12-4 ')

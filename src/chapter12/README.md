@@ -237,7 +237,13 @@ class SearchTree:
             x = y
             y = y.p
         return y
-         
+
+    def insertkey(self, key, index = None):
+        '''
+        插入元素，时间复杂度`O(h)` `h`为树的高度
+        '''
+        self.insert(SearchTreeNode(key, index))
+
     def insert(self, z : SearchTreeNode):
         '''
         插入元素，时间复杂度`O(h)` `h`为树的高度
@@ -331,6 +337,61 @@ class SearchTree:
         return len(self.nodes)
 ```
 
+采用随机化技术的二叉查找树(继承正常二叉查找树)
+
+```python
+class RandomSearchTree(SearchTree):
+
+    def __init__(self):
+        self.lastnode : SearchTreeNode = None
+        self.root : SearchTreeNode = None
+        self.nodes = []
+        self.__buffers = []
+
+    def __randomize_inplace(self, array):
+        '''
+        随机打乱排列一个数组
+
+        Args
+        ===
+        `array` : 随机排列前的数组
+
+        Return
+        ===
+        `random_array` : 随机排列后的数组
+
+        '''
+        n = len(array)
+        for i in range(n):
+            rand = _randint(i, n - 1)
+            _time.sleep(0.001)
+            array[i], array[rand] = array[rand], array[i]
+        return array
+
+    def randominsert(self, z : SearchTreeNode):
+        '''
+        使用随机化技术插入结点到缓存
+        '''
+        self.__buffers.append(z)
+
+    def randominsertkey(self, key, index = None):
+        '''
+        使用随机化技术插入结点到缓存
+        '''
+        z = SearchTreeNode(key, index)
+        self.randominsert(z)
+
+    def update(self):
+        '''
+        从缓存更新二叉查找树结点
+        '''
+        randombuffers = self.__randomize_inplace(self.__buffers)
+        for buffer in randombuffers:
+            self.insert(buffer)
+        self.__buffers.clear()
+```
+
+
 二叉查找树测试程序
 
 ```python
@@ -354,6 +415,17 @@ if __name__ == '__main__':
     print(tree.minimum_recursive(tree.root))
     print(tree.successor(tree.root))
     print(tree.predecessor(tree.root))
+    random_tree = RandomSearchTree()
+    random_tree.randominsertkey(1)
+    random_tree.randominsertkey(2)
+    random_tree.randominsertkey(3)
+    random_tree.randominsertkey(4)
+    random_tree.randominsertkey(5)
+    random_tree.update()
+    random_tree.insertkey(0)
+    print(random_tree.all())
+    print(random_tree.allkey())
+    print(random_tree.inorder_tree_walk(random_tree.root))
     # python src/chapter12/searchtree.py
     # python3 src/chapter12/searchtree.py
 else:
