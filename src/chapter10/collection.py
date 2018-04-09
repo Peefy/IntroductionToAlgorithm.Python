@@ -44,7 +44,9 @@ class Stack:
         return len(self.array)
 
 class TwoStack:
-      
+    '''
+    用一个数组实现的两个栈
+    '''
     def __init__(self, size = 5):
         self.__one_top = -1
         self.__two_top = size
@@ -96,6 +98,9 @@ class TwoStack:
         if self.__one_top == -1 or self.__two_top == self.__size:
             raise Exception('stack is full!')
 class StackUsingQueue:
+    '''
+    用队列实现的栈
+    '''
     def __init__(self, iterable = None):
         self.__queue1 = Queue()
         self.__queue2 = Queue()
@@ -114,7 +119,9 @@ class StackUsingQueue:
     def count(self):
         return self.__queue1.length()
 class Queue:
-
+    '''
+    队列
+    '''
     def __init__(self, iterable = None):
         self.tail = 0
         self.array = []
@@ -144,6 +151,9 @@ class Queue:
     def length(self):
         return len(self.array)
 class DoubleQueue:
+    '''
+    双向队列
+    '''
     def __init__(self, iterable = None):
         self.tail = 0
         self.array = []
@@ -180,6 +190,9 @@ class DoubleQueue:
         return len(self.array)
 
 class QueueUsingStack:
+    '''
+    用栈实现的队列
+    '''
     def __init__(self, iterable = None):
         self.__stack1 = Stack()
         self.__stack2 = Stack()
@@ -226,7 +239,10 @@ class ListNode:
 
     isNone = property(getisNone, None)
 
-class List:       
+class List:   
+    '''
+    链表
+    '''    
     def __init__(self):
         '''
         初始化一个空链表
@@ -381,6 +397,9 @@ class List:
         self.__length -= 1
 
 class QueueUsingList:
+    '''
+    使用链表构造的队列
+    '''
     def __init__(self):
         self.__list = List()
         self.__length = 0
@@ -402,6 +421,9 @@ class QueueUsingList:
         return self.__list.all()
 
 class StackUsingList:
+    '''
+    使用链表构造的栈
+    '''
     def __init__(self):
         self.__list = List()
         self.__length = 0
