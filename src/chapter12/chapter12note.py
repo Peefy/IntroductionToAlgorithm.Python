@@ -285,7 +285,7 @@ class Chapter12_4:
         print(' 设P(n)表示一棵包含n个结点的随机构造二叉树中的平均总路径长度')
         print('在对快速排序算法的每一次递归调用中，都是随机地选择一个支点元素来对待排序元素集合进行划分')
         print(' 二叉查找树中的每个结点也对以该结点为根的子树中的所有元素进行划分')
-        print('思考题12-4  不同的二叉树数目')
+        print('思考题12-4 不同的二叉树数目')
         print(' 设bn表示包含n个结点的不同的二叉树的数目，在本问题里，要给出关于bn的公式和一个渐进估计')
         # python src/chapter12/chapter12note.py
         # python3 src/chapter12/chapter12note.py
