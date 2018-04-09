@@ -75,6 +75,17 @@ class Chapter13_3:
         ```
         '''
         print('chapter13.3 note as follow')
+        print('第13章 ')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter13/chapter13note.py
         # python3 src/chapter13/chapter13note.py
 
