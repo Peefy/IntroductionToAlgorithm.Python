@@ -112,7 +112,7 @@ class Chapter13_2:
         print('给出左旋和右旋。当某个结点x上做左旋时，假设它的右孩子不是nil[T],',
             'x可以为树内任意右孩子不是nil[T]的结点')
         print('左旋以x到y之间的链为\"支轴\"进行，它使y成为该该子树新的根，x成为y的左孩子，而y的左孩子则成为x的右孩子')
-        print('')
+        print('在LEFT-ROTATE的代码中，必须保证right[x]!=None,且根的父结点为None')
         print('')
         print('')
         print('')
