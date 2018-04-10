@@ -335,6 +335,47 @@ class SearchTree:
         二叉查找树中的结点总数
         '''
         return len(self.nodes)
+
+    def leftrotate(self, x : SearchTreeNode):
+        '''
+        左旋 时间复杂度:`O(1)`
+        '''
+        if x.right == None:
+            return
+        y : SearchTreeNode = x.right
+        x.right = y.left
+        if y.left != None:
+            y.left.p = x
+        y.p = x.p
+        if x.p == None:
+            self.root = y
+        elif x == x.p.left:
+            x.p.left = y
+        else:
+            x.p.right = y
+        y.left = x
+        x.p = y
+
+    def rightrotate(self, x : SearchTreeNode):
+        '''
+        右旋 时间复杂度:`O(1)`
+        '''
+        if x.left == None:
+            return
+        y : SearchTreeNode = x.left
+        x.left = y.right
+        if y.right != None:
+            y.right.p = x
+        y.p = x.p
+        if x.p == None:
+            self.root = y
+        elif x == x.p.left:
+            x.p.left = y
+        else:
+            x.p.right = y
+        y.right = x
+        x.p = y
+
 ```
 
 采用随机化技术的二叉查找树(继承正常二叉查找树)
@@ -395,12 +436,17 @@ class RandomSearchTree(SearchTree):
 
 ```python
 if __name__ == '__main__':
-    tree = SearchTree()
-    tree.insert_recursive(SearchTreeNode(12, 0))
-    tree.insert(SearchTreeNode(11, 1))
-    tree.insert(SearchTreeNode(10, 2))
-    tree.insert(SearchTreeNode(15, 3))
-    tree.insert_recursive(SearchTreeNode(9, 4))   
+tree = SearchTree()
+    node1 = SearchTreeNode(12, 0)
+    node2 = SearchTreeNode(11, 1)
+    node3 = SearchTreeNode(10, 2)
+    node4 = SearchTreeNode(15, 3)
+    node5 = SearchTreeNode(9, 4)
+    tree.insert_recursive(node1)
+    tree.insert(node2)
+    tree.insert(node3)
+    tree.insert(node4)
+    tree.insert_recursive(node5)   
     print(tree.all())
     print(tree.count())
     print(tree.inorder_tree_walk(tree.root))
@@ -414,6 +460,13 @@ if __name__ == '__main__':
     print(tree.minimum_recursive(tree.root))
     print(tree.successor(tree.root))
     print(tree.predecessor(tree.root))
+    tree.insertkey(18)
+    tree.insertkey(16)
+    tree.leftrotate(node4)
+    tree.insertkey(20)
+    tree.rightrotate(node3)
+    tree.insertkey(3)
+    print(tree.all())
     random_tree = RandomSearchTree()
     random_tree.randominsertkey(1)
     random_tree.randominsertkey(2)

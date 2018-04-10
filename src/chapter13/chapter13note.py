@@ -105,6 +105,21 @@ class Chapter13_2:
         '''
         print('chapter13.2 note as follow')
         print('13.2 旋转')
+        print('当在含n个关键字的红黑树上运行时，查找树操作TREE-INSERT和TREE-DELETE的时间为O(lgn)')
+        print('由于这两个操作对树作了修改，结果可能违反13.1节中给出的红黑性质。',
+            '为保持这些性质，就要改变树中某些结点的颜色以及指针结构')
+        print('指针结构的修改是通过旋转来完成的，这是一种能保持二叉查找树性质的查找树局部操作')
+        print('给出左旋和右旋。当某个结点x上做左旋时，假设它的右孩子不是nil[T],',
+            'x可以为树内任意右孩子不是nil[T]的结点')
+        print('左旋以x到y之间的链为\"支轴\"进行，它使y成为该该子树新的根，x成为y的左孩子，而y的左孩子则成为x的右孩子')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter13/chapter13note.py
         # python3 src/chapter13/chapter13note.py
 
