@@ -113,13 +113,12 @@ class Chapter13_2:
             'x可以为树内任意右孩子不是nil[T]的结点')
         print('左旋以x到y之间的链为\"支轴\"进行，它使y成为该该子树新的根，x成为y的左孩子，而y的左孩子则成为x的右孩子')
         print('在LEFT-ROTATE的代码中，必须保证right[x]!=None,且根的父结点为None')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('练习13.2-1 RIGHT-ROTATE的代码已经给出')
+        print('练习13.2-2 二查查找树性质：在一棵有n个结点的二叉查找树中，刚好有n-1种可能的旋转')
+        print('练习13.2-3 属于x结点的子孙结点，当结点x左旋时，x的子孙结点的深度加1')
+        print('练习13.2-4 二查查找树性质：任何一棵含有n个结点的二叉查找树，可以通过O(n)次旋转，',
+            '转变为另外一棵含n个结点的二叉查找树')
+        print('练习13.2-5 如果二叉查找树T1可以右转成二叉查找树T2，则可以调用O(n^2)次RIGHT-ROTATE来右转')
         # python src/chapter13/chapter13note.py
         # python3 src/chapter13/chapter13note.py
 
@@ -140,7 +139,7 @@ class Chapter13_3:
         ```
         '''
         print('chapter13.3 note as follow')
-        print('第13章 ')
+        print('13.3 插入')
         print('')
         print('')
         print('')
