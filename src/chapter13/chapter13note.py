@@ -140,7 +140,7 @@ class Chapter13_3:
         '''
         print('chapter13.3 note as follow')
         print('13.3 插入')
-        print('')
+        print('一棵含有n个结点的红黑树中插入一个新结点的操作可以在O(lgn)时间内完成')
         print('')
         print('')
         print('')

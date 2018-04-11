@@ -120,7 +120,7 @@ class SearchTree:
             x = x.left
         return x
 
-    def __minimum_recursive(self, x : SearchTreeNode) -> list:
+    def __minimum_recursive(self, x : SearchTreeNode):
         '''
         最小关键字元素(递归版本) 
 
@@ -318,7 +318,7 @@ class SearchTree:
         self.nodes.remove(z) 
         return y
         
-    def all(self) -> list:
+    def all(self):
         '''
         返回二叉查找树中所有结点索引值，键值构成的集合
         '''
@@ -327,13 +327,13 @@ class SearchTree:
             array.append({ "index":node.index,"key" : node.key})
         return array
 
-    def allkey(self) -> list:
+    def allkey(self):
         '''
         按升序的方式输出所有结点`key`值构成的集合
         '''
         return self.__inorder_tree_walk_key(self.root)
 
-    def count(self) -> int:
+    def count(self):
         '''
         二叉查找树中的结点总数
         '''
