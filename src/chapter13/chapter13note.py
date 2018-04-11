@@ -141,21 +141,53 @@ class Chapter13_3:
         print('chapter13.3 note as follow')
         print('13.3 插入')
         print('一棵含有n个结点的红黑树中插入一个新结点的操作可以在O(lgn)时间内完成')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('红黑树T插入结点z时，就像是T是一棵普通的二叉查找树那样，然后将z染成红色，')
+        print('为保证红黑性质能继续保持，调用一个辅助程序对结点重新旋转和染色，假设z的key域已经提前赋值')
+        print('插入结点后，如果有红黑性质被破坏，则至多有一个被破坏，并且不是性质2就是性质4')
+        print('如果违反性质2，则发生的原因是z的根而且是红的，')
+        print('如果违反性质4，则原因是z和z的父结点都是红的')
+        print('循环结束是因为z.p是黑的，')
+        print('在while循环中需要考虑六种情况，其中三种与另外三种')
+        print('情况1与情况2，3的区别在于z的父亲的兄弟(或叔叔)的颜色有所不同，')
+        print('情况1:z的叔叔y是红色的')
+        print('情况2:z的叔叔y是黑色的，而且z是右孩子')
+        print('情况3:z的叔叔y是黑色的，而且z是左孩子')
+        print('有趣的是，insert_fixup的整个过程旋转的次数从不超过两次')
+        print('练习13.3-1 红黑树假设插入的结点x是红色的，但是将结点假设为黑色，则红黑树的性质4就不会破坏')
+        print(' 但是不会这么做，原因是会直接改变其父亲结点的黑高度，破坏红黑树的性质5，这样会使红黑树的插入变得非常复杂')
+        print('练习13.3-2 ')
+        print('练习13.3-3 ')
+        print('练习13.3-4 ')
+        print('练习13.3-5 ')
+        print('练习13.3-6 ')
+        # python src/chapter13/chapter13note.py
+        # python3 src/chapter13/chapter13note.py
+
+class Chapter13_4:
+    '''
+    chpater13.4 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter13.4 note
+
+        Example
+        ====
+        ```python
+        Chapter13_4().note()
+        ```
+        '''
+        print('chapter13.4 note as follow')
+        print('13.4 插入')
         # python src/chapter13/chapter13note.py
         # python3 src/chapter13/chapter13note.py
 
 chapter13_1 = Chapter13_1()
 chapter13_2 = Chapter13_2()
 chapter13_3 = Chapter13_3()
+chapter13_4 = Chapter13_4()
 
 def printchapter13note():
     '''
@@ -165,6 +197,7 @@ def printchapter13note():
     chapter13_1.note()
     chapter13_2.note()
     chapter13_3.note()
+    chapter13_4.note()
 
 # python src/chapter13/chapter13note.py
 # python3 src/chapter13/chapter13note.py
