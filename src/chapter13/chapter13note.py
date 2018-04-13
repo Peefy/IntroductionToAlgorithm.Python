@@ -18,6 +18,11 @@ from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
 import numpy as np
 
+if __name__ == '__main__':
+    import redblacktree as rb
+else:
+    from . import redblacktree as rb
+
 class Chapter13_1:
     '''
     chpater13.1 note and function
@@ -153,11 +158,20 @@ class Chapter13_3:
         print('情况2:z的叔叔y是黑色的，而且z是右孩子')
         print('情况3:z的叔叔y是黑色的，而且z是左孩子')
         print('有趣的是，insert_fixup的整个过程旋转的次数从不超过两次')
+        tree = rb.RedBlackTree()
+        tree.insertkey(41)
+        tree.insertkey(38)
+        tree.insertkey(31)
+        tree.insertkey(12)
+        tree.insertkey(19)
+        tree.insertkey(8)
+        tree.insertkey(1)
+        print(tree.inorder_tree_walk(tree.root))
         print('练习13.3-1 红黑树假设插入的结点x是红色的，但是将结点假设为黑色，则红黑树的性质4就不会破坏')
         print(' 但是不会这么做，原因是会直接改变其父亲结点的黑高度，破坏红黑树的性质5，这样会使红黑树的插入变得非常复杂')
         print('练习13.3-2 ')
-        print('练习13.3-3 ')
-        print('练习13.3-4 ')
+        print('练习13.3-3 略')
+        print('练习13.3-4 红黑树性质：RB-INSERT-FIXUP过程永远不会将color[nil[T]]设置为RED')
         print('练习13.3-5 ')
         print('练习13.3-6 ')
         # python src/chapter13/chapter13note.py

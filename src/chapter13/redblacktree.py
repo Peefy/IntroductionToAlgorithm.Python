@@ -1,12 +1,12 @@
 
-RED = 1
 BLACK = 0
+RED = 1
 
 class RedBlackTreeNode:
     '''
     红黑树结点
     '''
-    def __init__(self, key, index, color = RED, \
+    def __init__(self, key, index = None, color = RED, \
         p = None, left = None, right = None):
         '''
         红黑树树结点
@@ -32,8 +32,22 @@ class RedBlackTreeNode:
         self.p = p
 
     def __str__(self):
-        return 'key:' + str(self.key) + ','\
-                'index:' + str(self.index)
+        '''
+        str({'key' : self.key, 
+            'index' : self.index, 
+            'color' : self.color})
+        '''
+        return  str({'key' : self.key, 
+            'index' : self.index, 
+            'color' : self.color})
+
+    def isnil(self):
+        '''
+        判断红黑树结点是否是哨兵结点
+        '''
+        if self.key == None and self.color == BLACK:
+            return True
+        return False
 
 class RedBlackTree:
     '''
@@ -43,18 +57,20 @@ class RedBlackTree:
         '''
         红黑树
         '''
-        self.lastnode : RedBlackTreeNode = None
-        self.root : RedBlackTreeNode = None
         self.nodes = []
-        self.nil = None
+        self.nil = RedBlackTreeNode(None, color=BLACK)
+        self.root = self.nil
 
-    def insertkeyandcolor(self, key, index, color = RED):
+    def insertkey(self, key, index = None, color = RED):
+        '''
+        插入红黑树结点 时间复杂度 `O(lgn)`
+        '''
         z = RedBlackTreeNode(key, index, color)
         self.insert(z)
 
     def insert(self, z : RedBlackTreeNode):
         '''
-        插入红黑树结点 时间复杂度`O(lgn)`
+        插入红黑树结点 时间复杂度 `O(lgn)`
         '''
         y = self.nil
         x = self.root
@@ -75,6 +91,7 @@ class RedBlackTree:
         z.right = self.nil
         z.color = RED
         self.insert_fixup(z)
+        self.nodes.append(z)
 
     def insert_fixup(self, z : RedBlackTreeNode):
         '''
@@ -88,12 +105,13 @@ class RedBlackTree:
                     y.color = BLACK
                     z.p.p.color = RED
                     z = z.p.p
-                elif z == z.p.right:
+                elif y.color == BLACK and z == z.p.right:
                     z = z.p
                     self.leftrotate(z)
-                z.p.color = BLACK
-                z.p.p.color = RED
-                self.rightrotate(z)
+                elif y.color == BLACK and z == z.p.left:
+                    z.p.color = BLACK
+                    z.p.p.color = RED
+                    self.rightrotate(z.p.p)
             else:
                 y = z.p.p.left
                 if y.color == RED:
@@ -101,26 +119,26 @@ class RedBlackTree:
                     y.color = BLACK
                     z.p.p.color = RED
                     z = z.p.p
-                elif z == z.p.right:
+                elif y.color == BLACK and z == z.p.right:
                     z = z.p
                     self.leftrotate(z)
-                z.p.color = BLACK
-                z.p.p.color = RED
-                self.rightrotate(z)               
+                elif y.color == BLACK and z == z.p.left:
+                    z.p.color = BLACK
+                    z.p.p.color = RED
+                    self.rightrotate(z.p.p)               
         self.root.color = BLACK    
         
-    def leftrotate(self, x : SearchTreeNode):
+    def leftrotate(self, x : RedBlackTreeNode):
         '''
-        左旋 时间复杂度:`O(1)`
+        左旋 时间复杂度: `O(1)`
         '''
-        if x.right == None:
-            return
-        y : SearchTreeNode = x.right
-        x.right = y.left
-        if y.left != None:
-            y.left.p = x
+        y : RedBlackTreeNode = x.right
+        z = y.left
+        if y == self.nil:
+            return 
+        y.left.p = x
         y.p = x.p
-        if x.p == None:
+        if x.p == self.nil:
             self.root = y
         elif x == x.p.left:
             x.p.left = y
@@ -128,19 +146,19 @@ class RedBlackTree:
             x.p.right = y
         y.left = x
         x.p = y
+        x.right = z
 
-    def rightrotate(self, x : SearchTreeNode):
+    def rightrotate(self, x : RedBlackTreeNode):
         '''
         右旋 时间复杂度:`O(1)`
         '''
-        if x.left == None:
+        y : RedBlackTreeNode = x.left
+        z = y.right
+        if y == self.nil:
             return
-        y : SearchTreeNode = x.left
-        x.left = y.right
-        if y.right != None:
-            y.right.p = x
+        y.right.p = x
         y.p = x.p
-        if x.p == None:
+        if x.p == self.nil:
             self.root = y
         elif x == x.p.left:
             x.p.left = y
@@ -148,5 +166,25 @@ class RedBlackTree:
             x.p.right = y
         y.right = x
         x.p = y
+        x.left = z
             
+    def all(self):
+        '''
+        返回红黑树中所有的结点
+        '''
+        return self.nodes
+
+    def inorder_tree_walk(self, x : RedBlackTreeNode):
+        '''
+        从红黑树的`x`结点后序遍历
+        '''
+        array = []
+        if x != None:
+            left = self.inorder_tree_walk(x.left)
+            array = array + left
+            right = self.inorder_tree_walk(x.right)  
+        if x != None and x.isnil() == False:
+            array.append(str(x))
+            array = array + right
+        return array
 
