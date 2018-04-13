@@ -4,7 +4,7 @@
 
 ## [Blog](https://peefy.github.io/blog/tags/#python)
 
-## Requirement:
+## Requirement
 
 * *Python3.5+ Sdk*
 * *pip package*
