@@ -1,3 +1,19 @@
+---
+layout: post
+title: "用Python实现的红黑树RedBlackTree"
+description: "用Python实现的红黑树RedBlackTree"
+categories: [Python]
+tags: [python]
+redirect_from:
+  - /2018/04/07/
+---
+
+## 用Python实现的红黑树RedBlackTree
+
+redblacktree.py
+
+```python
+
 
 BLACK = 0
 RED = 1
@@ -200,3 +216,8 @@ if __name__ == '__main__':
     print(tree.inorder_tree_walk(tree.root))
 else:
     pass
+
+```
+
+[Github Code](https://github.com/Peefy/CLRS_dugu_code-master/blob/master/src/chapter13)
+
