@@ -2,9 +2,9 @@
 
 🐎 *CLRS* book study of Peefy. 
 
-[Blog](https://peefy.github.io/blog/tags/#python)
+## [Blog](https://peefy.github.io/blog/tags/#python)
 
-# Requirement:
+## Requirement:
 
 * *Python3.5+ Sdk*
 * *pip package*
@@ -13,7 +13,7 @@
 * *scipy package*
 * *matplotlib package*
 
-# Quick Start
+## Quick Start
 
 ### Step 1
 
@@ -29,7 +29,7 @@
 
 Then enjoy it.
 
-# Tip
+## Tip
 
 If you like it or it may help.Thanks for **Fork** and **Star**!
 

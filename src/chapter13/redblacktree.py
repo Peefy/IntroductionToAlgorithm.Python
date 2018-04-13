@@ -1,4 +1,6 @@
 
+from __future__ import absolute_import, print_function
+
 BLACK = 0
 RED = 1
 
