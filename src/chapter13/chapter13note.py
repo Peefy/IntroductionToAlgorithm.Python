@@ -171,8 +171,10 @@ class Chapter13_3:
         print('练习13.3-2 ', tree.inorder_tree_walk(tree.root))
         print('练习13.3-3 略')
         print('练习13.3-4 红黑树性质：RB-INSERT-FIXUP过程永远不会将color[nil[T]]设置为RED')
-        print('练习13.3-5 ')
-        print('练习13.3-6 ')
+        print('练习13.3-5 考虑用RB-INSERT插入n个结点而成的一棵红黑树。证明：如果n>1,n=2时，则该树至少有一个红结点，',
+            '第一个结点就是父节点一定为黑色结点，第二个插入结点则一定为红结点')
+        print('练习13.3-6 如果红黑树的表示中不提供父指针的话，应当如何有效地实现RB-INSERT')
+        print(' 不会')
         # python src/chapter13/chapter13note.py
         # python3 src/chapter13/chapter13note.py
 
