@@ -1,6 +1,8 @@
 # CLRS_dugu_code-master
 
-🐎 *CLRS* book study of Peefy.
+🐎 *CLRS* book study of Peefy. 
+
+[Blog](https://peefy.github.io/blog/tags/#python)
 
 # Requirement:
 
