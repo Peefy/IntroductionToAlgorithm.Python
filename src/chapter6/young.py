@@ -2,7 +2,7 @@
 
 # python src/chapter6/young.py
 # python3 src/chapter6/young.py
-
+from __future__ import division, absolute_import, print_function
 import math as _math
 
 def array2youngmatrix(A, m, n):

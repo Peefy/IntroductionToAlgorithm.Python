@@ -1,4 +1,4 @@
-
+from __future__ import division, absolute_import, print_function
 if __name__ == '__main__':
     import chapter6_1 as _chapter6_1
     import chapter6_2 as _chapter6_2

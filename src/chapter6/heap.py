@@ -4,7 +4,7 @@
 
 # python src/chapter6/heap.py
 # python3 src/chapter6/heap.py
-
+from __future__ import division, absolute_import, print_function
 import math as _math
 from numpy import arange as _arange
 

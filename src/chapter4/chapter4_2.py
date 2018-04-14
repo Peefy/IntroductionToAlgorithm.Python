@@ -1,7 +1,7 @@
 
 # python src/chapter4/chapter4_2.py
 # python3 src/chapter4/chapter4_2.py
-
+from __future__ import division, absolute_import, print_function
 import sys
 import math
 

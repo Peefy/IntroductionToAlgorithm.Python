@@ -1,7 +1,7 @@
 
 ## python src/chapter2/chapter2.py
 ## python3 src/chapter2/chapter2.py
-
+from __future__ import division, absolute_import, print_function
 import sys
 import numpy as nm
 from numpy import arange

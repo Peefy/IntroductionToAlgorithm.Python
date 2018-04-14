@@ -13,6 +13,9 @@ Class Chapter11_4
 Class Chapter11_5
 
 '''
+
+from __future__ import division, absolute_import, print_function
+
 import sys as _sys
 import math as _math
 import random as _random

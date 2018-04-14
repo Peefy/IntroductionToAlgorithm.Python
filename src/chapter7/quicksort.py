@@ -1,4 +1,6 @@
 
+from __future__ import division, absolute_import, print_function
+
 from copy import deepcopy as _deepcopy
 from random import randint as _randint
 class QuickSort:

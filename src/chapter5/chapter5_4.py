@@ -1,7 +1,7 @@
 
 # python src/chapter5/chapter5_4.py
 # python3 src/chapter5/chapter5_4.py
-
+from __future__ import division, absolute_import, print_function
 import sys as _sys
 import math as _math
 import random as _random

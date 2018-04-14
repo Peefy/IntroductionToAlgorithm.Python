@@ -9,6 +9,9 @@ Class Chapter9_2
 Class Chapter9_3
 
 '''
+
+from __future__ import division, absolute_import, print_function
+
 import sys as _sys
 import math as _math
 import random as _random

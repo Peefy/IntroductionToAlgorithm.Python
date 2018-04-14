@@ -1,3 +1,5 @@
+
+from __future__ import division, absolute_import, print_function
 import json as _json
 from random import randint as _randint
 class Stack:
