@@ -8,6 +8,8 @@ Class Chapter13_2
 
 Class Chapter13_3
 
+Class Chapter13_4
+
 '''
 import sys as _sys
 import math as _math
@@ -222,10 +224,37 @@ class Chapter13_4:
         print('RB-DELETE-FIXUP程序的几种情况')
         print(' 情况1.x的兄弟w是红色的')
         print(' 情况2.x的兄弟w是黑色的，而且w的两个孩子都是黑色的')
-        print(' 情况3.x的兄弟是黑色的，w的左孩子是红色的，右孩子是黑色的')
+        print(' 情况3.x的兄弟w是黑色的，w的左孩子是红色的，右孩子是黑色的')
         print(' 情况4.x的兄弟w是黑色的，而且w的右孩子是红色的')
         print('RB-DELETE的运行时间：含n个结点的红黑树的高度为O(lgn),',
             '不调用RB-DELETE-FIXUP时该程序的总时间代价为O(lgn)')
+        print('在RB-DELETE-FIXUP中，情况1,3和4在各执行一定次数的颜色修改和至多修改三次旋转后便结束')
+        print('情况2是while循环唯一可以重复的情况，其中指针x沿树上升的次数至多为O(lgn)次，且不执行任何旋转')
+        print('所以，过程RB-DELETE-FIXUP要花O(lgn)时间，做至多三次旋转，从而RB-DELETE的总时间为O(lgn)')
+        print('练习13.4-1: 红黑树删除过程性质：在执行RB-DELETE-FIXUP之后，树根总是黑色的')
+        print('练习13.4-2: 在RB-DELETE中，如果x和p[y]都是红色的，则性质4可以通过调用RB-DELETE-FIXUP(T,x)来恢复')
+        print('练习13.4-3: 在练习13.3-2中，将关键字41,38,31,12,19,8连续插入一棵初始为空的树中，从而得到一棵红黑树。')
+        print(' 请给出从该树中连续删除关键字8,12,19,31,38,41后的结果')
+        tree = rb.RedBlackTree()
+        nodekeys = [41, 38, 31, 12, 19, 8]
+        for key in nodekeys:
+            tree.insertkey(key)
+        print(tree.all())
+        nodekeys.reverse()
+        for key in nodekeys:
+            tree.deletekey(key)
+        print(tree.all())
+        tree.insertkey(1)
+        print(tree.all())
+        print('练习13.4-4: 在RB-DELETE-FIXUP的哪些行中，可能会检查或修改哨兵nil[T]?')
+        print('练习13.4-5: ')
+        print('练习13.4-6: x.p在情况1的开头一定是黑色的')
+        print('练习13.4-7: 假设用RB-INSERT来将一个结点x插入一棵红黑树，紧接着又用RB-DELETE将它从树中删除')
+        print(' 结果的红黑树与初始的红黑树是否相同？')
+        print('思考题13-1: ')
+        print('思考题13-2: ')
+        print('思考题13-3: ')
+        print('思考题13-4: ')
         # python src/chapter13/chapter13note.py
         # python3 src/chapter13/chapter13note.py
 
