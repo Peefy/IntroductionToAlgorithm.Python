@@ -2,6 +2,36 @@
 
 *CLRS* book study of Peefy.
 
+算法导论 **Introduction to Algorithms**
+
+* Chapter1 算法在计算中的作用
+
+* Chapter2 算法入门
+
+* Chapter3 函数的增长
+
+* Chapter4 递归式
+
+* Chapter5 概率分析和随机算法
+
+* Chapter6 堆排序
+
+* Chapter7 快速排序
+
+* Chapter8 线性时间排序
+
+* Chapter9 中位数和顺序统计学
+
+* Chapter10 基本数据结构
+
+* Chapter11 散列表
+
+* Chapter12 二叉查找树
+
+* Chapter13 红黑树
+
+* Chapter14 数据结构的扩张
+
 ## Requirement:
 
 * *Python3.5+ Sdk*

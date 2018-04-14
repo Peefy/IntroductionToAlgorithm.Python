@@ -195,7 +195,37 @@ class Chapter13_4:
         ```
         '''
         print('chapter13.4 note as follow')
-        print('13.4 插入')
+        print('13.4 删除')
+        print('和n个结点的红黑树上的其他基本操作一样，对一个结点的删除要花O(lgn)时间。', 
+            '与插入操作相比，删除操作只是稍微复杂些')
+        print('程序RB-DELETE是对TREE-DELETE程序(12.3)略作修改得来的。',
+            '在删除一个结点后，该程序就调用一个辅助程序RB-DELETE-FIXUP,用来改变结点的颜色并作旋转，从而保持红黑树性质')
+        print('过程TREE-DELETE和RB-DELETE之间有三点不同。首先，', 
+            'TREE-DELETE中所有对NIL的引用在RB-DELETE中都被替换成哨兵Nil的引用')
+        print('如果y是红色的，则当y被删除后，红黑性质仍然得以保持，理由如下：')
+        print(' 树中各结点的黑高度都没有变化')
+        print(' 不存在两个相邻的红色结点')
+        print(' 因为如果y是红的，就不可能是根，所以根仍然是黑色的')
+        print('传递给RB-DELETE-FIXUP的结点x是两个结点中的一个：在y被删除之前，如果y有个不是哨兵nil的孩子')
+        print('则x为y的唯一孩子；如果y没有孩子，则x为哨兵nil,在后一种情况中，',
+            '之后的无条件赋值保证了无论x是有关键字的内结点或哨兵nil,x现在的父结点都为先前y的父结点')
+        print('在RB-DELETE中，如果被删除的结点y是黑色的，则会产生三个问题。')
+        print(' 首先，如果y原来是根结点，而y的一个红色的孩子成为了新的根，就会违反性质2')
+        print(' 其次，如果x和y.p都是红的，就会违反性质4')
+        print(' 第三，删除y将导致先前包含y的任何路径上黑结点的个数少1，因此性质5被y的一个祖先破坏')
+        print('  补救这个问题的一个办法就是把结点x视为还有额外的一重黑色。')
+        print('RB-DELETE-FIXUP程序负责恢复性质1,2,4')
+        print('while循环的目标是将额外的黑色沿树上移动,直到')
+        print(' 1.x指向一个红黑结点，此时将x着色为黑色')
+        print(' 2.x指向根，这是可以简单地消除那个额外的黑色，或者')
+        print(' 3.做必要的旋转和颜色修改')
+        print('RB-DELETE-FIXUP程序的几种情况')
+        print(' 情况1.x的兄弟w是红色的')
+        print(' 情况2.x的兄弟w是黑色的，而且w的两个孩子都是黑色的')
+        print(' 情况3.x的兄弟是黑色的，w的左孩子是红色的，右孩子是黑色的')
+        print(' 情况4.x的兄弟w是黑色的，而且w的右孩子是红色的')
+        print('RB-DELETE的运行时间：含n个结点的红黑树的高度为O(lgn),',
+            '不调用RB-DELETE-FIXUP时该程序的总时间代价为O(lgn)')
         # python src/chapter13/chapter13note.py
         # python3 src/chapter13/chapter13note.py
 

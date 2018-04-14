@@ -4,6 +4,8 @@
 
 ## [Blog](https://peefy.github.io/blog/tags/#python)
 
+## [Source Code](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src)
+
 ## Requirement
 
 * *Python3.5+ Sdk*
@@ -26,6 +28,10 @@
 ### Step 3
 
 > python main.py
+
+or 
+
+> python3 main.py
 
 Then enjoy it.
 
