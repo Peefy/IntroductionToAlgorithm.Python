@@ -73,8 +73,9 @@ class Chapter14_1:
             '如何在O(lgn)时间内，确定x在该树的线性序中第i个后继')
         print('练习14.1-6: 在OS-SELECT或OS-RANK中，每次引用结点的size域都',
             '仅是为了计算在以结点为根的子树中该结点的rank')
-        print('练习14.1-7: ')
-        print('练习14.1-8: ')
+        print('练习14.1-7: 说明如何在O(nlgn)的时间内，利用顺序统计树对大小为n的数组中的逆序对')
+        print('练习14.1-8: 现有一个圆上的n条弦，每条弦都是按其端点来定义的。',
+            '请给出一个能在O(nlgn)时间内确定园内相交弦的对数。假设任意两条弦都不会共享端点')      
         # python src/chapter14/chapter14note.py
         # python3 src/chapter14/chapter14note.py
 
@@ -95,7 +96,24 @@ class Chapter14_2:
         ```
         '''
         print('chapter14.2 note as follow')
-
+        print('14.2 如何扩张数据结构')
+        print('对一种数据结构的扩张过程可分为四个步骤')
+        print(' 1.选择基础数据结构')
+        print(' 2.确定要在基础数据结构中添加哪些信息')
+        print(' 3.验证可用基础数据结构上的基本修改操作来维护这些新添加的信息')
+        print(' 4.设计新的操作')
+        print('对红黑树的扩张')
+        print('当红黑树被选作基础数据结构时，可以证明，',
+            '某些类型的附加信息总是可以用插入和删除来进行有效地维护')
+        print('定理14.1(红黑树的扩张) 设域f对含n个结点的红黑树进行扩张的域，',
+            '且某结点x的域f的内容可以仅用结点x,left[x]和right[x]中的信息计算')
+        print(' 包括f[left[x]]和f[right[x]]')
+        print(' 在插入和删除操作中，我们在不影响这两个操作O(lgn)渐进性能的情况下，对T的所有结点的f值进行维护')
+        print('练习14.2-1 ')
+        print('练习14.2-2 ')
+        print('练习14.2-3 ')
+        print('练习14.2-4 ')
+        print('练习14.2-5 ')
         # python src/chapter14/chapter14note.py
         # python3 src/chapter14/chapter14note.py
 
