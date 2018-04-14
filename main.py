@@ -2,6 +2,7 @@
 # python3 main.py
 
 # Jupyter Notebook
+from __future__ import division, absolute_import, print_function
 
 import src
 
