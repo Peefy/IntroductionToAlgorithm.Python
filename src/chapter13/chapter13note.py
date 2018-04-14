@@ -1,6 +1,6 @@
 
-# python src/chapter12/chapter12note.py
-# python3 src/chapter12/chapter12note.py
+# python src/chapter13/chapter13note.py
+# python3 src/chapter13/chapter13note.py
 '''
 Class Chapter13_1
 
@@ -303,7 +303,7 @@ chapter13_4 = Chapter13_4()
 
 def printchapter13note():
     '''
-    print chapter11 note.
+    print chapter13 note.
     '''
     print('Run main : single chapter thirteen!')  
     chapter13_1.note()

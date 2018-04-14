@@ -297,7 +297,7 @@ chapter12_4 = Chapter12_4()
 
 def printchapter12note():
     '''
-    print chapter11 note.
+    print chapter12 note.
     '''
     print('Run main : single chapter twelve!')  
     chapter12_1.note()
