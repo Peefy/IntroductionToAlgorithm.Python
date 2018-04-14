@@ -428,7 +428,7 @@ class RedBlackTree:
   
     def __preorder(self, node : RedBlackTreeNode): 
         if node.isnil() == False:
-            print(str(node), ' ')  
+            print(str(node), end=' ')  
             self.__preorder(node.left) 
             self.__preorder(node.right)  
 
@@ -442,7 +442,7 @@ class RedBlackTree:
         if node.isnil() == False:
             self.__preorder(node.left)       
             self.__preorder(node.right) 
-            print(str(node), ' ') 
+            print(str(node), end=' ') 
 
     def preorder_print(self):
         '''
