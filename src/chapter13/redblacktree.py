@@ -40,6 +40,8 @@ class RedBlackTreeNode:
             'index' : self.index, 
             'color' : self.color})
         '''
+        if self.isnil() == True:
+            return None
         return  str({'key' : self.key, 
             'index' : self.index, 
             'color' : self.color})

@@ -42,6 +42,8 @@ class RedBlackTreeNode:
             'index' : self.index, 
             'color' : self.color})
         '''
+        if self.isnil() == True:
+            return None
         return  str({'key' : self.key, 
             'index' : self.index, 
             'color' : self.color})
@@ -368,8 +370,8 @@ class RedBlackTree:
         y.left = x
         x.p = y
         x.right = z
-        y.size = x.size
-        x.size = x.left.size + x.right.size + 1
+        # y.size = x.size
+        # x.size = x.left.size + x.right.size + 1
 
     def rightrotate(self, x : RedBlackTreeNode):
         '''
@@ -390,8 +392,8 @@ class RedBlackTree:
         y.right = x
         x.p = y
         x.left = z
-        y.size = x.size
-        x.size = x.left.size + x.right.size + 1
+        # y.size = x.size
+        # x.size = x.left.size + x.right.size + 1
             
     def inorder_tree_walk(self, x : RedBlackTreeNode):
         '''
@@ -474,6 +476,79 @@ class RedBlackTree:
         self.__postorder(self.root)
         print('')
 
+    @staticmethod
+    def test():
+        tree = RedBlackTree()
+        tree.insertkey(41)
+        tree.insertkey(38)
+        tree.insertkey(31)
+        tree.insertkey(12)
+        tree.insertkey(19)
+        tree.insertkey(8)
+        tree.insertkey(1)
+        tree.deletekey(12)
+        tree.deletekey(38)
+        tree.preorder_print()
+        tree.postorder_print()
+        tree.inorder_print()
+        print(tree.all())
+        tree.clear()
+        print(tree.all())
+
+class OSTree(RedBlackTree):
+    '''
+    顺序统计树
+    '''
+    def __init__(self):
+        '''
+        顺序统计树
+        '''
+        super().__init__()   
+
+    def leftrotate(self, x : RedBlackTreeNode):
+        '''
+        左旋 时间复杂度: `O(1)`
+        '''
+        y : RedBlackTreeNode = x.right
+        z = y.left
+        if y == self.nil:
+            return 
+        y.left.p = x
+        y.p = x.p
+        if x.p == self.nil:
+            self.root = y
+        elif x == x.p.left:
+            x.p.left = y
+        else:
+            x.p.right = y
+        y.left = x
+        x.p = y
+        x.right = z
+        y.size = x.size
+        x.size = x.left.size + x.right.size + 1
+
+    def rightrotate(self, x : RedBlackTreeNode):
+        '''
+        右旋 时间复杂度:`O(1)`
+        '''
+        y : RedBlackTreeNode = x.left
+        z = y.right
+        if y == self.nil:
+            return
+        y.right.p = x
+        y.p = x.p
+        if x.p == self.nil:
+            self.root = y
+        elif x == x.p.left:
+            x.p.left = y
+        else:
+            x.p.right = y
+        y.right = x
+        x.p = y
+        x.left = z
+        y.size = x.size
+        x.size = x.left.size + x.right.size + 1
+
     def __os_select(self, x : RedBlackTreeNode, i):
         r = x.left.size + 1
         if i == r:
@@ -524,32 +599,102 @@ class RedBlackTree:
         node = self.tree_search(self.root, key)
         return self.os_rank(node)
 
+class IntervalTreeNode(RedBlackTreeNode):
+    '''
+    区间树结点
+    '''
+    def __init__(self, key, interval : tuple):
+        '''
+        区间树结点
+
+        `key` : 键值
+
+        `interval` : 区间值 a tuple like (`min`, `max`), and `min` <= `max`
+
+        '''
+        self.__para_interval_err = 'para interval must be a tuple like ' + \
+            'contains two elements, min <= max'
+        try:
+            assert type(interval) is tuple
+            assert len(interval) == 2 
+            self.low, self.high = interval
+            assert self.low <= self.high 
+        except:
+            raise Exception(self.__para_interval_err)           
+        super().__init__(key)      
+        self.interval = interval 
+        self.max = None
+
+class IntervalTree(RedBlackTree):
+    '''
+    区间树
+    '''
+    def __init__(self):
+        '''
+        区间树
+        '''
+        super().__init__()
+        
+    def buildnil(self):
+        '''
+        构造一个新的哨兵nil结点
+        '''
+        nil = IntervalTreeNode(None, (0, 0))
+        nil.color = BLACK
+        nil.size = 0
+        return nil
+
+    def __int_overlap(self, int : tuple, i):
+        low, high = int
+        if i >= low and i <= high:
+            return True
+        return False
+
+    def interval_insert(self, x : IntervalTreeNode):
+        '''
+        将包含区间域`int`的元素`x`插入到区间树T中
+        '''
+        pass
+
+    def interval_delete(self, x : IntervalTreeNode):
+        '''
+        从区间树中删除元素`x`
+        '''
+        pass
+
+    def interval_search(self, interval):
+        '''
+        返回一个指向区间树T中的元素`x`的指针，使int[x]与i重叠，
+        若集合中无此元素存在，则返回`self.nil`
+        '''
+        x = self.root
+        while x.isnil() == False and self.__int_overlap(x.interval, i) == False:
+            if x.left.isnil() == False and x.left.max >= i.
+
+    def insertkey(self, key, interval, index = None, color = RED):
+        '''
+        插入红黑树结点 时间复杂度 `O(lgn)`
+        '''
+        z = IntervalTreeNode(key, interval)
+        super().insert(z)
+
     @staticmethod
     def test():
-        tree = RedBlackTree()
-        tree.insertkey(41)
-        tree.insertkey(38)
-        tree.insertkey(31)
-        tree.insertkey(12)
-        tree.insertkey(19)
-        tree.insertkey(8)
-        tree.insertkey(1)
-        tree.deletekey(12)
-        tree.deletekey(38)
-        tree.preorder_print()
-        tree.postorder_print()
-        tree.inorder_print()
-        print(tree.all())
-        tree.clear()
+        '''
+        test
+        '''
+        tree = IntervalTree()
+        tree.insertkey(1, (0, 1))
+        tree.insertkey(2, (1, 2))
+        tree.insertkey(3, (2, 3))
+        node = IntervalTreeNode(1, (1, 2))
         print(tree.all())
 
-if __name__ == '__main__':
-    
+if __name__ == '__main__': 
     RedBlackTree.test()
-
+    IntervalTree.test()
     # python src/chapter14/rbtree.py
     # python3 src/chapter14/rbtree.py
-
 else:
     pass
 

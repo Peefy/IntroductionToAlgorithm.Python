@@ -109,11 +109,14 @@ class Chapter14_2:
             '且某结点x的域f的内容可以仅用结点x,left[x]和right[x]中的信息计算')
         print(' 包括f[left[x]]和f[right[x]]')
         print(' 在插入和删除操作中，我们在不影响这两个操作O(lgn)渐进性能的情况下，对T的所有结点的f值进行维护')
-        print('练习14.2-1 ')
-        print('练习14.2-2 ')
-        print('练习14.2-3 ')
-        print('练习14.2-4 ')
-        print('练习14.2-5 ')
+        print('练习14.2-1 通过为结点增加指针的形式可以在扩张的顺序统计树上，以最坏情况O(1)的时间来支持')
+        print(' 动态集合查询操作MINIMUM,MAXIMUM,SUCCESSOR,PREDECESSOR,且顺序统计树上的其他操作的渐进性能不受影响')
+        print('练习14.2-2 可以为结点增加黑高度域，且不影响红黑树操作性能')
+        print('练习14.2-3 可以将红黑树中结点的深度作为一个域来进行有效的维护')
+        print('练习14.2-4 假设在红黑树每个结点x中增加一个域f，按中序排列所有结点。证明在一次旋转后')
+        print(' 可以在O(1)时间里对f域作出合适的修改。对扩张稍作修改，证明顺序统计树size域的每次旋转的维护时间为O(1)')
+        print('练习14.2-5 希望通过增加操作RB-ENUMERATE(x,a,b)来扩张红黑树。该操作输出所有的关键字k')
+        print(' 在Θ(m+lgn)时间里实现RB-ENUMERATE，其中m为输出的关键字数，n为树中内部结点(不需要向红黑树中增加新的域)')
         # python src/chapter14/chapter14note.py
         # python3 src/chapter14/chapter14note.py
 
@@ -134,7 +137,24 @@ class Chapter14_3:
         ```
         '''
         print('chapter14.3 note as follow')
-
+        print('14.3 区间树')
+        print('定义一个闭区间是一个有序对[t1,t2]。开区间和半开区间分别略去了集合的两个或一个端点')
+        print('区间可以很方便地表示各占用一段连续时间的一些事件')
+        print('区间树是一种对动态集合进行维护的红黑树，该集合中的每个元素x都包含一个区间int[x]')
+        print('区间树以及区间树上各种操作的设计')
+        print(' 1.基础数据结构：红黑树；其中，每个结点x包含一个区间域int[x],x的关键字为区间的低端点low[int[x]]')
+        print(' 2.附加信息：每个结点中除了区间信息外，还包含一个值max[x],即以x为根的子树中所有区间的端点的最大值')
+        print(' 3.对信息的维护:必须验证对含n个结点的区间树的插入和删除能在O(lgn)时间内完成')
+        print('  给定区间int[x]和x的子结点的max值，可以确定max[x]')
+        print('     max[x]=max(x.high, x.left.max, x.right.max)')
+        print('  这样根据定理14.1可知，插入和删除操作的运行时间O(lgn)。在一次旋转后，更新max域只需O(1)时间')
+        print(' 4.设计新的操作:唯一需要的新操作是INTERVAL-SEARCH(T, i)')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter14/chapter14note.py
         # python3 src/chapter14/chapter14note.py
 
@@ -155,7 +175,7 @@ class Chapter14_4:
         ```
         '''
         print('chapter14.4 note as follow')
-
+        print('')
         # python src/chapter14/chapter14note.py
         # python3 src/chapter14/chapter14note.py
 
