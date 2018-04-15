@@ -496,10 +496,27 @@ class RedBlackTree:
         print(tree.all())
 
 class OSTreeNode(RedBlackTreeNode):
+    '''
+    顺序统计树结点
+    '''
     def __init__(self, key):
+        '''
+        `key` : 键值
+        '''
         super().__init__(key)
 
     def __str__(self):
+        '''
+        str(OSTreeNode())
+
+        {
+            'key' : self.key, 
+            'index' : self.index, 
+            'color' : self.color,
+            'size' : self.size
+        }
+
+        '''
         if self.isnil() == True:
             return None
         return  str({'key' : self.key, 
@@ -640,6 +657,9 @@ class OSTree(RedBlackTree):
 
     @staticmethod
     def test():
+        '''
+        测试函数
+        '''
         tree = OSTree()
         tree.insertkey(12)
         tree.insertkey(13)
@@ -658,7 +678,9 @@ class OSTree(RedBlackTree):
         print(tree.os_select(6))
         print(tree.os_key_rank(8))
         print(tree.os_key_rank(12))
-        print('')
+
+__para_interval_err = 'para interval must be a tuple like ' + \
+            'contains two elements, min <= max'
 
 class IntervalTreeNode(RedBlackTreeNode):
     '''
@@ -673,18 +695,17 @@ class IntervalTreeNode(RedBlackTreeNode):
         `interval` : 区间值 a tuple like (`min`, `max`), and `min` <= `max`
 
         '''
-        self.__para_interval_err = 'para interval must be a tuple like ' + \
-            'contains two elements, min <= max'
+
         try:
             assert type(interval) is tuple
             assert len(interval) == 2 
             self.low, self.high = interval
             assert self.low <= self.high 
         except:
-            raise Exception(self.__para_interval_err)           
+            raise Exception(__para_interval_err)           
         super().__init__(key)      
         self.interval = interval 
-        self.max = None
+        self.max = 0
 
 class IntervalTree(RedBlackTree):
     '''
@@ -697,6 +718,8 @@ class IntervalTree(RedBlackTree):
         super().__init__()
         
     def __updatemax(self, x : IntervalTreeNode):
+        if x == None:
+            return 0
         x.max = max(x.high, self.__updatemax(x.left), \
             self.__updatemax(x.right))
         return x.max
@@ -762,9 +785,15 @@ class IntervalTree(RedBlackTree):
         test
         '''
         tree = IntervalTree()
-        tree.insertkey(1, (0, 1))
-        tree.insertkey(2, (1, 2))
-        tree.insertkey(3, (2, 3))
+        tree.insertkey(11, (0, 1))
+        tree.insertkey(23, (1, 2))
+        tree.insertkey(13, (2, 3))
+        tree.insertkey(41, (0, 1))
+        tree.insertkey(22, (1, 2))
+        tree.insertkey(53, (2, 3))
+        tree.insertkey(18, (0, 1))
+        tree.insertkey(22, (1, 2))
+        tree.insertkey(32, (2, 3))
         node = IntervalTreeNode(1, (1, 2))
         print(tree.all())
 
