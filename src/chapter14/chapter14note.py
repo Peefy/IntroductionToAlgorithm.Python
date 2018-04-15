@@ -149,8 +149,9 @@ class Chapter14_3:
         print('     max[x]=max(x.high, x.left.max, x.right.max)')
         print('  这样根据定理14.1可知，插入和删除操作的运行时间O(lgn)。在一次旋转后，更新max域只需O(1)时间')
         print(' 4.设计新的操作:唯一需要的新操作是INTERVAL-SEARCH(T, i)')
-        print('')
-        print('')
+        print('定理14.2 INTERVAL-SEARCH(T, i)的任意一次执行都将或者返回一个其区间覆盖了i的结点，',
+            '或者返回nil[T],此时树T中没有哪一个结点的区间覆盖了i')
+        print('练习14.3-1 写出作用于区间树的结点，并于O(1)时间内更新max域的LEFT-ROTATE的')
         print('')
         print('')
         print('')

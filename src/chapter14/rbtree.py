@@ -370,8 +370,8 @@ class RedBlackTree:
         y.left = x
         x.p = y
         x.right = z
-        # y.size = x.size
-        # x.size = x.left.size + x.right.size + 1
+        y.size = x.size
+        x.size = x.left.size + x.right.size + 1
 
     def rightrotate(self, x : RedBlackTreeNode):
         '''
@@ -392,8 +392,8 @@ class RedBlackTree:
         y.right = x
         x.p = y
         x.left = z
-        # y.size = x.size
-        # x.size = x.left.size + x.right.size + 1
+        y.size = x.size
+        x.size = x.left.size + x.right.size + 1
             
     def inorder_tree_walk(self, x : RedBlackTreeNode):
         '''
@@ -495,6 +495,18 @@ class RedBlackTree:
         tree.clear()
         print(tree.all())
 
+class OSTreeNode(RedBlackTreeNode):
+    def __init__(self, key):
+        super().__init__(key)
+
+    def __str__(self):
+        if self.isnil() == True:
+            return None
+        return  str({'key' : self.key, 
+            'index' : self.index, 
+            'color' : self.color,
+            'size' : self.size})
+
 class OSTree(RedBlackTree):
     '''
     顺序统计树
@@ -504,6 +516,20 @@ class OSTree(RedBlackTree):
         顺序统计树
         '''
         super().__init__()   
+
+    def insert(self, z : OSTreeNode):
+        '''
+        插入顺序统计树结点
+        '''
+        super().insert(z)
+        self.updatesize()
+
+    def insertkey(self, key):
+        '''
+        插入顺序统计树结点
+        '''
+        node = OSTreeNode(key)
+        self.insert(node)
 
     def leftrotate(self, x : RedBlackTreeNode):
         '''
@@ -562,6 +588,7 @@ class OSTree(RedBlackTree):
         '''
         返回树中包含第`i`小关键字的结点的指针(递归)
         '''
+        assert i >= 1 
         return self.__os_select(self.root, i)
 
     def os_select_nonrecursive(self, i):
@@ -582,7 +609,7 @@ class OSTree(RedBlackTree):
 
     def os_rank(self, x : RedBlackTreeNode):
         '''
-        对红黑树T进行中序遍历后得到的线性序中`x`的位置
+        对顺序统计树T进行中序遍历后得到的线性序中`x`的位置
         '''
         r = x.left.size + 1
         y = x
@@ -594,10 +621,44 @@ class OSTree(RedBlackTree):
 
     def os_key_rank(self, key):
         '''
-        对红黑树T进行中序遍历后得到的线性序中键值为`key`结点的位置
+        对顺序统计树T进行中序遍历后得到的线性序中键值为`key`结点的位置
         '''
         node = self.tree_search(self.root, key)
         return self.os_rank(node)
+
+    def __updatesize(self, x : RedBlackTreeNode):
+        if x.isnil() == True:
+            return 0
+        x.size = self.__updatesize(x.left) + self.__updatesize(x.right) + 1
+        return x.size
+
+    def updatesize(self):
+        '''
+        更新红黑树的所有结点的size域
+        '''
+        self.__updatesize(self.root)
+
+    @staticmethod
+    def test():
+        tree = OSTree()
+        tree.insertkey(12)
+        tree.insertkey(13)
+        tree.insertkey(5)
+        tree.insertkey(8)
+        tree.insertkey(16)
+        tree.insertkey(3)
+        tree.insertkey(1)    
+        tree.insertkey(2)
+        print(tree.all())
+        print(tree.os_select(1))
+        print(tree.os_select(2))
+        print(tree.os_select(3))
+        print(tree.os_select(4))
+        print(tree.os_select(5))
+        print(tree.os_select(6))
+        print(tree.os_key_rank(8))
+        print(tree.os_key_rank(12))
+        print('')
 
 class IntervalTreeNode(RedBlackTreeNode):
     '''
@@ -635,6 +696,17 @@ class IntervalTree(RedBlackTree):
         '''
         super().__init__()
         
+    def __updatemax(self, x : IntervalTreeNode):
+        x.max = max(x.high, self.__updatemax(x.left), \
+            self.__updatemax(x.right))
+        return x.max
+    
+    def updatemax(self):
+        '''
+        更新区间树的`max`域
+        '''
+        self.__updatemax(self.root)
+
     def buildnil(self):
         '''
         构造一个新的哨兵nil结点
@@ -650,17 +722,19 @@ class IntervalTree(RedBlackTree):
             return True
         return False
 
-    def interval_insert(self, x : IntervalTreeNode):
+    def insert(self, x : IntervalTreeNode):
         '''
         将包含区间域`int`的元素`x`插入到区间树T中
         '''
-        pass
+        super().insert(x)
+        self.updatemax()
 
-    def interval_delete(self, x : IntervalTreeNode):
+    def delete(self, x : IntervalTreeNode):
         '''
         从区间树中删除元素`x`
         '''
-        pass
+        super().delete(x)
+        self.updatemax()
 
     def interval_search(self, interval):
         '''
@@ -669,14 +743,18 @@ class IntervalTree(RedBlackTree):
         '''
         x = self.root
         while x.isnil() == False and self.__int_overlap(x.interval, i) == False:
-            if x.left.isnil() == False and x.left.max >= i.
+            if x.left.isnil() == False and x.left.max >= i.low:
+                x = x.left
+            else:
+                x = x.right
+        return x
 
     def insertkey(self, key, interval, index = None, color = RED):
         '''
         插入红黑树结点 时间复杂度 `O(lgn)`
         '''
         z = IntervalTreeNode(key, interval)
-        super().insert(z)
+        self.insert(z)
 
     @staticmethod
     def test():
@@ -692,6 +770,7 @@ class IntervalTree(RedBlackTree):
 
 if __name__ == '__main__': 
     RedBlackTree.test()
+    OSTree.test()
     IntervalTree.test()
     # python src/chapter14/rbtree.py
     # python3 src/chapter14/rbtree.py
