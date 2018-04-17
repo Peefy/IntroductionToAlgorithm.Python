@@ -706,6 +706,20 @@ class IntervalTreeNode(RedBlackTreeNode):
         super().__init__(key)      
         self.interval = interval 
         self.max = 0
+    
+    def __str__(self):
+        '''
+        {'key' : self.key, 
+            'index' : self.index, 
+            'color' : self.color,
+            'interval' : self.interval }
+        '''
+        if self.isnil() == True:
+            return 'None'
+        return  str({'key' : self.key, 
+            'index' : self.index, 
+            'color' : self.color,
+            'interval' : self.interval })
 
 class IntervalTree(RedBlackTree):
     '''
@@ -741,6 +755,7 @@ class IntervalTree(RedBlackTree):
 
     def __int_overlap(self, int : tuple, i):
         low, high = int
+        i = (i[0] + i[1]) / 2.0
         if i >= low and i <= high:
             return True
         return False
@@ -765,8 +780,8 @@ class IntervalTree(RedBlackTree):
         若集合中无此元素存在，则返回`self.nil`
         '''
         x = self.root
-        while x.isnil() == False and self.__int_overlap(x.interval, i) == False:
-            if x.left.isnil() == False and x.left.max >= i.low:
+        while x.isnil() == False and self.__int_overlap(x.interval, interval) == False:
+            if x.left.isnil() == False and x.left.max >= interval[0]:
                 x = x.left
             else:
                 x = x.right
@@ -785,16 +800,17 @@ class IntervalTree(RedBlackTree):
         test
         '''
         tree = IntervalTree()
-        tree.insertkey(11, (0, 1))
-        tree.insertkey(23, (1, 2))
-        tree.insertkey(13, (2, 3))
-        tree.insertkey(41, (0, 1))
-        tree.insertkey(22, (1, 2))
-        tree.insertkey(53, (2, 3))
-        tree.insertkey(18, (0, 1))
-        tree.insertkey(22, (1, 2))
-        tree.insertkey(32, (2, 3))
-        node = IntervalTreeNode(1, (1, 2))
+        tree.insertkey(11, (0, 11))
+        tree.insertkey(23, (11, 23))
+        tree.insertkey(13, (12, 13))
+        tree.insertkey(41, (40, 41))
+        tree.insertkey(22, (11, 22))
+        tree.insertkey(53, (42, 53))
+        tree.insertkey(18, (10, 18))
+        tree.insertkey(32, (22, 32))
+        node = IntervalTreeNode(2, (1, 2))
+        print(tree.interval_search((20, 25)))
+        print(tree.interval_search((28, 33)))
         print(tree.all())
 
 if __name__ == '__main__': 
