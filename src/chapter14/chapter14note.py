@@ -8,8 +8,6 @@ Class Chapter14_2
 
 Class Chapter14_3
 
-Class Chapter14_4
-
 '''
 
 from __future__ import division, absolute_import, print_function
@@ -151,39 +149,37 @@ class Chapter14_3:
         print(' 4.设计新的操作:唯一需要的新操作是INTERVAL-SEARCH(T, i)')
         print('定理14.2 INTERVAL-SEARCH(T, i)的任意一次执行都将或者返回一个其区间覆盖了i的结点，',
             '或者返回nil[T],此时树T中没有哪一个结点的区间覆盖了i')
-        print('练习14.3-1 写出作用于区间树的结点，并于O(1)时间内更新max域的LEFT-ROTATE的')
-        print('')
-        print('')
-        print('')
-        print('')
-        # python src/chapter14/chapter14note.py
-        # python3 src/chapter14/chapter14note.py
-
-class Chapter14_4:
-    '''
-    chpater14.4 note and function
-    '''
-    def note(self):
-        '''
-        Summary
-        ====
-        Print chapter14.4 note
-
-        Example
-        ====
-        ```python
-        Chapter14_4().note()
-        ```
-        '''
-        print('chapter14.4 note as follow')
-        print('')
+        print('练习14.3-1 写出作用于区间树的结点，并于O(1)时间内更新max域的LEFT-ROTATE的伪代码：完成')
+        print('练习14.3-2 重写INTERVAL-SEAECH代码，使得当所有的区间都是开区间时，它也能正确的工作')
+        print('练习14.3-3 请给出一个有效的算法，使对给定的区间i，它返回一个与i重叠的、',
+            '具有最小低端点的区间；或者，当这样的区间不存在时返回nil[T]')
+        print('练习14.3-4 给定一个区间树T和一个区间i，请描述如何能在O(min(n, klgn))时间内，',
+            '列出T中所有与i重叠的区间，此处k为输出区间数。(可选：找出一种不修改树的方法)')
+        print('练习14.3-5 请说明如何对有关区间树的的过程作哪些修改，才能支持操作INTERVAL-SEARCH-EXACTLY(T, i)',
+            '它返回一个指向区间树T中结点x的指针，使low[int[x]]=low[i],high[int[x]]=high[i]',
+            '或当T不包含这样的结点时返回nil[T],所有操作对于n结点树的运行时间应该为O(lgn)')
+        print('练习14.3-6 请说明如何来维护一个支持操作MIN-GAP的动态数集Q，使该操作能给出Q中最近的两个数之间的差幅值',
+            '例如Q={1,5,9,15,18,22}，则MIN-GAP(Q)返回18-15=3，因为15和18为Q最近的两数',
+            '使操作INSERT,DELETE,SEARCH和MIN-GAP尽可能高效，并分析它们的运行时间')
+        print('练习14.3-7 VLSI数据库通常将一块集成电路表示成一组矩形，因而矩形的表示中有最小和最大的x和y坐标')
+        print(' 请给出一个能在O(lgn)时间里确定一组矩形中是否有两个重叠的算法(提示：将一条线移过所有的矩形)')
+        print('思考题14-1 最大重叠点')
+        print(' 假设希望对一组区间记录一个最大重叠点，亦即覆盖它的区间最多的那个点')
+        print(' 1.证明：最大重叠点总存在于某段的端点上')
+        print(' 2.设计一组数据结构，能有效的支持操作INTERVAL-INSERT,INTERVAL-DELETE和返回最大重叠点操作FIND-POM')
+        print(' 提示：将所有端点组织成红黑树。左端点关联+1值，右端点关联-1值，附加一些维护最大重叠点信息以扩张树中结点')
+        print('思考题14-2 Josephus排列')
+        print(' Josephus问题的定义如下：假设n个人排成环形，且有一正整数m<=n。')
+        print(' 从某个指定的人开始，沿环报数，每遇到第m个人就让其出列，且报数进行下去。这个过程一直进行到所有人都出列为止')
+        print(' 每个人出列的次序定义了整数1,2,...,n的(n,m)-Josephus排列。例如(7,3)-Josephus排列为<3,6,2,7,5,1,4>')
+        print(' 1.假设m为常数。请描述一个O(n)的算法，使之对给定的整数n，输出(n,m)-Josephus排列')
+        print(' 2.假设m不是个常数，请描述一个O(nlgn)时间的算法，使给定的整数n和m，输出(n,m)-Josephus排列')
         # python src/chapter14/chapter14note.py
         # python3 src/chapter14/chapter14note.py
 
 chapter14_1 = Chapter14_1()
 chapter14_2 = Chapter14_2()
 chapter14_3 = Chapter14_3()
-chapter14_4 = Chapter14_4()
 
 def printchapter14note():
     '''
@@ -193,7 +189,6 @@ def printchapter14note():
     chapter14_1.note()
     chapter14_2.note()
     chapter14_3.note()
-    chapter14_4.note()
 
 # python src/chapter14/chapter14note.py
 # python3 src/chapter14/chapter14note.py
