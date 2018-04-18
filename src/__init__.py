@@ -13,7 +13,9 @@ __all__ = ['Chapter1', 'Chapter2', 'Chapter2_3',
            'printchapter10note',
            'printchapter11note',
            'printchapter12note',
-           'printchapter13note']
+           'printchapter13note',
+           'printchapter14note',
+           'printchapter15note',]
 
 from .chapter1.chapter1_1 import Chapter1
 
