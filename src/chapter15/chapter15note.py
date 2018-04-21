@@ -19,12 +19,109 @@ import time as _time
 from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
+from numpy import array as _array
 import numpy as np
 
 class Chapter15_1:
     '''
     chpater15.1 note and function
     '''
+    index1 = 0
+    index2 = 1
+    f = [[], []]
+    l = [[], []]
+    def fastway(self, a, t, e, x, n):
+        '''
+        计算最快时间 Θ(n)
+
+        Args
+        ===
+        `a` : `a[i][j]` 表示在第`i`条装配线`j`装配站的装配时间
+
+        `t` : `t[i][j]` 表示在第`i`条装配线`j`装配站移动到另外一条装配线所需要的时间
+
+        `e` : `e[i]` 表示汽车底盘进入工厂装配线`i`所需要的时间
+
+        `x` : `x[i]` 表示完成的汽车花费离开装配线所需要的时间
+
+        `n` : 每条装配线所具有的装配站数量
+
+        Return
+        ===
+        `(fxin, lxin)` : a tuple like
+
+        Example
+        ===
+        ```python
+        a = [[7,9,3,4,8,4],[8,5,6,4,5,7]]
+        t = [[2,3,1,3,4],[2,1,2,2,1]]
+        e = [2, 4]
+        x = [3, 2]
+        n = 6
+        self.fastway(a, t, e, x, n)
+        >>> (38, 0)
+        ```
+
+        '''
+        # 定义最优解变量
+        ## 路径最优解
+        lxin = 0
+        ## 时间最优解
+        fxin = 0
+        # 定义两条装配线
+        index1 = self.index1
+        index2 = self.index2
+        # 子问题存储空间
+        f = self.f
+        l = self.l
+        # 开辟空间存储动态规划子问题的解
+        f[index1] = list(range(n))
+        f[index2] = list(range(n))
+        l[index1] = list(range(n))
+        l[index2] = list(range(n))
+        # 上装配线
+        f[index1][0] = e[index1] + a[index1][0]
+        f[index2][0] = e[index2] + a[index2][0]
+        # 求解子问题
+        for j in range(1, n):
+            # 求解装配线1的子问题,因为求解最短时间，谁小赋值谁
+            if f[index1][j - 1] + a[index1][j] <= f[index2][j - 1] + t[index2][j - 1] + a[index1][j]:
+                f[index1][j] = f[index1][j - 1] + a[index1][j]
+                l[index1][j] = index1
+            else:
+                f[index1][j] = f[index2][j - 1] + t[index2][j - 1] + a[index1][j]
+                l[index1][j] = index2
+            # 求解装配线1的子问题,因为求解最短时间，谁小赋值谁
+            if f[index2][j - 1] + a[index2][j] <= f[index1][j - 1] + t[index1][j - 1] + a[index2][j]:
+                f[index2][j] = f[index2][j - 1] + a[index2][j]
+                l[index2][j] = index2
+            else:
+                f[index2][j] = f[index1][j - 1] + t[index1][j - 1] + a[index2][j]
+                l[index2][j] = index1
+        n = n - 1
+        # 求解离开装配线时的解即为总问题的求解，因为子问题已经全部求解
+        if f[index1][n] + x[index1] <= f[index2][n] + x[index2]:
+            fxin = f[index1][n] + x[index1]
+            lxin = index1
+        else:
+            fxin = f[index2][n] + x[index2]
+            lxin = index2
+        # 返回最优解
+        return (fxin, lxin)
+
+    def printstations(self, l, lxin, n):
+        '''
+        打印通过的路线
+        '''
+        index1 = self.index1
+        index2 = self.index2
+        i = lxin - 1
+        print('line', i + 1, 'station', n)
+        for j in range(2, n + 1):
+            m = n - j + 2 - 1
+            i = l[i][m]
+            print('line', i + 1, 'station', m)
+
     def note(self):
         '''
         Summary
@@ -42,6 +139,7 @@ class Chapter15_1:
         print('这一部分将介绍设计和分析高效算法的三种重要技术：动态规划(第15章)，贪心算法(第16章)和平摊分析(第17章)')
         print('本书前面三部分介绍了一些可以普遍应用的技术，如分治法、随机化和递归求解')
         print('这一部分的新技术要更复杂一些，但它们对有效地解决很多计算问题来说很有用')
+        # !动态规划适用于问题可以分解为若干子问题,关键技术是存储这些子问题每一个解，以备它重复出现
         print('动态规划通常应用于最优化问题，即要做出一组选择以达到一个最优解。',
             '在做选择的同时，经常出现同样形式的子问题。当某一特定的子问题可能出自于多于一种选择的集合时，动态规划非常有效')
         print(' 关键技术是存储这些子问题每一个解，以备它重复出现。第15章说明如何利用这种简单思想，将指数时间的算法转化为多项式时间的算法')
@@ -79,16 +177,51 @@ class Chapter15_1:
             '很容易计算出一个底盘通过工厂装配线要花的时间')
         print('不幸地是，选择装配站的可能方式有2^n种；可以把装配线1内使用的装配站集合看作{1,2,..,n}的一个子集')
         print('因此，要通过穷举所有可能的方式、然后计算每种方式花费的时间来确定最快通过工厂的路线，需要Ω(2^n)时间，这在n很大时是不行的')
-        print('步骤1.通过工厂最快路线的结构')
+        print('步骤1.通过工厂最快路线的结构,子问题最优结果结果的存储空间')
         print(' 动态规划方法的第一个步骤是描述最优解的结构的特征。对于装配线调度问题，可以如下执行。')
         print(' 首先，假设通过装配站S1,j的最快路线通过了装配站S1,j-1。关键的一点是这个底盘必定是利用了最快的路线从开始点到装配站S1,j-1的')
         print(' 更一般地，对于装配线调度问题，一个问题的最优解包含了子问题的一个最优解。')
         print(' 我们称这个性质为最优子结构，这是是否可以应用动态规划方法的标志之一')
         print(' 为了寻找通过任一条装配线上的装配站j的最快路线，我们解决它的子问题，即寻找通过两条装配线上的装配站j-1的最快路线')
         print(' 所以，对于装配线调度问题，通过建立子问题的最优解，就可以建立原问题某个实例的一个最优解')
-        print('步骤2.一个递归的解')
-        print('步骤3.计算最快时间')
-        print('步骤4.构造通过工厂的最快路线')
+        print('步骤2.一个递归的解，总时间最快就是子问题最快')
+        print(' 在动态规划方法中，第二个步骤是利用子问题的最优解来递归定义一个最优解的值。')
+        print(' 对于装配线的调度问题，选择在两条装配线上通过装配站j的最快路线的问题来作为子问题')
+        print(' j=1,2,...,n。令fi[j]表示一个底盘从起点到装配站Sij的最快可能时间')
+        print(' 最终目标是确定底盘通过工厂的所有路线的最快时间，记为f')
+        print(' 底盘必须一路径由装配线1或2通过装配站n，然后到达工厂的出口，由于这些路线的较快者就是通过整个工厂的最快路线')
+        print(' f=min(f1[n]+x1,f2[n]+x2)')
+        print(' 要对f1[1]和f2[1]进行推理也是容易的。不管在哪一条装配线上通过装配站1，底盘都是直接到达该装配站的')
+        print('步骤3.计算最快时间fxin')
+        print(' 此时写出一个递归算法来计算通过工厂的最快路线是一件简单的事情，这种递归算法有一个问题：它的执行时间是关于n的指数形式')
+        # !装配站所需时间
+        a = [[7, 9, 3, 4, 8, 4],\
+             [8, 5, 6, 4, 5, 7]]
+        # !装配站切换到另一条线花费的时间
+        t = [[2, 3, 1, 3, 4],\
+             [2, 1, 2, 2, 1]]
+        # !进入装配线所需时间
+        e = [2, 4]
+        # !离开装配线所需时间
+        x = [3, 2]
+        # !每条装配线装配站的数量
+        n = 6
+        result = self.fastway(a, t, e, x, n)
+        fxin = result[0]
+        lxin = result[1] + 1
+        print('fxin:', fxin, ' lxin:', lxin, 'l[lxin]:', _array(self.l)[lxin - 1] + 1)
+        self.printstations(self.l, lxin, n)
+        print('存储的子问题的解为：')
+        print('f:')
+        print(_array(self.f))
+        print('l:')
+        print(_array(self.l) + 1)
+        print('步骤4.构造通过工厂的最快路线lxin')
+        print('练习15.1-1 ')
+        print('练习15.1-2 ')
+        print('练习15.1-3 ')
+        print('练习15.1-4 ')
+        print('练习15.1-5 ')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
