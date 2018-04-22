@@ -242,6 +242,27 @@ class Chapter15_2:
         ```
         '''
         print('chapter15.2 note as follow')   
+        print('15.2 矩阵链乘法')
+        print('为了计算矩阵链乘法，可将两个矩阵相乘的标准算法作为一个子程序Θ(n^3)，矩阵乘法满足结合律')
+        print('矩阵链乘法加括号的顺序对求积运算的代价有很大的影响。')
+        print('矩阵乘法当且仅当两个矩阵相容(A的列数等于B的行数)，才可以进行相乘运算')
+        print('C(p,r) = A(p,q) * B(q,r)')
+        print('注意在矩阵链乘法当中，实际上并没有把矩阵相乘，目的仅是确定一个具有最下代价的相乘顺序')
+        print('确定最优顺序花费的时间能在矩阵乘法上得到更好的回报')
+        print('计算全部括号的重数')
+        print('设P(n)表示一串n个矩阵可能的加全部括号的方案数')
+        print('用动态规划求解矩阵链乘法顺序，使用穷举的方式不是很好的一个方式，随着矩阵数量n的增长，')
+        print('P(n)的一个类似递归解的Catalan数序列，其增长的形式是Ω(4^n/n^(3/2))')
+        print('P(n)递归式的一个解为Ω(2^n),所以解的个是指数形式，穷尽策略不是一个好的形式')
+        print('步骤1.最优加全部括号的结构')
+        print(' 动态规划方法的第一步是寻找最优的子结构')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
