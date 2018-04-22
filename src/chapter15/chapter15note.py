@@ -111,7 +111,7 @@ class Chapter15_1:
 
     def printstations(self, l, lxin, n):
         '''
-        打印通过的路线
+        打印最优通过的路线
         '''
         index1 = self.index1
         index2 = self.index2
@@ -121,6 +121,22 @@ class Chapter15_1:
             m = n - j + 2 - 1
             i = l[i][m]
             print('line', i + 1, 'station', m)
+
+    def __printstations_ascending(self, l, i, m):
+        if m - 1 <= 0:
+            print('line', i + 1, 'station', m)
+        else:
+            self.__printstations_ascending(l, l[i][m - 1], m - 1)
+        print('line', i + 1, 'station', m)
+        
+    def printstations_ascending(self, l, lxin, n):
+        '''
+        升序打印最优通过的路线
+        '''
+        index1 = self.index1
+        index2 = self.index2
+        _lxin = lxin - 1
+        self.__printstations_ascending(l, _lxin, n)
 
     def note(self):
         '''
@@ -210,17 +226,20 @@ class Chapter15_1:
         fxin = result[0]
         lxin = result[1] + 1
         print('fxin:', fxin, ' lxin:', lxin, 'l[lxin]:', _array(self.l)[lxin - 1] + 1)
-        self.printstations(self.l, lxin, n)
+        print('最优路径输出(降序从尾到头)')
+        self.printstations(self.l, lxin, n)    
         print('存储的子问题的解为：')
         print('f:')
         print(_array(self.f))
         print('l:')
         print(_array(self.l) + 1)
         print('步骤4.构造通过工厂的最快路线lxin')
-        print('练习15.1-1 ')
-        print('练习15.1-2 ')
-        print('练习15.1-3 ')
-        print('练习15.1-4 ')
+        print('练习15.1-1 最优路径输出(升序从头到尾)')
+        # 通过递归的方式先到达路径头
+        self.printstations_ascending(self.l, lxin, n)
+        print('练习15.1-2 定理：在递归算法中引用fi[j]的次数ri(j)等于2^(n-j)')
+        print('练习15.1-3 定理：所有引用fi[j]的总次数等于2^(n+1)-2')
+        print('练习15.1-4 包含fi[j]和li[j]值的表格共含4n-2个表项。说明如何把空间需求缩减到共2n+2')
         print('练习15.1-5 ')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
