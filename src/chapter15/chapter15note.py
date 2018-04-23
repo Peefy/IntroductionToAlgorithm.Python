@@ -302,6 +302,13 @@ class Chapter15_3:
         ```
         '''
         print('chapter15.3 note as follow')   
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
