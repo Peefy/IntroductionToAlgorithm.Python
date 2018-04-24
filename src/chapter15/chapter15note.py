@@ -21,6 +21,7 @@ from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
 from numpy import array as _array
 import numpy as np
+from numpy import *
 
 class Chapter15_1:
     '''
@@ -53,8 +54,8 @@ class Chapter15_1:
         Example
         ===
         ```python
-        a = [[7,9,3,4,8,4],[8,5,6,4,5,7]]
-        t = [[2,3,1,3,4],[2,1,2,2,1]]
+        a = [[7, 9, 3, 4, 8, 4], [8, 5, 6, 4, 5, 7]]
+        t = [[2, 3, 1, 3, 4], [2, 1, 2, 2, 1]]
         e = [2, 4]
         x = [3, 2]
         n = 6
@@ -131,7 +132,7 @@ class Chapter15_1:
         
     def printstations_ascending(self, l, lxin, n):
         '''
-        升序打印最优通过的路线
+        升序打印最优通过的路线(递归方式)
         '''
         index1 = self.index1
         index2 = self.index2
@@ -209,7 +210,8 @@ class Chapter15_1:
         print(' f=min(f1[n]+x1,f2[n]+x2)')
         print(' 要对f1[1]和f2[1]进行推理也是容易的。不管在哪一条装配线上通过装配站1，底盘都是直接到达该装配站的')
         print('步骤3.计算最快时间fxin')
-        print(' 此时写出一个递归算法来计算通过工厂的最快路线是一件简单的事情，这种递归算法有一个问题：它的执行时间是关于n的指数形式')
+        print(' 此时写出一个递归算法来计算通过工厂的最快路线是一件简单的事情，',
+            '这种递归算法有一个问题：它的执行时间是关于n的指数形式')
         # !装配站所需时间
         a = [[7, 9, 3, 4, 8, 4],\
              [8, 5, 6, 4, 5, 7]]
@@ -240,7 +242,7 @@ class Chapter15_1:
         print('练习15.1-2 定理：在递归算法中引用fi[j]的次数ri(j)等于2^(n-j)')
         print('练习15.1-3 定理：所有引用fi[j]的总次数等于2^(n+1)-2')
         print('练习15.1-4 包含fi[j]和li[j]值的表格共含4n-2个表项。说明如何把空间需求缩减到共2n+2')
-        print('练习15.1-5 ')
+        print('练习15.1-5 略')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
@@ -275,13 +277,25 @@ class Chapter15_2:
         print('P(n)递归式的一个解为Ω(2^n),所以解的个是指数形式，穷尽策略不是一个好的形式')
         print('步骤1.最优加全部括号的结构')
         print(' 动态规划方法的第一步是寻找最优的子结构')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print(' 然后，利用这一子结构，就可以根据子问题的最优解构造出原问题的一个最优解。')
+        print(' 对于矩阵链乘法问题，可以执行如下这个步骤')
+        print(' 用记号Ai..j表示对乘积AiAi+1Aj求值的结果，其中i<=j,如果这个问题是非平凡的，即i<j')
+        print(' 则对乘积AiAi+1...Aj的任何全部加括号形式都将乘积在Ak与Ak+1之间分开，此处k是范围1<=k<j之内的一个整数')
+        print(' 就是说，对某个k值，首先计算矩阵Ai..k和Ak+1..j,然后把它们相乘就得到最终乘积Ai..j')
+        print(' 这样，加全部括号的代价就是计算Ai..k和Ak+1..j的代价之和再加上两者相乘的代价')
+        print('步骤2.一个递归解')
+        print(' 接下来，根据子问题的最优解来递归定义一个最优解的代价。对于矩阵链乘法问题，子问题即确定AiAi+1...Aj的加全部括号的最小代价问题')
+        print(' 此处1<=i<=j<=n。设m[i,j]为计算矩阵Ai..j所需的标量乘法运算次数的最小值；对整个问题，计算A1..n的最小代价就是m[1,n]')
+        print(' 递归定义m[i,j]。如果i==j,则问题是平凡的；矩阵链只包含一个矩阵Ai..i=Ai,故无需做任何标量乘法来计算chengji')
+        print(' 关于对乘积AiAi+1...Aj的加全部括号的最小代价的递归定义为')
+        print(' m[i,j]=0, i = j;  m[i,j]=min{min[i,k]+m[k+1,j] + pi-1pkpj}, i < j')
+        print('步骤3.计算最优代价')
+        print(' 可以很容易地根据递归式，来写一个计算乘积A1A2...An的最小代价m[1,n]的递归算法。',
+            '然而这个算法具有指数时间，它与检查每一种加全部括号乘积的强力法差不多')
+        print(' 但是原问题只有相当少的子问题：对每一对满足1<=i<=j<=n的i和j对应一个问题，总共Θ(n^2)种')
+        print(' 一个递归算法在其递归树的不同分支中可能会多次遇到同一个子问题，子问题重叠这一性质')
+        print(' 不是递归地解递归式，而是执行动态规划方法的第三个步骤，使用自底向上的表格法来计算最优代价')
+        
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
