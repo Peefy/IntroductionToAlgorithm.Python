@@ -339,6 +339,14 @@ class SearchTree:
         '''
         return len(self.nodes)
 
+    def depth(self, x : SearchTreeNode):
+        '''
+        二叉查找树`x`结点的深度
+        '''
+        if x == None:
+            return 0
+        return 1 + max(self.depth(x.left), self.depth(x.right))
+
     def leftrotate(self, x : SearchTreeNode):
         '''
         左旋 时间复杂度:`O(1)`
@@ -454,6 +462,7 @@ if __name__ == '__main__':
     print(tree.minimum_recursive(tree.root))
     print(tree.successor(tree.root))
     print(tree.predecessor(tree.root))
+    print(tree.depth(tree.root))
     tree.insertkey(18)
     tree.insertkey(16)
     tree.leftrotate(node4)
