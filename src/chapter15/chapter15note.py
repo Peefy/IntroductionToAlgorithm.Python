@@ -270,6 +270,26 @@ class Chapter15_2:
                         C[i][j] = C[i][j] + A[i][k] * B[k][j]
             return C
 
+    def matrix_chain_order(self, p):
+        '''
+        算法：填表m的方式对应于求解按长度递增的矩阵链上的加全部括号问题
+        '''
+        n = len(p) - 1
+        m = ones([n, n])
+        s = ones([n, n])
+        for i in range(n):
+            m[i][i] = 0
+        for l in range(2, n):
+            for i in range(l, n - l + 1):
+                j = i + l - 1
+                m[i][j] = inf
+                for k in range(i, j - 1):
+                    q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j]
+                    if q < m[i][j]:
+                        m[i][j] = q
+                        s[i][j] = k
+        return (m, s)
+
     def note(self):
         '''
         Summary
@@ -326,8 +346,9 @@ class Chapter15_2:
         print(' 不是递归地解递归式，而是执行动态规划方法的第三个步骤，使用自底向上的表格法来计算最优代价')
         print(' 假设矩阵Ai的维数是pi-1×pi,i=1,2,...,n。输入是一个序列p=<p0,p1,...pn>,其中length[p]=n+1')
         print(' 程序使用一个辅助表m[1..n,1..n]来保存m[i,j]的代价')
-        print('')
-        print('')
+        result = self.matrix_chain_order([30, 35, 15, 5, 10, 20, 25])
+        print(result[0])
+        print(result[1])
         print('')
         print('')
         print('')
