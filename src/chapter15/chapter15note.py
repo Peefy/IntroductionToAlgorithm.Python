@@ -293,15 +293,15 @@ class Chapter15_2:
         # 矩阵的个数
         n = len(p) - 1
         # 辅助表m n*n
-        m = ones([n, n])
+        m = zeros([n, n])
         # 辅助表s n*n
-        s = ones([n, n])
+        s = zeros([n, n])
         for i in range(n):
             m[i][i] = 0
         for l in range(1, n):
             for i in range(l, n - l + 1):
                 j = i + l - 1
-                m[i][j] = inf
+                m[i][j] = math.inf
                 for k in range(i, j - 1):
                     q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j]
                     if q < m[i][j]:
@@ -313,6 +313,8 @@ class Chapter15_2:
         '''
         输出矩阵链乘积的一个最优加全部括号形式
         '''
+        i = int(i)
+        j = int(j)
         if i == j:
             print('A', i, end='')
         else:
@@ -379,9 +381,13 @@ class Chapter15_2:
         print(' 不是递归地解递归式，而是执行动态规划方法的第三个步骤，使用自底向上的表格法来计算最优代价')
         print(' 假设矩阵Ai的维数是pi-1×pi,i=1,2,...,n。输入是一个序列p=<p0,p1,...pn>,其中length[p]=n+1')
         print(' 程序使用一个辅助表m[1..n,1..n]来保存m[i,j]的代价')
-        result = self.matrix_chain_order([30, 35, 15, 5, 10, 20, 25])
-        print('the m is ', result[0])
-        print('the s is ', result[1])
+        p = [30, 35, 15, 5, 10, 20, 25]
+        n = len(p) - 1
+        m, s = self.matrix_chain_order(p)
+        print('the m is ', m)
+        print('the s is ', s)
+        print('最优加全部括号形式为：')
+        # self.print_optimal_parens(s, 0, n - 1)
         print('步骤4.构造一个最优解')
         print(' 虽然MATRIX—CHAIN-ORDER确定了计算矩阵链乘积所需的标量乘积法次数，但没有说明如何对这些矩阵相乘(如何加全部括号)')
         print('练习15.2-1 对6个矩阵维数为<5, 10, 3, 12, 5, 50, 6>的各矩阵，找出其矩阵链乘积的一个最优加全部括号')
