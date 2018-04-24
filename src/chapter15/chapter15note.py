@@ -272,14 +272,30 @@ class Chapter15_2:
 
     def matrix_chain_order(self, p):
         '''
-        算法：填表m的方式对应于求解按长度递增的矩阵链上的加全部括号问题
+        算法：填表`m`的方式对应于求解按长度递增的矩阵链上的加全部括号问题
+
+        Return
+        ===
+        `(m, s)`
+
+        `m`
+
+        `s`
+
+        Example
+        ===
+        ```python
+        matrix_chain_order([30, 35, 15, 5, 10, 20, 25])
+        >>> [1, 2, 3, 4, 5]
+        ```
+
         '''
         n = len(p) - 1
         m = ones([n, n])
         s = ones([n, n])
         for i in range(n):
             m[i][i] = 0
-        for l in range(2, n):
+        for l in range(1, n):
             for i in range(l, n - l + 1):
                 j = i + l - 1
                 m[i][j] = inf
