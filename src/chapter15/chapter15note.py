@@ -278,17 +278,20 @@ class Chapter15_2:
         ===
         `(m, s)`
 
-        `m`
+        `m` : 存储子问题的辅助表`m`
 
-        `s`
+        `s` : 存储子问题的辅助表`s`
 
         Example
         ===
         ```python
         matrix_chain_order([30, 35, 15, 5, 10, 20, 25])
-        >>> [1, 2, 3, 4, 5]
+        >>> (m, s)
+        >>> m
+        >>> [1, 2, 3]
+        >>> s
+        >>> [4, 5, 6]
         ```
-
         '''
         # 矩阵的个数
         n = len(p) - 1
@@ -322,6 +325,22 @@ class Chapter15_2:
             self.print_optimal_parens(s, i, s[i][j])
             self.print_optimal_parens(s, s[i][j] + 1, j)
             print(')', end='')
+
+    def __matrix_chain_multiply(self, A, s, i, j):
+        pass
+
+
+    def matrix_chain_multiply(self, A : list):
+        '''
+        调用矩阵链乘法对矩阵数组进行连乘
+        '''
+        p = []
+        for a in A:
+            row = shape(a)[0]
+            p.append(row)
+        p.append(shape(A[-1])[1])
+        m, s = self.matrix_chain_order(p)
+        return self.__matrix_chain_multiply(A, s, 1, len(p) - 1)
 
     def note(self):
         '''
@@ -387,15 +406,28 @@ class Chapter15_2:
         print('the m is ', m)
         print('the s is ', s)
         print('最优加全部括号形式为：')
+        print('例子：矩阵链 A1(30 * 35) A2(35 * 15) A3(15 * 5) A4(5 * 10) A5(10 * 20) A6(20 * 25)')
+        print('的一个最优加全部括号的形式为((A1(A2A3))((A4A5)A6))')
         # self.print_optimal_parens(s, 0, n - 1)
         print('步骤4.构造一个最优解')
         print(' 虽然MATRIX—CHAIN-ORDER确定了计算矩阵链乘积所需的标量乘积法次数，但没有说明如何对这些矩阵相乘(如何加全部括号)')
+        print(' 利用保存在表格s[1..n,1..n]内的、经过计算的信息来构造一个最优解并不难。')
+        print(' 在每一个表项s[i,j]中，记录了对乘积AiAi+1...Aj在Ak与Ak+1之间，进行分裂以取得最优加全部括号时的k值')
         print('练习15.2-1 对6个矩阵维数为<5, 10, 3, 12, 5, 50, 6>的各矩阵，找出其矩阵链乘积的一个最优加全部括号')
+        p = [5, 10, 3, 12, 5, 50, 6]
+        n = len(p) - 1
+        m, s = self.matrix_chain_order(p)
+        print('the m is ')
+        print(m)
+        print('the s is ')
+        print(s)
+        print('最优加全部括号形式为：')
+        # self.print_optimal_parens(s, 0, n - 1)
         print('练习15.2-2 给出一个矩阵链乘法算法MATRX-CHAIN_MULTIPLY(A, s, i, j), 初始参数为A, s, 1, n')
         print('练习15.2-3 用替换法证明递归公式的解为Ω(2^n)')
         print('练习15.2-4 设R(i, j)表示在调用MATRIX-CHAIN—ORDER中其他表项时，',
             '表项m[i, j]被引用的次数(n^3-n)/3')
-        print('练习15.2-5 定理：一个含n个元素的表达式的加全部括号中恰有n-1对括号')
+        print('练习15.2-5 定理：一个含n个元素的表达式的加全部括号中恰有n-1对括号(显然n个数的乘法做n-1次两数相乘即可出结果)')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
