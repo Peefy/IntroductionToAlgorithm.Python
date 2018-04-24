@@ -309,6 +309,18 @@ class Chapter15_2:
                         s[i][j] = k
         return (m, s)
 
+    def print_optimal_parens(self, s, i, j):
+        '''
+        输出矩阵链乘积的一个最优加全部括号形式
+        '''
+        if i == j:
+            print('A', i, end='')
+        else:
+            print('(', end='')
+            self.print_optimal_parens(s, i, s[i][j])
+            self.print_optimal_parens(s, s[i][j] + 1, j)
+            print(')', end='')
+
     def note(self):
         '''
         Summary
@@ -332,6 +344,8 @@ class Chapter15_2:
         print('(((AB)C)D)')
         A = [[1, 2], [3, 4]]
         print(self.matrix_multiply(A, A))
+        A = array(A)
+        print(A * A)
         print('为了计算矩阵链乘法，可将两个矩阵相乘的标准算法作为一个子程序Θ(n^3)，矩阵乘法满足结合律')
         print('矩阵链乘法加括号的顺序对求积运算的代价有很大的影响。')
         print('矩阵乘法当且仅当两个矩阵相容(A的列数等于B的行数)，才可以进行相乘运算')
@@ -368,12 +382,14 @@ class Chapter15_2:
         result = self.matrix_chain_order([30, 35, 15, 5, 10, 20, 25])
         print('the m is ', result[0])
         print('the s is ', result[1])
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('步骤4.构造一个最优解')
+        print(' 虽然MATRIX—CHAIN-ORDER确定了计算矩阵链乘积所需的标量乘积法次数，但没有说明如何对这些矩阵相乘(如何加全部括号)')
+        print('练习15.2-1 对6个矩阵维数为<5, 10, 3, 12, 5, 50, 6>的各矩阵，找出其矩阵链乘积的一个最优加全部括号')
+        print('练习15.2-2 给出一个矩阵链乘法算法MATRX-CHAIN_MULTIPLY(A, s, i, j), 初始参数为A, s, 1, n')
+        print('练习15.2-3 用替换法证明递归公式的解为Ω(2^n)')
+        print('练习15.2-4 设R(i, j)表示在调用MATRIX-CHAIN—ORDER中其他表项时，',
+            '表项m[i, j]被引用的次数(n^3-n)/3')
+        print('练习15.2-5 定理：一个含n个元素的表达式的加全部括号中恰有n-1对括号')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
@@ -394,7 +410,7 @@ class Chapter15_3:
         ```
         '''
         print('chapter15.3 note as follow')   
-        print('')
+        print('15.3 动态规划基础')
         print('')
         print('')
         print('')
