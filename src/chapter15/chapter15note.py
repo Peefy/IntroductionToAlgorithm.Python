@@ -250,6 +250,26 @@ class Chapter15_2:
     '''
     chpater15.2 note and function
     '''
+
+    def matrix_multiply(self, A, B):
+        '''
+        两个矩阵相乘
+        '''
+        rowA = shape(A)[0]
+        colunmA = shape(A)[1]
+        rowB = shape(B)[0]
+        colunmB = shape(B)[1]
+        C = ones([rowA, colunmB])
+        if colunmA != rowA:
+            raise Exception('incompatible dimensions')
+        else:
+            for i in range(rowA):
+                for j in range(colunmB):
+                    C[i][j] = 0
+                    for k in range(colunmA):
+                        C[i][j] = C[i][j] + A[i][k] * B[k][j]
+            return C
+
     def note(self):
         '''
         Summary
@@ -264,6 +284,15 @@ class Chapter15_2:
         '''
         print('chapter15.2 note as follow')   
         print('15.2 矩阵链乘法')
+        print('例如：如果矩阵链为A B C D')
+        print('则乘积ABCD可用五种不同的方式加括号')
+        print('(A(B(CD)))')
+        print('(A((BC)D))')
+        print('((AB)(CD))')
+        print('((A(BC))D)')
+        print('(((AB)C)D)')
+        A = [[1, 2], [3, 4]]
+        print(self.matrix_multiply(A, A))
         print('为了计算矩阵链乘法，可将两个矩阵相乘的标准算法作为一个子程序Θ(n^3)，矩阵乘法满足结合律')
         print('矩阵链乘法加括号的顺序对求积运算的代价有很大的影响。')
         print('矩阵乘法当且仅当两个矩阵相容(A的列数等于B的行数)，才可以进行相乘运算')
@@ -295,7 +324,16 @@ class Chapter15_2:
         print(' 但是原问题只有相当少的子问题：对每一对满足1<=i<=j<=n的i和j对应一个问题，总共Θ(n^2)种')
         print(' 一个递归算法在其递归树的不同分支中可能会多次遇到同一个子问题，子问题重叠这一性质')
         print(' 不是递归地解递归式，而是执行动态规划方法的第三个步骤，使用自底向上的表格法来计算最优代价')
-        
+        print(' 假设矩阵Ai的维数是pi-1×pi,i=1,2,...,n。输入是一个序列p=<p0,p1,...pn>,其中length[p]=n+1')
+        print(' 程序使用一个辅助表m[1..n,1..n]来保存m[i,j]的代价')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
