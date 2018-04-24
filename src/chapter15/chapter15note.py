@@ -290,8 +290,11 @@ class Chapter15_2:
         ```
 
         '''
+        # 矩阵的个数
         n = len(p) - 1
+        # 辅助表m n*n
         m = ones([n, n])
+        # 辅助表s n*n
         s = ones([n, n])
         for i in range(n):
             m[i][i] = 0
