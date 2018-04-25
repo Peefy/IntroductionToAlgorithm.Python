@@ -10,16 +10,19 @@ Class Chapter14_3
 
 '''
 
-from __future__ import division, absolute_import, print_function
+from __future__ import absolute_import, division, print_function
 
-import sys as _sys
 import math as _math
 import random as _random
+import sys as _sys
 import time as _time
+from copy import copy as _copy
+from copy import deepcopy as _deepcopy
 from random import randint as _randint
-from copy import copy as _copy, deepcopy as _deepcopy
-from numpy import arange as _arange
+
 import numpy as np
+from numpy import arange as _arange
+
 
 class Chapter14_1:
     '''

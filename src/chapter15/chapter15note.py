@@ -10,18 +10,21 @@ Class Chapter15_3
 
 '''
 
-from __future__ import division, absolute_import, print_function
+from __future__ import absolute_import, division, print_function
 
-import sys as _sys
 import math as _math
 import random as _random
+import sys as _sys
 import time as _time
+from copy import copy as _copy
+from copy import deepcopy as _deepcopy
 from random import randint as _randint
-from copy import copy as _copy, deepcopy as _deepcopy
+
+import numpy as np
 from numpy import arange as _arange
 from numpy import array as _array
-import numpy as np
 from numpy import *
+
 
 class Chapter15_1:
     '''
@@ -457,10 +460,10 @@ class Chapter15_3:
         print(' 如果一个问题的最优解中包含了子问题的最优解，则该问题具有最优子结构')
         print(' 当一个问题包含最优子结构时，提示我们动态规划是可行的，当然贪心算法也是可行的')
         print('在寻找最优子结构时，可以遵循一种共同的模式')
-        print('')
-        print('')
-        print('')
-        print('')
+        print(' 1.问题的一个解可以看作是一个选择')
+        print(' 2.假设对一个给定的问题，已知的是一个可以导致最优解的选择')
+        print(' 3.在已知这个选择后，要确定哪些子问题会随之发生')
+        print(' 4.假设每个子问题的解都不可能是最优的选择，则问题也不可能是最优的')
         print('')
         print('')
         print('')
