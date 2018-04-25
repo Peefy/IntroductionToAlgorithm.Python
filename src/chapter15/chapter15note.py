@@ -25,7 +25,6 @@ from numpy import arange as _arange
 from numpy import array as _array
 from numpy import *
 
-
 class Chapter15_1:
     '''
     chpater15.1 note and function
@@ -464,8 +463,8 @@ class Chapter15_3:
         print(' 2.假设对一个给定的问题，已知的是一个可以导致最优解的选择')
         print(' 3.在已知这个选择后，要确定哪些子问题会随之发生')
         print(' 4.假设每个子问题的解都不可能是最优的选择，则问题也不可能是最优的')
-        print('')
-        print('')
+        print('为了描述字问题空间，尽量保持这个空间简单')
+        print('非正式地，一个动态规划算法地运行时间依赖于两个因素地乘积，子问题地总个数以及')
         print('')
         print('')
         print('')
