@@ -334,7 +334,6 @@ class Chapter15_2:
     def __matrix_chain_multiply(self, A, s, i, j):
         pass
 
-
     def matrix_chain_multiply(self, A : list):
         '''
         调用矩阵链乘法对矩阵数组进行连乘
@@ -405,6 +404,8 @@ class Chapter15_2:
         print(' 不是递归地解递归式，而是执行动态规划方法的第三个步骤，使用自底向上的表格法来计算最优代价')
         print(' 假设矩阵Ai的维数是pi-1×pi,i=1,2,...,n。输入是一个序列p=<p0,p1,...pn>,其中length[p]=n+1')
         print(' 程序使用一个辅助表m[1..n,1..n]来保存m[i,j]的代价')
+        print('例子：矩阵链 A1(30 * 35) A2(35 * 15) A3(15 * 5) A4(5 * 10) A5(10 * 20) A6(20 * 25)')
+        print('的一个最优加全部括号的形式为((A1(A2A3))((A4A5)A6))')
         p = [30, 35, 15, 5, 10, 20, 25]
         n = len(p) - 1
         m, s = self.matrix_chain_order(p)
@@ -415,8 +416,6 @@ class Chapter15_2:
         print('最优加全部括号形式为：')
         self.print_optimal_parens(s)
         print('')
-        print('例子：矩阵链 A1(30 * 35) A2(35 * 15) A3(15 * 5) A4(5 * 10) A5(10 * 20) A6(20 * 25)')
-        print('的一个最优加全部括号的形式为((A1(A2A3))((A4A5)A6))')
         # self.print_optimal_parens(s, 0, n - 1)
         print('步骤4.构造一个最优解')
         print(' 虽然MATRIX—CHAIN-ORDER确定了计算矩阵链乘积所需的标量乘积法次数，但没有说明如何对这些矩阵相乘(如何加全部括号)')
@@ -506,10 +505,11 @@ class Chapter15_3:
             '因为前者无需递归的代价，而且维护表格的开销也小一点')
         print('此外，在有些问题中，还可以用动态规划算法中的表存取模式来进一步减少时间或空间上的需求')
         print('练习15.3-1 RECURSIVE-MATRIX-CHAIN要比枚举对乘积所有可能的加全部括号并逐一计算其乘法的次数')
-        print('练习15.3-2 ')
-        print('练习15.3-3 ')
-        print('练习15.3-4 ')
-        print('练习15.3-5 ')
+        print('练习15.3-2 请解释在加速一个好的分治算法如合并排序方面，做备忘录方法为什么没有效果。',
+            '因为分治算法子问题并没有重复和最优，只是一个解的过程。合并排序谁与谁合并已经确定')
+        print('练习15.3-3 考虑矩阵链乘法问题的一个变形，其目标是加全部括号矩阵序列以最大化而不是最小化标量乘法的次数。这个问题具有最优子结构')
+        print('练习15.3-4 描述装配线调度问题如何具有重叠子问题')
+        print('练习15.3-5 在动态规划中，我们先求解各个子问题，我们先求解各个子问题，然后再来决定该选择它们中的哪一个来用在原问题的最优解中。')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
