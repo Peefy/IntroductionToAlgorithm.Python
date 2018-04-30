@@ -289,44 +289,47 @@ class Chapter15_2:
         ```python
         matrix_chain_order([30, 35, 15, 5, 10, 20, 25])
         >>> (m, s)
-        >>> m
-        >>> [1, 2, 3]
-        >>> s
-        >>> [4, 5, 6]
         ```
         '''
         # 矩阵的个数
         n = len(p) - 1
-        # 辅助表m n*n
-        m = zeros([n, n])
-        # 辅助表s n*n
-        s = zeros([n, n])
+        # 辅助表m n * n
+        m = zeros((n, n))
+        # 辅助表s n * n
+        s = zeros((n, n))
         for i in range(n):
             m[i][i] = 0
-        for l in range(1, n):
-            for i in range(l, n - l + 1):
+        for l in range(2, n + 1):
+            for i in range(0, n - l + 1):
                 j = i + l - 1
                 m[i][j] = math.inf
-                for k in range(i, j - 1):
-                    q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j]
+                for k in range(i, j):
+                    q = m[i][k] + m[k + 1][j] + p[i] * p[k + 1] * p[j + 1]          
                     if q < m[i][j]:
                         m[i][j] = q
-                        s[i][j] = k
+                        s[i][j] = k + 1
         return (m, s)
 
-    def print_optimal_parens(self, s, i, j):
+    def __print_optimal_parens(self, s, i, j):
         '''
         输出矩阵链乘积的一个最优加全部括号形式
         '''
         i = int(i)
         j = int(j)
         if i == j:
-            print('A', i, end='')
+            print('A{}'.format(i + 1), end='')
         else:
             print('(', end='')
-            self.print_optimal_parens(s, i, s[i][j])
-            self.print_optimal_parens(s, s[i][j] + 1, j)
+            self.__print_optimal_parens(s, i, s[i][j])
+            self.__print_optimal_parens(s, s[i][j] + 1, j)
             print(')', end='')
+
+    def print_optimal_parens(self, s):
+        '''
+        输出矩阵链乘积的一个最优加全部括号形式
+        '''
+        s = s - 1
+        self.__print_optimal_parens(s, 0, shape(s)[-1] - 1)
 
     def __matrix_chain_multiply(self, A, s, i, j):
         pass
@@ -405,9 +408,13 @@ class Chapter15_2:
         p = [30, 35, 15, 5, 10, 20, 25]
         n = len(p) - 1
         m, s = self.matrix_chain_order(p)
-        print('the m is ', m)
-        print('the s is ', s)
+        print('the m is ')
+        print(m)
+        print('the s is ')
+        print(s)
         print('最优加全部括号形式为：')
+        self.print_optimal_parens(s)
+        print('')
         print('例子：矩阵链 A1(30 * 35) A2(35 * 15) A3(15 * 5) A4(5 * 10) A5(10 * 20) A6(20 * 25)')
         print('的一个最优加全部括号的形式为((A1(A2A3))((A4A5)A6))')
         # self.print_optimal_parens(s, 0, n - 1)
@@ -424,7 +431,8 @@ class Chapter15_2:
         print('the s is ')
         print(s)
         print('最优加全部括号形式为：')
-        # self.print_optimal_parens(s, 0, n - 1)
+        self.print_optimal_parens(s)
+        print('')
         print('练习15.2-2 给出一个矩阵链乘法算法MATRX-CHAIN_MULTIPLY(A, s, i, j), 初始参数为A, s, 1, n')
         print('练习15.2-3 用替换法证明递归公式的解为Ω(2^n)')
         print('练习15.2-4 设R(i, j)表示在调用MATRIX-CHAIN—ORDER中其他表项时，',
@@ -476,6 +484,59 @@ class Chapter15_3:
         print('注意：在不能应用最优子结构的时候，就一定不能假设它能够应用，已知一个有向图G=(V,E)和结点u,v∈V')
         print('无权最短路径：找出一条从u到v的包含最少边数的路径。这样一条路径必须是简单路径，因为从路径中去掉一个回路后，会产生边数更少的路径')
         print('无权最长简单路径：找出一条从u到v的包含最多边数的简单路径，需要加入简单性需求，否则就可以遍历一个回路任意多次')
+        print('这样任何从u到v的路径p必定包含一个中间顶点，比如w，')
+        print('对无权最长简单路径问题，假设它具有最优子结构。最终结论：说明对于最长简单路径，不仅缺乏最优子结构，而且无法根据子问题的解来构造问题的一个合法解')
+        print('而且在寻找最短路径中子问题是独立的，答案是子问题本来就没有共享资源')
+        print('装配站问题和矩阵链乘法问题都有独立的子问题')
+        print('重叠子问题')
+        print('适用于动态规划求解的最优化问题必须具有的第二个要素是子问题的空间要很小，也就是用来解原问题的递归算法可反复地解同样的子问题，而不是总在产生新的问题')
+        print('典型地，不同的子问题数是输入规模的一个多项式。当一个递归算法不断地调用同一问题时，我们说该最优问题包含重叠子问题')
+        print('相反地，适合用分治法解决的问题往往在递归的每一步都产生全新的问题。',
+            '动态规划算法总是充分利用重叠子问题，即通过每个子问题只解一次，把解保存在一个在需要时就可以查看的表中，而每次查表的时间为常数')
+        print('动态规划要求其子问题即要独立又要重叠')
+        # !动态规划最好存储子问题的结果在表格中，省时省力
+        print('做备忘录')
+        print('动态规划有一种变形，它既具有通常的动态规划方法的效率，又采用了一种自顶向下的策略。其思想就是备忘原问题的自然但是低效的递归算法')
+        print('像在通常的动态规划中一样，维护一个记录了子问题解的表，但有关填表动作的控制结构更像递归算法')
+        print('加了备忘录的递归算法为每一个子问题的解在表中记录一个表项。开始时，每个表项最初都包含一个特殊的值，以表示该表项有待填入')
+        print('总之，矩阵链乘法问题可以在O(n^3)时间内，用自顶向下的备忘录算法或自底向上的动态规划算法解决')
+        print('两种方法都利用了重叠子问题的性质。原问题共有Θ(n^2)个不同的子问题，这两种方法对每个子问题都只计算一次。',
+            '如果不使用做备忘录,则自然递归算法就要以指数时间运行，因为它要反复解已经解过的子问题')
+        print('在实际应用中，如果所有的子问题都至少要被计算一次，则一个自底向上的动态规划算法通常要比一个自顶向下的做备忘录算法好出一个常数因子，',
+            '因为前者无需递归的代价，而且维护表格的开销也小一点')
+        print('此外，在有些问题中，还可以用动态规划算法中的表存取模式来进一步减少时间或空间上的需求')
+        print('练习15.3-1 RECURSIVE-MATRIX-CHAIN要比枚举对乘积所有可能的加全部括号并逐一计算其乘法的次数')
+        print('练习15.3-2 ')
+        print('练习15.3-3 ')
+        print('练习15.3-4 ')
+        print('练习15.3-5 ')
+        # python src/chapter15/chapter15note.py
+        # python3 src/chapter15/chapter15note.py
+
+
+class Chapter15_4:
+    '''
+    chpater15.4 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter15.4 note
+
+        Example
+        ====
+        ```python
+        Chapter15_4().note()
+        ```
+        '''
+        print('chapter15.4 note as follow')   
+        print('15.4 最长公共子序列')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         print('')
         print('')
         print('')
@@ -488,6 +549,7 @@ class Chapter15_3:
 chapter15_1 = Chapter15_1()
 chapter15_2 = Chapter15_2()
 chapter15_3 = Chapter15_3()
+chapter15_4 = Chapter15_4()
 
 def printchapter15note():
     '''
@@ -497,6 +559,7 @@ def printchapter15note():
     chapter15_1.note()
     chapter15_2.note()
     chapter15_3.note()
+    chapter15_4.note()
 
 # python src/chapter15/chapter15note.py
 # python3 src/chapter15/chapter15note.py
