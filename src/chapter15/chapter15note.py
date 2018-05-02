@@ -518,6 +518,14 @@ class Chapter15_4:
     '''
     chpater15.4 note and function
     '''
+
+    def lcs_length(self, x : list, y : list):
+        '''
+        Return
+        ===
+        (b ,c)
+        '''
+
     def note(self):
         '''
         Summary
@@ -532,17 +540,40 @@ class Chapter15_4:
         '''
         print('chapter15.4 note as follow')   
         print('15.4 最长公共子序列')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('在生物学应用中，经常要比较两个(或更多)不同有机体的DNA。一个DNA螺旋由一串被称为基的分子组成')
+        print('可能的基包括腺嘌呤，鸟嘌呤，胞嘧啶，胸腺嘧啶')
+        print('分别以它们的首字母来表示这些基，一个DNA螺旋可以表示为在有穷集合{A,C,G,T}上的一个串')
+        print('如一个有机体的DNA串可能为S1=ACCGTACGAT,而另一个有机体的DNA可能为S2=GTCCTTCGAT')
+        print('将两个DNA螺旋作比较的一个目的就是要确定这两个螺旋有多么相似')
+        print('目的是找出第三个螺旋S3,在S3中的基也都出现在S1和S2中；而且这些基必须是以相同的顺序出现，但是不必要是连续的')
+        print('能找到的S3越长，S1和S2就越相似')
+        print('将这个相似度概念形式化为最长公共子序列问题。',
+            '一个给定序列的子序列就是该给定序列中去掉零个或者多个元素')
+        print('例如，Z=<B,C,D,B>是X=<A,B,C,B,D,A,B>的一个子序列，相应的下标序列为<2,3,5,7>')
+        print('如果Z既是X的一个子序列又是Y的一个子序列，称序列Z是X和Y的公共子序列')
+        print('例如：X=<A,B,C,B,D,A,B>,Y=<B,D,C,A,B,A>则序列<B,C,A>即为X和Y的一个公共子序列')
+        print('但是<B,C,A>不是X和Y的一个最长公共子序列(LCS),因为它的长度等于3')
+        print('而同为X和Y的公共子序列<B,C,B,A>其长度等于4。序列<B,C,B,A>是X和Y的一个LCS')
+        print('<B,D,A,B>也是，因为没有长度为5或更大的公共子序列')
+        print('LCS问题可用动态规划来有效解决')
+        print('步骤1.描述一个最长公共子序列')
+        print(' 定理15.1，设X和Y为两个序列，并设Z为X和Y任意一个LCS(最长公共子序列)')
+        print(' 1) 如果xm=yn,那么zk=xm=yn,而且Z(k-1)是Xm-1和Yn-1的一个LCS')
+        print(' 2) 如果xm≠yn,那么zk≠xm,蕴含Z是Xm-1和Y的一个LCS')
+        print(' 3) 如果xm≠yn,那么zk≠yn,蕴含Z是X和Yn-1的一个LCS')
+        print('步骤2.一个递归解')
+        print(' 寻找LCS时，可能要检查一个或两个子问题。如果xm=yn,必须找出Xm-1和Yn-1的一个LCS')
+        print(' 将xm=yn添加到这个LCS上，可以产生X和Y的一个LCS。如果xm≠yn，就必须解决两个子问题：')
+        print(' 找出Xm-1和Y的一个LCS，以及找出X和Yn-1的一个LCS。')
+        print(' 在这两个LCS，较长的就是X和Y的一个LCS，因为这些情况涉及了所有的可能，其中一个最优的子问题解必须被使用在X和Y的一个LCS中')
+        print(' LCS问题的中的重叠子问题，以及共享子子问题')
+        print(' 像在矩阵链乘法问题中一样，LCS问题的递归解涉及到建立一个最优解的值的递归式。定义c[i,j]为序列Xi和Yi的一个LCS的长度')
+        print(' 递归式子：')
+        print('  c[i,j] = 0; 如果i = 0 或 j = 0')
+        print('  c[i,j] = c[i-1,j-1]+1; 如果i,j>0和xi=yj')
+        print('  c[i,j]=max(c[i,j-1],c[i-1,j]); 如果i,j>0和xi≠yj')
+        print('步骤3.计算LCS的长度')
+        print(' 容易写出一个指数时间的递归算法，来计算连个序列的LCS的长度，因为只有Θ(mn)个不同的子问题')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
