@@ -549,7 +549,21 @@ class Chapter15_4:
 
     def print_lcs(self, b, X, i, j):
         '''
-        打印公共子序列
+        打印公共子序列 运行时间为`O(m + n)`
+        '''
+        if i == -1 or j == -1:
+            return
+        if b[i ,j] == '↖':
+            self.print_lcs(b, X, i - 1, j - 1)
+            print(X[i], end=' ')
+        elif b[i, j] == '↑':
+            self.print_lcs(b, X, i - 1, j)
+        else:
+            self.print_lcs(b, X, i, j - 1)
+
+    def print_lcs_with_tablec(self, c, X, i, j):
+        '''
+        打印公共子序列 运行时间为`O(m + n)`
         '''
         if i == -1 or j == -1:
             return
@@ -619,6 +633,30 @@ class Chapter15_4:
         print(b)
         self.print_lcs(b, X, len(X) - 1, len(Y) - 1)
         print('')
+        print('改进代码')
+        print('一旦涉及出某个算法之后，常常可以在时间内或空间上对该算法做些改进。对直观的动态规划算法尤为如此')
+        print('有些改变可以简化代码并改进一些常数因子，但并不会带来算法性能方面的渐进改善。',
+            '其他一些改变则可以可以在时间和空间上有相当大的改善')
+        print('其他一些改变则可以在时间和空间上有相当大的渐进节省')
+        print('在求公共子序列当中，完全可以去掉b。每个表项c[i, j]仅依赖于另外三个c表项：c[i-1, j-1], c[i-1,j]和c[i,j-1]')
+        print('给定c[i, j]的值，我们可在O(1)时间内确定这三个值中的哪一个被用来计算c[i, j]，而不检查表b')
+        print('然而，我们能减少LCS-LENGTH的渐进空间需求，因为它一次只需表c的两行：正在被计算的一行和前面一行')
+        print('如果仅要求求出一个LCS的长度，则这种改进是有用的；如果要重构一个LCS的元素，',
+            '则小的表无法包含足够的信息来使我们在O(m+n)时间内重新执行以前各步')
+        print('练习15.4-1 ')
+        X = ['1', '0', '0', '1', '0', '1', '0', '1']
+        Y = ['0', '1', '0', '1', '1', '0', '1', '1', '0']
+        c, b = self.lcs_length(X, Y)
+        print('the c is')
+        print(c)
+        print('the b is')
+        print(b)
+        self.print_lcs(b, X, len(X) - 1, len(Y) - 1)
+        print('练习15.4-2 利用表c中拐点的元素，矩阵中')
+        print('练习15.4-3 ')
+        print('练习15.4-4 ')
+        print('练习15.4-5 ')
+        print('练习15.4-6 ')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
