@@ -32,6 +32,8 @@
 
 * Chapter14 数据结构的扩张
 
+* Chapter15 动态规划
+
 ## Requirement:
 
 * *Python3.5+ Sdk*

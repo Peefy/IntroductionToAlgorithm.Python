@@ -1,4 +1,5 @@
-
+# -*- coding: UTF-8 -*-
+# usr/bin/python3
 # python src/chapter15/chapter15note.py
 # python3 src/chapter15/chapter15note.py
 '''
@@ -444,6 +445,47 @@ class Chapter15_3:
     '''
     chpater15.3 note and function
     '''
+    def __recursive_matrix_chain(self, p : list, m, s, i, j):
+        '''
+        矩阵链算法的低效递归版本
+        '''
+        if i == j:
+            return 0
+        m[i][j] = math.inf
+        for k in range(i, j):
+            q = self.__recursive_matrix_chain(p, m, s, i, k) + self.__recursive_matrix_chain(p, m, s, k + 1, j) + p[i] * p[k + 1] * p[j + 1] 
+            if q < m[i][j]:
+                m[i][j] = q
+                s[i][j] = k + 1
+        return m[i, j]
+        
+    def recursive_matrix_chain(self, p : list):
+        '''
+        矩阵链算法的低效递归版本
+        '''
+        # 矩阵的个数
+        n = len(p) - 1
+        # 辅助表m n * n
+        m = zeros((n, n))
+        # 辅助表s n * n
+        s = zeros((n, n))
+        self.__recursive_matrix_chain(p, m, s, 0, n - 1)
+        return (m, s)
+
+    def memoized_matrix_chain(self, p):
+        '''
+        矩阵链算法的备忘录版本
+        '''
+        # 矩阵的个数
+        n = len(p) - 1
+        # 辅助表m n * n
+        m = zeros((n, n))
+        # 辅助表s n * n
+        s = zeros((n, n))
+        for i in range(n):
+            for j in range(i, n):
+                m[i][j] = math.inf
+
     def note(self):
         '''
         Summary
@@ -470,6 +512,13 @@ class Chapter15_3:
         print(' 2.假设对一个给定的问题，已知的是一个可以导致最优解的选择')
         print(' 3.在已知这个选择后，要确定哪些子问题会随之发生')
         print(' 4.假设每个子问题的解都不可能是最优的选择，则问题也不可能是最优的')
+        p = [5, 10, 3, 12, 5, 50, 6]
+        n = len(p) - 1
+        m, s = self.recursive_matrix_chain(p)
+        print('the m is ')
+        print(m)
+        print('the s is ')
+        print(s)
         print('为了描述子问题空间，尽量保持这个空间简单')
         print('非正式地，一个动态规划算法地运行时间依赖于两个因素地乘积，子问题地总个数和每一个问题有多少种选择')
         print('在装配线调度中，总共有Θ(n)个子问题，并且只有两个选择来检查每个子问题，所以执行时间为Θ(n)。')
@@ -495,6 +544,7 @@ class Chapter15_3:
         print('动态规划要求其子问题即要独立又要重叠')
         # !动态规划最好存储子问题的结果在表格中，省时省力
         print('做备忘录')
+        # !备忘录动态规划填表时更像递归版本，即动态规划的递归版本
         print('动态规划有一种变形，它既具有通常的动态规划方法的效率，又采用了一种自顶向下的策略。其思想就是备忘原问题的自然但是低效的递归算法')
         print('像在通常的动态规划中一样，维护一个记录了子问题解的表，但有关填表动作的控制结构更像递归算法')
         print('加了备忘录的递归算法为每一个子问题的解在表中记录一个表项。开始时，每个表项最初都包含一个特殊的值，以表示该表项有待填入')
@@ -513,7 +563,6 @@ class Chapter15_3:
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
-
 class Chapter15_4:
     '''
     chpater15.4 note and function
@@ -530,10 +579,6 @@ class Chapter15_4:
         n = len(y)
         c = zeros([m + 1, n + 1])
         b = zeros((m, n), dtype=np.str)
-        for i in range(1, m + 1):
-            c[i][0] = 0
-        for j in range(n):
-            c[0][j] = 0
         for i in range(0, m):
             for j in range(0, n):
                 if x[i] == y[j]:
@@ -546,6 +591,12 @@ class Chapter15_4:
                     c[i + 1][j + 1] = c[i + 1][j]
                     b[i][j] = '←'
         return (c, b)
+
+    def memoized_lcs_length(self, x : list, y : list):
+        '''
+        公共子序列的备忘录版本
+        '''
+        pass
 
     def print_lcs(self, b, X, i, j):
         '''
@@ -561,19 +612,19 @@ class Chapter15_4:
         else:
             self.print_lcs(b, X, i, j - 1)
 
-    def print_lcs_with_tablec(self, c, X, i, j):
+    def print_lcs_with_tablec(self, c, X : list, Y : list, i, j):
         '''
         打印公共子序列 运行时间为`O(m + n)`
         '''
-        if i == -1 or j == -1:
+        if i == -2 or j == -2:
             return
-        if b[i ,j] == '↖':
-            self.print_lcs(b, X, i - 1, j - 1)
+        if c[i ,j] == c[i - 1][j - 1] + 1 and X[i] == Y[j]:
+            self.print_lcs_with_tablec(c, X, Y, i - 1, j - 1)
             print(X[i], end=' ')
-        elif b[i, j] == '↑':
-            self.print_lcs(b, X, i - 1, j)
+        elif c[i - 1, j] >= c[i][j - 1]:
+            self.print_lcs_with_tablec(c, X, Y, i - 1, j)
         else:
-            self.print_lcs(b, X, i, j - 1)
+            self.print_lcs_with_tablec(c, X, Y, i, j - 1)
 
     def note(self):
         '''
@@ -652,7 +703,10 @@ class Chapter15_4:
         print('the b is')
         print(b)
         self.print_lcs(b, X, len(X) - 1, len(Y) - 1)
-        print('练习15.4-2 利用表c中拐点的元素，矩阵中')
+        print('')
+        self.print_lcs_with_tablec(c, X, Y, len(X) - 1, len(Y) - 1)
+        print('')
+        print('练习15.4-2 利用表c中拐点的元素，c矩阵中元素是它斜上方元素+1，且x[i]==y[j]，说明是↖️')
         print('练习15.4-3 ')
         print('练习15.4-4 ')
         print('练习15.4-5 ')
@@ -660,10 +714,32 @@ class Chapter15_4:
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
+class Chapter15_5:
+    '''
+    chpater15.5 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter15.5 note
+
+        Example
+        ====
+        ```python
+        Chapter15_5().note()
+        ```
+        '''
+        print('chapter15.5 note as follow')   
+        print('15.5 最优二叉查找树')
+        # python src/chapter15/chapter15note.py
+        # python3 src/chapter15/chapter15note.py
+
 chapter15_1 = Chapter15_1()
 chapter15_2 = Chapter15_2()
 chapter15_3 = Chapter15_3()
 chapter15_4 = Chapter15_4()
+chapter15_5 = Chapter15_5()
 
 def printchapter15note():
     '''
