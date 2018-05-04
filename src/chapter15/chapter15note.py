@@ -518,13 +518,48 @@ class Chapter15_4:
     '''
     chpater15.4 note and function
     '''
-
     def lcs_length(self, x : list, y : list):
         '''
+        计算LCS的长度(也是矩阵路径的解法) 时间复杂度`O(mn)`
+
         Return
         ===
         (b ,c)
         '''
+        m = len(x)
+        n = len(y)
+        c = zeros([m + 1, n + 1])
+        b = zeros((m, n), dtype=np.str)
+        for i in range(1, m + 1):
+            c[i][0] = 0
+        for j in range(n):
+            c[0][j] = 0
+        for i in range(0, m):
+            for j in range(0, n):
+                if x[i] == y[j]:
+                    c[i + 1][j + 1] = c[i][j] + 1
+                    b[i][j] = '↖'
+                elif c[i][j + 1] >= c[i + 1][j]:
+                    c[i + 1][j + 1] = c[i][j + 1]
+                    b[i][j] = '↑'
+                else:
+                    c[i + 1][j + 1] = c[i + 1][j]
+                    b[i][j] = '←'
+        return (c, b)
+
+    def print_lcs(self, b, X, i, j):
+        '''
+        打印公共子序列
+        '''
+        if i == -1 or j == -1:
+            return
+        if b[i ,j] == '↖':
+            self.print_lcs(b, X, i - 1, j - 1)
+            print(X[i], end=' ')
+        elif b[i, j] == '↑':
+            self.print_lcs(b, X, i - 1, j)
+        else:
+            self.print_lcs(b, X, i, j - 1)
 
     def note(self):
         '''
@@ -573,7 +608,17 @@ class Chapter15_4:
         print('  c[i,j] = c[i-1,j-1]+1; 如果i,j>0和xi=yj')
         print('  c[i,j]=max(c[i,j-1],c[i-1,j]); 如果i,j>0和xi≠yj')
         print('步骤3.计算LCS的长度')
-        print(' 容易写出一个指数时间的递归算法，来计算连个序列的LCS的长度，因为只有Θ(mn)个不同的子问题')
+        print(' 容易写出一个指数时间的递归算法，来计算连个序列的LCS的长度，',
+            '因为只有Θ(mn)个不同的子问题,所以可以用动态规划来自底向上计算解')
+        X = ['A', 'B', 'C', 'B', 'D', 'A', 'B']
+        Y = ['B', 'D', 'C', 'A', 'B', 'A']
+        c, b = self.lcs_length(X, Y)
+        print('the c is')
+        print(c)
+        print('the b is')
+        print(b)
+        self.print_lcs(b, X, len(X) - 1, len(Y) - 1)
+        print('')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
