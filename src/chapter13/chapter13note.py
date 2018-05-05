@@ -30,10 +30,6 @@ if __name__ == '__main__':
 else:
     from . import redblacktree as rb
 
-import io
-import sys 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
-
 class Chapter13_1:
     '''
     chpater13.1 note and function

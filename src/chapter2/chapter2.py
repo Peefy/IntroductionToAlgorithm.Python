@@ -8,10 +8,6 @@ from numpy import arange
 import matplotlib as mat
 import matplotlib.pyplot as plt
 
-import io
-import sys 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
-
 class Chapter2:
     '''
     CLRS 第二章 2.1 2.2 算法函数和笔记

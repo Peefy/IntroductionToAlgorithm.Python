@@ -9,9 +9,6 @@ import time as _time
 from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 
-import io
-import sys 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
 class Chapter5_3:
     '''
     CLRS 第五章 5.3 算法函数和笔记

@@ -20,9 +20,6 @@ from random import randint as _randint
 from copy import copy as _copy, deepcopy as _deepcopy
 from numpy import arange as _arange
 
-import io
-import sys 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
 
 class Chapter9_1:
     '''

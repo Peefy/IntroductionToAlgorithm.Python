@@ -31,9 +31,6 @@ if __name__ == '__main__':
 else:
     from . import collection as c
 
-import io
-import sys 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
 
 class Chapter10_1:
     '''

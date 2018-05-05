@@ -27,9 +27,6 @@ else:
     from . import quicksort
     from . import stooge
 
-import io
-import sys 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
 class Chapter7_1:
     def note(self):
         '''

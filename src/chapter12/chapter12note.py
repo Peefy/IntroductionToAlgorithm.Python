@@ -28,10 +28,6 @@ if __name__ == '__main__':
 else:
     from .searchtree import SearchTree, SearchTreeNode, RandomSearchTree
 
-import io
-import sys 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
-
 class Chapter12_1:
     '''
     chpater12.1 note and function

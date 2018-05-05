@@ -10,7 +10,6 @@ Class Chapter15_2
 Class Chapter15_3
 
 '''
-
 from __future__ import absolute_import, division, print_function
 
 import math as _math
@@ -338,7 +337,7 @@ class Chapter15_2:
     def __matrix_chain_multiply(self, A, s, i, j):
         pass
 
-    def matrix_chain_multiply(self, A : list):
+    def matrix_chain_multiply(self, A):
         '''
         调用矩阵链乘法对矩阵数组进行连乘
         '''
@@ -448,7 +447,7 @@ class Chapter15_3:
     '''
     chpater15.3 note and function
     '''
-    def __recursive_matrix_chain(self, p : list, m, s, i, j):
+    def __recursive_matrix_chain(self, p, m, s, i, j):
         '''
         矩阵链算法的低效递归版本
         '''
@@ -462,7 +461,7 @@ class Chapter15_3:
                 s[i][j] = k + 1
         return m[i, j]
         
-    def recursive_matrix_chain(self, p : list):
+    def recursive_matrix_chain(self, p):
         '''
         矩阵链算法的低效递归版本
         '''
@@ -595,7 +594,7 @@ class Chapter15_4:
     '''
     chpater15.4 note and function
     '''
-    def lcs_length(self, x : list, y : list):
+    def lcs_length(self, x, y):
         '''
         计算LCS的长度(也是矩阵路径的解法) 时间复杂度`O(mn)`
 
@@ -620,7 +619,7 @@ class Chapter15_4:
                     b[i][j] = '←'
         return (c, b)
 
-    def __lookup_lcs_length(self, x : list, y : list, c, b, i, j):
+    def __lookup_lcs_length(self, x, y, c, b, i, j):
         if c[i][j] != math.inf:
             return c[i][j]
         if x[i - 1] == y[j - 1]:
@@ -635,7 +634,7 @@ class Chapter15_4:
             b[i - 1][j -1] = '←'
         return c[i][j]
 
-    def memoized_lcs_length(self, x : list, y : list):
+    def memoized_lcs_length(self, x, y):
         '''
         公共子序列的备忘录版本 时间复杂度`O(mn)`
         '''
@@ -653,7 +652,7 @@ class Chapter15_4:
         self.__lookup_lcs_length(x, y, c, b, m, n)
         return (c, b)
 
-    def memoized_lcs_show(self, x : list, y : list):
+    def memoized_lcs_show(self, x, y):
         '''
         公共子序列的备忘录版本打印公共子序列 时间复杂度`O(mn)`
         '''
@@ -677,7 +676,7 @@ class Chapter15_4:
         else:
             self.print_lcs(b, X, i, j - 1)
 
-    def print_lcs_with_tablec(self, c, X : list, Y : list, i, j):
+    def print_lcs_with_tablec(self, c, X, Y, i, j):
         '''
         打印公共子序列 运行时间为`O(m + n)`
         '''
@@ -691,7 +690,7 @@ class Chapter15_4:
         else:
             self.print_lcs_with_tablec(c, X, Y, i, j - 1)
 
-    def longest_inc_seq(self, x : list):
+    def longest_inc_seq(self, x):
         '''
         最长递增子序列(动态规划求解) `O(n^2)` 
 
@@ -733,25 +732,32 @@ class Chapter15_4:
         print(t)
         return seq
 
-    def __fast_longest_inc_seq(self, x, input, index):
-        '''
-        快速递归的最长递增子序列(备忘录动态规划) `O(nlgn)`
-        '''
-        if index == 0:
-            return x[index]
-        last = x[index]
-        pre = self.__fast_longest_inc_seq(self, x, input, index - 1)
-        if last >= pre:
-            
+    def lower_bound(self, arr, x, start, end):
+        middle = (start + end) // 2
+        while arr[middle] < x:
+            middle -= 1
+        return middle
 
-    def fast_longest_inc_seq(self, x : list):
+    def fast_longest_inc_seq(self, x):
         '''
-        快速递归的最长递增子序列(备忘录动态规划) `O(nlgn)`
+        快速递归的最长递增子序列(二分查找) `O(nlgn)`
         '''
         n = len(x)
-        seq = []
-        self.__fast_longest_inc_seq(x, seq, n - 1)
-        return seq
+        g = []
+        l = []
+        # O(n)
+        for i in range(n):
+            g.append(math.inf)
+        for i in range(n):
+            # 二分查找 O(nlgn)
+            k = self.lower_bound(g, x[i], 0, n -1)
+            g[k] = x[i]
+        # quick sort O(nlgn)
+        g.sort()
+        for i in range(n):
+            if g[i] != math.inf:
+                l.append(g[i])
+        return l
 
     def note(self):
         '''
@@ -838,9 +844,13 @@ class Chapter15_4:
         self.memoized_lcs_show(X, Y)
         print('练习15.4-4 略')
         print('练习15.4-5 求n个数的序列中最长的单调递增子序列，O(n^2)')
-        print(self.longest_inc_seq([1, 3, 5, 7, 1, 2, 3, 4, 5, 9]))
-        print(self.longest_inc_seq([5, 4, 3, 7, 1, 2, 3, 6, 2, 1]))
+        print(self.longest_inc_seq([1, 3, 5, 7, 1, 2, 3, 4, 5, 7]))
+        print(self.longest_inc_seq([5, 4, 3, 7, 1, 2, 3, 6, 2, 8]))
+        print(self.longest_inc_seq([1, 2, 3, 4, 5, 2, 3, 1, 9]))
         print('练习15.4-6 求n个数的序列中最长的单调递增子序列，O(nlgn)')
+        print(self.fast_longest_inc_seq([1, 3, 5, 7, 1, 2, 3, 4, 5, 7]))
+        print(self.fast_longest_inc_seq([5, 4, 3, 7, 1, 2, 3, 6, 2, 8]))
+        print(self.fast_longest_inc_seq([1, 2, 3, 4, 5, 2, 3, 1, 9]))
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 

@@ -8,10 +8,6 @@ import src
 
 from src.test import testAll
 
-import io
-import sys 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
-
 if __name__ == '__main__':
     ## Test required packet
     testAll()

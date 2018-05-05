@@ -14,10 +14,6 @@ if __name__ == '__main__':
     import heap
 else:
     from . import heap
-    
-import io
-import sys 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
 
 class Chapter6_4:
     '''
