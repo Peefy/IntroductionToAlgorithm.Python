@@ -872,6 +872,7 @@ class Chapter15_5:
         '''
         print('chapter15.5 note as follow')   
         print('15.5 最优二叉查找树')
+        print('如在一篇文章中搜索单词，希望所花费的总时间尽量地小，')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
