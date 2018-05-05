@@ -28,6 +28,7 @@ from numpy import *
 import io
 import sys 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
+
 class Chapter15_1:
     '''
     chpater15.1 note and function
@@ -619,11 +620,48 @@ class Chapter15_4:
                     b[i][j] = '←'
         return (c, b)
 
+    def __lookup_lcs_length(self, x : list, y : list, c, b, i, j):
+        if c[i][j] != math.inf:
+            return c[i][j]
+        if x[i - 1] == y[j - 1]:
+            c[i][j] = self.__lookup_lcs_length(x, y, c, b, i - 1, j - 1) + 1
+            b[i - 1][j - 1] = '↖'
+        elif self.__lookup_lcs_length(x, y, c, b, i - 1, j) >= \
+            self.__lookup_lcs_length(x, y, c, b, i, j - 1):
+            c[i][j] = self.__lookup_lcs_length(x, y, c, b, i - 1, j)
+            b[i - 1][j - 1] = '↑'
+        else:
+            c[i][j] = self.__lookup_lcs_length(x, y, c, b, i, j - 1)
+            b[i - 1][j -1] = '←'
+        return c[i][j]
+
     def memoized_lcs_length(self, x : list, y : list):
         '''
-        公共子序列的备忘录版本
+        公共子序列的备忘录版本 时间复杂度`O(mn)`
         '''
-        pass
+        m = len(x)
+        n = len(y)
+        c = zeros([m + 1, n + 1])
+        b = zeros((m, n), dtype=np.str)
+        #b = '↓'
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                c[i][j] = math.inf
+        for i in range(0, m):
+            for j in range(0, n):
+                b[i][j] = '↓'
+        self.__lookup_lcs_length(x, y, c, b, m, n)
+        return (c, b)
+
+    def memoized_lcs_show(self, x : list, y : list):
+        '''
+        公共子序列的备忘录版本打印公共子序列 时间复杂度`O(mn)`
+        '''
+        c, b = self.memoized_lcs_length(x, y)
+        print(c)
+        print(b)
+        self.print_lcs(b, x, len(x) - 1, len(y) - 1)
+        print('')
 
     def print_lcs(self, b, X, i, j):
         '''
@@ -652,6 +690,68 @@ class Chapter15_4:
             self.print_lcs_with_tablec(c, X, Y, i - 1, j)
         else:
             self.print_lcs_with_tablec(c, X, Y, i, j - 1)
+
+    def longest_inc_seq(self, x : list):
+        '''
+        最长递增子序列(动态规划求解) `O(n^2)` 
+
+        Example
+        ===
+        ```python
+        >>> longest_inc_seq([2, 3, 1, 4])
+        >>> [2, 3, 4]
+        ```
+        '''
+        # 序列的长度
+        n = len(x)
+        # 动态规划子问题表的深度
+        t = zeros([n, n])
+        for i in range(n):
+            for j in range(n):
+                t[i][j] = math.inf
+        last = 0
+        max_count = 0
+        max_count_index = 0
+        seq = []
+        for i in range(n):
+            top = 0
+            count = 1
+            for j in range(i, n):
+                if x[i] <= x[j] and top <= x[j]:
+                    t[i][j] = x[j]
+                    count += 1
+                    top = x[j]
+                    if count >= max_count:
+                        max_count = count
+                        max_count_index = i
+                else:
+                    t[i][j] = math.inf
+        for i in range(n):
+            val = t[max_count_index][i]
+            if val != math.inf:
+                seq.append(val)
+        print(t)
+        return seq
+
+    def __fast_longest_inc_seq(self, x, input, index):
+        '''
+        快速递归的最长递增子序列(备忘录动态规划) `O(nlgn)`
+        '''
+        if index == 0:
+            return x[index]
+        last = x[index]
+        pre = self.__fast_longest_inc_seq(self, x, input, index - 1)
+        if last >= pre:
+            
+
+    def fast_longest_inc_seq(self, x : list):
+        '''
+        快速递归的最长递增子序列(备忘录动态规划) `O(nlgn)`
+        '''
+        n = len(x)
+        seq = []
+        self.__fast_longest_inc_seq(x, seq, n - 1)
+        return seq
 
     def note(self):
         '''
@@ -730,14 +830,17 @@ class Chapter15_4:
         print('the b is')
         print(b)
         self.print_lcs(b, X, len(X) - 1, len(Y) - 1)
-        print('')
+        print(' ')
         self.print_lcs_with_tablec(c, X, Y, len(X) - 1, len(Y) - 1)
-        print('')
+        print(' ')
         print('练习15.4-2 利用表c中拐点的元素，c矩阵中元素是它斜上方元素+1，且x[i]==y[j]，说明是↖️')
-        print('练习15.4-3 ')
-        print('练习15.4-4 ')
-        print('练习15.4-5 ')
-        print('练习15.4-6 ')
+        print('练习15.4-3 请给出一个LCS-LENGTH的运行时间为O(mn)的做备忘录版本')
+        self.memoized_lcs_show(X, Y)
+        print('练习15.4-4 略')
+        print('练习15.4-5 求n个数的序列中最长的单调递增子序列，O(n^2)')
+        print(self.longest_inc_seq([1, 3, 5, 7, 1, 2, 3, 4, 5, 9]))
+        print(self.longest_inc_seq([5, 4, 3, 7, 1, 2, 3, 6, 2, 1]))
+        print('练习15.4-6 求n个数的序列中最长的单调递增子序列，O(nlgn)')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
@@ -777,6 +880,7 @@ def printchapter15note():
     chapter15_2.note()
     chapter15_3.note()
     chapter15_4.note()
+    chapter15_5.note()
 
 # python src/chapter15/chapter15note.py
 # python3 src/chapter15/chapter15note.py
