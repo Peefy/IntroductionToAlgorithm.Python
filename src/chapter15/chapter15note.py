@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# coding:utf-8
 # usr/bin/python3
 # python src/chapter15/chapter15note.py
 # python3 src/chapter15/chapter15note.py
@@ -15,7 +15,6 @@ from __future__ import absolute_import, division, print_function
 
 import math as _math
 import random as _random
-import sys as _sys
 import time as _time
 from copy import copy as _copy
 from copy import deepcopy as _deepcopy
@@ -26,6 +25,9 @@ from numpy import arange as _arange
 from numpy import array as _array
 from numpy import *
 
+import io
+import sys 
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
 class Chapter15_1:
     '''
     chpater15.1 note and function
@@ -482,9 +484,32 @@ class Chapter15_3:
         m = zeros((n, n))
         # 辅助表s n * n
         s = zeros((n, n))
+        # !备忘录版本与递归版本相同的地方都是要填表时进行递归，
+        # !但是递归时并不重新计算表m中的元素,仅仅做一个某位置是否填过表的判断
+        # 将表m全部填成无穷inf
         for i in range(n):
             for j in range(i, n):
                 m[i][j] = math.inf
+        self.loockup_chian(p, m, 0, n - 1)
+        return m
+
+    def loockup_chian(self, p, m, i, j):
+        '''
+        回溯查看表m中的元素
+        '''
+        # 查看而不是重新比较
+        if m[i][j] < math.inf:
+            return m[i][j]
+        if i == j:
+            m[i][j] = 0
+        else:
+            for k in range(i, j):
+                q = self.loockup_chian(p, m, i, k) + \
+                    self.loockup_chian(p, m, k + 1, j) + \
+                    p[i] * p[k + 1] * p[j + 1] 
+                if q < m[i][j]:
+                    m[i][j] = q
+        return m[i][j]
 
     def note(self):
         '''
@@ -519,6 +544,8 @@ class Chapter15_3:
         print(m)
         print('the s is ')
         print(s)
+        print('the m is as follows:')
+        print(self.memoized_matrix_chain(p))
         print('为了描述子问题空间，尽量保持这个空间简单')
         print('非正式地，一个动态规划算法地运行时间依赖于两个因素地乘积，子问题地总个数和每一个问题有多少种选择')
         print('在装配线调度中，总共有Θ(n)个子问题，并且只有两个选择来检查每个子问题，所以执行时间为Θ(n)。')

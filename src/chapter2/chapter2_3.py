@@ -20,6 +20,10 @@ if __name__ == '__main__':
 else:
     from .chapter2 import Chapter2
 
+import io
+import sys 
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
+
 class Chapter2_3:
     '''
     CLRS 第二章 2.3 算法函数和笔记

@@ -15,6 +15,10 @@ if __name__ == '__main__':
 else:
     from . import heap
 
+import io
+import sys 
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
+
 class Chapter6_3:
     '''
     CLRS 第六章 6.3 算法函数和笔记

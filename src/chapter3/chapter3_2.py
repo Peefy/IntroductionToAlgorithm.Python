@@ -15,6 +15,10 @@ from matplotlib.pyplot import plot
 from matplotlib.pyplot import figure
 from matplotlib.pyplot import show
 
+import io
+import sys 
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
+
 class Chapter3_2:
     '''
     CLRS 第三章 3.2 算法函数和笔记

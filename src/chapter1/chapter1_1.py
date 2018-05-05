@@ -18,6 +18,10 @@ import sympy as sym
 from sympy import symbols, Symbol
 from sympy import solve, poly, exp, log
 
+import io
+import sys 
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf8') 
+
 class Chapter1:
     '''
     CLRS 第一章 算法函数和笔记
