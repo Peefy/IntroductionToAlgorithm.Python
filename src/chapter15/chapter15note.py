@@ -862,16 +862,26 @@ class Chapter15_5:
     chpater15.5 note and function
     '''
     def optimal_bst(self, p, q, n):
-        e = zeros((n + 2, n + 1))
-        w = zeros((n + 2, n + 1))
+        '''
+        求最优二叉树
+        '''
+        e = zeros((n + 2, n + 2))
+        w = zeros((n + 2, n + 2))
+        root = zeros((n + 1, n + 1))
         for i in range(1, n + 2):
             e[i][i - 1] = q[i - 1]
             w[i][i - 1] = q[i - 1]
         for l in range(1, n + 1):
-            for i in range(1, n - l + 2):
+            for i in range(1, n - l + 1 + 1):
                 j = i + l - 1
                 e[i][j] = math.inf
                 w[i][j] = w[i][j - 1] + p[j] + q[j]
+                for r in range(i, j):
+                    t = e[i][r - 1] + e[r + 1][j] + w[i][j]
+                    if t < e[i][j]:
+                        e[i][j] = t
+                        root[i][j] = r
+        return (e, root)
     
     def note(self):
         '''
@@ -923,8 +933,25 @@ class Chapter15_5:
         print(' 为了提高效率，还需要一个表格。不是每当计算e[i, j]时都从头开始计算w(i, j),',
             '而是把这些值保存在表w[1..n+1,0..n]中')
         print(' 因此，可以计算出Θ(n^2)个w[i, j]的值，每一个值需要Θ(1)的计算时间')
-        print(' ')
-        print('')
+        print('OPTIMAL-BST计算出的表e[i][j],w[i][j]和root[i][j]')
+        print('OPTIMAL-BST过程需要Θ(n^3)的运行时间，这与MATRIX-CHAIN-ORDER是一样的，',
+            '因为for循环有三层嵌套,而且每个循环的下标有至多n个值')
+        print('练习15.5-1 写出过程CONSTRUCT-OPTIMAL-BST(root)的伪代码，给定表root，输出一棵最优二叉查找树的结构')
+        p = [0, 0, 0.15, 0.10, 0.05, 0.10, 0.20]
+        q = [0 ,0.05, 0.10, 0.05, 0.05, 0.05, 0.10]
+        e, root = self.optimal_bst(p, q, len(q) - 1)
+        print(e)
+        print(root)
+        print('练习15.5-2 ')
+        print('练习15.5-3 ')
+        print('练习15.5-4 ')
+        print('思考题15-1 ')
+        print('思考题15-2 ')
+        print('思考题15-3 ')
+        print('思考题15-4 ')
+        print('思考题15-5 ')
+        print('思考题15-6 ')
+        print('思考题15-7 ')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
