@@ -861,6 +861,18 @@ class Chapter15_5:
     '''
     chpater15.5 note and function
     '''
+    def optimal_bst(self, p, q, n):
+        e = zeros((n + 2, n + 1))
+        w = zeros((n + 2, n + 1))
+        for i in range(1, n + 2):
+            e[i][i - 1] = q[i - 1]
+            w[i][i - 1] = q[i - 1]
+        for l in range(1, n + 1):
+            for i in range(1, n - l + 2):
+                j = i + l - 1
+                e[i][j] = math.inf
+                w[i][j] = w[i][j - 1] + p[j] + q[j]
+    
     def note(self):
         '''
         Summary
@@ -908,9 +920,10 @@ class Chapter15_5:
         print('步骤3：计算一棵最优二叉查找树的期望搜索代价')
         print(' 最优二叉查找树与矩阵链乘法的特征之间有一些相似。在二者的问题域中，子问题由连续的下标范围组成')
         print(' 直接递归式的实现和直接递归的矩阵链乘法一样低效')
-        print(' 为了提高效率')
-        print('')
-        print('')
+        print(' 为了提高效率，还需要一个表格。不是每当计算e[i, j]时都从头开始计算w(i, j),',
+            '而是把这些值保存在表w[1..n+1,0..n]中')
+        print(' 因此，可以计算出Θ(n^2)个w[i, j]的值，每一个值需要Θ(1)的计算时间')
+        print(' ')
         print('')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
