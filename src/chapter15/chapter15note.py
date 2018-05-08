@@ -883,6 +883,12 @@ class Chapter15_5:
                         root[i][j] = r
         return (e, root)
     
+    def construct_optimal_bst(self, root):
+        '''
+        给定表root，输出一棵最优二叉查找树的结构
+        '''
+        pass
+
     def note(self):
         '''
         Summary
@@ -942,6 +948,7 @@ class Chapter15_5:
         e, root = self.optimal_bst(p, q, len(q) - 1)
         print(e)
         print(root)
+        self.construct_optimal_bst(root)
         print('练习15.5-2 ')
         print('练习15.5-3 ')
         print('练习15.5-4 ')
