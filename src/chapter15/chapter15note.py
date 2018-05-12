@@ -876,7 +876,7 @@ class Chapter15_5:
                 j = i + l - 1
                 e[i][j] = math.inf
                 w[i][j] = w[i][j - 1] + p[j] + q[j]
-                for r in range(i, j):
+                for r in range(i, j + 1):
                     t = e[i][r - 1] + e[r + 1][j] + w[i][j]
                     if t < e[i][j]:
                         e[i][j] = t
