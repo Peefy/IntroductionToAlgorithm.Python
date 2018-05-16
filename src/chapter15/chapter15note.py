@@ -861,6 +861,7 @@ class Chapter15_5:
     '''
     chpater15.5 note and function
     '''
+
     def optimal_bst(self, p, q, n):
         '''
         求最优二叉树
@@ -892,9 +893,46 @@ class Chapter15_5:
         '''
         给定表root，输出一棵最优二叉查找树的结构
         '''
-        i = 1
-        j = 1
-        count = shape(root)[-1] - 1
+        i = 0
+        j = 0
+        count = shape(root)[-1]
+
+    weight = 0
+    min_weight_arr = 0
+
+    def __compute_weight(self, i : int, j : int, key : list, fkey : list):
+        weight = self.weight
+        if i - 1 == j:
+            weight[i][j] = fkey[j]
+        else:
+            weight[i][j] = self.__compute_weight(i, j - 1, key, fkey) + key[j] + fkey[j]
+        return weight[i][j]
+            
+
+    def __dealbestBSTree(self, i : int, j : int, key : list, fkey : list):
+        pass
+
+    def bestBSTree(self, key : list, fkey : list):
+        '''
+        最优二叉搜索树的算法实现，这里首先采用自上而下的求解方法(动态规划+递归实现)
+        '''
+        n = len(key)
+        min_weight_arr = zeros((n + 2, n + 1))
+        self.weight = zeros((n + 2, n + 1))
+        weight = self.weight
+        for k in range(1, n + 1):
+            self.__compute_weight(k, n - 1, key, fkey)
+        print('weight array')
+        for i in range(1, n + 1):
+            for j in range(0, n):
+                print(weight[i][j],end='\t')
+            print()
+        self.__dealbestBSTree(1, n - 1, key, fkey)
+        print('min weight array')
+        for i in range(1, n + 1):
+            for j in range(0, n):
+                print(min_weight_arr[i][j],end='\t')
+            print()
 
     def note(self):
         '''
@@ -957,6 +995,7 @@ class Chapter15_5:
         print(root)
         self.construct_optimal_bst(root)
         print('练习15.5-2 对n=7个关键字以及如下概率的集合，确定一棵最优二叉查找树的代价和结构')
+        # p的第一个元素是用不到的，k的下标从1开始
         p = [0, 0.04, 0.06, 0.08, 0.02, 0.10, 0.12, 0.14]
         q = [0.06, 0.06, 0.06, 0.06, 0.05, 0.05, 0.05, 0.05]
         e, root = self.optimal_bst(p, q, len(q) - 1)
