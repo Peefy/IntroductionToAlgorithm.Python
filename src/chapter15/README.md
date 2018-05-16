@@ -470,4 +470,102 @@ def longest_inc_seq(self, x):
 
 ```
 
+### 最优二叉搜索树
+
+#### 实现一 (非递归)
+
+```python
+
+   def optimal_bst(self, p, q, n):
+        '''
+        求最优二叉树
+        '''
+        e = zeros((n + 2, n + 1))
+        w = zeros((n + 2, n + 1))
+        root = zeros((n, n))
+        for i in range(1, n + 2):
+            e[i][i - 1] = q[i - 1]
+            w[i][i - 1] = q[i - 1]
+        for l in range(1, n + 1):
+            for i in range(1, n - l + 1 + 1):
+                j = i + l - 1
+                e[i][j] = math.inf
+                w[i][j] = w[i][j - 1] + p[j] + q[j]
+                for r in range(i, j + 1):
+                    t = e[i][r - 1] + e[r + 1][j] + w[i][j]
+                    if t < e[i][j]:
+                        e[i][j] = t
+                        root[i - 1][j - 1] = r
+        e_return = zeros((n + 1, n + 1))
+        w_return = zeros((n + 1, n + 1))
+        for i in range(n):
+            e_return[i] = e[i + 1]
+            w_return[i] = w[i + 1]
+        return (e_return, root)
+
+```
+
+#### 实现二 (递归+备忘录模式)
+
+```python
+
+    def __compute_weight(self, i : int, j : int, key : list, fkey : list, weight):
+        if i - 1 == j:
+            weight[i][j] = fkey[j]
+        else:
+            weight[i][j] = self.__compute_weight(i, j - 1, key, fkey, weight) + key[j] + fkey[j]
+        return weight[i][j]
+            
+    def __dealbestBSTree(self, i : int, j : int, key : list, fkey : list, weight, min_weight_arr):
+        '''
+        备忘录模式(从上到下模式)
+        '''
+        if i - 1 == j:
+            min_weight_arr[i][j] = weight[i][j]
+            return weight[i][j]
+        if min_weight_arr[i][j] != 0:
+            return min_weight_arr[i][j]
+        _min = 10
+        for k in range(i, j + 1):
+            tmp = self.__dealbestBSTree(i, k - 1, key, fkey, weight, min_weight_arr) + \
+                self.__dealbestBSTree(k + 1, j, key, fkey, weight, min_weight_arr) + \
+                weight[i][j]
+            if tmp < _min:
+                _min = tmp
+        min_weight_arr[i][j] = _min
+        return _min
+
+    def bestBSTree(self, key : list, fkey : list):
+        '''
+        最优二叉搜索树的算法实现，这里首先采用自上而下的求解方法(动态规划+递归实现) `O(n^3)`
+        '''
+        n = len(key)
+        min_weight_arr = zeros((n + 1, n))
+        weight = zeros((n + 1, n))
+        for k in range(1, n + 1):
+            self.__compute_weight(k, n - 1, key, fkey, weight)
+        self.__dealbestBSTree(1, n - 1, key, fkey, weight, min_weight_arr)
+        m_w_r = zeros((n, n))
+        w_r = zeros((n, n))
+        for i in range(n):
+            m_w_r[i] = min_weight_arr[i + 1]
+            w_r[i] = weight[i + 1]
+        return (w_r, m_w_r, min_weight_arr[1][n - 1]) 
+
+    def show_bestBSTree(self, key : list, fkey : list):
+        '''
+        最优二叉搜索树的算法实现，这里首先采用自上而下的求解方法(动态规划+递归实现) `O(n^3)`
+        并且打印出权重矩阵和最小权重
+        '''
+        w, m, min = self.bestBSTree(key, fkey)
+        print('the weight matrix is')
+        print(w)
+        print('the min weight matrix is')
+        print(m)
+        print('the min weight value is')
+        print(min)
+
+```
+
+
 [Github Code](https://github.com/Peefy/CLRS_dugu_code-master/blob/master/src/chapter15)
