@@ -1023,7 +1023,7 @@ class Chapter15_5:
         print(root)
         self.show_bestBSTree(p, q)
         self.construct_optimal_bst(root)
-        print('练习15.5-3 ')
+        print('练习15.5-3 略')
         print('练习15.5-4 ')
         print('思考题15-1 双调欧几里得旅行商问题')
         print('思考题15-2 整齐打印')
