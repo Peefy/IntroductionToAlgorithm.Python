@@ -865,9 +865,9 @@ class Chapter15_5:
         '''
         求最优二叉树
         '''
-        e = zeros((n + 2, n + 2))
-        w = zeros((n + 2, n + 2))
-        root = zeros((n + 1, n + 1))
+        e = zeros((n + 2, n + 1))
+        w = zeros((n + 2, n + 1))
+        root = zeros((n, n))
         for i in range(1, n + 2):
             e[i][i - 1] = q[i - 1]
             w[i][i - 1] = q[i - 1]
@@ -880,14 +880,21 @@ class Chapter15_5:
                     t = e[i][r - 1] + e[r + 1][j] + w[i][j]
                     if t < e[i][j]:
                         e[i][j] = t
-                        root[i][j] = r
-        return (e, root)
+                        root[i - 1][j - 1] = r
+        e_return = zeros((n + 1, n + 1))
+        w_return = zeros((n + 1, n + 1))
+        for i in range(n):
+            e_return[i] = e[i + 1]
+            w_return[i] = w[i + 1]
+        return (e_return, root)
     
     def construct_optimal_bst(self, root):
         '''
         给定表root，输出一棵最优二叉查找树的结构
         '''
-        pass
+        i = 1
+        j = 1
+        count = shape(root)[-1] - 1
 
     def note(self):
         '''
@@ -949,16 +956,22 @@ class Chapter15_5:
         print(e)
         print(root)
         self.construct_optimal_bst(root)
-        print('练习15.5-2 ')
+        print('练习15.5-2 对n=7个关键字以及如下概率的集合，确定一棵最优二叉查找树的代价和结构')
+        p = [0, 0.04, 0.06, 0.08, 0.02, 0.10, 0.12, 0.14]
+        q = [0.06, 0.06, 0.06, 0.06, 0.05, 0.05, 0.05, 0.05]
+        e, root = self.optimal_bst(p, q, len(q) - 1)
+        print(e)
+        print(root)
+        self.construct_optimal_bst(root)
         print('练习15.5-3 ')
         print('练习15.5-4 ')
-        print('思考题15-1 ')
-        print('思考题15-2 ')
-        print('思考题15-3 ')
-        print('思考题15-4 ')
-        print('思考题15-5 ')
-        print('思考题15-6 ')
-        print('思考题15-7 ')
+        print('思考题15-1 双调欧几里得旅行商问题')
+        print('思考题15-2 整齐打印')
+        print('思考题15-3 编辑距离')
+        print('思考题15-4 计划一个公司聚会')
+        print('思考题15-5 Viterbi算法')
+        print('思考题15-6 在棋盘上移动')
+        print('思考题15-7 达到最高效益的调度')
         # python src/chapter15/chapter15note.py
         # python3 src/chapter15/chapter15note.py
 
