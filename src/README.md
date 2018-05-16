@@ -4,35 +4,37 @@
 
 算法导论 **Introduction to Algorithms**
 
-* Chapter1 算法在计算中的作用
+* [Chapter1 算法在计算中的作用](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter1)
 
-* Chapter2 算法入门
+* [Chapter2 算法入门](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter2)
 
-* Chapter3 函数的增长
+* [Chapter3 函数的增长](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter3)
 
-* Chapter4 递归式
+* [Chapter4 递归式](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter4)
 
-* Chapter5 概率分析和随机算法
+* [Chapter5 概率分析和随机算法](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter5)
 
-* Chapter6 堆排序
+* [Chapter6 堆排序](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter6)
 
-* Chapter7 快速排序
+* [Chapter7 快速排序](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter7)
 
-* Chapter8 线性时间排序
+* [Chapter8 线性时间排序](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter8)
 
-* Chapter9 中位数和顺序统计学
+* [Chapter9 中位数和顺序统计学](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter9)
 
-* Chapter10 基本数据结构
+* [Chapter10 基本数据结构](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter10)
 
-* Chapter11 散列表
+* [Chapter11 散列表](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter11)
 
-* Chapter12 二叉查找树
+* [Chapter12 二叉查找树](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter12)
 
-* Chapter13 红黑树
+* [Chapter13 红黑树](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter13)
 
-* Chapter14 数据结构的扩张
+* [Chapter14 数据结构的扩张](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter14)
 
-* Chapter15 动态规划
+* [Chapter15 动态规划](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter15)
+
+* [Chapter16 贪心算法](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter16)
 
 ## Requirement:
 
