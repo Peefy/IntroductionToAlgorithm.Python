@@ -897,42 +897,61 @@ class Chapter15_5:
         j = 0
         count = shape(root)[-1]
 
-    weight = 0
-    min_weight_arr = 0
-
-    def __compute_weight(self, i : int, j : int, key : list, fkey : list):
-        weight = self.weight
+    def __compute_weight(self, i : int, j : int, key : list, fkey : list, weight):
         if i - 1 == j:
             weight[i][j] = fkey[j]
         else:
-            weight[i][j] = self.__compute_weight(i, j - 1, key, fkey) + key[j] + fkey[j]
+            weight[i][j] = self.__compute_weight(i, j - 1, key, fkey, weight) + key[j] + fkey[j]
         return weight[i][j]
             
-
-    def __dealbestBSTree(self, i : int, j : int, key : list, fkey : list):
-        pass
+    def __dealbestBSTree(self, i : int, j : int, key : list, fkey : list, weight, min_weight_arr):
+        '''
+        备忘录模式(从上到下模式)
+        '''
+        if i - 1 == j:
+            min_weight_arr[i][j] = weight[i][j]
+            return weight[i][j]
+        if min_weight_arr[i][j] != 0:
+            return min_weight_arr[i][j]
+        _min = 10
+        for k in range(i, j + 1):
+            tmp = self.__dealbestBSTree(i, k - 1, key, fkey, weight, min_weight_arr) + \
+                self.__dealbestBSTree(k + 1, j, key, fkey, weight, min_weight_arr) + \
+                weight[i][j]
+            if tmp < _min:
+                _min = tmp
+        min_weight_arr[i][j] = _min
+        return _min
 
     def bestBSTree(self, key : list, fkey : list):
         '''
-        最优二叉搜索树的算法实现，这里首先采用自上而下的求解方法(动态规划+递归实现)
+        最优二叉搜索树的算法实现，这里首先采用自上而下的求解方法(动态规划+递归实现) `O(n^3)`
         '''
         n = len(key)
-        min_weight_arr = zeros((n + 2, n + 1))
-        self.weight = zeros((n + 2, n + 1))
-        weight = self.weight
+        min_weight_arr = zeros((n + 1, n))
+        weight = zeros((n + 1, n))
         for k in range(1, n + 1):
-            self.__compute_weight(k, n - 1, key, fkey)
-        print('weight array')
-        for i in range(1, n + 1):
-            for j in range(0, n):
-                print(weight[i][j],end='\t')
-            print()
-        self.__dealbestBSTree(1, n - 1, key, fkey)
-        print('min weight array')
-        for i in range(1, n + 1):
-            for j in range(0, n):
-                print(min_weight_arr[i][j],end='\t')
-            print()
+            self.__compute_weight(k, n - 1, key, fkey, weight)
+        self.__dealbestBSTree(1, n - 1, key, fkey, weight, min_weight_arr)
+        m_w_r = zeros((n, n))
+        w_r = zeros((n, n))
+        for i in range(n):
+            m_w_r[i] = min_weight_arr[i + 1]
+            w_r[i] = weight[i + 1]
+        return (w_r, m_w_r, min_weight_arr[1][n - 1]) 
+
+    def show_bestBSTree(self, key : list, fkey : list):
+        '''
+        最优二叉搜索树的算法实现，这里首先采用自上而下的求解方法(动态规划+递归实现) `O(n^3)`
+        并且打印出权重矩阵和最小权重
+        '''
+        w, m, min = self.bestBSTree(key, fkey)
+        print('the weight matrix is')
+        print(w)
+        print('the min weight matrix is')
+        print(m)
+        print('the min weight value is')
+        print(min)
 
     def note(self):
         '''
@@ -993,6 +1012,7 @@ class Chapter15_5:
         e, root = self.optimal_bst(p, q, len(q) - 1)
         print(e)
         print(root)
+        self.show_bestBSTree(p, q)
         self.construct_optimal_bst(root)
         print('练习15.5-2 对n=7个关键字以及如下概率的集合，确定一棵最优二叉查找树的代价和结构')
         # p的第一个元素是用不到的，k的下标从1开始
@@ -1001,6 +1021,7 @@ class Chapter15_5:
         e, root = self.optimal_bst(p, q, len(q) - 1)
         print(e)
         print(root)
+        self.show_bestBSTree(p, q)
         self.construct_optimal_bst(root)
         print('练习15.5-3 ')
         print('练习15.5-4 ')
