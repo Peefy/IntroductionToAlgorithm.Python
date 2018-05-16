@@ -943,8 +943,8 @@ class Chapter15_5:
         print('OPTIMAL-BST过程需要Θ(n^3)的运行时间，这与MATRIX-CHAIN-ORDER是一样的，',
             '因为for循环有三层嵌套,而且每个循环的下标有至多n个值')
         print('练习15.5-1 写出过程CONSTRUCT-OPTIMAL-BST(root)的伪代码，给定表root，输出一棵最优二叉查找树的结构')
-        p = [0, 0, 0.15, 0.10, 0.05, 0.10, 0.20]
-        q = [0 ,0.05, 0.10, 0.05, 0.05, 0.05, 0.10]
+        p = [0, 0.15, 0.10, 0.05, 0.10, 0.20]
+        q = [0.05, 0.10, 0.05, 0.05, 0.05, 0.10]
         e, root = self.optimal_bst(p, q, len(q) - 1)
         print(e)
         print(root)
