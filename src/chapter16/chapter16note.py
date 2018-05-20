@@ -26,6 +26,84 @@ class Chapter16_1:
     '''
     chpater16.1 note and function
     '''
+    def recursive_activity_selector(self, s, f, i, j):
+        '''
+        递归解决活动选择问题
+        '''
+        m = i + 1
+        while m < j and s[m] < f[i]:
+            m = m + 1
+        if m < j:
+            return [m] + self.recursive_activity_selector(s, f, m, j) 
+        else:
+            return []
+
+    def greedy_activity_selector(self, s, f):
+        '''
+        迭代贪心算法解决活动选择问题
+        '''
+        n = len(s)
+        A = [1]
+        i = 1
+        for m in range(2, n):
+            if s[m] >= f[i]:
+                A = A + [m]
+                i = m
+        return A
+
+    def normal_activity_selector(self, s, f):
+        '''
+        常规for循环解决选择问题
+        '''
+        n = len(s)
+        c = zeros((n, n))
+        v = zeros((n, n))
+        for k in range(n):
+            start = s[k]
+            end = f[k]
+            c[k][k] = k + 1
+            for i in range(k):
+                if f[i] < start:
+                    start = s[i]
+                    c[k][i] = i + 1
+            for j in range(k + 1, n):
+                if s[j] > end:
+                    end = f[j]
+                    c[k][j] = j + 1
+        return c
+
+    def dp_activity_selector(self, s, f):
+        '''
+        动态规划解决选择问题
+        '''
+        n = len(s)
+        c = zeros((n, n))
+        index = zeros((n, n))
+        for step in range(2, n):
+            for i in range(0, n - 1):
+                j = step + i
+                if j < n:
+                    if f[i] <= s[j]:
+                        for k in range(i + 1, j):
+                            if f[k] > s[j] or s[k] < f[i]:
+                                continue
+                            result = c[i][k] + c[k][j] + 1
+                            if result > c[i][j]:
+                                c[i][j] = result
+                                index[i][j] = k
+        return index
+
+    def dp_activity_selector_print(self, index, i, j):
+        '''
+        打印结果
+        '''
+        k = int(index[i][j])
+        if k != 0:
+            self.dp_activity_selector_print(index, i, k)
+            print(k, end=' ')
+            self.dp_activity_selector_print(index, k, j)
+        
+
     def note(self):
         '''
         Summary
@@ -77,16 +155,31 @@ class Chapter16_1:
         print('一个递归解')
         print(' 动态规划方法的第二步是递归地定义最优解的值。对于活动选择问题')
         print(' 考虑一个非空子集Sij,如果ak在Sij的最大兼容子集中被使用，则子问题Sik和Skj的最大兼容子集也被使用')
-        print(' 递归式：c[i, j] = c[i, k] + c[k, j] + 1')
+        print(' 递归式：c[i, j] = max{c[i, k] + c[k, j] + 1} 如果Sij不是空集')
+        print(' 递归式：c[i, j] = 0 如果Sij是空集')
+        print('将动态规划解转化为贪心解')
+        print(' 到此为止，写出一个表格化的、自底向上的、基于递归式的动态规划算法是不难的')
+        i = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11]
+        s = [0, 1, 3, 0 ,5, 3, 5, 6, 8, 8, 2, 12]
+        f = [0, 4, 5, 6, 7, 8, 9, 10,11,12,13,14]
+        print(' 定理16.1 对于任意非空子问题Sij,设am是Sij中具有最早结束时间的活动:fm=min{fk:ak属于Sij}')
+        print(' 那么(1) 活动am在Sij的某最大兼容活动子集中被使用')
+        print(' (2)子问题Sim为空，所以选择am将使子问题Smj为唯一可能非空的子问题')
+        print('递归贪心算法')
+        print(' 介绍一种纯贪心的，自顶向下(递归)的算法解决活动选择问题,',
+            '假设n个输入活动已经按照结束时间的单调递增顺序排序。否则可以在O(nlgn)时间内将它们以此排序')
+        print(self.recursive_activity_selector(s, f, 0, len(s)))
+        print(self.greedy_activity_selector(s, f))
+        print('练习16.1-1 活动选择问题的动态规划算法')
+        s = [0, 1, 3, 0 ,5, 3, 5, 6, 8, 8, 2, 12, math.inf]
+        f = [0, 4, 5, 6, 7, 8, 9, 10,11,12,13,14, math.inf]
+        index = self.dp_activity_selector(s, f)
+        print(index)
+        self.dp_activity_selector_print(index, 0, len(s) - 1)
         print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('练习16.1-2 ')
+        print('练习16.1-3 ')
+        print('练习16.1-4 ')
         print('')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
