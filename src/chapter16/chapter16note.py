@@ -58,7 +58,7 @@ class Chapter16_1:
         A = []
         n = len(s)
         c = zeros((n, n))
-        v = zeros((n, n))
+        cost = zeros(n)
         for k in range(n):
             start = s[k]
             end = f[k]
@@ -67,6 +67,7 @@ class Chapter16_1:
                 if f[i] < start:
                     start = s[i]
                     c[k][i] = i + 1
+                    cost[k] += 
             for j in range(k + 1, n):
                 if s[j] > end:
                     end = f[j]
@@ -170,7 +171,7 @@ class Chapter16_1:
             '假设n个输入活动已经按照结束时间的单调递增顺序排序。否则可以在O(nlgn)时间内将它们以此排序')
         print(self.recursive_activity_selector(s, f, 0, len(s)))
         print(self.greedy_activity_selector(s, f))
-        s = [1, 3, 0 ,5, 3, 5, 6, 8, 8, 2, 12]
+        s = [1, 2, 0 ,5, 3, 5, 6, 8, 8, 2, 12]
         f = [4, 5, 6, 7, 8, 9, 10,11,12,13,14]
         print(self.normal_activity_selector(s, f))
         print('练习16.1-1 活动选择问题的动态规划算法')
@@ -180,10 +181,12 @@ class Chapter16_1:
         print(index)
         self.dp_activity_selector_print(index, 0, len(s) - 1)
         print('')
-        print('练习16.1-2 ')
-        print('练习16.1-3 ')
-        print('练习16.1-4 ')
-        print('')
+        print('练习16.1-2 略')
+        print('练习16.1-3 区间图着色问题：可作出一个区间图，其顶点为已知的活动，其边连接着不兼容的活动',
+            '其边连接着不兼容的活动。为使任两个相邻结点的颜色均不相同，',
+            '所需的最少颜色数对应于找出调度给定的所有活动所需的最小教室数')
+        print('练习16.1-4 并不是任何用来解决活动选择问题的贪心算法都能给出兼容活动的最大集合')
+        print(' 请给出一个例子，说明那种在与已选出的活动兼容的活动中选择生存期最短的方法是行不通的')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
 
