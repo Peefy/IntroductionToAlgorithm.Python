@@ -55,6 +55,7 @@ class Chapter16_1:
         '''
         常规for循环解决选择问题
         '''
+        A = []
         n = len(s)
         c = zeros((n, n))
         v = zeros((n, n))
@@ -103,7 +104,6 @@ class Chapter16_1:
             print(k, end=' ')
             self.dp_activity_selector_print(index, k, j)
         
-
     def note(self):
         '''
         Summary
@@ -170,6 +170,9 @@ class Chapter16_1:
             '假设n个输入活动已经按照结束时间的单调递增顺序排序。否则可以在O(nlgn)时间内将它们以此排序')
         print(self.recursive_activity_selector(s, f, 0, len(s)))
         print(self.greedy_activity_selector(s, f))
+        s = [1, 3, 0 ,5, 3, 5, 6, 8, 8, 2, 12]
+        f = [4, 5, 6, 7, 8, 9, 10,11,12,13,14]
+        print(self.normal_activity_selector(s, f))
         print('练习16.1-1 活动选择问题的动态规划算法')
         s = [0, 1, 3, 0 ,5, 3, 5, 6, 8, 8, 2, 12, math.inf]
         f = [0, 4, 5, 6, 7, 8, 9, 10,11,12,13,14, math.inf]
