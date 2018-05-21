@@ -22,6 +22,7 @@ from numpy import arange as _arange
 from numpy import array as _array
 from numpy import *
 
+
 class Chapter16_1:
     '''
     chpater16.1 note and function
@@ -58,21 +59,23 @@ class Chapter16_1:
         A = []
         n = len(s)
         c = zeros((n, n))
-        cost = zeros(n)
+        length = zeros(n)
         for k in range(n):
             start = s[k]
             end = f[k]
             c[k][k] = k + 1
+            length[k] += (end - start)
             for i in range(k):
                 if f[i] < start:
                     start = s[i]
                     c[k][i] = i + 1
-                    cost[k] += 
+                    length[k] += (f[i] - s[i])
             for j in range(k + 1, n):
-                if s[j] > end:
+                if s[j] >= end:
                     end = f[j]
                     c[k][j] = j + 1
-        return c
+                    length[k] += (f[j] - s[j])
+        return c, length
 
     def dp_activity_selector(self, s, f):
         '''
