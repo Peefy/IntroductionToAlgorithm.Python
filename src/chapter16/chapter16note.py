@@ -209,7 +209,12 @@ class Chapter16_2:
         Chapter16_2().note()
         ```
         '''
-        print('chapter16.2 note as follow')   
+        print('chapter16.2 note as follow')
+        print('16.2 贪心策略的基本内容')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
 
