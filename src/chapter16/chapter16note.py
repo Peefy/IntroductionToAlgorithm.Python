@@ -211,8 +211,9 @@ class Chapter16_2:
         '''
         print('chapter16.2 note as follow')
         print('16.2 贪心策略的基本内容')
-        print('')
-        print('')
+        print('贪心算法是通过做一系列的选择来给出某一问题的最优解。',
+            '对算法中的每一个决策点，做一个当时(看起来)是最佳的选择')
+        print('这种启发式策略并不是总能产生出最优解，但是常常能给出最优解')
         print('')
         print('')
         # python src/chapter16/chapter16note.py
