@@ -22,6 +22,10 @@ redirect_from:
 
 贪心算法只需考虑一个选择(贪心的选择)，再做贪心选择时，子问题之一必然是空的，因此只留下一个非空子问题
 
+### GA和DP的不同
+
+贪心是自下而上 动态规划是自上而下，动态规划的最优解的子集仍然是子问题的最优解，所以存在最优解迭代公式和存放最优解的表格；贪心是从第一步每一步先使子问题达到最优
+
 ### 活动选择问题
 
 ```python
@@ -213,6 +217,104 @@ redirect_from:
             else:
                 print('value:{} weight:{}'.format(v[i], m))
                 m = 0
+
+```
+
+### 计算组合价值最大问题(贪心求解)
+
+```python
+
+    def cal_compose_value(self, A, B):
+        '''
+        计算组合价值
+        '''
+        assert len(A) == len(B)
+        n = len(A)
+        value = 0
+        for i in range(n):
+            value += A[i] ** B[i]
+        return value
+
+    def insertsort(self, array, start ,end, isAscending=True):
+        '''
+        Summary
+        ===
+        插入排序的升序排列(带排序索引), 原地排序
+        
+        Parameter
+        ===
+        `array` : a list like
+
+        `start` : sort start index
+
+        `end` : sort end index
+
+        Return
+        ===
+        `sortedArray` : 排序好的数组
+
+        Example
+        ===
+        ```python
+        >>> array = [6, 5, 4, 3, 2, 1]
+        >>> Chapter2_3().insert(array, 1, 4)
+        >>> [6 ,2, 3, 4, 5, 1]
+        ```
+        '''
+        if isAscending == True:
+            A = array
+            for j in range(start + 1, end + 1):
+                ## Insert A[j] into the sorted sequece A[1...j-1] 前n - 1 张牌
+                # 下标j指示了待插入到手中的当前牌，所以j的索引从数组的第二个元素开始
+                # 后来摸的牌
+                key = A[j]
+                # 之前手中的已经排序好的牌的最大索引
+                i = j - 1
+                # 开始寻找插入的位置并且移动牌
+                while(i >= 0 and A[i] > key):
+                    # 向右移动牌
+                    A[i + 1] = A[i]
+                    # 遍历之前的牌
+                    i = i - 1
+                # 后来摸的牌插入相应的位置
+                A[i + 1] = key
+                # 输出升序排序后的牌
+        else:
+            A = array
+            for j in range(start + 1, end + 1):
+                ## Insert A[j] into the sorted sequece A[1...j-1] 前n - 1 张牌
+                # 下标j指示了待插入到手中的当前牌，所以j的索引从数组的第二个元素开始
+                # 后来摸的牌
+                key = A[j]
+                # 之前手中的已经排序好的牌的最大索引
+                i = j - 1
+                # 开始寻找插入的位置并且移动牌
+                while(i >= 0 and A[i] <= key):
+                    # 向右移动牌
+                    A[i + 1] = A[i]
+                    # 遍历之前的牌
+                    i = i - 1
+                # 后来摸的牌插入相应的位置
+                A[i + 1] = key
+                # 输出升序排序后的牌
+        return A
+
+    def max_compose_value(self, A, B):
+        ''' 
+        最大化报酬问题，对集合`A` 和 集合`B`排序后，使价值最大 (贪心求解)
+
+        value = argmax(∏ ai ** bi)
+
+        '''
+        assert len(A) == len(B)
+        n = len(A)
+        for i in range(n):
+            A = self.insertsort(A, i, n - 1, isAscending=False)
+            if A[i] >= 1:
+                B = self.insertsort(B, i, n - 1, isAscending=False)  
+            else:
+                B = self.insertsort(B, i, n - 1, isAscending=True)  
+        return self.cal_compose_value(A, B)
 
 ```
 

@@ -498,8 +498,30 @@ class Chapter16_2:
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
 
+class Chapter16_3:
+    '''
+    chpater16.3 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter16.3 note
+
+        Example
+        ====
+        ```python
+        Chapter16_3().note()
+        ```
+        '''
+        print('chapter16.3 note as follow')
+        # python src/chapter16/chapter16note.py
+        # python3 src/chapter16/chapter16note.py
+
+
 chapter16_1 = Chapter16_1()
 chapter16_2 = Chapter16_2()
+chapter16_3 = Chapter16_3()
 
 def printchapter16note():
     '''
@@ -508,6 +530,7 @@ def printchapter16note():
     print('Run main : single chapter sixteen!')  
     chapter16_1.note()
     chapter16_2.note()
+    chapter16_3.note()
 
 # python src/chapter16/chapter16note.py
 # python3 src/chapter16/chapter16note.py
