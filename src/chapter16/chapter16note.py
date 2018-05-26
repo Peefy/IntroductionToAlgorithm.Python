@@ -7,6 +7,8 @@ Class Chapter16_1
 
 Class Chapter16_2
 
+Class Chapter16_3
+
 '''
 from __future__ import absolute_import, division, print_function
 
@@ -21,7 +23,6 @@ import numpy as np
 from numpy import arange as _arange
 from numpy import array as _array
 from numpy import *
-
 
 class Chapter16_1:
     '''
@@ -197,9 +198,13 @@ class Chapter16_2:
     '''
     chpater16.2 note and function
     '''
-    def zero_one_knapsack_problem_dp(self, total_weight, item_weight : list, item_value : list):
+    def zero_one_knapsack_problem_dp(self, total_weight, item_weight, item_value):
         '''
         0-1背包问题的动态规划方法
+
+        时间复杂度`O(n × total_weight)`
+
+        空间复杂度`O(n × total_weight)`
 
         Args
         ===
@@ -213,19 +218,181 @@ class Chapter16_2:
         ===
         `item_index` : 存放入背包的物品索引，一个物品只能存放一次
 
-        Examplr
+        Example
         ===
         ```python
-        total_weight = 50
-        item_weight = [10, 20, 30]
-        item_value = [60, 100, 120]
-        zero_one_knapsack_problem_dp(total_weight, item_weight, item_value):
+        >>> total_weight = 50
+        >>> item_weight = [10, 20, 30]
+        >>> item_value = [60, 100, 120]
+        >>> zero_one_knapsack_problem_dp(total_weight, item_weight, item_value):
         >>> [1, 2]
         ```
-        
         '''
-        count = len(item_weight)
-        pass
+        # 动态规划第一步先选取最优子问题结构,并确立表格
+        n = len(item_value) 
+        W = total_weight
+        V = zeros((n, W + 1))
+        w = item_weight
+        v = item_value   
+        for i in range(1, n):
+            for j in range(1, W + 1):
+                if j < w[i]:
+                    V[i][j] = V[i - 1][j]
+                else:
+                    V[i][j] = max(V[i - 1][j], V[i - 1][j - w[i]] + v[i])
+        item = []
+        self.__find_zero_one_knapsack_problem_dp_result(V, w, v, n - 1, W, item)
+        return item
+    
+    def __find_zero_one_knapsack_problem_dp_result(self, V, w, v, i, j, item : list):
+        if i >= 0:
+            if V[i][j] == V[i - 1][j]:
+                self.__find_zero_one_knapsack_problem_dp_result(V, w, v, i - 1, j, item)
+            elif j - w[i] >= 0 and V[i][j] == V[i - 1][j - w[i]] + v[i]:
+                item.append(i)
+                self.__find_zero_one_knapsack_problem_dp_result(V, w, v, i - 1, j - w[i], item)
+
+    def partof_knapsack_problem_ga(self, total_weight, item_weight, item_value):
+        '''
+        部分背包问题的贪心算法
+
+        Args
+        ===
+        `total_weight` : 背包能容纳的物品总重量
+
+        `item_weight` : `list` 各物品的重量
+
+        `item_value` : `list` 各物品的价值
+
+        Return
+        ===
+        `item_index` : 存放入背包的物品索引，一个物品只能存放一次
+
+        Example
+        ===
+        ```python
+        >>> total_weight = 50
+        >>> item_weight = [10, 20, 30]
+        >>> item_value = [60, 100, 120]
+        >>> partof_knapsack_problem_ga(total_weight, item_weight, item_value):
+        ```
+        '''
+        w = item_weight
+        v = item_value
+        n = len(w)
+        r = []
+        m = total_weight
+        for i in range(n):
+            r.append(v[i] * 1.0 / w[i])
+        # 冒泡排序
+        for i in range(1, n):
+            for j in range(n - i):
+                # 排序
+                if r[j] < r[j + 1]:
+                    r[j], r[j + 1] = r[j + 1], r[j]
+                    w[j], w[j + 1] = w[j + 1], w[j]
+                    v[j], v[j + 1] = v[j + 1], v[j]    
+        i = 0 
+        while m > 0:
+            if w[i] <= m:
+                m -= w[i]
+                print('value:{} weight:{}'.format(v[i], w[i]))
+                i += 1
+            else:
+                print('value:{} weight:{}'.format(v[i], m))
+                m = 0
+
+    def cal_compose_value(self, A, B):
+        '''
+        计算组合价值
+        '''
+        assert len(A) == len(B)
+        n = len(A)
+        value = 0
+        for i in range(n):
+            value += A[i] ** B[i]
+        return value
+
+    def insertsort(self, array, start ,end, isAscending=True):
+        '''
+        Summary
+        ===
+        插入排序的升序排列(带排序索引), 原地排序
+        
+        Parameter
+        ===
+        `array` : a list like
+
+        `start` : sort start index
+
+        `end` : sort end index
+
+        Return
+        ===
+        `sortedArray` : 排序好的数组
+
+        Example
+        ===
+        ```python
+        >>> array = [6, 5, 4, 3, 2, 1]
+        >>> Chapter2_3().insert(array, 1, 4)
+        >>> [6 ,2, 3, 4, 5, 1]
+        ```
+        '''
+        if isAscending == True:
+            A = array
+            for j in range(start + 1, end + 1):
+                ## Insert A[j] into the sorted sequece A[1...j-1] 前n - 1 张牌
+                # 下标j指示了待插入到手中的当前牌，所以j的索引从数组的第二个元素开始
+                # 后来摸的牌
+                key = A[j]
+                # 之前手中的已经排序好的牌的最大索引
+                i = j - 1
+                # 开始寻找插入的位置并且移动牌
+                while(i >= 0 and A[i] > key):
+                    # 向右移动牌
+                    A[i + 1] = A[i]
+                    # 遍历之前的牌
+                    i = i - 1
+                # 后来摸的牌插入相应的位置
+                A[i + 1] = key
+                # 输出升序排序后的牌
+        else:
+            A = array
+            for j in range(start + 1, end + 1):
+                ## Insert A[j] into the sorted sequece A[1...j-1] 前n - 1 张牌
+                # 下标j指示了待插入到手中的当前牌，所以j的索引从数组的第二个元素开始
+                # 后来摸的牌
+                key = A[j]
+                # 之前手中的已经排序好的牌的最大索引
+                i = j - 1
+                # 开始寻找插入的位置并且移动牌
+                while(i >= 0 and A[i] <= key):
+                    # 向右移动牌
+                    A[i + 1] = A[i]
+                    # 遍历之前的牌
+                    i = i - 1
+                # 后来摸的牌插入相应的位置
+                A[i + 1] = key
+                # 输出升序排序后的牌
+        return A
+
+    def max_compose_value(self, A, B):
+        ''' 
+        最大化报酬问题，对集合`A` 和 集合`B`排序后，使价值最大 (贪心求解)
+
+        value = argmax(∏ ai ** bi)
+
+        '''
+        assert len(A) == len(B)
+        n = len(A)
+        for i in range(n):
+            A = self.insertsort(A, i, n - 1, isAscending=False)
+            if A[i] >= 1:
+                B = self.insertsort(B, i, n - 1, isAscending=False)  
+            else:
+                B = self.insertsort(B, i, n - 1, isAscending=True)  
+        return self.cal_compose_value(A, B)
 
     def note(self):
         '''
@@ -304,15 +471,30 @@ class Chapter16_2:
         print('练习16.2-1 证明部分背包问题具有贪心选择性质')
         print('练习16.2-2 请给出一个解决0-1背包问题的运行时间为O(n W)的动态规划方法，',
             'n为物品件数，W为窃贼可放入他背包物品的最大重量')
-        total_weight = 50
-        item_weight = [10, 20, 30]
-        item_value = [60, 100, 120]
+        # 一般动态规划在输入数据中填入首项0
+        total_weight = 8
+        item_weight = [0, 5, 4, 3, 1]
+        item_value = [0, 3, 4, 5, 6]
         print(self.zero_one_knapsack_problem_dp(total_weight, item_weight, item_value))
-        print('练习16.2-3 ')
-        print('练习16.2-4 ')
-        print('练习16.2-5 ')
-        print('练习16.2-6 ')
-        print('练习16.2-7 ')
+        total_weight = 8
+        item_weight = [2, 3, 4, 5]
+        item_value = [3, 4, 5, 6]
+        print(self.zero_one_knapsack_problem_dp(total_weight, item_weight, item_value))
+        print('贪心算法解部分背包问题')
+        self.partof_knapsack_problem_ga(total_weight, item_weight, item_value)
+        print('练习16.2-3 从价值高重量轻的开始拿，拿到满为止')
+        print('练习16.2-4 略,公路加油问题')
+        print('练习16.2-5 请描述一个算法，使之对给定的一实数轴上的点集{x1,x2,...,xn},能确定包含所有',
+            '给定点的最小单位闭区间闭集合')
+        print('练习16.2-6 带权中位数：在O(nlgn)的最坏情况时间内求出n个元素的带权中位数',
+            '说明如何在O(n)时间内解决部分背包问题')
+        print('练习16.2-7 最大化报酬问题')
+        A = [1.1, 0.2, 3, 4, 5]
+        B = [4.3, 4, 3, 2, 1]
+        print(self.cal_compose_value(A, B))
+        print(self.max_compose_value(A, B))
+        print(A)
+        print(B)
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
 
