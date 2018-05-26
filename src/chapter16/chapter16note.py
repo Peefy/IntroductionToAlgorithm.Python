@@ -515,6 +515,7 @@ class Chapter16_3:
         ```
         '''
         print('chapter16.3 note as follow')
+        print('16.3 赫夫曼编码')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
 
