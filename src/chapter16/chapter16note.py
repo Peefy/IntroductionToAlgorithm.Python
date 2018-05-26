@@ -197,6 +197,36 @@ class Chapter16_2:
     '''
     chpater16.2 note and function
     '''
+    def zero_one_knapsack_problem_dp(self, total_weight, item_weight : list, item_value : list):
+        '''
+        0-1背包问题的动态规划方法
+
+        Args
+        ===
+        `total_weight` : 背包能容纳的物品总重量
+
+        `item_weight` : `list` 各物品的重量
+
+        `item_value` : `list` 各物品的价值
+
+        Return
+        ===
+        `item_index` : 存放入背包的物品索引，一个物品只能存放一次
+
+        Examplr
+        ===
+        ```python
+        total_weight = 50
+        item_weight = [10, 20, 30]
+        item_value = [60, 100, 120]
+        zero_one_knapsack_problem_dp(total_weight, item_weight, item_value):
+        >>> [1, 2]
+        ```
+        
+        '''
+        count = len(item_weight)
+        pass
+
     def note(self):
         '''
         Summary
@@ -264,15 +294,25 @@ class Chapter16_2:
             '贪心算法就可以O(nlgn)时间运行。关于部分背包问题具有贪心选择性质的证明')
         print('一个简单的问题可以说明贪心为什么不适用0-1背包问题，背包能承受的最大重量为50磅')
         print('物品1 重10磅 值60元(每磅6元)；物品2 重20磅 值100元(每磅5元)；物品3 重30磅 值120元(每磅4元)')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('按照贪心策略(即只关注当前的最优情况)，就要取物品1，然而最优解是一定不能取物品1的')
+        print('最优解取的是物品2和物品3，留下物品1.两种包含物品1的可能解都是次优的')
+        print('即贪心策略对0-1背包问题不适用')
+        print('然而对于部分背包问题，在按照贪心策略先取物品1以后，确实可以产生一个最优解')
+        print('在0-1背包问题中不应该取物品1的原因在与这样无法把背包填满，空余的空间就降低了他的货物的有效每磅价值')
+        print('在0-1背包问题中，当我们考虑是否要把一件物品加到背包中时，必须对把该问题加进去的子问题的解与不取该物品的子问题的解进行比较')
+        print('由这种方式形成的问题导致了许多重叠子问题(这是动态规划的一个特点)，所以，可以用动态规划来解决0-1背包问题')
+        print('练习16.2-1 证明部分背包问题具有贪心选择性质')
+        print('练习16.2-2 请给出一个解决0-1背包问题的运行时间为O(n W)的动态规划方法，',
+            'n为物品件数，W为窃贼可放入他背包物品的最大重量')
+        total_weight = 50
+        item_weight = [10, 20, 30]
+        item_value = [60, 100, 120]
+        print(self.zero_one_knapsack_problem_dp(total_weight, item_weight, item_value))
+        print('练习16.2-3 ')
+        print('练习16.2-4 ')
+        print('练习16.2-5 ')
+        print('练习16.2-6 ')
+        print('练习16.2-7 ')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
 
