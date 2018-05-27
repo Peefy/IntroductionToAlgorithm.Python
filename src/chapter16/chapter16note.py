@@ -244,7 +244,7 @@ class Chapter16_2:
         self.__find_zero_one_knapsack_problem_dp_result(V, w, v, n - 1, W, item)
         return item
     
-    def __find_zero_one_knapsack_problem_dp_result(self, V, w, v, i, j, item : list):
+    def __find_zero_one_knapsack_problem_dp_result(self, V, w, v, i, j, item):
         if i >= 0:
             if V[i][j] == V[i - 1][j]:
                 self.__find_zero_one_knapsack_problem_dp_result(V, w, v, i - 1, j, item)
@@ -516,13 +516,81 @@ class Chapter16_3:
         '''
         print('chapter16.3 note as follow')
         print('16.3 赫夫曼编码')
+        # !赫夫曼编码是一种被广泛应用而且非常有效的数据压缩技术,根据数据特征，一般可以压缩20%-90%,这里的数据指的是字符串序列
+        print('赫夫曼编码是一种被广泛应用而且非常有效的数据压缩技术')
+        print('根据数据特征，一般可以压缩20%-90%,这里的数据指的是字符串序列')
+        print('赫夫曼贪心算法使用了一张字符出现频度表')
+        print('可变长编码要比固定长度编码好的多，其特点是对频度高的字符赋以短编码，而对频度低的字符赋以较长的一些编码')
+        print('比如只用一比特0编码a，四个比特1100编码f，101编码b，100编码c，111编码d，1101编码e')
+        print('前缀编码')
+        print(' 上述考虑的编码当中，没有一个编码是另一个编码的前缀。这样的编码称为前缀编码')
+        print(' 定理：由字符编码技术所获得的最优数据研所总可用某种前缀编码来获得，',
+            '因此将注意力集中到前缀编码上并不失一般性')
+        print(' 在前缀编码中解码也是很方便的。因为没有一个码是其他码的前缀')
+        print(' 只要识别出第一个编码，将它翻译成原文字符，再对余下的编码文件重复这个解码过程即可')
+        print(' 在上述的a到f编码当中，可将字符串001011101唯一地分析为0·0·101·1101，因而可解码为aabe')
+        print(' 解码过程需要有一种关于前缀编码的方便表示，使得初始编码可以很容易地被识别出来')
+        print(' 有一种表示方法就是叶子为给定字符的二叉树，在这种二叉树中，将一个字符的编码解释为从根至该字符的路径')
+        print(' 0表示转向左子结点，1表示转向右子结点')
+        print(' 注意并不是二叉查找树，因为各结点无需以排序次序出现，且内结点也不包含关键字')
+        # !文件的一种最优编码总是由一棵满二叉树来表示的，树中的每个非结点都有两个子结点
+        print('文件的一种最优编码总是由一棵满二叉树来表示的，树中的每个非结点都有两个子结点')
+        print('固定长度编码不是最优编码，因为表示它的树不是满二叉树：有的编码开始于10，但没有一个开始于11')
+        print('给定对用一种前缀编码的二叉树T，很容易计算出编码一个文件所需的位数。')
+        print('对字母表C中的每一个字符c，设f(c)表示c在文件中出现的频度，d(c)表示c的叶子在树中的深度。')
+        print('注意d(c)也是字符c的编码的长度。这样编码一个文件所需的位数就是')
+        print('  B(T)=∑f(c)d(c)')
+        print('构造赫夫曼编码')
+        # !赫夫曼设计了一个可用来构造一种称为赫夫曼编码的最优前缀编码的贪心算法 
+        print('赫夫曼设计了一个可用来构造一种称为赫夫曼编码的最优前缀编码的贪心算法 ')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
 
+class Chapter16_4:
+    '''
+    chpater16.4 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter16.4 note
+
+        Example
+        ====
+        ```python
+        Chapter16_4().note()
+        ```
+        '''
+        print('chapter16.4 note as follow')
+        # python src/chapter16/chapter16note.py
+        # python3 src/chapter16/chapter16note.py
+
+class Chapter16_5:
+    '''
+    chpater16.5 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter16.5 note
+
+        Example
+        ====
+        ```python
+        Chapter16_5().note()
+        ```
+        '''
+        print('chapter16.5 note as follow')
+        # python src/chapter16/chapter16note.py
+        # python3 src/chapter16/chapter16note.py
 
 chapter16_1 = Chapter16_1()
 chapter16_2 = Chapter16_2()
 chapter16_3 = Chapter16_3()
+chapter16_4 = Chapter16_4()
+chapter16_5 = Chapter16_5()
 
 def printchapter16note():
     '''
@@ -532,6 +600,8 @@ def printchapter16note():
     chapter16_1.note()
     chapter16_2.note()
     chapter16_3.note()
+    chapter16_4.note()
+    chapter16_5.note()
 
 # python src/chapter16/chapter16note.py
 # python3 src/chapter16/chapter16note.py
