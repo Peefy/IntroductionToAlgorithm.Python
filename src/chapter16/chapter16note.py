@@ -24,6 +24,11 @@ from numpy import arange as _arange
 from numpy import array as _array
 from numpy import *
 
+if __name__ == '__main__':
+    import huffmantree as ht
+else:
+    from . import huffmantree as ht
+
 class Chapter16_1:
     '''
     chpater16.1 note and function
@@ -502,6 +507,9 @@ class Chapter16_3:
     '''
     chpater16.3 note and function
     '''
+
+    
+        
     def note(self):
         '''
         Summary
@@ -522,6 +530,12 @@ class Chapter16_3:
         print('赫夫曼贪心算法使用了一张字符出现频度表')
         print('可变长编码要比固定长度编码好的多，其特点是对频度高的字符赋以短编码，而对频度低的字符赋以较长的一些编码')
         print('比如只用一比特0编码a，四个比特1100编码f，101编码b，100编码c，111编码d，1101编码e')
+        print('a的频度为45')
+        print('b的频度为13')
+        print('c的频度为12')
+        print('d的频度为16')
+        print('e的频度为9')
+        print('f的频度为5')
         print('前缀编码')
         print(' 上述考虑的编码当中，没有一个编码是另一个编码的前缀。这样的编码称为前缀编码')
         print(' 定理：由字符编码技术所获得的最优数据研所总可用某种前缀编码来获得，',
@@ -535,6 +549,8 @@ class Chapter16_3:
         print(' 注意并不是二叉查找树，因为各结点无需以排序次序出现，且内结点也不包含关键字')
         # !文件的一种最优编码总是由一棵满二叉树来表示的，树中的每个非结点都有两个子结点
         print('文件的一种最优编码总是由一棵满二叉树来表示的，树中的每个非结点都有两个子结点')
+        print('二叉树中每个叶子结点被标以一个字符及其出现的频度。')
+        print('每个内结点标以其子树中所有叶子的额度总和')
         print('固定长度编码不是最优编码，因为表示它的树不是满二叉树：有的编码开始于10，但没有一个开始于11')
         print('给定对用一种前缀编码的二叉树T，很容易计算出编码一个文件所需的位数。')
         print('对字母表C中的每一个字符c，设f(c)表示c在文件中出现的频度，d(c)表示c的叶子在树中的深度。')
@@ -543,6 +559,26 @@ class Chapter16_3:
         print('构造赫夫曼编码')
         # !赫夫曼设计了一个可用来构造一种称为赫夫曼编码的最优前缀编码的贪心算法 
         print('赫夫曼设计了一个可用来构造一种称为赫夫曼编码的最优前缀编码的贪心算法 ')
+        print('该算法的正确性要依赖于贪心选择性质和最优子结构')
+        c = ['a', 'b', 'c', 'd', 'e', 'f']
+        f = [45, 13, 12, 16, 9, 5]
+        tree = ht.HuffmanTreeBuilder(c, f).build()
+        print('字符为：')
+        print(tree.characters)
+        print('频度为：')
+        print(tree.fs)
+        print('编码为：')
+        print(tree.codings)
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
 
