@@ -3,11 +3,16 @@
 # python src/chapter16/chapter16note.py
 # python3 src/chapter16/chapter16note.py
 '''
+
 Class Chapter16_1
 
 Class Chapter16_2
 
 Class Chapter16_3
+
+Class Chpater16_4
+
+Class Chapter16_5
 
 '''
 from __future__ import absolute_import, division, print_function
@@ -507,9 +512,7 @@ class Chapter16_3:
     '''
     chpater16.3 note and function
     '''
-
-    
-        
+ 
     def note(self):
         '''
         Summary
