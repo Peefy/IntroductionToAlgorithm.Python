@@ -581,10 +581,27 @@ class Chapter16_3:
             '如果能做到这一点，则它们的编码就具有相同长度，而仅仅最后一位不同')
         print('下面的引理证明了构造最优前缀编码的问题具有最优子结构性质')
         print('引理16.3 设C为一给定字母表，其中每个字母c属于C都定义有频度f[c].设x和y是C中具有最低频度的两个字母。',
-            '并设C‘为字母表移去x和y，再加上(新)字符z后的字母表,')
-        print('')
-        print('')
-        print('')
+            '并设C`为字母表移去x和y，再加上(新)字符z后的字母表,C`=C-{x,y}+{z},定义f[z]=f[x]+f[y]')
+        print('设T`为表示字母表C`上最优前缀编码的任意一棵树。那么，',
+            '将T`中的叶子结点z替换成具有x和y孩子的内部结点所得到的树T，表示字母表C上的一个最优前缀编码')
+        print('定理16.4 HUFFMAN过程产生一种最优前缀编码')
+        print('练习16.3-1 定理：一棵不满的二叉树不可能与一种最优前缀编码对应')
+        print('练习16.3-2 对下面的频度集合（基于前8个斐波那契数），其最优的赫夫曼编码是什么')
+        c = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+        f = [1, 1, 2, 3, 5, 8, 13, 21]
+        tree = ht.HuffmanTreeBuilder(c, f).build()
+        print('字符为：')
+        print(tree.characters)
+        print('频度为：')
+        print(tree.fs)
+        print('编码为：')
+        print(tree.codings)
+        print('练习16.3-3 ')
+        print('练习16.3-4 ')
+        print('练习16.3-5 ')
+        print('练习16.3-6 ')
+        print('练习16.3-7 ')
+        print('练习16.3-8 ')
         print('')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
