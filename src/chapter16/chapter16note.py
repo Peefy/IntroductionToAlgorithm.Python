@@ -671,6 +671,19 @@ class Chapter16_5:
         ```
         '''
         print('chapter16.5 note as follow')
+        print('16.5 一个任务调度问题')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
 
