@@ -69,8 +69,8 @@ class Chapter16_1:
         '''
         A = []
         n = len(s)
-        c = zeros((n, n))
-        length = zeros(n)
+        c = np.zeros((n, n))
+        length = np.zeros(n)
         for k in range(n):
             start = s[k]
             end = f[k]
@@ -93,8 +93,8 @@ class Chapter16_1:
         动态规划解决选择问题
         '''
         n = len(s)
-        c = zeros((n, n))
-        index = zeros((n, n))
+        c = np.zeros((n, n))
+        index = np.zeros((n, n))
         for step in range(2, n):
             for i in range(0, n - 1):
                 j = step + i
@@ -189,8 +189,8 @@ class Chapter16_1:
         f = [4, 5, 6, 7, 8, 9, 10,11,12,13,14]
         print(self.normal_activity_selector(s, f))
         print('练习16.1-1 活动选择问题的动态规划算法')
-        s = [0, 1, 3, 0 ,5, 3, 5, 6, 8, 8, 2, 12, math.inf]
-        f = [0, 4, 5, 6, 7, 8, 9, 10,11,12,13,14, math.inf]
+        s = [0, 1, 3, 0 ,5, 3, 5, 6, 8, 8, 2, 12, _math.inf]
+        f = [0, 4, 5, 6, 7, 8, 9, 10,11,12,13,14, _math.inf]
         index = self.dp_activity_selector(s, f)
         print(index)
         self.dp_activity_selector_print(index, 0, len(s) - 1)
@@ -659,6 +659,63 @@ class Chapter16_5:
     '''
     chpater16.5 note and function
     '''
+    def greedy(self, S, l, w):
+        '''
+        Args
+        ===
+        `M` : tuple(S, l) 加权拟阵 
+
+        `w` : 相关的正的权函数
+
+        Return
+        ===
+        `A` : 最优子集
+
+        '''
+        A = []
+        B = []
+        ind = lexsort((S, w))
+        for i in ind:
+            B.append(S[i])
+        for x in B:
+            A = A + [x]
+        return A
+    
+    def task_scheduling(self, S, d, w):
+        '''
+        贪心算法解决任务调度问题
+
+        Args
+        ===
+        `S` : n个单位时间任务的集合S
+
+        `d` : 任务的截止时间d
+
+        `w` : 任务的误时惩罚w
+
+        Return
+        ===
+        `done` : 最优任务调度
+        '''      
+        n = len(S)
+        done = zeros(n)    
+        sum = 0
+        # 按照截止时间进行冒泡排序
+        for i in range(n - 1):
+            for j in range(n - i - 1):
+                if w[j] < w[j + 1]:
+                    w[j], w[j + 1] = w[j + 1], w[j]
+                    d[j], d[j + 1] = d[j + 1], d[j]
+        for i in range(n):
+            for j in range(d[j] + 1):
+                k = d[j] - j - 1
+                if done[k] == 0:
+                    done[k] = 1
+                    break
+                if k == 0:
+                    sum += w[i]
+        return done, sum
+        
     def note(self):
         '''
         Summary
@@ -686,8 +743,24 @@ class Chapter16_5:
         print(' 然后，可以设计出一个以A中的任务作为其早任务的最优调度。')
         print(' 这种方法对在单一处理器上调度具有期限和惩罚的单位时间任务来说是很有效的。')
         print(' 采用了Greedy后，这个算法的运行时间为O(n^2),因为算法中O(n)次独立性检查的每一次都要花O(n)的时间')
-        print('练习16.5-1 ')
-        print('练习16.5-2 ')
+        print('贪心算法解决最优任务调度问题')
+        # n个单位时间任务的集合S
+        S = [1, 2, 3, 4, 5, 6, 7]
+        # 任务的截止时间d
+        d = [4, 2, 4, 3, 1, 4, 6]
+        # 任务的误时惩罚w
+        w = [70, 60, 50, 40, 30, 20, 10]
+        print(self.task_scheduling(S, d, w))
+        w = []
+        print('练习16.5-1 调度问题的实例，但要将每个惩罚wi替换成80-wi')
+        # n个单位时间任务的集合S
+        S = [1, 2, 3, 4, 5, 6, 7]
+        # 任务的截止时间d
+        d = [4, 2, 4, 3, 1, 4, 6]
+        # 任务的误时惩罚w
+        w = [10, 20, 30, 40, 50, 60, 70]
+        print(self.task_scheduling(S, d, w))
+        print('练习16.5-2 如何利用引理16.12的性质2在O(|A|)时间内，确定一个给定的任务集A是否是独立的')
         print('')
         # python src/chapter16/chapter16note.py
         # python3 src/chapter16/chapter16note.py
