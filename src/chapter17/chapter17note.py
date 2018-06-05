@@ -50,9 +50,10 @@ class Chapter17_1:
         print('在平摊分析中，执行一系列数据结构的操作所需要的时间是通过对执行所有操作求平均而得出的')
         # !平摊分析语平均情况分析的不同之处在于它不牵扯到概率；平摊分析保证在最坏情况下，每个操作具有平均性能
         print('平摊分析语平均情况分析的不同之处在于它不牵扯到概率；平摊分析保证在最坏情况下，每个操作具有平均性能')
-        print('')
-        print('')
-        print('')
+        # !平摊分析中三种最常用的技术：聚焦分析，计账方法，势能方法
+        print('平摊分析中三种最常用的技术：聚焦分析，计账方法，势能方法')
+        print('17.1 聚焦分析')
+        print('在聚焦分析中，要证明对所有的n,由n个操作所构成的序列的总时间在最坏的情况下为T(n),')
         print('')
         print('')
         print('')
@@ -103,9 +104,30 @@ class Chapter17_3:
         # python src/chapter17/chapter17note.py
         # python3 src/chapter17/chapter17note.py
 
+class Chapter17_4:
+    '''
+    chpater17.4 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter17.4 note
+
+        Example
+        ====
+        ```python
+        Chapter17_4().note()
+        ```
+        '''
+        print('chapter17.4 note as follow')
+        # python src/chapter17/chapter17note.py
+        # python3 src/chapter17/chapter17note.py
+
 chapter17_1 = Chapter17_1()
 chapter17_2 = Chapter17_2()
 chapter17_3 = Chapter17_3()
+chapter17_4 = Chapter17_4()
 
 def printchapter17note():
     '''
@@ -115,6 +137,7 @@ def printchapter17note():
     chapter17_1.note()
     chapter17_2.note()
     chapter17_3.note()
+    chapter17_4.note()
 
 # python src/chapter17/chapter17note.py
 # python3 src/chapter17/chapter17note.py
