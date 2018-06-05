@@ -53,13 +53,13 @@ class Chapter17_1:
         # !平摊分析中三种最常用的技术：聚焦分析，计账方法，势能方法
         print('平摊分析中三种最常用的技术：聚焦分析，计账方法，势能方法')
         print('17.1 聚焦分析')
-        print('在聚焦分析中，要证明对所有的n,由n个操作所构成的序列的总时间在最坏的情况下为T(n),')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('在聚焦分析中，要证明对所有的n,由n个操作所构成的序列的总时间在最坏的情况下为T(n).')
+        print('因此，在最坏情况下，每个操作的平均代价(或称平摊代价)为T(n)/n')
+        print('这个平摊代价对每个操作都是成立的，即使当序列中存在几种类型的操作也是一样的')
+        print('栈操作')
+        print(' 10.1介绍了两种基本的栈操作，每种操作的时间代价都是O(1)：PUSH和POP操作')
+        print('因此，含n个PUSH和POP操作的序列的总代价为n,而这n个操作的实际运行时间就是Θ(n)')
+        print('现在增加一个栈操作MULTIPOP(S,k),它的作用使弹出栈S的k个栈顶对象，或者当栈包含少于k个对象时，弹出整个栈中的数据对象')
         print('')
         # python src/chapter17/chapter17note.py
         # python3 src/chapter17/chapter17note.py
