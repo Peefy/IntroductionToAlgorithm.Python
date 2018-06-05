@@ -2,21 +2,16 @@
 This packet includes CLRS notes of each chapter
 '''
 
+LAST_CHAPTER = 17
+
 __all__ = ['Chapter1', 'Chapter2', 'Chapter2_3',
            'Chapter3_1', 'Chapter3_2', 'Chapter4_1', 
            'Chapter4_2', 'Chapter4_3', 'Chapter4_4', 
            'Chapter5_1', 'Chapter5_2', 'Chapter5_3', 
-           'Chapter5_4', 'chapter6_printall',
-           'printchapter7note',
-           'printchapter8note',
-           'printchapter9note',
-           'printchapter10note',
-           'printchapter11note',
-           'printchapter12note',
-           'printchapter13note',
-           'printchapter14note',
-           'printchapter15note',
-           'printchapter16note']
+           'Chapter5_4', 'chapter6_printall']
+
+for i in range(7, LAST_CHAPTER + 1):
+    __all__.append('printchapter{}note'.format(i))
 
 from .chapter1.chapter1_1 import Chapter1
 
@@ -57,3 +52,5 @@ from .chapter14.chapter14note import printchapter14note
 from .chapter15.chapter15note import printchapter15note
 
 from .chapter16.chapter16note import printchapter16note
+
+from .chapter17.chapter17note import printchapter17note
