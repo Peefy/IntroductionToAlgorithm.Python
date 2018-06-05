@@ -45,10 +45,23 @@ class Chapter17_1:
         Chapter17_1().note()
         ```
         '''
-        print('chapter17.1 note as follow')   
+        print('chapter17.1 note as follow')  
+        # !在平摊分析中，执行一系列数据结构的操作所需要的时间是通过对执行所有操作求平均而得出的
+        print('在平摊分析中，执行一系列数据结构的操作所需要的时间是通过对执行所有操作求平均而得出的')
+        # !平摊分析语平均情况分析的不同之处在于它不牵扯到概率；平摊分析保证在最坏情况下，每个操作具有平均性能
+        print('平摊分析语平均情况分析的不同之处在于它不牵扯到概率；平摊分析保证在最坏情况下，每个操作具有平均性能')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter17/chapter17note.py
         # python3 src/chapter17/chapter17note.py
-
 
 class Chapter17_2:
     '''
@@ -69,7 +82,6 @@ class Chapter17_2:
         print('chapter17.2 note as follow')
         # python src/chapter17/chapter17note.py
         # python3 src/chapter17/chapter17note.py
-
 
 class Chapter17_3:
     '''
