@@ -36,9 +36,11 @@
 
 * [Chapter16 贪心算法](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter16)
 
+* [Chapter16 平摊分析](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter17)
+
 ## Requirement:
 
-* *Python3.5+ Sdk*
+* *Python3+ Sdk*
 * *pip package*
 * *numpy package*
 * *sympy package*
