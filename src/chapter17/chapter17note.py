@@ -120,6 +120,17 @@ class Chapter17_2:
         '''
         print('chapter17.2 note as follow')
         print('17.2 记账方法')
+        print('在平摊分析的记账方法中。对不同的操作赋予不同的费用，某些操作的费用比它们的实际代价或多或少')
+        print('对一个操作的收费的数量称为平摊代价')
+        print('当一个操作的平摊代价超过了它的实际代价时，两者的差值就被当做存款(credit),并赋予数据结构中的一些特定对象')
+        print('存款可以在以后用于补偿那些平摊代价低于其实际代价的操作')
+        print('就可以将一个操作的平摊代价')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter17/chapter17note.py
         # python3 src/chapter17/chapter17note.py
 
