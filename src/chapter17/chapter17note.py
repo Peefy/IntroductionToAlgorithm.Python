@@ -148,12 +148,13 @@ class Chapter17_2:
         print(' 位数在本例中将被用作代价。用1元钱表示单位代价(即某一位的翻转)')
         print(' 因为计数器中为1的位数始终是非负的，故存款的总额总是非负的')
         print('因此对n次INCREMENT操作，总的平摊代价为O(n),这就给出了总的实际代价的一个界')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('练习17.2-1 对一个大小始终不超过k的栈上执行一系列栈操作。在每k个操作后，复制整个栈的内容以留作备份')
+        print(' 证明：在对各种栈操作赋予合适的平摊代价后，n个栈操作(包括复制栈的操作)的代价为O(n)')
+        print('练习17.2-2 略')
+        print('练习17.2-3 假设希望不仅能使一个计数器增值，也能使之复位至零',
+            '如何将一个计数器实现为一个位数组，使得对一个初始为零的计数器，',
+            '任一个包含n个INCREMENT和RESET操作的序列的时间为O(n)')
+        print(' 可以保持一个指针指向高位1')
         # python src/chapter17/chapter17note.py
         # python3 src/chapter17/chapter17note.py
 
@@ -174,6 +175,7 @@ class Chapter17_3:
         ```
         '''
         print('chapter17.3 note as follow')
+        print('17.3 势能方法')
         # python src/chapter17/chapter17note.py
         # python3 src/chapter17/chapter17note.py
 
