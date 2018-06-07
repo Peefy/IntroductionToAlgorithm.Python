@@ -19,7 +19,6 @@ class Chapter6_4:
     '''
     CLRS 第六章 6.4 算法函数和笔记
     '''
-
     def note(self):
         '''
         Summary

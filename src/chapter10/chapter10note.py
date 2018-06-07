@@ -31,7 +31,6 @@ if __name__ == '__main__':
 else:
     from . import collection as c
 
-
 class Chapter10_1:
     '''
     chpater10.1 note and function

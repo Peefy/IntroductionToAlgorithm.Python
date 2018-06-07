@@ -17,12 +17,10 @@ else:
     from . import heap
     from . import young
 
-
 class Chapter6_5:
     '''
     CLRS 第六章 6.5 算法函数和笔记
     '''
-
     def note(self):
         '''
         Summary
