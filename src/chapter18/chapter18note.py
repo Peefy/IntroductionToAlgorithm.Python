@@ -52,10 +52,39 @@ class Chapter18_1:
         print(' 这种堆支持操作INSERT,MINIMUM,EXTRACT-MIN和UNION.')
         print(' UNION操作用于合并两个堆。这两章中出现的数据结构还支持DELETE和DECREASE-KEY操作')
         print('第19章中出现的二项堆结构能在O(lgn)最坏情况时间内支持以上各种操作，此处n位输入堆中的总元素数')
-        print('第20章 斐波那契堆 操作INSERT,MINIMUM和UNION仅花O(1)的实际和平摊时间')
+        print('第20章 斐波那契堆对二项堆进行了改进 操作INSERT,MINIMUM和UNION仅花O(1)的实际和平摊时间')
         print(' 操作EXTRACT-MIN和DELETE要花O(lgn)的平摊时间')
         # !渐进最快的图问题算法中，斐波那契堆是其核心部分
         print(' 操作DECREASE-KEY仅花O(1)的平摊时间')
+        print('第21章 用于不想交集合的一些数据结构，由n个元素构成的全域被划分成若干动态集合')
+        print(' 一个由m个操作构成的序列的运行时间为O(ma(n)),其中a(n)是一个增长的极慢的函数')
+        print(' 在任何可想象的应用中，a(n)至多为4.')
+        print(' 这个问题的数据结构简单，但用来证明这个时间界的平摊分析却比较复杂')
+        print('其他一些高级的数据结构：')
+        print(' 动态树：维护一个不相交的有根树的森林')
+        print('  在动态树的一种实现中，每个操作具有O(lgn)的平摊时间界；',
+            '在另一种更复杂的实现中，最坏情况时间界O(lgn).动态树常用在一些渐进最快的网络流算法中')
+        print(' 伸展树：是一种二叉查找树，标准的查找树操作在其上以O(lgn)的平摊时间运行,',
+            '伸展树的一个应用是简化动态树')
+        print(' 持久的数据结构允许在过去版本的数据结构上做查询，甚至有时候做更新,',
+            '只需很小的时空代价，就可以使链式数据结构持久化的技术')
+        print('第18章 B 树')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter18/chapter18note.py
         # python3 src/chapter18/chapter18note.py
 
