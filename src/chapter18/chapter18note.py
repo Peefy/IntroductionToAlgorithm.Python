@@ -1,7 +1,7 @@
 # coding:utf-8
 # usr/bin/python3
-# python src/chapter17/chapter17note.py
-# python3 src/chapter17/chapter17note.py
+# python src/chapter18/chapter18note.py
+# python3 src/chapter18/chapter18note.py
 '''
 
 Class Chapter18_1
@@ -69,13 +69,17 @@ class Chapter18_1:
         print(' 持久的数据结构允许在过去版本的数据结构上做查询，甚至有时候做更新,',
             '只需很小的时空代价，就可以使链式数据结构持久化的技术')
         print('第18章 B 树')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        # !B树是为磁盘或其他直接存取辅助设备而设计的一种平衡查找树
+        print('B树是为磁盘或其他直接存取辅助设备而设计的一种平衡查找树。与红黑树类似，',
+            '但是在降低磁盘I/O操作次数方面更好一些。许多数据库系统使用B树或者B树的变形来存储信息')
+        # !B树与红黑树的主要不同在于，B树的结点可以有许多子女，从几个到几千个，就是说B树的分支因子可能很大
+        print('B树与红黑树的主要不同在于，B树的结点可以有许多子女，从几个到几千个，就是说B树的分支因子可能很大')
+        print('这一因子常常是由所使用的磁盘特性所决定的。')
+        print('B树与红黑树的相似之处在于，每棵含有n个结点的B树高度为O(lgn),',
+            '但可能要比一棵红黑树的高度小许多，因为分支因子较大')
+        print('所以B树也可以被用来在O(lgn)时间内，实现许多动态集合操作')
+        print('B树以自然的方式推广二叉查找树。如果B树的内结点x包含x.n个关键字，则x就有x.n+1个子女')
+        print('结点x中的关键字是用来将x所处理的关键字域划分成x.n+1个子域的分隔点，每个子域都由x中的一个子女来处理')
         print('')
         print('')
         print('')
