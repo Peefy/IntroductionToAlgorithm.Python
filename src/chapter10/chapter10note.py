@@ -123,10 +123,10 @@ class Chapter10_1:
         print('练习10.1-6: ', q.dequeue(), q.dequeue(), q.dequeue())
         s = c.StackUsingQueue()
         s.push(1);s.push(2);s.push(3)
-        print('练习10.1-7: ', s.pop(), s.pop(), s.pop())
-        
+        print('练习10.1-7: ', s.pop(), s.pop(), s.pop())   
         # python src/chapter10/chapter10note.py
         # python3 src/chapter10/chapter10note.py
+        
 class Chapter10_2:
     '''
     chpater10.2 note and function
