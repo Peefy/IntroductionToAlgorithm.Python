@@ -138,14 +138,15 @@ class Chapter18_2:
         ```
         '''
         print('chapter18.2 note as follow')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('18.2 对B树的基本操作')
+        print('这一节给出操作B-TREE-SEARCH, B-TREE-CREATE和B-TREE-INSERT的细节，两个约定:')
+        print(' (1) B树的根结点始终在主存中，因而无需对根做DISK-DEAD；但是，',
+            '每当根结点被改变后，都需要对根结点做一次DISK-WRITE')
+        print(' (2) 任何被当做参数的结点被传递之前，要先对它们做一次DISK-READ')
+        print('给出的过程都是\"单向\"算法，即它们沿树的根下降，没有任何回溯')
+        print('搜索B树')
+        print(' 搜索B树有搜索二叉查找树很相似，只是不同于二叉查找树的两路分支，而是多路分支')
+        print(' 即在每个内结点x处，要做x.n+1路的分支决定')
         print('')
         print('')
         # python src/chapter18/chapter18note.py
