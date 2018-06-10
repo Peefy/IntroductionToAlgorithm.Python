@@ -171,13 +171,17 @@ class Chapter18_2:
         print(' 要分裂一个满的根，首先让根成为一个新的空跟结点的孩子，',
             '这样才能够使用B-TREE-SPLIT-CHILD，树的高度因此增加1，分裂是树长高的唯一途径')
         print('对B树用单程下行便利树方式插入关键字')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        # btree = bt.BTree.create()
-        # print(btree.root)
+        print('对一棵高度为h的B树，B-TREE-INSERT要做的磁盘存取次数为O(h),因为在调用B-TREE-INSERT-NONFULL之间',
+            '只做了O(1)次DISK-READ和DISK-WRITE操作，所占用的总的CPU时间为O(th)=O(tlogt(n))')
+        print('因为B-TREE-INSERT-NONFULL是尾递归的，故也可以用一个while循环来实现')
+        print('说明了在任何时刻，需要留在主存中的页面数为O(1)')
+        print('练习18.2-1 ')
+        print('练习18.2-2 ')
+        print('练习18.2-3 ')
+        print('练习18.2-4 ')
+        print('练习18.2-5 ')
+        print('练习18.2-6 ')
+        print('练习18.2-7 ')
         # python src/chapter18/chapter18note.py
         # python3 src/chapter18/chapter18note.py
 
@@ -198,6 +202,7 @@ class Chapter18_3:
         ```
         '''
         print('chapter18.3 note as follow')
+        print('从B树中删除关键字')
         # python src/chapter18/chapter18note.py
         # python3 src/chapter18/chapter18note.py
 

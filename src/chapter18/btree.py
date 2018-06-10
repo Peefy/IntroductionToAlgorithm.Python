@@ -3,15 +3,25 @@ class BTreeNode:
     '''
     B树结点
     '''
-    def __init__(self, n = 0, leaf = True):
+    def __init__(self, n = 0, isleaf = True):
         '''
         B树结点
+
+        Args
+        ===
+        `n` : 结点包含关键字的数量
+
+        `isleaf` : 是否是叶子节点
+
         '''
+        # 结点包含关键字的数量
         self.n = n
-        self.key = None
+        # 关键字的值数组
         self.keys = []
+        # 子结点数组
         self.children = []
-        self.leaf = leaf
+        # 是否是叶子节点
+        self.isleaf = isleaf
 
     def __str__(self):
         return 'key:' + str(self.key) + ','\
@@ -80,7 +90,7 @@ class BTree:
         ```
         '''
         node = BTreeNode.allocate_node()
-        node.leaf = True
+        node.isleaf = True
         node.n = 0
         node.key = 1
         btree = BTree(m)
@@ -157,6 +167,96 @@ class BTree:
         y.diskwrite()
         z.diskwrite()
         x.diskwrite()
+
+    def insert(self, key):
+        '''
+        向B树中插入新结点`key`  
+        '''
+        pass
+
+    def remove(self, key): 
+        '''
+        从B中删除结点`key`
+        '''      
+        pass
+    
+    def display(self):
+        '''
+        打印树的关键字  
+        '''
+        pass
+
+    def contain(self, key):
+        '''
+        检查该`key`是否存在于B树中  
+        '''
+        pass
+
+    def clear(self):
+        '''
+        清空B树  
+        '''
+        pass
+
+    def __recursive_clear(self, pNode : BTreeNode):
+        '''
+        删除树  
+        '''
+        pass
+
+    def __delete_node(self, pNode : BTreeNode):
+        '''
+        删除节点 
+        '''
+        pass
+    
+    def __search(self, pNode : BTreeNode, key):
+        '''
+        查找关键字  
+        '''
+        pass
+
+    def __split_child(self, pParent : BTreeNode, nChildIndex, pChild : BTreeNode):
+        '''
+        分裂子节点
+        '''
+        pass
+    
+    def __insert_non_full(self, pNode: BTreeNode, key):
+        '''
+        在非满节点中插入关键字
+        '''
+        pass
+
+    def __display_in_concavo(self, pNode: BTreeNode, count):
+        '''
+        用括号打印树 
+        '''
+        pass
+
+    def __merge_child(self, pNode: BTreeNode, index):
+        '''
+        合并两个子结点
+        '''
+        pass
+
+    def __recursive_remove(self, pNode: BTreeNode, key):
+        '''
+        递归的删除关键字`key`  
+        '''
+        raise NotImplementedError
+
+    def predecessor(self, pNode: BTreeNode):
+        '''
+        前驱关键字
+        '''
+        pass
+
+    def successor(self, pNode: BTreeNode):
+        '''
+        后继关键字
+        '''
+        raise NotImplementedError
 
 def test():
     '''
