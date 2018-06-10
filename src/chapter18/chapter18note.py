@@ -25,6 +25,11 @@ from numpy import arange as _arange
 from numpy import array as _array
 from numpy import * 
 
+if __name__ == '__main__':
+    import btree as bt
+else:
+    from . import btree as bt
+
 class Chapter18_1:
     '''
     chpater18.1 note and function
@@ -147,8 +152,23 @@ class Chapter18_2:
         print('搜索B树')
         print(' 搜索B树有搜索二叉查找树很相似，只是不同于二叉查找树的两路分支，而是多路分支')
         print(' 即在每个内结点x处，要做x.n+1路的分支决定')
+        print(' B-TREE-SEARCH是定义在二叉查找树上的TREE-SEARCH过程的一个直接推广。',
+            '它的输入是一个指向某子树的根结点x的指针，以及要在该子树中搜索的一个关键字k',
+            '顶层调用的形式为B-TREE-SEARCH(root, key).如果k在B树中，',
+            'B-TREE-SEARCH就返回一个由结点y和使keyi[y]==k成立的下标i组成的有序对(y, i)',
+            '否则返回NONE')
+        print(' 像在二叉查找树的TREE-SEARCH过程中那样，在递归过程中所遇到的结点构成以一条从树根下降的路径')
+        print('创建一棵空的B树')
+        print(' 为构造一棵B树T，先用B-TREE-CREATE来创建一个空的根结点，再调用B-TREE-INSERT来加入新的关键字')
+        print('向B树插入关键字')
+        print(' 与向二叉查找树中插入一个关键字相比向B树中插入一个关键字复杂得多。')
+        print(' 像在二叉查找树中一样，要查找插入新关键字的叶子位置。',
+            '但是在B树中，不能简单地创建一个新的叶结点，然后将其插入,因为这样得到的树不再是一颗有效的B树')
+        print('B树中结点的分裂')
         print('')
         print('')
+        # btree = bt.BTree.create()
+        # print(btree.root)
         # python src/chapter18/chapter18note.py
         # python3 src/chapter18/chapter18note.py
 
