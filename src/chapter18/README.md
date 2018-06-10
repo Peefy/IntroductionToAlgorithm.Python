@@ -16,7 +16,6 @@ B树与红黑树的主要不同在于，B树的结点可以有许多子女，从
 
 ```python
 
-
 class BTreeNode:
     '''
     B树结点
@@ -93,11 +92,17 @@ class BTree:
         '''
         B树的定义
         '''
+        # B树的最小度数
         self.M = m
+        # 节点包含关键字的最大个数
         self.KEY_MAX = 2 * self.M - 1
+        # 非根结点包含关键字的最小个数
         self.KEY_MIN = self.M - 1
+        # 子结点的最大个数
         self.CHILD_MAX = self.KEY_MAX + 1
+        # 子结点的最小个数
         self.CHILD_MIN = self.KEY_MIN + 1
+        # 根结点
         self.root: BTreeNode = None
 
     def __new_node(self):
@@ -110,16 +115,23 @@ class BTree:
         '''
         向B树中插入新结点`key`  
         '''
+        # 检查关键字是否存在
         if self.contain(key) == True:
             return False
         else:
+            # 检查是否为空树
             if self.root is None:
-                self.root = self.__new_node()
+                node = self.__new_node()
+                node.diskwrite()
+                self.root = node    
+            # 检查根结点是否已满      
             if self.root.n == self.KEY_MAX:
+                # 创建新的根结点
                 pNode = self.__new_node()
                 pNode.isleaf = False
                 pNode.children[0] = self.root
                 self.__split_child(pNode, 0 ,self.root)
+                # 更新结点指针
                 self.root = pNode
             self.__insert_non_full(self.root, key)
             return True
@@ -128,8 +140,10 @@ class BTree:
         '''
         从B中删除结点`key`
         '''      
+        # 如果关键字不存在
         if not self.search(self.root, key):
             return False
+        # 特殊情况处理
         if self.root.n == 1:
             if self.root.isleaf == True:
                 self.clear()
@@ -183,15 +197,18 @@ class BTree:
         '''
         查找关键字  
         '''
+        # 检测结点是否为空，或者该结点是否为叶子节点
         if pNode is None:
             return False
         else:
             i = 0
+            # 找到使key < pNode.keys[i]成立的最小下标
             while i < pNode.n and key > pNode.keys[i]:
                 i += 1
             if i < pNode.n and key == pNode.keys[i]:
                 return True
             else:
+                # 检查该结点是否为叶子节点
                 if pNode.isleaf == True:
                     return False
                 else:
@@ -201,42 +218,68 @@ class BTree:
         '''
         分裂子节点
         '''
-        pRightNode = self.__new_node()
+        # 将pChild分裂成pLeftChild和pChild两个结点
+        pRightNode = self.__new_node()  # 分裂后的右结点
         pRightNode.isleaf = pChild.isleaf
         pRightNode.n = self.KEY_MIN
+        # 拷贝关键字的值
         for i in range(self.KEY_MIN):
             pRightNode.keys[i] = pChild.keys[i + self.CHILD_MIN]
+        # 如果不是叶子结点，就拷贝孩子结点指针
         if not pChild.isleaf:
             for i in range(self.CHILD_MIN):
                 pRightNode.children[i] = pChild.children[i + self.CHILD_MIN]
+        # 更新左子树的关键字个数
         pChild.n = self.KEY_MIN
+        # 将父结点中的pChildIndex后的所有关键字的值和子树指针向后移动一位
         for i in range(nChildIndex, pParent.n):
             j = pParent.n + nChildIndex - i
             pParent.children[j + 1] = pParent.children[j]
             pParent.keys[j] = pParent.keys[j - 1]
+        # 更新夫结点的关键字个数
         pParent.n += 1
+        # 存储右子树指针
         pParent.children[nChildIndex + 1] = pRightNode
+        # 把结点的中间值提到父结点
         pParent.keys[nChildIndex] = pChild.keys[self.KEY_MIN]
+        pChild.diskwrite()
+        pRightNode.diskwrite()
+        pParent.diskwrite()
     
     def __insert_non_full(self, pNode: BTreeNode, key):
         '''
         在非满节点中插入关键字
         '''
+        # 获取结点内关键字个数
         i = pNode.n
+        # 如果pNode是叶子结点
         if pNode.isleaf == True:
+            # 从后往前 查找关键字的插入位置
             while i > 0 and key < pNode.keys[i - 1]:
+                # 向后移位
                 pNode.keys[i] = pNode.keys[i - 1]
                 i -= 1
+            # 插入关键字的值
             pNode.keys[i] = key
+            # 更新结点关键字的个数
             pNode.n += 1
+            pNode.diskwrite()
+        # pnode是内结点
         else:
+            # 从后往前 查找关键字的插入的子树
             while i > 0 and key < pNode.keys[i - 1]:
                 i -= 1
+            # 目标子树结点指针
             pChild = pNode.children[i]
+            pNode.children[i].diskread()
+            # 子树结点已经满了
             if pChild.n == self.KEY_MAX:
+                # 分裂子树结点
                 self.__split_child(pNode, i, pChild)
+                # 确定目标子树
                 if key > pNode.keys[i]:
                     pChild = pNode.children[i + 1]
+            # 插入关键字到目标子树结点
             self.__insert_non_full(pChild, key)
 
     def __display_in_concavo(self, pNode: BTreeNode, count):
@@ -394,6 +437,7 @@ if __name__ == '__main__':
     test()
 else:
     pass
+
 
 ```
 

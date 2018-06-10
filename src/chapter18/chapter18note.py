@@ -175,8 +175,16 @@ class Chapter18_2:
             '只做了O(1)次DISK-READ和DISK-WRITE操作，所占用的总的CPU时间为O(th)=O(tlogt(n))')
         print('因为B-TREE-INSERT-NONFULL是尾递归的，故也可以用一个while循环来实现')
         print('说明了在任何时刻，需要留在主存中的页面数为O(1)')
-        print('练习18.2-1 ')
-        print('练习18.2-2 ')
+        keys = ['F', 'S', 'Q', 'K', 'C', 'L', 'H', 'T', 'V', \
+            'W', 'M', 'R', 'N', 'P', 'A', 'B', 'X', 'Y', 'D', 'Z', 'E']
+        btree = bt.BTree(2)
+        for key in keys:
+            btree.insert(key)
+        print('练习18.2-1 请给出关键字', keys, '依照顺序插入一棵最小度数为2的空的B树的结果')
+        print(btree.root)
+        print('练习18.2-2 在child_split的情况下，在调用B-TREE-INSERT的过程中',
+            '会执行冗余的DISK-READ或DISK-WRITE')
+        print(' 所谓冗余的DISK-READ是指')
         print('练习18.2-3 ')
         print('练习18.2-4 ')
         print('练习18.2-5 ')
