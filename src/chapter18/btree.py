@@ -3,16 +3,15 @@ class BTreeNode:
     '''
     B树结点
     '''
-    def __init__(self, n = 0, key = None, keys = [], children = [], leaf = False, p = None):
+    def __init__(self, n = 0, leaf = True):
         '''
         B树结点
         '''
         self.n = n
         self.key = None
-        self.keys = keys
-        self.children = children
+        self.keys = []
+        self.children = []
         self.leaf = leaf
-        self.p = p
 
     def __str__(self):
         return 'key:' + str(self.key) + ','\
@@ -53,17 +52,22 @@ class BTree:
     '''
     B树
     '''
-    def __init__(self):
+    def __init__(self, m = 3):
         '''
         B树的定义
         '''
+        self.M = m
+        self.KEY_MAX = 2 * self.M - 1
+        self.KEY_MIN = self.M - 1
+        self.CHILD_MAX = self.KEY_MAX + 1
+        self.CHILD_MIN = self.KEY_MIN + 1
         self.lastnode: BTreeNode = None
         self.root: BTreeNode = None
         self.nodes = []
         self.t = 4
 
     @staticmethod
-    def create():
+    def create(m = 3):
         '''
         创建一棵空的B树
 
@@ -79,7 +83,7 @@ class BTree:
         node.leaf = True
         node.n = 0
         node.key = 1
-        btree = BTree()
+        btree = BTree(m)
         btree.root = node
         return btree
 
@@ -138,7 +142,7 @@ class BTree:
         for j in range(t - 1):
             z.keys[j] = z.keys[j + t]
         if not y.leaf:
-            for j i in range(t):
+            for j in range(t):
                 z.children[j] = z.children[j + t]
         y.n = t - 1
         for j in range(i + 1, x.n + 1):
