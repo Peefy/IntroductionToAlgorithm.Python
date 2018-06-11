@@ -225,6 +225,13 @@ class Chapter18_3:
         '''
         print('chapter18.3 note as follow')
         print('从B树中删除关键字')
+        print(' 删除操作与插入操作类似，只是略微复杂，因为一个关键字可以从任意一个结点删除，而不只是从叶子中删除')
+        print(' ')
+        print(' ')
+        print(' ')
+        print(' ')
+        print(' ')
+        print(' ')
         # python src/chapter18/chapter18note.py
         # python3 src/chapter18/chapter18note.py
 

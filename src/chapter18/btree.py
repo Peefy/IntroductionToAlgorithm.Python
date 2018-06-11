@@ -128,7 +128,7 @@ class BTree:
         从B中删除结点`key`
         '''      
         # 如果关键字不存在
-        if not self.search(self.root, key):
+        if not self.__search(self.root, key):
             return False
         # 特殊情况处理
         if self.root.n == 1:
@@ -448,6 +448,12 @@ def test():
     tree.insert(63)
     tree.insert(43)
     tree.insert(2)
+    print(tree.root)
+    tree.remove(1)
+    tree.remove(2)
+    tree.remove(3)
+    print(tree.root)
+    tree.clear()
     print(tree.root)
     tree.display()
 
