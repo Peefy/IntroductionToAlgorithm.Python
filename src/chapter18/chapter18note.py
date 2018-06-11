@@ -230,6 +230,8 @@ class Chapter18_3:
         print(' 防止因删除操作影响B树的性质')
         print('练习18.3-1 略')
         print('练习18.3-2 略')
+        print('思考题18-1 辅存上的栈')
+        print('思考题18-2 连接与分裂2-3-4树')
         # python src/chapter18/chapter18note.py
         # python3 src/chapter18/chapter18note.py
 
