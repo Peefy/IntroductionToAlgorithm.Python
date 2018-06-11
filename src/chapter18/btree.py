@@ -24,7 +24,11 @@ class BTreeNode:
         self.isleaf = isleaf
 
     def __str__(self):
-        returnStr = 'keys:' + str(self.keys) + ';' + 'childrens:['
+
+        returnStr = 'keys:['
+        for i in range(self.n):
+            returnStr += str(self.keys[i]) + ' '
+        returnStr += '];childrens:['
         for child in self.children:
             returnStr += str(child) + ';'
         returnStr += ']\r\n'
@@ -113,7 +117,7 @@ class BTree:
                 pNode = self.__new_node()
                 pNode.isleaf = False
                 pNode.children[0] = self.root
-                self.__split_child(pNode, 0 ,self.root)
+                self.__split_child(pNode, 0, self.root)
                 # 更新结点指针
                 self.root = pNode
             self.__insert_non_full(self.root, key)
@@ -219,7 +223,7 @@ class BTree:
             j = pParent.n + nChildIndex - i
             pParent.children[j + 1] = pParent.children[j]
             pParent.keys[j] = pParent.keys[j - 1]
-        # 更新夫结点的关键字个数
+        # 更新父结点的关键字个数
         pParent.n += 1
         # 存储右子树指针
         pParent.children[nChildIndex + 1] = pRightNode
@@ -288,17 +292,21 @@ class BTree:
         '''
         pChild1 = pParent.children[index]
         pChild2 = pParent.children[index + 1]
+        # 将pChild2数据合并到pChild1
         pChild1.n = self.KEY_MAX
+        # 将父结点index的值下移
         pChild1.keys[self.KEY_MIN] = pParent.keys[index]
         for i in range(self.KEY_MIN):
             pChild1.keys[i + self.KEY_MIN + 1] = pChild2.keys[i]
         if not pChild1.isleaf:
             for i in range(self.CHILD_MIN):
                 pChild1.children[i + self.CHILD_MIN] = pChild2.children[i]
+        # 父结点删除index的key，index后的往前移一位
         pParent.n -= 1
         for i in range(index, pParent.n):
             pParent.keys[i] = pParent.keys[i + 1]
             pParent.children[i + 1] = pParent.children[i + 2]
+        # 删除pChild2
         self.__delete_node(pChild2)
 
     def __recursive_remove(self, pNode: BTreeNode, key):
@@ -308,43 +316,64 @@ class BTree:
         i = 0
         while i < pNode.n and key > pNode.keys[i]:
             i += 1
+        # 关键字key在结点pNode
         if i < pNode.n and key == pNode.keys[i]:
+            # pNode是个叶结点
             if pNode.isleaf == True:
+                # 从pNode中删除k
                 for j in range(i, pNode.n):
                     pNode.keys[j] = pNode.keys[j + 1]
                 return
+            # pNode是个内结点
             else:
+                # 结点pNode中前于key的子结点
                 pChildPrev = pNode.children[i]
+                # 结点pNode中后于key的子结点
                 pChildNext = pNode.children[i + 1]
                 if pChildPrev.n >= self.CHILD_MIN:
+                    # 获取key的前驱关键字
                     prevKey = self.predecessor(pChildPrev)
                     self.__recursive_remove(pChildPrev, prevKey)
+                    # 替换成key的前驱关键字
                     pNode.keys[i] = prevKey
                     return
+                # 结点pChildNext中至少包含CHILD_MIN个关键字
                 elif pChildNext.n >= self.CHILD_MIN:
+                    # 获取key的后继关键字
                     nextKey = self.successor(pChildNext)
                     self.__recursive_remove(pChildNext, nextKey)
+                    # 替换成key的后继关键字
                     pNode.keys[i] = nextKey
                     return
+                # 结点pChildPrev和pChildNext中都只包含CHILD_MIN-1个关键字
                 else:
                     self.__merge_child(pNode, i)
                     self.__recursive_remove(pChildPrev, key)
+        # 关键字key不在结点pNode中
         else:
+            # 包含key的子树根结点
             pChildNode = pNode.children[i]
+            # 只有t-1个关键字
             if pChildNode.n == self.KEY_MAX:
+                # 左兄弟结点
                 pLeft = None
+                # 右兄弟结点
                 pRight = None
+                # 左兄弟结点
                 if i > 0:
                     pLeft = pNode.children[i - 1]
+                # 右兄弟结点
                 if i < pNode.n:
                     pRight = pNode.children[i + 1]
                 j = 0
                 if pLeft is not None and pLeft.n >= self.CHILD_MIN:
+                    # 父结点中i-1的关键字下移至pChildNode中
                     for j in range(pChildNode.n):
                         k = pChildNode.n - j
                         pChildNode.keys[k] = pChildNode.keys[k - 1]
                     pChildNode.keys[0] = pNode.keys[i - 1]
                     if not pLeft.isleaf:
+                        # pLeft结点中合适的子女指针移到pChildNode中
                         for j in range(pChildNode.n + 1):
                             k = pChildNode.n + 1 - j
                             pChildNode.children[k] = pChildNode.children[k - 1]
@@ -352,20 +381,26 @@ class BTree:
                     pChildNode.n += 1
                     pNode.keys[i] = pLeft.keys[pLeft.n - 1]
                     pLeft.n -= 1
+                # 右兄弟结点至少有CHILD_MIN个关键字
                 elif pRight is not None and pRight.n >= self.CHILD_MIN:
+                    # 父结点中i的关键字下移至pChildNode中
                     pChildNode.keys[pChildNode.n] = pNode.keys[i]
                     pChildNode.n += 1
+                    # pRight结点中的最小关键字上升到pNode中
                     pNode.keys[i] = pRight.keys[0]
                     pRight.n -= 1
                     for j in range(pRight.n):
                         pRight.keys[j] = pRight.keys[j + 1]
                     if not pRight.isleaf:
+                        # pRight结点中合适的子女指针移动到pChildNode中
                         pChildNode.children[pChildNode.n] = pRight.children[0]
                         for j in range(pRight.n):
                             pRight.children[j] = pRight.children[j + 1]
+                # 左右兄弟结点都只包含CHILD_MIN-1个结点
                 elif pLeft is not None:
                     self.__merge_child(pNode, i - 1)
                     pChildNode = pLeft
+                # 与右兄弟合并
                 elif pRight is not None:
                     self.__merge_child(pNode, i)
             self.__recursive_remove(pChildNode, key)
