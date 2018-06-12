@@ -40,6 +40,18 @@ class Chapter19_1:
         ```
         '''
         print('chapter19.1 note as follow')  
+        print('第19章 二项堆')
+        print('可合并堆的数据结构，这些数据结构支持下面五种操作')
+        print('MAKE-HEAP():创建并返回一个不包含任何元素的新堆')
+        print('INSERT(H,x):将结点x(其关键字域中已填入了内容)插入堆H中')
+        print('MINIMUM(H):返回一个指向堆H中包含最小关键字的结点的指针')
+        print('EXTRACT-MIN(H):将堆H中包含的最小关键字删除，并返回一个指向该结点的指针')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter19/chapter19note.py
         # python3 src/chapter19/chapter19note.py
 
