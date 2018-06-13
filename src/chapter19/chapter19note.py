@@ -91,13 +91,16 @@ class Chapter19_1:
             '则sibling[x]=None,每个结点x都包含域degree[x],即x的子女个数')
         print('一个二项堆中的各二项树被组织成一个链表，我们称之为根表。')
         print('在遍历根表时，各根的度数是严格递增的')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('根据第二个二项堆的性质，在一个n结点的二项堆中各根的度数构成了{0,1,...,[lgn]}的一个子集')
+        print('对根结点来说与非结点根来说，sibling域的含义是不同的，如果x为根，则x.sibling指向根表中下一个根')
+        print('像通常一样，如果x为根表中最后一个根，则x.sibling=None')
+        print('练习19.1-1 假设x为一个二项堆中，某棵二项树中的一个结点，并假定sibling[x]!=None')
+        print(' 如果x不是根，x.sibling.degree比x.degree多1，',
+            '如果x是个根，则x.sibling.degree比x.degree多至少1,因为需要知道二项堆的二项树组成结构')
+        print('练习19.1-2 如果x是二项堆的某棵二项树的非根结点，x.p.degree比x.degree大至多O(n)')
+        print('练习19.1-3 假设一棵二项树Bk中的结点标为二进制形式。考虑深度i处标为l的一个结点x，且设j=k-i.')
+        print(' 证明：在x的二进制表示中共有j个1.恰好包含j个1的二进制k串共有多少？',
+            '证明x的度数与l的二进制表示中，最右0的右边的1的个数相同')
         # python src/chapter19/chapter19note.py
         # python3 src/chapter19/chapter19note.py
 
