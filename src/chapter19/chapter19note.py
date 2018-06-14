@@ -121,6 +121,22 @@ class Chapter19_2:
         ```
         '''
         print('chapter19.2 note as follow')  
+        print('19.2 对二项堆的操作')
+        print('创建一个新二项堆')
+        print(' 为了构造一个空的二项堆')
+        print('寻找最小关键字')
+        print(' 过程BINOMIAL-HEAP-MINIMUM返回一个指针，',
+            '指向包含n个结点的二项堆H中具有最小关键字的结点',
+            '这个实现假设没有一个关键字为无穷')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter19/chapter19note.py
         # python3 src/chapter19/chapter19note.py
 
