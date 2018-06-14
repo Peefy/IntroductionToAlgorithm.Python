@@ -87,20 +87,59 @@ class BinomialHeap:
 
     @classmethod
     def make_heap(self):
+        '''
+        创建一个新的二项堆
+        '''
         heap = BinomialHeap()
         return heap
 
     @classmethod
-    def merge(self):
+    def merge(self, H1, H2):
         pass
 
     @classmethod
-    def union(self):
-        pass
-
-if __name__ == '__main__':
+    def union(self, H1, H2):
+        '''
+        两个堆合并
+        '''
+        heap = BinomialHeap.make_heap()
+        x = None
+        pre_x = None
+        next_x = None
+        heap.head = BinomialHeap.merge(H1, H2)
+        if heap.head is None:
+            return heap
+        pre_x = None
+        x = heap.head
+        next_x = x.sibling
+        while next_x is not None:
+            if x.degree != next_x.degree or next_x.sibling is not None and\
+                next_x.degree == next_x.sibling.degree:
+                pre_x = x
+                x = next_x
+            elif x.key <= next_x.key:
+                x.sibling = next_x.sibling
+                heap.link(x, next_x)
+            else:
+                if pre_x is None:
+                    heap.head = next_x
+                else:
+                    pre_x.sibling = next_x
+                heap.link(x, next_x)
+                x = next_x
+            x = next_x
+        return heap
+       
+def test():
+    '''
+    test
+    '''
+    print('BinomialHeapNode and BinomialHeap test')
     heap = BinomialHeap.make_heap()
     if heap.head is not None:
         print(heap.head)
+
+if __name__ == '__main__':
+    test()
 else:
     pass
