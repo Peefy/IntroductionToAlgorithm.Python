@@ -128,15 +128,16 @@ class Chapter19_2:
         print(' 过程BINOMIAL-HEAP-MINIMUM返回一个指针，',
             '指向包含n个结点的二项堆H中具有最小关键字的结点',
             '这个实现假设没有一个关键字为无穷')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print(' 因为一个二项堆是最小堆有序的，故最小关键字必在根结点中') 
+        print(' 过程BINOMIAL-HEAP-MINIMUM检查所有的根(至多[lgn]+1),将当前最小者存于min中')
+        print(' 而将指向当前最小者的指针存于y之中。BINOMIAL-HEAP-MINIMUM返回一个指向具有关键字1的结点的指针')
+        print(' 因为至多要检查[lgn]+1个根，所以BINOMIAL-HEAP-MINIMUM的运行时间为O(lgn)')
+        print('合并两个二项堆')
+        print(' 合并两个二项堆的操作可用作后面大部分操作的一个子程序。')
+        print(' 过程BINOMIAL-HEAP-UNION反复连接根结点的度数相同的各二项树')
+        print(' LINK操作将以结点y为根的Bk-1树与以结点z为根的Bk-1树连接起来')
+        print(' ')
+        print(' ')
         # python src/chapter19/chapter19note.py
         # python3 src/chapter19/chapter19note.py
 
