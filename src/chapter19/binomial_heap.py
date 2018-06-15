@@ -3,8 +3,7 @@ class BinomialHeapNode:
     '''
     二项堆结点
     '''
-
-    def __init__(self, key=None, p=None, degree=None,
+    def __init__(self, key=None, degree=None, p=None, 
         child = None, sibling = None):
         '''
         二项堆结点
@@ -249,8 +248,7 @@ def test():
     '''
     print('BinomialHeapNode and BinomialHeap test')
     heap = BinomialHeap.make_heap()
-    heap.head = BinomialHeapNode(1, None, 0)
-    heap.insertkey(5)
+    heap = heap.insertkey(5)
     heap = heap.insertkey(8)
     heap = heap.insertkey(2)
     heap = heap.insertkey(7)
