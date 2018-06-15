@@ -23,6 +23,11 @@ from numpy import arange as _arange
 from numpy import array as _array
 from numpy import * 
 
+if __name__ == '__main__':
+    import binomial_heap as bh
+else:
+    from . import binomial_heap as bh
+
 class Chapter19_1:
     '''
     chpater19.1 note and function
@@ -108,6 +113,8 @@ class Chapter19_2:
     '''
     chpater19.2 note and function
     '''
+    def buildheap(self):
+        pass
     def note(self):
         '''
         Summary
@@ -136,8 +143,18 @@ class Chapter19_2:
         print(' 合并两个二项堆的操作可用作后面大部分操作的一个子程序。')
         print(' 过程BINOMIAL-HEAP-UNION反复连接根结点的度数相同的各二项树')
         print(' LINK操作将以结点y为根的Bk-1树与以结点z为根的Bk-1树连接起来')
-        print(' ')
-        print(' ')
+        print(' BINOMIAL-HEAP-UNION搓成合并H1和H2并返回结果堆，在合并过程中，同时也破坏了H1和H2的表示')
+        print(' 还使用了辅助过程BINOMIAL-HEAP-MERGE,来讲H1和H2的根表合并成一个按度数的单调递增次序排列的链表')
+        print('练习19.2-1 写出BINOMIAL-HEAP-MERGE的伪代码 代码已经给出')
+        print('练习19.2-2 ')
+        print('练习19.2-3 ')
+        print('练习19.2-4 ')
+        print('练习19.2-5 ')
+        print('练习19.2-6 ')
+        print('练习19.2-7 ')
+        print('练习19.2-8 ')
+        print('练习19.2-9 ')
+        print('练习19.2-10 ')
         # python src/chapter19/chapter19note.py
         # python3 src/chapter19/chapter19note.py
 

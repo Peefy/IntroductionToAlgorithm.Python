@@ -3,7 +3,8 @@ class BinomialHeapNode:
     '''
     二项堆结点
     '''
-    def __init__(self, p = None, key = None, degree = None, 
+
+    def __init__(self, key=None, p=None, degree=None,
         child = None, sibling = None):
         '''
         二项堆结点
@@ -62,6 +63,7 @@ class BinomialHeap:
             x = x.sibling
         return y
 
+    @classmethod
     def link(self, y : BinomialHeapNode, z : BinomialHeapNode):
         '''
         将一结点`y`为根的Bk-1树与以结点`z`为根的Bk-1树连接起来
@@ -80,10 +82,90 @@ class BinomialHeap:
         z.child = y
         z.degree += 1
 
+    def insert(self, x : BinomialHeapNode):
+        '''
+        插入一个结点 时间复杂度`O(1) + O(lgn) = O(lgn)`
+        '''
+        h1 = BinomialHeap.make_heap()
+        x.p = None
+        x.child = None
+        x.sibling = None
+        x.degree = 0
+        h1.head = x
+        unionheap = BinomialHeap.union(self, h1)
+        return unionheap
+
+    def insertkey(self, key):
+        '''
+        插入一个结点 时间复杂度`O(1) + O(lgn) = O(lgn)`
+        '''
+        return self.insert(BinomialHeapNode(key))
+
     def extract_min(self):
         '''
+        抽取最小关键字
         '''
-        pass
+        p = self.head
+        x = None
+        x_prev = None
+        p_prev = None
+        min = -2147483648
+        if p is None:
+            return p
+        x = p
+        min = p.key
+        p_prev = p
+        p = p.sibling
+        while p is not None:
+            if p.key < min:
+                x_prev = p_prev
+                x = p
+                min = p.key
+            p_prev = p
+            p = p.sibling
+        if x == self.head:
+            self.head = x.sibling
+        elif x.sibling is None:
+            x_prev.sibling = None
+        else:
+            x_prev.sibling = x.sibling
+        child_x = x.child
+        if child_x != None:
+            h1 = BinomialHeap.make_heap()
+            child_x.p = None
+            h1.head = child_x
+            p = child_x.sibling
+            child_x.sibling = None
+            while p is not None:
+                p_prev = p
+                p = p.sibling
+                p_prev.sibling = h1.head
+                h1.head = p_prev
+                p_prev.p = None
+            self = BinomialHeap.union(self, h1)
+        return x
+
+    def decresekey(self, x : BinomialHeapNode, key):
+        '''
+        减小结点的关键字的值，调整该结点在相应二项树中的位置
+        '''
+        if x.key < key:
+            return 
+        x.key = key
+        y = x
+        p = x.p
+        while p is not None and y.key < p.key:
+            y.key = p.key
+            p.key = key
+            y = p
+            p = y.p
+
+    def delete(self, x : BinomialHeapNode):
+        '''
+        删除一个关键字
+        '''
+        self.decresekey(x, -2147483648)
+        self.extract_min()
 
     @classmethod
     def make_heap(self):
@@ -94,48 +176,87 @@ class BinomialHeap:
         return heap
 
     @classmethod
-    def merge(self, H1, H2):
-        pass
-
-    @classmethod
-    def union(self, H1, H2):
+    def merge(self, h1, h2):
         '''
-        两个堆合并
+        合并两个二项堆h1和h2
         '''
-        heap = BinomialHeap.make_heap()
-        x = None
-        pre_x = None
-        next_x = None
-        heap.head = BinomialHeap.merge(H1, H2)
-        if heap.head is None:
-            return heap
-        pre_x = None
-        x = heap.head
-        next_x = x.sibling
-        while next_x is not None:
-            if x.degree != next_x.degree or next_x.sibling is not None and\
-                next_x.degree == next_x.sibling.degree:
-                pre_x = x
-                x = next_x
-            elif x.key <= next_x.key:
-                x.sibling = next_x.sibling
-                heap.link(x, next_x)
+        firstNode = None
+        p = None
+        p1 = h1.head
+        p2 = h2.head
+        if p1 is None or p2 is None:
+            if p1 is None:
+                firstNode = p2
             else:
-                if pre_x is None:
-                    heap.head = next_x
+                firstNode = p1
+            return firstNode
+        if p1.degree < p2.degree:
+            firstNode = p1
+            p = firstNode
+            p1 = p1.sibling
+        else:
+            firstNode = p2
+            p = firstNode
+            p2 = p2.sibling
+        while p1 is not None and p2 is not None:
+            if p1.degree < p2.degree:
+                p.sibling = p1
+                p = p1
+                p1 = p1.sibling
+            else:
+                p.sibling = p2
+                p = p2
+                p2 = p2.sibling
+        if p1 is not None:
+            p.sibling = p1
+        else:
+            p.sibling = p2
+        return firstNode
+    
+    @classmethod
+    def union(self, h1, h2):
+        '''
+        两个堆合并 时间复杂度:`O(lgn)`
+        '''
+        h = BinomialHeap.make_heap()
+        h.head = BinomialHeap.merge(h1, h2)
+        del h1
+        del h2
+        if h.head is None:
+            return h
+        prev = None
+        x = h.head
+        next = x.sibling
+        while next is not None:
+            if x.degree != next.degree or (next.sibling is not None and x.degree == next.sibling.degree):
+                prev = x
+                x = next
+            elif x.key <= next.key:
+                x.sibling = next.sibling
+                h.link(next, x)
+            else:
+                if prev is None:
+                    h.head = next
                 else:
-                    pre_x.sibling = next_x
-                heap.link(x, next_x)
-                x = next_x
-            x = next_x
-        return heap
-       
+                    prev.sibling = next
+                h.link(x, next)
+            next = x.sibling
+        return h
+                
 def test():
     '''
     test
     '''
     print('BinomialHeapNode and BinomialHeap test')
     heap = BinomialHeap.make_heap()
+    heap.head = BinomialHeapNode(1, None, 0)
+    heap.insertkey(5)
+    heap = heap.insertkey(8)
+    heap = heap.insertkey(2)
+    heap = heap.insertkey(7)
+    heap = heap.insertkey(6)
+    heap = heap.insertkey(9)
+    heap = heap.insertkey(4)
     if heap.head is not None:
         print(heap.head)
 
