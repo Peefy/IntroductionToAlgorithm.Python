@@ -28,6 +28,9 @@ class BinomialHeapNode:
         self.sibling = sibling
     
     def __str__(self):
+        '''
+        str(self.key)
+        '''
         return str(self.key)
 
 class BinomialHeap:
@@ -54,7 +57,7 @@ class BinomialHeap:
         '''
         y = None
         x = self.head
-        min = -2147483648
+        min = 2147483648
         while x != None:
             if x.key < min:
                 min = x.key
@@ -141,8 +144,8 @@ class BinomialHeap:
                 p_prev.sibling = h1.head
                 h1.head = p_prev
                 p_prev.p = None
-            self = BinomialHeap.union(self, h1)
-        return x
+            self = BinomialHeap.union(self, h1)         
+        return self
 
     def decresekey(self, x : BinomialHeapNode, key):
         '''
@@ -164,7 +167,7 @@ class BinomialHeap:
         删除一个关键字
         '''
         self.decresekey(x, -2147483648)
-        self.extract_min()
+        return self.extract_min()
 
     @classmethod
     def make_heap(self):
@@ -248,13 +251,21 @@ def test():
     '''
     print('BinomialHeapNode and BinomialHeap test')
     heap = BinomialHeap.make_heap()
-    heap = heap.insertkey(5)
+
+    node = BinomialHeapNode(5)
+    heap = heap.insert(node)
     heap = heap.insertkey(8)
     heap = heap.insertkey(2)
     heap = heap.insertkey(7)
     heap = heap.insertkey(6)
     heap = heap.insertkey(9)
     heap = heap.insertkey(4)
+    heap = heap.extract_min()
+    print(heap.minimum())
+    heap = heap.delete(node)
+    if heap.head is not None:
+        print(heap.head)
+    heap = heap.extract_min()
     if heap.head is not None:
         print(heap.head)
 
