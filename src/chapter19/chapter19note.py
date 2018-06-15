@@ -114,7 +114,52 @@ class Chapter19_2:
     chpater19.2 note and function
     '''
     def buildheap(self):
-        pass
+        '''
+        构造19.2-2的形式二项堆
+        '''
+        heap = bh.BinomialHeap()
+        root1 = bh.BinomialHeapNode(25, 0)
+        # 根结点
+        heap.head = root1
+        root2 = bh.BinomialHeapNode(12, 2)
+        root3 = bh.BinomialHeapNode(6, 4)
+        heap.head.sibling = root2
+        root2.sibling = root3
+
+        root2.child = bh.BinomialHeapNode(37, 1, root2)
+        root2.child.sibling = bh.BinomialHeapNode(18, 0, root2)
+
+        root2.child.child = bh.BinomialHeapNode(
+            41, 0, root2.child)
+
+        root3.child = bh.BinomialHeapNode(10, 3, root3)
+        root3.child.sibling = bh.BinomialHeapNode(8, 2, root3)
+        root3.child.sibling.sibling = bh.BinomialHeapNode(14, 1, root3)
+        root3.child.sibling.sibling.sibling = bh.BinomialHeapNode(29, 0, root3)
+
+        node = root3.child
+        node.child = bh.BinomialHeapNode(16, 2, node)
+        node.child.sibling = bh.BinomialHeapNode(28, 1, node)
+        node.child.sibling.sibling = bh.BinomialHeapNode(13, 0, node)
+
+        node = root3.child.sibling
+        node.child = bh.BinomialHeapNode(11, 1, node)
+        node.child.sibling = bh.BinomialHeapNode(17, 0, node)
+        node.child.child = bh.BinomialHeapNode(27, 0, node.child)
+
+        node = root3.child.sibling.sibling
+        node.child = bh.BinomialHeapNode(38, 0, node)
+
+        node = root3.child.child
+        node.child = bh.BinomialHeapNode(26, 1, node)
+        node.child.sibling = bh.BinomialHeapNode(23, 0, node)
+        node.child.child = bh.BinomialHeapNode(42, 0, node.child)
+
+        node = root3.child.child.sibling
+        node.child = bh.BinomialHeapNode(77, 0, node)
+
+        return heap
+
     def note(self):
         '''
         Summary
@@ -151,10 +196,20 @@ class Chapter19_2:
         heap = heap.insertkey(2)
         heap = heap.insertkey(3)
         print(heap.head)
-        print('练习19.2-2 ')
-        print('练习19.2-3 ')
-        print('练习19.2-4 ')
-        print('练习19.2-5 ')
+        print('练习19.2-2 将关键字24的结点插入如图19-7d的二项树当中')
+        heap = self.buildheap()
+        print(heap.head)
+        heap = heap.insertkey(24)
+        print(heap.head)
+        print(' 所得结果二项堆就是24变成了头结点，25变成24的子结点')
+        heap = heap.deletekey(28)
+        print('练习19.2-3 删除28关键字整个二项堆结构与原来很不相同')
+        print('练习19.2-4 讨论使用如下循环不变式BINOMIAL-HEAP-UNION的正确性')
+        print(' x指向下列之一的根')
+        print(' 1.该度数下唯一的根')
+        print(' 2.该度数下仅有两根中的第一个')
+        print(' 3.该度数下仅有三个根中的第一或第二个')
+        print('练习19.2-5 如果关键字的值可以是无穷，为什么过程BINOMIAL-HEAP-MINIMUM可能无法工作')
         print('练习19.2-6 ')
         print('练习19.2-7 ')
         print('练习19.2-8 ')

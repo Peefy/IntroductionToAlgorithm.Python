@@ -47,6 +47,7 @@ class BinomialHeap:
 
         '''
         self.head = head
+        self.__findnode = None
 
     def minimum(self):
         '''
@@ -57,7 +58,8 @@ class BinomialHeap:
         '''
         y = None
         x = self.head
-        min = 2147483648
+        if x is not None:
+            min = x.key 
         while x != None:
             if x.key < min:
                 min = x.key
@@ -103,6 +105,40 @@ class BinomialHeap:
         '''
         return self.insert(BinomialHeapNode(key))
 
+    def deletekey(self, key):
+        '''
+        删除一个关键字为`key`的结点 时间复杂度`O(lgn)`
+        '''
+        node = self.findkey(key)
+        if node is not None:
+            return self.delete(node)
+        return self
+
+    def findkey(self, key):
+        '''
+        查找一个结点 时间复杂度`O(lgn)`
+        '''
+        self.__findkey(key, self.head)
+        return self.__findnode
+
+    def __findkey(self, key, node):
+        '''
+        查找一个结点
+        '''
+        if node is not None:
+            if node.key == key:
+                self.__findnode = node
+            i = 0 
+            nodefind = node.child
+            while i < node.degree:
+                self.__findkey(key, nodefind)
+                nodefind = nodefind.sibling
+                i += 1
+            nodefind = node.sibling
+            while nodefind is not None:
+                self.__findkey(key, nodefind)
+                nodefind = nodefind.sibling
+
     def extract_min(self):
         '''
         抽取最小关键字
@@ -111,7 +147,6 @@ class BinomialHeap:
         x = None
         x_prev = None
         p_prev = None
-        min = -2147483648
         if p is None:
             return p
         x = p
@@ -164,7 +199,7 @@ class BinomialHeap:
 
     def delete(self, x : BinomialHeapNode):
         '''
-        删除一个关键字
+        删除一个关键字 时间复杂度`O(lgn)`
         '''
         self.decresekey(x, -2147483648)
         return self.extract_min()
@@ -266,6 +301,7 @@ def test():
     if heap.head is not None:
         print(heap.head)
     heap = heap.extract_min()
+    heap = heap.deletekey(9)
     if heap.head is not None:
         print(heap.head)
 
