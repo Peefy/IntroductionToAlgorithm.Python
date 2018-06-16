@@ -24,9 +24,9 @@ from numpy import array as _array
 from numpy import * 
 
 if __name__ == '__main__':
-    import binomial_heap as bh
+    import binomialheap as bh
 else:
-    from . import binomial_heap as bh
+    from . import binomialheap as bh
 
 class Chapter19_1:
     '''

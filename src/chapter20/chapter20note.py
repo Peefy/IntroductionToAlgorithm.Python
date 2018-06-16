@@ -23,6 +23,11 @@ from numpy import arange as _arange
 from numpy import array as _array
 from numpy import * 
 
+if __name__ == '__main__':
+    import fibonacciheap as fh
+else:
+    from . import fibonacciheap as fh
+
 class Chapter20_1:
     '''
     chpater20.1 note and function
@@ -104,6 +109,9 @@ class Chapter20_2:
     '''
     chpater20.2 note and function
     '''
+    def buildheap(self, parameter_list):
+        pass
+
     def note(self):
         '''
         Summary
