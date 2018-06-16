@@ -109,8 +109,12 @@ class Chapter20_2:
     '''
     chpater20.2 note and function
     '''
-    def buildheap(self, parameter_list):
-        pass
+    def buildheap(self):
+        '''
+        构造20.3的斐波那契堆
+        '''
+        heap = fh.FibonacciHeap()
+        return heap
 
     def note(self):
         '''
