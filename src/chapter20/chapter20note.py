@@ -72,11 +72,31 @@ class Chapter20_1:
             'x所有的子女被链接成一个环形双链表,称为x的子女表。',
             '子女表的每个孩子y有指针left[y]和right[y]分别指向其左，右兄弟')
         print('如果y结点是独子，则left[y]=right[y]=y。各兄弟在子女表中出现的次序是任意的')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        # !在斐波那契堆中采用环形双链表
+        print('在斐波那契堆中采用环形双链表有两个好处。',
+            '首先可以在O(1)时间内将某结点从环形双链表中去掉')
+        print(' 其次，给定两个这样的表，可以在O(1)时间内将它们连接为一个环形双链表')
+        print('另外一个结点中的另外两个域也很有用。结点x的子女表中子女的个数存储于degree[x]')
+        print('布尔值域mark[x],指示自从x上一次成为另一个结点子女以来，它是否失掉了一个孩子')
+        print('新创建的结点是没有标记的，且当结点x成为另一个结点的孩子时也是没有标记的')
+        print('DECREASE-KEY操作，才会置所有的mark域为FALSE')
+        print('对于给定的斐波那契堆H,可以通过指向包含最小关键字的树根的指针min[H]来访问')
+        print(' 这个结点被称为斐波那契堆中的最小结点。如果一个斐波那契堆H是空的，则min[H]=None')
+        print('在一个斐波那契堆中，所有树的根都通过用其left和right指针链接成一个环形的双链表，称为该堆的根表')
+        print('在根表中各树的顺序可以是任意的')
+        print('斐波那契堆H中目前所包含的结点个数为n[H]')
+        print('势函数')
+        print(' 对一个给定的斐波那契堆H，用t(H)来表示H的根表中树的棵数，用m(H)来表示H中有标记结点的个数')
+        print(' 斐波那契堆H的势定义为Φ(H)=t(H)+2m(H)')
+        print(' 一组斐波那契堆的势为各成分斐波那契堆的势之和。')
+        print(' 假定一个单位的势可以支付常数量的工作，此处该常数足够大，',
+            '可以覆盖我们可能遇到的任何常数时间的工作')
+        print(' 假定斐波那契堆应用在开始时，都没有堆。于是，初始的势就为0，且根据方程，势始终是非负的')
+        print(' 对某一操作序列来说，其总的平摊代价的一个上界也就是这个操作序列总的实际代价的一个上界')
+        print('最大度数')
+        print(' 在包含n个结点的斐波那契堆中，结点的最大度数有一个已知的上界D(n)')
+        print(' 当斐波那契堆仅支持可合并堆操作时,D(n)<=[lgn]')
+        print(' 当斐波那契堆还需支持DECREASE-KEY和DELETE操作时,D(n)=O(lgn)')
         # python src/chapter20/chapter20note.py
         # python3 src/chapter20/chapter20note.py
 
@@ -97,11 +117,106 @@ class Chapter20_2:
         ```
         '''
         print('chapter20.2 note as follow')  
+        print('20.2 可合并堆的操作')
+        print('介绍斐波那契堆所实现的各种可合并堆操作。',
+            '如果仅需要支持MAKE-HEAP,INSERT,MINIMUM,EXTRACT-MI和UNION操作')
+        print('则每个斐波那契堆就只是一组\"无序的\"的二项树')
+        print('无序的二项树和二项树一样，也是递归定义的')
+        print('无序的二项树U0包含一个结点，一棵无序的二项树Uk包含两颗无序的二项树Uk-1')
+        # !如果一个有n个结点的斐波那契堆由一组无序二项树构成，则D(n)=lgn
+        print('可能要花Ω(lgn)时间向一个二项堆中插入一个结点或合并两个二项堆。',
+            '当向斐波那契堆中插入新结点或者合并两个斐波那契堆时，并不去合并树')
+        print(' 而是将这个工作留给EXTRACT-MIN操作，那是就真正需要找出新的最小结点了')
+        print('斐波那契堆插入一个结点')
+        print(' 与BINOMIAL-HEAP-INSERT过程不同，FIB-HEAP-INSERT并不对斐波那契堆中的树进行合并')
+        print(' 如果连续执行了k次FIB-HEAP-INSERT操作，则k棵单结点的树被加到了根表中')
+        print(' 为了确定FIB-HEAP-INSERT的平摊代价，设H为输入的斐波那契堆，H‘为结果斐波那契堆')
+        print(' 于是，t(H‘)=t(H)+1,m(H‘)=m(H),且势的增加为1')
+        print(' 因为实际的代价为O(1)，故平摊的代价为O(1)+1=O(1)')
+        print('寻找最小结点')
+        print(' 在一个斐波那契堆H中,最小的结点由指针min[H],故可以在O(1)实际时间内找到最小结点')
+        print(' 又因为H的势没有变化，所以这个操作的平摊代价就等于其O(1)的实际代价')
+        print('合并两个斐波那契堆')
+        print(' 合并斐波那契堆H1和H2，同时破坏H1和H2，仅仅简单地将H1和H2的两根表并置,然后确定一个新的最小结点')
+        print(' 势的改变为0,FIB-HEAP-UNION的平摊代价与其O(1)的实际代价相等')
+        print('抽取最小结点')
+        print(' 斐波那契堆FIB-HEAP-EXTRACT-MIN的操作是最复杂的。')
+        print(' 先前对根表中的树进行合并这项工作是被推后的，那么到了这儿最终必须由这个操作完成')
+        print(' 假定从链表中删除一个结点时，仍在表中的指针被更新，而被抽取结点的指针则无变化。该过程还用到辅助过程CONSOLIDATE')
+        print(' 在抽取最小结点之前的势为t(H)+2m(H),而在此之后的势至多为(D(n)+1)+2m(H)')
+        print(' 因为在该操作之后至多留下D(n)+1个根，且操作中没有任何结点被加标记，所以总的平摊代价至多为O(D(n))')
+        print(' 这是因为可以通过扩大势的单位来支配O(t(H))中隐藏的常数。')
+        print(' 从直觉上看，执行每一次链接的代价是由势的减少来支付的，',
+            '而势的减少又是由于链接操作使根的数目减少1而引起的')
+        print(' 若D(n)=O(lgn),所以抽取最小结点的平摊代价为O(lgn)')
+        print('练习20.2-1 ')
+        print('练习20.2-2 ')
+        print('练习20.2-3 ')
+        print('练习20.2-4 ')
+        print('练习20.2-5 ')
+        # python src/chapter20/chapter20note.py
+        # python3 src/chapter20/chapter20note.py
+
+class Chapter20_3:
+    '''
+    chpater20.3 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter20.3 note
+
+        Example
+        ====
+        ```python
+        Chapter20_3().note()
+        ```
+        '''
+        print('chapter20.3 note as follow')
+        print('20.3 减小一个关键字于删除一个结点')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        # python src/chapter20/chapter20note.py
+        # python3 src/chapter20/chapter20note.py
+
+class Chapter20_4:
+    '''
+    chpater20.4 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter20.4 note
+
+        Example
+        ====
+        ```python
+        Chapter20_4().note()
+        ```
+        '''
+        print('chapter20.4 note as follow')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter20/chapter20note.py
         # python3 src/chapter20/chapter20note.py
 
 chapter20_1 = Chapter20_1()
 chapter20_2 = Chapter20_2()
+chapter20_3 = Chapter20_3()
+chapter20_4 = Chapter20_4()
 
 def printchapter20note():
     '''
@@ -110,6 +225,8 @@ def printchapter20note():
     print('Run main : single chapter twenty!')  
     chapter20_1.note()
     chapter20_2.note()
+    chapter20_3.note()
+    chapter20_4.note()
 
 # python src/chapter20/chapter20note.py
 # python3 src/chapter20/chapter20note.py
