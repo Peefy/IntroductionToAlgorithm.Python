@@ -71,7 +71,7 @@ class Chapter20_1:
         print('每个结点x包含一个指向其父结点的指针p[x],以及一个指向其任一子女的指针child[x],',
             'x所有的子女被链接成一个环形双链表,称为x的子女表。',
             '子女表的每个孩子y有指针left[y]和right[y]分别指向其左，右兄弟')
-        print('如果y结点是独子')
+        print('如果y结点是独子，则left[y]=right[y]=y。各兄弟在子女表中出现的次序是任意的')
         print('')
         print('')
         print('')
