@@ -69,6 +69,8 @@ if __name__ == '__main__':
     src.printchapter19note()
     ## chapter20
     src.printchapter20note()
+    ## chapter21
+    src.printchapter21note()
 else:
     pass
 
