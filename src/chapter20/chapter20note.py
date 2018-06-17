@@ -109,11 +109,41 @@ class Chapter20_2:
     '''
     chpater20.2 note and function
     '''
+    def putxkeydownykey(self, heap : fh.FibonacciHeap, xkey, ykey):
+        '''
+        构造20.3的斐波那契堆
+        '''
+        ynode = heap.search(ykey)
+        root = ynode
+        node = fh.make_fib_node(xkey)
+        fh.link(node, root)
+        heap.keynum += 1
+
     def buildheap(self):
         '''
         构造20.3的斐波那契堆
         '''
-        heap = fh.FibonacciHeap()
+        heap = fh.make_fib_heap()
+        heap.insertkey(7)
+        heap.insertkey(18)
+        heap.insertkey(38)
+
+        self.putxkeydownykey(heap, 24, 7)
+        self.putxkeydownykey(heap, 17, 7)
+        self.putxkeydownykey(heap, 23, 7)
+
+        self.putxkeydownykey(heap, 26, 24)
+        self.putxkeydownykey(heap, 46, 24)
+        self.putxkeydownykey(heap, 35, 26)
+
+        self.putxkeydownykey(heap, 30, 17)
+
+        self.putxkeydownykey(heap, 21, 18)
+        self.putxkeydownykey(heap, 39, 18)
+        self.putxkeydownykey(heap, 52, 21)
+
+        self.putxkeydownykey(heap, 41, 38)
+
         return heap
 
     def note(self):
@@ -161,6 +191,8 @@ class Chapter20_2:
         print(' 从直觉上看，执行每一次链接的代价是由势的减少来支付的，',
             '而势的减少又是由于链接操作使根的数目减少1而引起的')
         print(' 若D(n)=O(lgn),所以抽取最小结点的平摊代价为O(lgn)')
+        heap = self.buildheap()
+        heap.print()
         print('练习20.2-1 ')
         print('练习20.2-2 ')
         print('练习20.2-3 ')

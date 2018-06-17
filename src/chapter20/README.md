@@ -64,6 +64,91 @@ class FibonacciHeapNode:
         return str({"key" : self.key, \
             "degree" : self.degree})
 
+def make_fib_node(key):
+    '''
+    创建斐波那契堆的结点
+    Example
+    ===
+    ```python
+    import fibonacciheap as fh
+    >>> node = fh.make_fib_node()
+    ```
+    '''
+    node = FibonacciHeapNode()
+    node.key = key
+    node.degree = 0
+    node.left = node
+    node.right = node
+    node.p = None
+    node.child = None
+    return node
+
+def make_fib_heap():
+    '''
+    创建一个新的空的斐波那契堆
+
+    平摊代价和实际代价都为`O(1)`
+
+    Example
+    ===
+    ```python
+    import fibonacciheap as fh
+    heap = fh.make_fib_heap()
+    ```
+    '''
+    heap = FibonacciHeap()
+    heap.keynum = 0
+    heap.maxdegree = 0
+    heap.min = None
+    heap.cons = None
+    return heap
+
+def node_add(node: FibonacciHeapNode, root: FibonacciHeapNode):
+    '''
+    将单个结点`node``加入链表`root`之前
+
+    此处`node`是单个结点，`root`是双向链表
+
+    '''
+    if node is None or root is None:
+        return
+    node.left = root.left
+    root.left.right = node
+    node.right = root
+    root.left = node
+
+def node_remove(node: FibonacciHeapNode):
+    '''
+    将单个结点`node`从双链表中移除
+    '''
+    node.left.right = node.right
+    node.right.left = node.left
+
+def node_cat(a: FibonacciHeapNode, b: FibonacciHeapNode):
+    '''
+    将双向链表`b`链接到双向链表`a`的后面
+    '''
+    tmp = a.right
+    a.right = b.right
+    b.right.left = a
+    b.right = tmp
+    tmp.left = b
+
+def link(node: FibonacciHeapNode, root: FibonacciHeapNode):
+    '''
+    将`node`链接到`root`根结点
+    '''
+    FibonacciHeap.node_remove(node)
+    if root is None:
+        return
+    if root.child == None:
+        root.child = node
+    else:
+        FibonacciHeap.node_add(node, root.child)
+    node.p = root
+    root.degree += 1
+    node.mark = False
+
 class FibonacciHeap:
     '''
     斐波那契堆 不涉及删除元素的可合并堆操作仅需要`O(1)`的平摊时间,这是斐波那契堆的优点
@@ -463,15 +548,20 @@ class FibonacciHeap:
         p = None
         if root is None:
             return root
-        while t.right != t:
+        while t != root.left:
             if t.key == key:
                 p = t
                 break
             else:
-                p = self.search_fromroot(root.child, key)
+                p = self.search_fromroot(t.child, key)
                 if p is not None:
                     break
                 t = t.right
+        else:
+            if t.key == key:
+                p = t
+            else:
+                p = self.search_fromroot(t.child, key)
         return p
 
     def search(self, key):
@@ -614,6 +704,7 @@ if __name__ == '__main__':
     test()
 else:
     pass
+
 
 ```
 
