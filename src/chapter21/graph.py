@@ -1,10 +1,4 @@
 
-## 用于不相交集合的数据结构
-
-不相交集合数据结构有多种应用,其中之一是用于确定一个无向图中连通子图的个数
-
-```python
-
 class UndirectedGraph:
     '''
     无向图 `G=(V, E)`
@@ -126,8 +120,3 @@ if __name__ == '__main__':
     test_graph_connected()
 else:
     pass    
-
-
-```
-
-[Github Code](https://github.com/Peefy/CLRS_dugu_code-master/blob/master/src/chapter21)
