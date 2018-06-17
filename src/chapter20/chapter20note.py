@@ -227,12 +227,12 @@ class Chapter20_3:
         '''
         print('chapter20.3 note as follow')
         print('20.3 减小一个关键字于删除一个结点')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('减小斐波那契堆中某结点的关键字，平摊时间为O(1)')
+        print('从包含n个结点的斐波那契堆中删除一个结点，平摊时间O(D(n))')
+        print('这些操作不包吃斐波那契堆中的所有树都是无序二项树的性质')
+        print('因而可以用O(lgn)来限界最大度数D(n)')
+        print('FIB-HEAP-EXTRACT-MIN和FIB-HEAP-DELETE的平摊运行时间为O(lgn)')
+        print('练习20.3-1 假设一个斐波那契堆中某个根是有')
         print('')
         # python src/chapter20/chapter20note.py
         # python3 src/chapter20/chapter20note.py

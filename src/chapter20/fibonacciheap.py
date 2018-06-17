@@ -395,7 +395,7 @@ class FibonacciHeap:
     
     def extractmin(self):
         '''
-        移除最小节点，并返回最小结点
+        移除最小节点，并返回最小结点 平摊运行时间为`O(lgn)`
         '''
         if self.min is None:
             return
@@ -456,6 +456,9 @@ class FibonacciHeap:
     def decrease(self, node : FibonacciHeapNode, key):
         '''
         将斐波那契堆heap中结点`node`的值减少为`key`
+
+        平摊运行时间为`O(lgn)`
+
         '''
         if self.min is None or node is None:
             return

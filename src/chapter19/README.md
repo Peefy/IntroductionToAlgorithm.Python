@@ -12,6 +12,16 @@ redirect_from:
 
 可合并堆包括二叉堆、二项堆、斐波那契堆
 
+操作|二叉堆(最坏情况)|二项堆(最坏情况)|斐波那契堆(平摊)|
+---|---|---|---
+MAKE-HEAP()   |   Θ(1)    |    Θ(1)    |  Θ(1)      |
+INSERT(H,x)   |    Θ(lgn)     |     Ω(lgn)   |     Θ(1)      |
+ MINIMUM(H)    |     Θ(1)      |     Ω(lgn)   |     Θ(1)      |
+  EXTRACT-MIN(H)|    Θ(lgn)     |     Θ(lgn)   |    O(lgn)     |
+ UNION(H1,H2)  |     Θ(n)      |     Ω(lgn)   |     Θ(1)      |
+ DECREASE-KEY  |    Θ(lgn)     |     Θ(lgn)   |     Θ(1)      |
+  DELETE(H, x)  |    Θ(lgn)     |     Θ(lgn)   |    O(lgn)     |
+
 ## 二项树
 
 二项树Bk是一种递归定义的树。
