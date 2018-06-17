@@ -6,6 +6,20 @@ class UndirectedGraph:
     def __init__(self, vertexs : list = [], edges : list = []):
         '''
         无向图 `G=(V, E)`
+
+        Args
+        ===
+        `vertexs` : 顶点集合 `list` contains element which contains one element denote a point
+
+        `edges` : 边集合 `list` contains element which contains two elements denote one edge of two points repectively
+
+        Example
+        ===
+        ```python
+        import graph
+        >>> g = graph.UndirectedGraph(['a', 'b', 'c', 'd'], [('a', 'b')])
+        ```
+
         '''
         self.vertexs = vertexs
         self.edges = edges

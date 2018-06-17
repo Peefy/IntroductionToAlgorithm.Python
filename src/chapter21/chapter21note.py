@@ -107,6 +107,7 @@ class Chapter21_2:
         ```
         '''
         print('chapter21.2 note as follow')
+        print('')
         # python src/chapter21/chapter21note.py
         # python3 src/chapter21/chapter21note.py
 
