@@ -107,12 +107,22 @@ class Chapter21_2:
         ```
         '''
         print('chapter21.2 note as follow')
-        print('不相交集合的链表表示')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('21.2 不相交集合的链表表示')
+        print(' 要实现不相交集合数据结构，一种简单的方法是每一种集合都用一个链表来表示')
+        print(' 每个链表中的第一个对象作为它所在集合的代表')
+        print(' 链表中的每一个对象都包含一个集合成员，一个指向包含下一个集合成员的对象的指针，以及指向代表的指针')
+        print(' 每个链表都含head指针和tail指针，head指向链表的代表，tail指向链表中最后的对象')
+        print(' 在这种链表表示中，MAKE-SET操作和FIND-SET操作都比较容易实现，只需要O(1)的时间')
+        print(' 执行MAKE-SET(x)操作，创建一个新的链表,其仅有对象为x')
+        print(' 对FIND-SET(X)操作,只要返回由x指向代表的指针即可')
+        print('合并的一个简单实现')
+        print(' 在UNION操作的实现中，最简单的是采用链表集合表示的实现，',
+            '这种实现要比MAKE-SET或FIND-SET多不少的时间')
+        print('执行UNION(x,y),就是将x所在的链表拼接到y所在链表的表尾.利用y所在链表的tail指针',
+            '可以迅速地找到应该在何处拼接x所在的链表')
+        print('一个作用于n个对象上的,包含m个操作的序列，需要Θ(n^2)时间')
+        print('执行n个MAKE-SET操作所需要的时间为Θ(n)')
+        print('因为第i个UNION操作更新了i个对象，故n-1个UNION操作所更新的对象总数为Θ(n^2)')
         print('')
         print('')
         print('')
