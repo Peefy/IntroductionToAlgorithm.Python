@@ -232,8 +232,11 @@ class Chapter20_3:
         print('这些操作不包吃斐波那契堆中的所有树都是无序二项树的性质')
         print('因而可以用O(lgn)来限界最大度数D(n)')
         print('FIB-HEAP-EXTRACT-MIN和FIB-HEAP-DELETE的平摊运行时间为O(lgn)')
-        print('练习20.3-1 假设一个斐波那契堆中某个根是有')
-        print('')
+        print('练习20.3-1 假设一个斐波那契堆中某个根x是有标记的。')
+        print(' 请解释x是如何成为有标记的根')
+        print(' 另说明x有无标记对分析来说没有影响，',
+            '即使他不是先被链接到另一个结点，然后又失去一个子结点的根')
+        print('练习20.3-2 使用聚焦分析来证明FIB-HEAP-DECREASE-KEY的平摊时间O(1)是每个操作的平均代价')
         # python src/chapter20/chapter20note.py
         # python3 src/chapter20/chapter20note.py
 
@@ -254,14 +257,25 @@ class Chapter20_4:
         ```
         '''
         print('chapter20.4 note as follow')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('20.4 最大度数的界')
+        print('为了证明FIB-HEAP-EXTRACT-MIN和FIB-HEAP-DELETE的平摊时间为O(lgn)')
+        print('必须首先证明，在包含n个结点的斐波那契堆中，任意结点的度数的上界D(n)为O(lgn)')
+        print('引理20.1 设x为斐波那契堆中任一结点，且假设degree[x]=k，',
+            '设y1,y2,...,yk表示按与x链接的次序排列的x的子女，从最早的到最迟的，则对i=2,3,...,k',
+            '有degree[y1]>=0和degree[yi]>=i-2')
+        print('引理20.2 对所有整数k>=0,F(k+2)=1+∑F(i)')
+        print('引理20.3 设x为斐波那契的任一结点，且k=degree[x],那么size(x)>=Fk+2>=Φ^k,其中Φ=(1+sqrt(5))/2')
+        print('推论20.4 在一个包含n个结点的斐波那契堆中，结点的最大度数D(n)为O(lgn)')
+        print('练习20.4-1 Pinocchio教授声称，包含n个结点的斐波那契堆的高度为O(lgn)')
+        print(' 请证明他是错的，即对于任意的正整数n，给出一个斐波那契堆操作序列，',
+            '它创建一个仅包含一棵树的堆,该树是n个结点的线性链')
+        print('练习20.4-2 假设将级联切断规则加以推广，使得当某个结点x失去其第k个孩子时')
+        print(' 就将其与父结点的联系切断，此处k为常整数。k取什么值时，有D(n)=O(lgn)')
+        print('思考题20-1 删除的另一种实现')
+        print('思考题20-2 其他斐波那契堆的操作')
+        print(' 增强斐波那契堆H，使之支持两种新的操作，同时，还不改变其他斐波那契堆操作的平摊运行时间')
+        print('FIB-HEAP-CHANGE-KEY(H, x. k) 将结点x的关键字改变为k')
+        print('FIB-HEAP-PRUNE(H, r) 将min(r, n[H])个结点从H中删除')
         # python src/chapter20/chapter20note.py
         # python3 src/chapter20/chapter20note.py
 
