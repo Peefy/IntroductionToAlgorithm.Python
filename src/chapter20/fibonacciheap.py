@@ -270,6 +270,7 @@ class FibonacciHeap:
                 self.link(y, x)
                 self.cons[d] = None
                 d += 1
+            self.cons[d] = x
         self.min = None
         for i in range(D):
             if self.cons[i] is not None:
@@ -277,7 +278,7 @@ class FibonacciHeap:
                     self.min = self.cons[i]
                 else:
                     FibonacciHeap.node_add(self.cons[i], self.min)
-                    if self.cons[i].key < self.min:
+                    if self.cons[i].key < self.min.key:
                         self.min = self.cons[i]
         
     def __extractmin(self):
@@ -486,11 +487,15 @@ class FibonacciHeap:
         if node is None:
             return
         start = node
-        while node.right != node:
+        while node != start.left:
             self.destroy(node.child)
             node = node.right
             del node.left
-    
+        else:
+            self.destroy(node.child)
+            node = node.right
+            del node.left
+
     def destroy(self):
         '''
         销毁斐波那契堆
@@ -515,9 +520,20 @@ class FibonacciHeap:
         start = node
         if node is None:
             return
-        while node.right != node:
+        while node != start.left:
             if direction == 1:
-                print('{}({}) is {}\'s child'.format(node.key, node.degree, prev.key))
+                print('%8d(%d) is %2d\'s child' % (node.key, node.degree, prev.key))
+            elif direction == 2:
+                print('%8d(%d) is %2d\'s child' % (node.key, node.degree, prev.key))
+            if node.child is not None:
+                self.print_node(node.child, node, 1)
+            prev = node
+            node = node.right
+            direction = 2
+        else:
+            if direction == 1:
+                print('{}({}) is {}\'s child'.format(
+                    node.key, node.degree, prev.key))
             elif direction == 2:
                 print('{}({}) is {}\'s next'.format(node.key, node.degree, prev.key))
             if node.child is not None:
@@ -534,9 +550,14 @@ class FibonacciHeap:
             return
         p = self.min
         i = 0
-        while p.right != p:
+        while p != self.min.left:
             i += 1
-            print("{}.{}({}) is root ".format(i, p.key, p.degree))
+            print("%2d. %4d(%d) is root " % (i, p.key, p.degree))
+            FibonacciHeap.print_node(p.child, p, 1)
+            p = p.right
+        else:
+            i += 1
+            print("%2d. %4d(%d) is root " % (i, p.key, p.degree))
             FibonacciHeap.print_node(p.child, p, 1)
             p = p.right
 
