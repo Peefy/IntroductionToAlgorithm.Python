@@ -107,6 +107,15 @@ class Chapter21_2:
         ```
         '''
         print('chapter21.2 note as follow')
+        print('不相交集合的链表表示')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         print('')
         # python src/chapter21/chapter21note.py
         # python3 src/chapter21/chapter21note.py
@@ -128,6 +137,16 @@ class Chapter21_3:
         ```
         '''
         print('chapter21.3 note as follow')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter21/chapter21note.py
         # python3 src/chapter21/chapter21note.py
 
@@ -148,6 +167,17 @@ class Chapter21_4:
         ```
         '''
         print('chapter21.4 note as follow')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter21/chapter21note.py
         # python3 src/chapter21/chapter21note.py
 
