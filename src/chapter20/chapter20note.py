@@ -191,13 +191,21 @@ class Chapter20_2:
         print(' 从直觉上看，执行每一次链接的代价是由势的减少来支付的，',
             '而势的减少又是由于链接操作使根的数目减少1而引起的')
         print(' 若D(n)=O(lgn),所以抽取最小结点的平摊代价为O(lgn)')
+        print('练习20.2-1 给出图20-3中所示的斐波那契堆调用FIB-HEAP-EXTRACT-MIN后得到的斐波那契堆')
         heap = self.buildheap()
+        print('remove before')
         heap.print()
-        print('练习20.2-1 ')
-        print('练习20.2-2 ')
-        print('练习20.2-3 ')
-        print('练习20.2-4 ')
-        print('练习20.2-5 ')
+        heap.extractmin()
+        print('remove after')
+        heap.print()
+        print('练习20.2-2 证明：引理19.1(二项树的性质)对无序二项树也成立')
+        print('练习20.2-3 证明：如果仅需支持可合并堆操作，',
+            '则在包含n个结点的斐波那契堆中结点的最大度数D(n)至多为[lgn]')
+        print('练习20.2-4 McGee教授设计了一种新的基于斐波那契堆的数据结构')
+        print(' McGee堆与斐波那契堆具有相同的结构，也支持可合并堆操作。',
+            '各操作的实现与斐波那契堆中的相同,不同的是插入和合并在最后的步骤中做合并调整')
+        print('练习20.2-5 论证：如果关键字的唯一操作是比较两个关键字，',
+            '则并非所有的可合并堆操作都有O(1)的平摊时间')
         # python src/chapter20/chapter20note.py
         # python3 src/chapter20/chapter20note.py
 
