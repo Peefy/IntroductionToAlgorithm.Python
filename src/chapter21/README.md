@@ -13,7 +13,6 @@
 
 ```python
 
-
 class UndirectedGraph:
     '''
     无向图 `G=(V, E)`
@@ -108,6 +107,110 @@ class Set:
     def __str__(self):
         return str(self.sets)
 
+class ListNode:
+    def __init__(self, key = None):
+        '''
+        采用链表表示不相交集合结点
+        '''
+        self.first = None
+        self.next = None
+        self.key = key
+    
+    def __str__(self):
+        return str(self.key)
+
+class List:
+    def __init__(self):
+        '''
+        采用链表表示不相交集合
+        '''
+        self.rep = None
+        self.head = None
+        self.tail = None
+        self.size = 0
+    
+    def __str__(self):
+        return 'List size:{} and rep:{}'.format(self.size, self.rep)
+
+class ListSet(Set):
+    '''
+    不相交集合的链表表示
+    '''
+    def __init__(self):
+        self.sets = []
+
+    def make_set(self, element):
+        '''
+        建立一个新的集合
+        '''
+        list = List()
+        node = ListNode(element)  
+        if list.size == 0:           
+            list.head = node
+            list.tail = node
+            list.rep = node
+            node.first = node
+            list.size = 1
+        else:
+            list.tail.next = node
+            list.tail = node 
+            node.first = list.head
+            list.size += 1
+        self.sets.append(list)
+
+    def union(self, set1, set2):
+        '''
+        将子集合`set1`和`set2`合并
+        '''
+        self.sets.remove(set1)
+        self.sets.remove(set2)
+        set1.tail.next = set2.rep
+        set1.size += set2.size
+        set1.tail = set2.tail
+
+        set2.rep = set1.rep
+
+        node = set2.head
+        for i in range(set2.size):
+            node.first = set1.rep
+            node = node.next
+
+        self.sets.append(set1)
+
+    def unionelement(self, element1, element2):
+        '''
+        将`element1`代表的集合和`element2`代表的集合合并
+        '''
+        set1 = self.find(element1)
+        set2 = self.find(element2)
+        if set1 is None or set2 is None:
+            return
+        if set1.size < set2.size:
+            self.union(set2, set1)
+        else:
+            self.union(set1, set2)
+
+    def find(self, element):
+        '''
+        找出包含元素`element`的集合
+        '''
+        for set in self.sets:
+            node = set.rep
+            while node != set.tail:
+                if node.key == element:
+                    return set
+                node = node.next
+            else:
+                if set.tail.key == element: 
+                    return set
+        return None
+
+    def printsets(self):
+        '''
+        打印集合
+        '''
+        for set in self.sets:
+            print(set)
 
 def connected_components(g: UndirectedGraph):
     '''
@@ -145,8 +248,29 @@ def test_graph_connected():
     print(g.get_connected_components())
     g.print_last_connected_count()
 
+def test_list_set():
+    '''
+    test_list_set
+    '''
+    NUM = 16
+    set = ListSet()
+    for i in range(NUM):
+        set.make_set(i)
+    for i in range(0, NUM - 1, 2):
+        set.unionelement(i, i + 1)
+    for i in range(0, NUM - 3, 4):
+        set.unionelement(i, i + 2)
+    set.printsets()
+    set.unionelement(1, 5)
+    set.unionelement(11, 13)
+    set.unionelement(1, 10)
+    set.printsets()
+    print(set.find(2))
+    print(set.find(9))
+
 if __name__ == '__main__':
     test_graph_connected()
+    test_list_set()
 else:
     pass    
 

@@ -28,9 +28,9 @@ from numpy import array as _array
 from numpy import * 
 
 if __name__ == '__main__':
-    import graph as _g
+    import notintersectset as _nset
 else:
-    from . import graph as _g
+    from . import notintersectset as _nset
 
 class Chapter21_1:
     '''
@@ -69,7 +69,7 @@ class Chapter21_1:
         print('不相交集合数据结构的一个应用')
         # !不相交集合数据结构有多种应用,其中之一是用于确定一个无向图中连通子图的个数
         print(' 不相交集合数据结构有多种应用,其中之一是用于确定一个无向图中连通子图的个数')
-        g = _g.UndirectedGraph()
+        g = _nset.UndirectedGraph()
         g.vertexs = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
         g.edges = [('d', 'i'), ('f', 'k'), ('g', 'i'),
                    ('b', 'g'), ('a', 'h'), ('i', 'j'), 
@@ -118,15 +118,27 @@ class Chapter21_2:
         print('合并的一个简单实现')
         print(' 在UNION操作的实现中，最简单的是采用链表集合表示的实现，',
             '这种实现要比MAKE-SET或FIND-SET多不少的时间')
-        print('执行UNION(x,y),就是将x所在的链表拼接到y所在链表的表尾.利用y所在链表的tail指针',
+        print(' 执行UNION(x,y),就是将x所在的链表拼接到y所在链表的表尾.利用y所在链表的tail指针',
             '可以迅速地找到应该在何处拼接x所在的链表')
-        print('一个作用于n个对象上的,包含m个操作的序列，需要Θ(n^2)时间')
-        print('执行n个MAKE-SET操作所需要的时间为Θ(n)')
-        print('因为第i个UNION操作更新了i个对象，故n-1个UNION操作所更新的对象总数为Θ(n^2)')
-        print('')
-        print('')
-        print('')
-        print('')
+        print(' 一个作用于n个对象上的,包含m个操作的序列，需要Θ(n^2)时间')
+        print(' 执行n个MAKE-SET操作所需要的时间为Θ(n)')
+        print(' 因为第i个UNION操作更新了i个对象，故n-1个UNION操作所更新的对象总数为Θ(n^2)')
+        print(' 总的操作数为2n-1，平均来看，每个操作需要Θ(n)的时间')
+        print(' 也就是一个操作的平摊时间为Θ(n)')
+        print('一种加权合并启发式策略')
+        print(' 在最坏情况下，根据上面给出的UNION过程的实现，每次调用这一过程都需要Θ(n)的时间')
+        print(' 如果两个表一样长的话，可以以任意顺序拼接，利用这种简单的加权合并启发式策略')
+        print(' 如果两个集合都有Ω(n)个成员的话，一次UNION操作仍然会需要Θ(n)时间')
+        print('定理21.1 利用不相交集合的链表表示和加权合并启发式',
+            '一个包括m个MAKE-SET,UNION和FIND-SET操作',
+            '(其中有n个MAKE-SET操作)的序列所需时间为O(m+nlgn)')
+        print('练习21.2-1 已经完成')
+        print('练习21.2-2 如下:结果是16个链表集合合并成了一个总的链表')
+        _nset.test_list_set()
+        print('练习21.2-3 对定理21.1的证明加以改造，使得MAKE-SET和FIND-SET操作有平坦时间界O(1)')
+        print(' 对于采用了链表表示和加权合并启发式策略的UNION操作，有界O(lgn)')
+        print('练习21.2-4 假定采用的是链表表示和加权合并启发式策略。略')
+        print('练习21.2-5 合并的两个表像合并排序那样轮流交叉合并')
         # python src/chapter21/chapter21note.py
         # python3 src/chapter21/chapter21note.py
 
@@ -147,7 +159,7 @@ class Chapter21_3:
         ```
         '''
         print('chapter21.3 note as follow')
-        print('')
+        print('21.3 不相交集合森林')
         print('')
         print('')
         print('')
