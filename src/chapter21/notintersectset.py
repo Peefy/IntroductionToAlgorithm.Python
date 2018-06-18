@@ -16,10 +16,9 @@ class UndirectedGraph:
         Example
         ===
         ```python
-        import graph
+        import notintersectset as graph
         >>> g = graph.UndirectedGraph(['a', 'b', 'c', 'd'], [('a', 'b')])
         ```
-
         '''
         self.vertexs = vertexs
         self.edges = edges
@@ -67,7 +66,7 @@ class Set:
 
     def make_set(self, element):
         '''
-        建立一个新的集合
+        用元素`element`建立一个新的集合
         '''
         self.sets.append({element})
 
@@ -92,6 +91,13 @@ class Set:
     
     def __str__(self):
         return str(self.sets)
+
+    def printsets(self):
+        '''
+        打印集合
+        '''
+        for set in self.sets:
+            print(set)
 
 class ListNode:
     def __init__(self, key = None):
@@ -123,11 +129,14 @@ class ListSet(Set):
     不相交集合的链表表示
     '''
     def __init__(self):
+        '''
+        不相交集合的链表表示
+        '''
         self.sets = []
 
     def make_set(self, element):
         '''
-        建立一个新的集合
+        用元素`element`建立一个新的集合
         '''
         list = List()
         node = ListNode(element)  
@@ -191,12 +200,107 @@ class ListSet(Set):
                     return set
         return None
 
-    def printsets(self):
+    
+
+class RootTreeNode:
+    '''
+    有根树结点
+    '''
+    def __init__(self, key = None, parent = None, rank = None):
         '''
-        打印集合
+        有根树结点
+
+        Args
+        ===
+        `key` : 关键字值
+
+        `parent` : 结点的父结点
+
+        `rank` : 结点的秩
         '''
-        for set in self.sets:
-            print(set)
+        self.key = key
+        self.parent = parent
+        self.rank = rank
+    
+    def __str__(self):
+        return 'key:{} rank:{}'.format(self.key, self.rank)
+
+class RootTree:
+    '''
+    有根树
+    '''
+    def __init__(self, root = None):
+        '''
+        有根树
+        Args
+        ===
+        `root` : 有根树的根结点
+        '''
+        self.root = root
+    
+    def __str__(self):
+        return 'roots:' + str(self.root)
+
+class ForestSet(Set):
+    '''
+    不相交集合森林
+    '''
+    def __init__(self):
+        self.sets = []
+
+    def make_set(self, element):
+        '''
+        用元素`element`建立一个新的集合
+        '''
+        treenode = RootTreeNode(element)
+        self.make_set_node(treenode)
+        
+    def make_set_node(self, node : RootTreeNode):
+        '''
+        用有根树结点`node`建立一个新的集合
+        '''
+        tree = RootTree()  
+        node.parent = node
+        node.rank = 0
+        tree.root = node
+        self.sets.append(tree)
+
+    @classmethod
+    def link(self, node1 : RootTreeNode, node2 : RootTreeNode):
+        '''
+        连接两个有根树的结点`node1`和`node2`
+        '''
+        if node1.rank > node2.rank:
+            node2.parent = node1
+        else:
+            node1.parent = node2
+            if node1.rank == node2.rank:
+                node2.rank += 1
+    
+    def union(self, x : RootTreeNode, y : RootTreeNode):
+        '''
+        将有根树结点`x`代表的集合和有根树结点`y`代表的集合合并
+        '''
+        self.link(self.findnode(x), self.findnode(y))
+
+    def findnode(self, x : RootTreeNode):
+        '''
+        带路径压缩的寻找集合
+        '''
+        if x != x.parent:
+            x.parent = self.findnode(x.parent)
+        return x.parent
+
+    def findnode_nonrecursive(self, x : RootTreeNode):
+        '''
+        带路径压缩的寻找集合(非递归版本)
+        '''
+        y = x
+        while y != y.parent:
+            y = y.parent
+        while x != x.parent:
+            x.parent = y
+            x = x.parent
 
 def connected_components(g: UndirectedGraph):
     '''
@@ -220,7 +324,7 @@ def connected_components(g: UndirectedGraph):
 
 def test_graph_connected():
     '''
-    test_graph_connected
+    测试无向图链接连通子图
     '''
     g = UndirectedGraph()
     g.vertexs = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
@@ -236,7 +340,7 @@ def test_graph_connected():
 
 def test_list_set():
     '''
-    test_list_set
+    不相交集合的链表表示
     '''
     NUM = 16
     set = ListSet()
@@ -254,8 +358,28 @@ def test_list_set():
     print(set.find(2))
     print(set.find(9))
 
+def test_forest_set():
+    '''
+    测试不相交集合森林
+    '''
+    NUM = 16
+    set = ForestSet()
+    nodes = []
+    for i in range(NUM):
+        nodes.append(RootTreeNode(i))
+    for i in range(NUM):
+        set.make_set_node(nodes[i])
+    set.printsets()
+    for i in range(0, NUM - 1, 2):
+        set.union(nodes[i], nodes[i + 1])
+    set.printsets()
+    for i in range(0, NUM - 3, 4):
+        set.union(nodes[i], nodes[i + 2])
+    set.printsets()
+
 if __name__ == '__main__':
     test_graph_connected()
     test_list_set()
+    test_forest_set()
 else:
     pass    

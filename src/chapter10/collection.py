@@ -120,6 +120,7 @@ class StackUsingQueue:
         
     def count(self):
         return self.__queue1.length()
+        
 class Queue:
     '''
     队列
