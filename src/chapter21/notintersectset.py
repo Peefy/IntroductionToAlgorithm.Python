@@ -200,8 +200,6 @@ class ListSet(Set):
                     return set
         return None
 
-    
-
 class RootTreeNode:
     '''
     有根树结点

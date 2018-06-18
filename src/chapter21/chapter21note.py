@@ -229,8 +229,42 @@ class Chapter21_4:
         print('推论21.5 在从任何一个结点指向根的路径上，结点的秩是严格递增的')
         print('引理21.6 每个结点的秩至多为1')
         print('时间界的证明')
-        print('引理21.7 假定有一个m个MAKE-SET,UNION和FIND-SET')
-        print('')
+        print('引理21.7 假定有一个m个MAKE-SET,UNION和FIND-SET操作构成的操作序列S\'',
+            '将其转换成一个新的操作序列S，它由m个MAKE-SET,LINK和FIND-SET操作所构成',
+            '转换方法是将每一个UNION操作转换成两个FIND-SET操作，后跟一个LINK操作',
+              '如果操作序列S的运行时间为O(ma(n)),操作序列S\'的运行时间即为O(m\'a(n))')
+        print('引理21.10 每个MAKE-SET操作的平摊代价是为O(1)')
+        print('引理21.11 每个LINK操作的平摊代价为O(a(n))')
+        print('引理21.12 每个FIND-SET操作的平摊代价为O(a(n))')
+        print('定理21.13 对于一个由m个MAKE-SET,UNION和FIND-SET操作所组成的操作序列(其中n个为MAKE-SET操作)',
+              '当在一个按秩合并和路径压缩的不相交集合森林上执行时，最坏情况下的执行时间O(ma(n))')
+        print('练习21.4-1 略')
+        print('练习21.4-2 证明：每个结点的秩都至多为[lgn]')
+        print('练习21.4-3 对每个结点x，存储rank[x]需要多少位(bit)')
+        print('练习21.4-4 对于带按秩合并,但不带路径压缩的不相交集合上的操作，',
+            '简要地证明其运行时间为O(mlgn)')
+        print('练习21.4-5 各结点的秩在一条指向根的路径上是严格递增的')
+        print('练习21.4-6 证明：一个包含m个MAKE-SET,UNION和FIND-SET操作(其中n个为MAKE-SET操作)的序列',
+              '当在一个带按秩合并的路径压缩的不相交集合森林上执行时，其最坏情况运行时间为O(ma\'(n))')
+        print('思考题21-1 脱机最小值')
+        print(' 脱机最小值问题(off-line minimum problem)是对INSERT和EXTRACT-MIN操作所所用的',
+            '一个其元素取自域{1,2,..,n}的动态集合T加以维护')
+        print(' 已知的是一个包含n个INSERT和m个EXTRACT-MIN调用的序列S,其中{1,2,...,n}',
+            '中的每一个关键字恰被插入一次')
+        print(' 在下面的脱机最小值问题的例子中，每个INSERT由一个数字表示,每个EXTRACT-MIN由字母E表示')
+        print(' 4,8,E,3,E,9,2,6,E,E,E,1,7,E,5')
+        print(' 将正确的值填入extracted数组')
+        print(' 如何用不相交集合数据结构有效地实现OFF-LINE-MINIMUM')
+        print('思考题21-2 深度确定')
+        print(' 在深度确定问题中，对一下三个操作所作用的一个有根树的森林F加以维护')
+        print(' (1) MAKE-TREE(v):创建一棵包含唯一结点v的树')
+        print(' (2) FIND-DEPTH(v):返回结点v在树中的深度')
+        print(' (3) GRAFT(r,v)：使结点r(假定为某棵树的根)成为结点v的子结点',
+            '(假定结点v在另一棵树中,它本身可能是,也可能不是一个根)')
+        print('思考题21-3 Tarjan的脱机最小公共祖先算法')
+        print(' 在一棵有根树T中，两个结点u和v的最小公共祖先是指这样的一个结点w,它是u和v的祖先，并且在树T中具有最大深度')
+        print(' 在脱机最小公共祖先问题中，给定的是一棵有根树T和一个由T中结点的无序对构成的任意集合P={(u, v)}')
+        print(' 希望确定P中每个对的最小公共祖先')
         # python src/chapter21/chapter21note.py
         # python3 src/chapter21/chapter21note.py
 
