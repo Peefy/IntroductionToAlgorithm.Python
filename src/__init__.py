@@ -2,7 +2,7 @@
 This packet includes CLRS notes of each chapter
 '''
 
-LAST_CHAPTER = 21
+LAST_CHAPTER = 22
 
 __all__ = ['Chapter1', 'Chapter2', 'Chapter2_3',
            'Chapter3_1', 'Chapter3_2', 'Chapter4_1', 
@@ -62,3 +62,5 @@ from .chapter19.chapter19note import printchapter19note
 from .chapter20.chapter20note import printchapter20note
 
 from .chapter21.chapter21note import printchapter21note
+
+from .chapter22.chapter22note import printchapter22note
