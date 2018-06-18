@@ -216,16 +216,20 @@ class Chapter21_4:
         ```
         '''
         print('chapter21.4 note as follow')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('21.4 带路径压缩的按秩合并的分析')
+        # !对作用于n个元素上的m个不相交集合操作，
+        # !联合使用按秩合并和路径压缩启发式的运行时间为O(ma(n))
+        print('对作用于n个元素上的m个不相交集合操作,',
+            '')
+        print('联合使用按秩合并和路径压缩启发式的运行时间为O(ma(n))')
+        print('秩的性质')
+        print('引理21.4 对所有的结点x，有rank[x]<=rank[p[x]],如果x!=p[x]则不等号严格成立')
+        print(' rank[x]的初始值位0，并随时间而增长，直到x!=p[x];从此以后rank[x]就不再变化')
+        print(' rank[p[x]]的值是时间的单调递增函数')
+        print('推论21.5 在从任何一个结点指向根的路径上，结点的秩是严格递增的')
+        print('引理21.6 每个结点的秩至多为1')
+        print('时间界的证明')
+        print('引理21.7 假定有一个m个MAKE-SET,UNION和FIND-SET')
         print('')
         # python src/chapter21/chapter21note.py
         # python3 src/chapter21/chapter21note.py
