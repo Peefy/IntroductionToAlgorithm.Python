@@ -1,3 +1,12 @@
+---
+layout: post
+title: "用Python实现的用于不相交集合的数据结构"
+description: "用Python实现的用于不相交集合的数据结构"
+categories: [Python]
+tags: [python]
+redirect_from:
+  - /2018/06/18/
+---
 
 ## 用于不相交集合的数据结构
 
@@ -213,8 +222,6 @@ class ListSet(Set):
                 if set.tail.key == element: 
                     return set
         return None
-
-    
 
 class RootTreeNode:
     '''
