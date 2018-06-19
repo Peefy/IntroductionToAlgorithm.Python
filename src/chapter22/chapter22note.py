@@ -27,7 +27,6 @@ from random import randint as _randint
 import numpy as np
 from numpy import arange as _arange
 from numpy import array as _array
-from numpy import * 
 
 class Chapter22_1:
     '''
@@ -46,6 +45,18 @@ class Chapter22_1:
         ```
         '''
         print('chapter22.1 note as follow')  
+        print('第六部分 图算法')
+        print('图是计算机科学中常用的一类数据结构，有关图的算法也是计算机科学中基础性算法')
+        print('有许多有趣而定计算问题都是用图')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter22/chapter22note.py
         # python3 src/chapter22/chapter22note.py
 
