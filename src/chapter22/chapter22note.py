@@ -126,6 +126,50 @@ class Chapter22_2:
     '''
     chpater22.2 note and function
     '''
+    def buildGraph(self):
+        '''
+        练习22.2-1
+
+        练习22.2-2
+        '''
+        g = _g.Graph()
+        g.veterxs = [_g.Vertex('1'), _g.Vertex('2'),
+                     _g.Vertex('3'), _g.Vertex('4'),
+                     _g.Vertex('5'), _g.Vertex('6')]
+        g.edges.clear()
+        g.edges.append(_g.Edge(_g.Vertex('1'), _g.Vertex('2'), 1, _g.DIRECTION_TO))
+        g.edges.append(_g.Edge(_g.Vertex('4'), _g.Vertex('2'), 1, _g.DIRECTION_TO))
+        g.edges.append(_g.Edge(_g.Vertex('1'), _g.Vertex('4'), 1, _g.DIRECTION_TO))
+        g.edges.append(_g.Edge(_g.Vertex('2'), _g.Vertex('5'), 1, _g.DIRECTION_TO))
+        g.edges.append(_g.Edge(_g.Vertex('3'), _g.Vertex('6'), 1, _g.DIRECTION_TO))
+        g.edges.append(_g.Edge(_g.Vertex('3'), _g.Vertex('5'), 1, _g.DIRECTION_TO))
+        g.edges.append(_g.Edge(_g.Vertex('5'), _g.Vertex('4'), 1, _g.DIRECTION_TO))
+        g.edges.append(_g.Edge(_g.Vertex('6'), _g.Vertex('6'), 1, _g.DIRECTION_TO))
+        _g.bfs(g, g.veterxs[2])
+        _g.print_path(g, g.veterxs[2], g.veterxs[4])
+        print('')
+        del g
+        
+        g = _g.Graph()
+        g.veterxs.clear()
+        g.edges.clear()
+        v = ['r', 's', 't', 'u', 'v', 'w', 'x', 'y']
+        g.addvertex(v)
+        g.addedge('v', 'r')
+        g.addedge('r', 's')
+        g.addedge('s', 'w')
+        g.addedge('w', 'x')
+        g.addedge('w', 't')
+        g.addedge('x', 't')
+        g.addedge('x', 'u')
+        g.addedge('x', 'y')
+        g.addedge('y', 'u')
+        g.addedge('u', 't')
+        _g.bfs(g, 'u')
+        _g.print_path(g, 'u', 'v')
+        print('')
+        del g
+
     def note(self):
         '''
         Summary
@@ -172,14 +216,40 @@ class Chapter22_2:
         print(' 定义从顶点s到v之间的最短路径距离d(s,v)为s到v的任何路径中最少的边数')
         print('  如果两个点s到v之间没有同路，则距离为无穷')
         print(' 广度优先搜索计算出来的就是最短路径')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('引理22.1 设G=(V,E)是一个有向图或无向图,s∈V为G的任意一个顶点，则对任意边(u,v)∈V,有:d(s,v)<=d(s,u)+1')
+        print('证明：如果从顶点s可达顶点u，则从s也可达v.在这种情况下，从s到v的最短路径不可能比s到u的最短路径加上边(u,v)更长',
+            '因此不等式成立。如果从s不可达顶点u，则d(s,u)=∞，不等式仍然成立')
+        print('引理22.2 设G=(V,E)是一个有向图或无向图,并假设算法BFS(广度优先搜索)从G中某一给定源顶点s∈V开始执行',
+            '在执行终止时，对每个顶点v∈V，BFS所计算出来的v.d的值没看组v.d>=d(s,v)')
+        print('引理22.3 假设过程BFS在图G=(V,E)上的执行过程中,队列Q包含顶点<v1,v2,..,vr>',
+            '其中v1是队列的头，vr是队列的尾巴','则d[vr]<=d[v1]+1,i=1,2,...,r-1')
+        print('推论22.4 假设在BFS的执行过程中将顶点vi和vj插入了队列，且vi先于vj入队',
+            '那么，当vj入队时，有d[vi]<=d[vj]')
+        print('定理22.5 (广度优先搜索的正确性)设G=(V,E)是一个有向图或无向图，',
+            '并假设过程BFS从G上某个给定的源顶点s可达的每一个顶点v∈V。在运行终止时，对所有v∈V，',
+            'd[v]=d(s,v).此外，对任意从s可达的顶点v≠s,从s到v的最短路径之一是从s到v.pi的最短路径再加上边(v.pi,v)')
+        print('广度优先树')
+        print('过程BFS在搜索图的同时，也建立了一棵广度优先树。这棵树是由每个顶点中的pi域所表示的')
+        print('对于图G=(V,E)及给定的源顶点s，可以更为形式化地定义其前趋子图Gpi=(Vpi,Epi)')
+        print('引理22.6 当过程BFS应用于某一有向图或无向图G=(V,E)时，',
+              '同时要构造出pi域,使得前趋子图Gpi=(Vpi,Epi)是一棵广度优先树')
+        print('PRINT-PATH(G,s,v)过程输出从s到v的最短路径上的所有结点',
+              '假设已经运行了BFS来计算最短路径')
+        print('练习22.2-1 ')
+        print('练习22.2-2 ')
+        self.buildGraph()
+        print('练习22.2-3 略')
+        print('练习22.2-4 在广度优先搜索算法BFS中,赋给顶点u的值d[u]与顶点在邻接表中的次序无关')
+        print(' 由BFS计算出来的广度优先树与邻接表中的顺序是有关的')
+        print('练习22.2-5 在有向图G=(V,E)中，源顶点s∈V，且树边集合满足对每一顶点v∈V，',
+            '从s到v的唯一路径是G中的一条最短路径;然而不论在每个邻接表中各顶点如何排列，',
+            '都不能通过在G上运行BFS而产生边集')
+        print('练习22.2-6 略')
+        print('练习22.2-7 树T=(V,E)的直径定义为max(d(u,v)),亦即，树的直径是树中所有最短路径长度中的最大值',
+            '试写出计算树的直径的有效算法，并分析算法的运行时间')
+        print(' 用无向图构造树')
+        print('练习22.2-8 设G=(V,E)是一个连通的无向图。请给出一个O(V+E)时间的算法，以计算图G中的一条路径',
+            '对于E中的每一条边,该路径都恰好在每一个方向上遍历一次')
         # python src/chapter22/chapter22note.py
         # python3 src/chapter22/chapter22note.py
 

@@ -1,5 +1,6 @@
 
 import math as _math
+from copy import deepcopy as _deepcopy
 
 import numpy as _np
 
@@ -86,6 +87,68 @@ class Graph:
         self.adj = []
         self.matrix = []
    
+    def addvertex(self, v):
+        '''
+        向图中添加结点`v`
+        '''
+        if type(v) is list:
+            for node in v:
+                if type(node) is not Vertex:
+                    key = node
+                    node = Vertex(key)
+                    self.veterxs.append(node)
+            return
+        if type(v) is not Vertex:
+            key = v
+            v = Vertex(key)
+        self.veterxs.append(v)
+
+    def addedge(self, v1, v2, dir = DIRECTION_NONE):
+        '''
+        向图中添加边`edge`
+
+        Args
+        ===
+        `v1` : 边的一个顶点
+
+        `v2` : 边的另一个顶点
+
+        `dir` : 边的方向
+            DIRECTION_NONE : 没有方向
+            DIRECTION_TO : `vertex1` → `vertex2`
+            DIRECTION_FROM : `vertex1` ← `vertex2`
+            DIRECTION_BOTH : `vertex1` ←→ `vertex2`
+        '''
+        egde = Edge(Vertex(v1), Vertex(v2), 1, dir)
+        self.edges.append(egde)
+
+    def changeVEToClass(self):
+        '''
+        将`veterx`和`edge`的类型变为`Vertex`和`Edge`
+        '''
+        vertexs_copy = _deepcopy(self.veterxs)
+        edges_copy = _deepcopy(self.edges)
+        self.veterxs.clear()
+        self.edges.clear()
+        for i in range(len(vertexs_copy)):
+            v = None
+            if type(vertexs_copy[i]) is Vertex:
+                v = vertexs_copy[i]
+            else:
+                v = Vertex(vertexs_copy[i])
+            self.veterxs.append(v)
+        for i in range(len(edges_copy)):
+            edge = None
+            if type(edges_copy[i]) is Edge:
+                edge = edges_copy[i]
+            elif len(edges_copy[i]) == 2:
+                v1, v2 = edges_copy[i]
+                edge = Edge(v1, v2)
+            elif len(edges_copy[i]) == 3:
+                v1, v2, dir = edges_copy[i]
+                edge = Edge(v1, v2, 1, dir)
+            self.edges.append(edge)
+
     def getadj(self):
         '''
         获取邻接表
@@ -100,20 +163,27 @@ class Graph:
                 dir = ' '
                 if type(edge) is Edge:
                     u, v, dir = edge.vertex1, edge.vertex2, edge.dir
+                    for k in range(n):
+                        if self.veterxs[k].key == u.key:
+                            uindex = k
+                        if self.veterxs[k].key == v.key:
+                            vindex = k
                 elif len(edge) == 2:
                     u, v = edge
+                    uindex = self.veterxs.index(u)
+                    vindex = self.veterxs.index(v)
                 else:
                     u, v, dir = edge
-                uindex = self.veterxs.index(u)
-                vindex = self.veterxs.index(v)
+                    uindex = self.veterxs.index(u)
+                    vindex = self.veterxs.index(v)
                 if dir == DIRECTION_TO and uindex == i:
-                    sub.append(v)
+                    sub.append(self.veterxs[vindex])
                 elif dir == DIRECTION_FROM and vindex == i:
-                    sub.append(u)
+                    sub.append(self.veterxs[uindex])
                 elif dir == DIRECTION_NONE and uindex == i:
-                    sub.append(v)
+                    sub.append(self.veterxs[vindex])
                 elif dir == DIRECTION_NONE and vindex == i:
-                    sub.append(u)               
+                    sub.append(self.veterxs[uindex])               
             adj.append(sub)
         self.adj = adj
         return adj
@@ -130,12 +200,19 @@ class Graph:
             dir = ' '
             if type(edge) is Edge:
                 u, v, dir = edge.vertex1, edge.vertex2, edge.dir 
+                for k in range(n):
+                    if self.veterxs[k].key == u.key:
+                        uindex = k
+                    if self.veterxs[k].key == v.key:
+                        vindex = k
             elif len(edge) == 2:
                 u, v = edge
+                uindex = self.veterxs.index(u)
+                vindex = self.veterxs.index(v)
             else:
                 u, v, dir = edge
-            uindex = self.veterxs.index(u)
-            vindex = self.veterxs.index(v)                         
+                uindex = self.veterxs.index(u)
+                vindex = self.veterxs.index(v)                         
             if dir == DIRECTION_TO:
                 mat[uindex, vindex] = 1
             elif dir == DIRECTION_FROM:
@@ -255,9 +332,14 @@ def bfs(g : Graph, s : Vertex):
             print(u.d, end=' ')
         print(' ')
     ```
-
     '''
     adj = g.getadj()
+    # g.changeVEToClass()
+    if type(s) is not Vertex:
+        key = s
+        for i in range(len(g.veterxs)):
+            if g.veterxs[i].key == key:
+                s = g.veterxs[i]
     n = len(g.veterxs)
     for i in range(n):
         u = g.veterxs[i]
@@ -274,7 +356,10 @@ def bfs(g : Graph, s : Vertex):
     q.append(s)
     while len(q) != 0:
         u = q.pop(0)
-        uindex = g.veterxs.index(u)
+        uindex = 0
+        for i in range(n):
+            if g.veterxs[i].key == u.key:
+                uindex = i
         for i in range(len(adj[uindex])):
             v = adj[uindex][i]
             if v.color == COLOR_WHITE:
@@ -283,7 +368,31 @@ def bfs(g : Graph, s : Vertex):
                 v.pi = u
                 q.append(v)
         u.color = COLOR_BLACK
-    
+
+def print_path(g : Graph, s : Vertex, v : Vertex):
+    '''
+    输出图`g`中顶点`s`到`v`的最短路径上的所有顶点
+
+    假设已经运行了BFS来计算最短路径
+    '''
+    if type(s) is not Vertex:
+        key = s
+        for i in range(len(g.veterxs)):
+            if g.veterxs[i].key == key:
+                s = g.veterxs[i]
+    if type(v) is not Vertex:
+        key = v
+        for i in range(len(g.veterxs)):
+            if g.veterxs[i].key == key:
+                v = g.veterxs[i]
+    if v == s:
+        print('{}→'.format(s.key), end='')
+    elif v.pi == None:
+        print('no path from {} to {} exists'.format(s.key, v.key))
+    else:
+        print_path(g, s, v.pi)
+        print('{}→'.format(v.key), end='')
+
 def undirected_graph_test():
     g = Graph()
     g.veterxs = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
@@ -331,6 +440,9 @@ def test_bfs():
         for u in g.veterxs:
             print(u.d, end=' ')
         print(' ')
+    bfs(g, v[0])
+    print_path(g, v[0], v[4])
+    print('')
     del g
 
     gwithdir = Graph()
@@ -354,6 +466,9 @@ def test_bfs():
         for u in gwithdir.veterxs:
             print(u.d, end=' ')
         print('')
+    bfs(gwithdir, vwithdir[0])
+    print_path(gwithdir, vwithdir[0], vwithdir[4])
+    print('')
     del gwithdir
 
 def test():
