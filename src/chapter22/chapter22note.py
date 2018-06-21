@@ -270,6 +270,29 @@ class Chapter22_3:
         ```
         '''
         print('chapter22.3 note as follow')
+        print('22.3 深度优先搜索')
+        # !深度搜索算法遵循的搜索策略是尽可能\"深\"地搜索一个图
+        print('这种搜索算法遵循的搜索策略是尽可能\"深\"地搜索一个图')
+        print('在深度优先搜索中，对于最新发现的顶点，如果还有以此为起点而未探测到的边，就沿此边继续探测下去',
+            '当顶点v的所有边都已经被探寻过后，搜索将回溯到发线顶点v有起始点的那些边')
+        print('这一过程一直进行到已发现从源顶点可达的所有顶点时为止')
+        print('如果还存在未被发现的顶点，则选择其中一个作为源顶点，并重复以上过程')
+        print('整个过程反复进行，直到所有的顶点都被发现时为止')
+        print('与广度优先搜索类似，在深度优先搜索中，每当扫描已经发现顶点u的邻接表，',
+            '从而发现新顶点v时,就将置v的先辈域pi[v]为u')
+        print('与广度优先搜索不同的是，其先辈子图形成一棵树，深度优先搜索产生的先辈子图可以由几棵树组成',
+            '因为搜索可能由多个源顶点开始重复进行。因此,在深度优先搜索中,',
+            '先辈子图的定义也和广度优先搜索中稍有不同')
+        print('深度优先搜索的先辈子图形成了一个由数棵深度优先树所组成的深度优先森林。Epi中边称为树边')
+        print('与广度优先搜索类似，在深度优先搜索过程中，也通过对顶点进行着色来表示顶点的状态。')
+        print('开始时，每个顶点均为白色，搜索中被发现时即置为灰色，结束时又被置为黑色(既当其邻接表被完全检索之后)')
+        print('这一技巧可以保证每一个顶点在搜索结束时，只存在于一棵深度优先树中，因此，这些树是不相交的')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter22/chapter22note.py
         # python3 src/chapter22/chapter22note.py
 
@@ -290,6 +313,15 @@ class Chapter22_4:
         ```
         '''
         print('chapter22.4 note as follow')
+        print('22.4 拓扑排序')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter22/chapter22note.py
         # python3 src/chapter22/chapter22note.py
 
@@ -311,6 +343,16 @@ class Chapter22_5:
         ```
         '''
         print('chapter22.5 note as follow')
+        print('22.5 强连通分支')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter22/chapter22note.py
         # python3 src/chapter22/chapter22note.py
 
