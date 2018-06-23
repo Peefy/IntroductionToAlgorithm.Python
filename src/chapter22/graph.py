@@ -369,6 +369,25 @@ def bfs(g : Graph, s : Vertex):
                 q.append(v)
         u.color = COLOR_BLACK
 
+def dfs(g : Graph):
+    '''
+    深度优先搜索算法(depth-first search)
+
+    Args
+    ===
+    `g` : type:`Graph`,图`G(V,E)`(无向图或者有向图均可)
+
+    Return
+    ===
+    None
+
+    Example
+    ===
+    ```python
+    ```
+    '''
+    pass
+
 def print_path(g : Graph, s : Vertex, v : Vertex):
     '''
     输出图`g`中顶点`s`到`v`的最短路径上的所有顶点
