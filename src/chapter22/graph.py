@@ -394,6 +394,9 @@ def print_path(g : Graph, s : Vertex, v : Vertex):
         print('{}→'.format(v.key), end='')
 
 def undirected_graph_test():
+    '''
+    测试无向图
+    '''
     g = Graph()
     g.veterxs = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
     g.edges = [('a', 'b'), ('a', 'c'), ('b', 'd'),
@@ -404,6 +407,9 @@ def undirected_graph_test():
     print(g.getmatrix())
 
 def directed_graph_test():
+    '''
+    测试有向图
+    '''
     g = Graph()
     g.veterxs = ['1', '2', '3', '4', '5', '6']
     g.edges = [('1', '2', '→'), ('4', '2', '→'), 
@@ -421,6 +427,9 @@ def directed_graph_test():
     print('是否包含通用的汇', g.contains_uni_link())
 
 def test_bfs():
+    '''
+    测试广度优先搜索方法
+    '''
     g = Graph()
     v = [Vertex('a'), Vertex('b'), Vertex('c'), Vertex('d'), Vertex('e')]
     g.veterxs = v
