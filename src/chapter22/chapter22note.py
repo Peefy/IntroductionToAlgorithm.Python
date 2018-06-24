@@ -257,6 +257,43 @@ class Chapter22_3:
     '''
     chpater22.3 note and function
     '''
+    def buildGraph(self):
+        '''
+        练习22.3-1
+
+        练习22.5-2
+        '''
+        g = _g.Graph()
+        g.veterxs.clear()
+        g.edges.clear()
+        v = ['q', 's', 'v', 'w', 't', 'x', 'y', 'z', 'u', 'r']
+        g.addvertex(v)
+        g.addedge('q', 's', _g.DIRECTION_TO)
+        g.addedge('q', 't', _g.DIRECTION_TO)
+        g.addedge('q', 'w', _g.DIRECTION_TO)
+        g.addedge('s', 'v', _g.DIRECTION_TO)
+        g.addedge('v', 'w', _g.DIRECTION_TO)
+        g.addedge('w', 's', _g.DIRECTION_TO)
+        g.addedge('t', 'x', _g.DIRECTION_TO)
+        g.addedge('t', 'y', _g.DIRECTION_TO)
+        g.addedge('x', 'z', _g.DIRECTION_TO)
+        g.addedge('y', 'q', _g.DIRECTION_TO)
+        g.addedge('z', 'x', _g.DIRECTION_TO)
+        g.addedge('u', 'y', _g.DIRECTION_TO)
+        g.addedge('r', 'y', _g.DIRECTION_TO)
+        g.addedge('r', 'u', _g.DIRECTION_TO)
+        _g.dfs(g)
+        for e in g.edges:
+            u, v = g.getvertexfromedge(e)         
+            if u.d < v.d and v.d < v.f and v.f < u.f:
+                print("边({},{})是树边或者前向边".format(u.key, v.key))
+            elif v.d < u.d and u.d < u.f and u.f < v.f:
+                print("边({},{})是反向边".format(u.key, v.key))
+            elif v.d < v.f and v.f < u.d and u.d < u.f:
+                print("边({},{})是交叉边".format(u.key, v.key))
+        print('')
+        del g
+
     def note(self):
         '''
         Summary
@@ -291,8 +328,75 @@ class Chapter22_3:
         print('每个顶点v由两个时间戳：当顶点v第一次被发现(并置成灰色)时，记录下第一个时间戳d[v]')
         print('每当结束检查v的邻接表(并置v为黑色)时,记录下第二个时间戳f[v]')
         print('许多图的算法中都用到了时间戳，它们对推算深度优先搜索的进行情况有很大的帮助')
-        print('')
-        print('')
+        print('广度优先搜索只能有一个源顶点，而深度优先却可以从多个源顶点开始搜索')
+        print('广度搜索通常用于从某个源顶点开始，寻找最短路径(以及相关的先辈子图)')
+        print('深度优先搜索通常作为另一个算法中的一个子程序')
+        print('深度优先搜索遍历图中所有顶点，发现白色顶点时，调用DFS-VISIT访问该顶点')
+        print('调用DFS-VISIT(u)时，顶点u就成为深度优先森林中一棵新树的根')
+        print('当DFS返回时，每个顶点u都对应于一个发现时刻u.d和一个完成时刻f[u]')
+        print('深度优先搜索的性质')
+        print(' 利用深度优先搜索，可以获得有关图结构的有价值的信息。',
+            '深度优先搜索最基本的特征也许是它的先辈子图Gpi形成了一个由树所组成的森林')
+        print(' 这是因为深度优先树的结构准确反映了递归调用DFS-VISIT的过程')
+        print(' 也就是v.pi==u当且仅当在搜索u的邻接表的过程当中,调用了过程DFS-VISIT(v)')
+        print(' 此外,在深度优先森林中，顶点v是顶点u的后裔,当且仅当v是u为灰色时发现的')
+        print('定理22.7(括号定理) 在对一个(有向或无向)图G=(V,E)的任何深度优先搜索中,',
+            '对于图中任意两个顶点u和v,下述三个条件中仅有一个成立')
+        print(' 1.区间(d[u],f[u])和区间(d[v],f[v])是完全不相交的,',
+            '且在深度优先森林中,u或v都不是对方的后裔')
+        print(' 2.区间(d[u],f[u])完全包含于区间(d[v],f[v])中,且在深度优先树中,u是v的后裔')
+        print(' 3.区间(d[v],f[v])完全包含于区间(d[u],f[u])中,且在深度优先树中,v是u的后裔')
+        print('推论22.8(后裔区间的嵌套) 在一个(有向图或无向)图G中的深度优先森林中,',
+            '顶点v是顶点u的后裔,当且仅当d[u]<d[v]<f[v]<f[u]')
+        print('定理22.9(白色路径定理) 在一个(有向或无向)图G=(V,E)的深度优先森林中,',
+            '顶点v是顶点u的后裔,当且仅当在搜索过程中于时刻d[u]发现u时,可以从顶点u出发,',
+            '经过一条完全由白色顶点组成的路径到达v')
+        print('边的分类')
+        print(' 深度优先搜索另一个令人感兴趣的性质就是可以通过搜索对输入图G=(V,E)的边进行归类')
+        print(' 这种归类可以用来收集有关图的很多重要信息')
+        print(' 如：一个有向图是无回路的，当且仅当对该图的深度优先搜索没有产生\"反向\"边')
+        print('根据在图G上进行深度优先搜索产生的深度优先森林Gpi,可以把图的边分为四种类型')
+        print(' (1)树边(tree edge)是深度优先森林Gpi中的边。如果顶点v是在探寻边(u,v)时被首次发现的，',
+            '那么(u,v)就是一条树边')
+        print(' (2)反向边(black edge)是深度优先树中，连接顶点u到它的某个后裔v的非树边(u,v)')
+        print(' (3)正向边(forward edge)是指深度优先树中，连接顶点u到它的某个后裔v的非树边(u,v)')
+        print(' (4)交叉边(cross edge)是其他类型的边，存在于同一颗深度优先树中的两个顶点之间,',
+            '条件是其中一个顶点不是另一个顶点的祖先。交叉边也可以在不同的深度优先树的顶点之间')
+        print('可以对算法DFS做一些修改，使之遇到图中的边时，对其进行分类。算法的核心思想在于每条边(u,v)',
+            '当该边被第一次探寻到时，即根据所到达的顶点v的颜色进行分类')
+        print(' (1)白色(COLOR_WHITE)表明它是一条树边')
+        print(' (2)灰色(COLOR_GRAY)表明它是一条树边')
+        print(' (3)黑色(BLACK_COLOR)表明它是一条正向边或交叉边')
+        print('在无向图中，由于(u,v)和(v,u)实际上是同一条边,上述的边分类可能会产生歧义')
+        print('当出现这种情况时，边被归为分类表中适用的第一种类型，将根据算法的执行过程中，',
+            '首先遇到的边是(u,v)还是(v,u)来对其进行分类')
+        print('在对一个无向图进行深度优先搜索时，不会出现正向边和交叉边')
+        print('定理22.10 在对一个无向图G进行深度优先搜索的过程中,',
+            'G的每一条边要么是树边,要么是反向边')
+        print('练习22.3-1 根据白色路径定理')
+        print('练习22.3-2 见如下程序')
+        self.buildGraph()
+        print('练习22.3-3 略')
+        print('练习22.3-4 证明：边(u,v)是一条：')
+        print(' (a) 树边或前向边，当且仅当d[u]<d[v]<f[v]<f[u]')
+        print(' (b) 反向边，当且仅当d[v]<d[u]<f[u]<f[v]')
+        print(' (c) 交叉边,当且仅当d[v]<f[v]<d[u]<f[u]')
+        print('练习22.3-5 证明：在一个无向图中，如果是根据在深度优先搜索中,(u,v)和(v,u)',
+            '哪一个首先被遇到作为标准来将(u,v)归类为树边或反向边的话，',
+            '就等价于根据边分类方案中的各类型的优先级来对它进行分类')
+        print('练习22.3-6 重写DFS，利用栈消除递归')
+        print('练习22.3-7 在一个有向图G中，如果有一条从u到v的路径，',
+            '并且在对G的深度优先搜索中,如果有d[u]<d[v],则在所得到的深度优先森林中,',
+            'v是u的一个后裔这一推测不一定正确')
+        print('练习22.3-8 略')
+        print('练习22.3-9 略')
+        print('练习22.3-10 解释在有向图中，对于一个顶点u(即使u在G中既有入边又出边)',
+            '是如何会最终落到一棵仅包含u的深度优先树中')
+        print('练习22.3-11 证明：对无向图G的深度优先搜索可以用来识别出G的连通分支',
+            '且深度优先森林中所包含的树的数量与G中的联通分支的数量一样多')
+        print('练习22.3-12 在一个有向图G=(V,E)中，如果u->v蕴含着对所有顶点u,v∈V',
+            '至多有一条从u到v的简单路径,则称G是单连通的。给出一个有效的',
+            '算法来判定一个有向图是否是单连通的')
         # python src/chapter22/chapter22note.py
         # python3 src/chapter22/chapter22note.py
 
@@ -314,7 +418,7 @@ class Chapter22_4:
         '''
         print('chapter22.4 note as follow')
         print('22.4 拓扑排序')
-        print('')
+        print('对有向图或者无向图G=(V,E)进行拓扑排序后，结果为该图所有顶点的一个线性序列')
         print('')
         print('')
         print('')
@@ -324,7 +428,6 @@ class Chapter22_4:
         print('')
         # python src/chapter22/chapter22note.py
         # python3 src/chapter22/chapter22note.py
-
 
 class Chapter22_5:
     '''

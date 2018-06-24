@@ -30,6 +30,7 @@ class Vertex:
         self.color = COLOR_WHITE
         self.d = _math.inf
         self.pi = None
+        self.f = _math.inf
 
     def __str__(self):
         return '[key:{} color:{} d:{} pi:{}]'.format(self.key, self.color, self.d, self.pi)
@@ -122,32 +123,32 @@ class Graph:
         egde = Edge(Vertex(v1), Vertex(v2), 1, dir)
         self.edges.append(egde)
 
-    def changeVEToClass(self):
+    def getvertexfromedge(self, edge : Edge):
         '''
-        将`veterx`和`edge`的类型变为`Vertex`和`Edge`
+        获取边的两个顶点的引用
+
+        Args
+        ===
+        `edge` : 边 
         '''
-        vertexs_copy = _deepcopy(self.veterxs)
-        edges_copy = _deepcopy(self.edges)
-        self.veterxs.clear()
-        self.edges.clear()
-        for i in range(len(vertexs_copy)):
-            v = None
-            if type(vertexs_copy[i]) is Vertex:
-                v = vertexs_copy[i]
-            else:
-                v = Vertex(vertexs_copy[i])
-            self.veterxs.append(v)
-        for i in range(len(edges_copy)):
-            edge = None
-            if type(edges_copy[i]) is Edge:
-                edge = edges_copy[i]
-            elif len(edges_copy[i]) == 2:
-                v1, v2 = edges_copy[i]
-                edge = Edge(v1, v2)
-            elif len(edges_copy[i]) == 3:
-                v1, v2, dir = edges_copy[i]
-                edge = Edge(v1, v2, 1, dir)
-            self.edges.append(edge)
+        n = len(self.veterxs)
+        if type(edge) is Edge:
+            u, v, dir = edge.vertex1, edge.vertex2, edge.dir
+            for k in range(n):
+                if self.veterxs[k].key == u.key:
+                    uindex = k
+                if self.veterxs[k].key == v.key:
+                    vindex = k
+            return (self.veterxs[uindex], self.veterxs[vindex])
+        elif len(edge) == 2:
+            u, v = edge
+            uindex = self.veterxs.index(u)
+            vindex = self.veterxs.index(v)
+        else:
+            u, v, dir = edge
+            uindex = self.veterxs.index(u)
+            vindex = self.veterxs.index(v)
+        return (u, v)
 
     def getadj(self):
         '''
@@ -182,8 +183,8 @@ class Graph:
                     sub.append(self.veterxs[uindex])
                 elif dir == DIRECTION_NONE and uindex == i:
                     sub.append(self.veterxs[vindex])
-                elif dir == DIRECTION_NONE and vindex == i:
-                    sub.append(self.veterxs[uindex])               
+                # elif dir == DIRECTION_NONE and vindex == i:
+                #    sub.append(self.veterxs[uindex])               
             adj.append(sub)
         self.adj = adj
         return adj
@@ -296,7 +297,7 @@ class Graph:
 
 def bfs(g : Graph, s : Vertex):
     '''
-    广度优先搜索(breadth-first search)
+    广度优先搜索(breadth-first search) 时间复杂度`O(V+E)`
 
     Args
     ===
@@ -369,25 +370,96 @@ def bfs(g : Graph, s : Vertex):
                 q.append(v)
         u.color = COLOR_BLACK
 
-def dfs(g : Graph):
-    '''
-    深度优先搜索算法(depth-first search)
+class _DFS:
+    def __init__(self):
+        self.__time = 0
+        self.__n = 0
+        self.__adj = []
 
-    Args
-    ===
-    `g` : type:`Graph`,图`G(V,E)`(无向图或者有向图均可)
+     def dfs_visit_non_recursive(self, g: Graph, u : Vertex):
+        '''
+        深度优先搜索从某个顶点开始(非递归)
+        '''
+        stack = []
+        stack.append(u)
+        self.__time += 1
+        u.d = self.__time
+        while len(stack) > 0:
+            w = stack.pop(0)
+            w.color = COLOR_GRAY            
+            uindex = 0
+            for i in range(self.__n):
+                if g.veterxs[i].key == w.key:
+                    uindex = i
+                    break     
+            for i in range(len(self.__adj[uindex])):
+                v = self.__adj[uindex][i]
+                if v.color == COLOR_WHITE:
+                    v.pi = w
+                    stack.append(v)
+                    self.__time += 1
+                    v.d = self.__time
+            w.color = COLOR_BLACK
+            self.__time += 1
+            w.f = self.__time
+        u.color = COLOR_BLACK
+        self.__time += 1
+        u.f = self.__time
 
-    Return
-    ===
-    None
+    def dfs_visit(self, g: Graph, u: Vertex):
+        '''
+        深度优先搜索从某个顶点开始
+        '''
+        u.color = COLOR_GRAY
+        self.__time += 1
+        u.d = self.__time
+        uindex = 0
+        for i in range(self.__n):
+            if g.veterxs[i].key == u.key:
+                uindex = i
+                break
+        for i in range(len(self.__adj[uindex])):
+            v = self.__adj[uindex][i]
+            if v.color == COLOR_WHITE:
+                v.pi = u
+                self.dfs_visit(g, v)
+        u.color = COLOR_BLACK
+        self.__time += 1
+        u.f = self.__time
 
-    Example
-    ===
-    ```python
-    ```
-    '''
-    pass
+    def dfs(self, g: Graph):
+        '''
+        深度优先搜索算法(depth-first search) 时间复杂度`Θ(V+E)`
 
+        Args
+        ===
+        `g` : type:`Graph`,图`G(V,E)`(无向图或者有向图均可)
+
+        Return
+        ===
+        None
+
+        Example
+        ===
+        ```python
+        ```
+        '''
+        self.__adj = g.getadj()
+        self.__n = len(g.veterxs)
+        self.__time = 0
+        for i in range(self.__n):
+            u = g.veterxs[i]
+            u.color = COLOR_WHITE
+            u.pi = None
+        for i in range(self.__n):
+            u = g.veterxs[i]
+            if u.color == COLOR_WHITE:
+                # self.dfs_visit_non_recursive(g, u)
+                self.dfs_visit(g, u)
+
+__dfs_instance = _DFS()
+dfs = __dfs_instance.dfs
+          
 def print_path(g : Graph, s : Vertex, v : Vertex):
     '''
     输出图`g`中顶点`s`到`v`的最短路径上的所有顶点
@@ -452,6 +524,7 @@ def test_bfs():
     g = Graph()
     v = [Vertex('a'), Vertex('b'), Vertex('c'), Vertex('d'), Vertex('e')]
     g.veterxs = v
+    g.edges.clear()
     g.edges.append(Edge(v[0], v[1]))
     g.edges.append(Edge(v[0], v[2]))
     g.edges.append(Edge(v[1], v[3]))
@@ -499,10 +572,33 @@ def test_bfs():
     print('')
     del gwithdir
 
+def test_dfs():
+    '''
+    测试深度优先搜索方法
+    '''
+    gwithdir = Graph()
+    vwithdir = [Vertex('a'), Vertex('b'), Vertex('c'),
+                Vertex('d'), Vertex('e')]
+    gwithdir.veterxs = vwithdir
+    gwithdir.edges.clear()
+    gwithdir.edges.append(Edge(vwithdir[0], vwithdir[1], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[0], vwithdir[2], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[1], vwithdir[3], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[1], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[3], vwithdir[0], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[4], vwithdir[3], 1, DIRECTION_FROM))
+    print('邻接表为')
+    print(gwithdir.getadj())
+    print('邻接矩阵为')
+    print(gwithdir.getmatrix())
+    dfs(gwithdir)
+    print('')
+
 def test():
     undirected_graph_test()
     directed_graph_test()
     test_bfs()
+    test_dfs()
 
 if __name__ == '__main__':
     test()
