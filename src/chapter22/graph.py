@@ -456,10 +456,36 @@ class _DFS:
             if u.color == COLOR_WHITE:
                 # self.dfs_visit_non_recursive(g, u)
                 self.dfs_visit(g, u)
+    
+    def topological_sort(self, g: Graph):
+        '''
+        拓扑排序
+
+        Args
+        ===
+        `g` : type:`Graph`,图`G(V,E)`(无向图)
+
+        Return
+        ===
+        `list` : list 排序好的顶点序列
+
+        Example
+        ===
+        ```python
+        import graph as _g
+        g = _g.Graph()
+        g.vertexs = ...
+        g.edges = ...
+        topological_sort(g)
+        ```
+
+        '''
+        pass
 
 __dfs_instance = _DFS()
 dfs = __dfs_instance.dfs
-          
+topological_sort = __dfs_instance.topological_sort
+
 def print_path(g : Graph, s : Vertex, v : Vertex):
     '''
     输出图`g`中顶点`s`到`v`的最短路径上的所有顶点
