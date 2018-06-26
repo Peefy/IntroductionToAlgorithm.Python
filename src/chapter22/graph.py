@@ -32,8 +32,18 @@ class Vertex:
         self.pi = None
         self.f = _math.inf
 
+    def resetpara(self):
+        '''
+        复位所有属性
+        '''
+        self.color = COLOR_WHITE
+        self.d = _math.inf
+        self.pi = None
+        self.f = _math.inf
+
     def __str__(self):
-        return '[key:{} color:{} d:{} pi:{}]'.format(self.key, self.color, self.d, self.pi)
+        return '[key:{} color:{} d:{} f:{} pi:{}]'.format(self.key, \
+            self.color, self.d, self.f, self.pi)
 
 class Edge:
     '''
@@ -88,6 +98,13 @@ class Graph:
         self.adj = []
         self.matrix = []
    
+    def reset_vertex_para(self):
+        '''
+        复位所有顶点的参数
+        '''
+        for i in range(len(self.veterxs)):
+            self.veterxs[i].resetpara()
+
     def addvertex(self, v):
         '''
         向图中添加结点`v`
@@ -334,6 +351,7 @@ def bfs(g : Graph, s : Vertex):
         print(' ')
     ```
     '''
+    g.reset_vertex_para()
     adj = g.getadj()
     # g.changeVEToClass()
     if type(s) is not Vertex:
@@ -375,8 +393,9 @@ class _DFS:
         self.__time = 0
         self.__n = 0
         self.__adj = []
+        self.__sort_list = []
 
-     def dfs_visit_non_recursive(self, g: Graph, u : Vertex):
+    def dfs_visit_non_recursive(self, g: Graph, u : Vertex):
         '''
         深度优先搜索从某个顶点开始(非递归)
         '''
@@ -426,6 +445,7 @@ class _DFS:
         u.color = COLOR_BLACK
         self.__time += 1
         u.f = self.__time
+        self.__sort_list.append(u)
 
     def dfs(self, g: Graph):
         '''
@@ -459,7 +479,7 @@ class _DFS:
     
     def topological_sort(self, g: Graph):
         '''
-        拓扑排序
+        拓扑排序 时间复杂度`Θ(V+E)`
 
         Args
         ===
@@ -478,13 +498,59 @@ class _DFS:
         g.edges = ...
         topological_sort(g)
         ```
-
         '''
-        pass
-
+        self.__sort_list.clear()
+        self.dfs(g)
+        sort_list = self.__sort_list
+        return sort_list
+        
 __dfs_instance = _DFS()
 dfs = __dfs_instance.dfs
 topological_sort = __dfs_instance.topological_sort
+
+def getpathnum_betweentwovertex(g : Graph, v1 : Vertex, v2 : Vertex):
+    '''
+    获取有向无回路图`g`中两个顶点`v1`和`v2`之间的路径数目 时间复杂度`Θ(V+E)`
+    '''
+    count = 0
+    g.reset_vertex_para()
+    adj = g.getadj()  
+    n = len(g.veterxs)
+    if type(v1) is not Vertex:
+        key = v1
+        for i in range(len(g.veterxs)):
+            if g.veterxs[i].key == key:
+                v1 = g.veterxs[i]
+    if type(v2) is not Vertex:
+        key = v2
+        for i in range(len(g.veterxs)):
+            if g.veterxs[i].key == key:
+                v2 = g.veterxs[i]
+    s = v1
+    s.color = COLOR_GRAY
+    s.d = 0
+    s.f = 0
+    s.pi = None
+    q = []
+    q.append(s)
+    while len(q) != 0:
+        u = q.pop(0)
+        uindex = 0
+        for i in range(n):
+            if g.veterxs[i].key == u.key:
+                uindex = i
+                break
+        for i in range(len(adj[uindex])):
+            v = adj[uindex][i]
+            if v.color == COLOR_WHITE:
+                v.color = COLOR_GRAY
+                v.d = u.d + 1
+                v.pi = u
+                q.append(v)
+            if v.key == v2.key:
+                count += 1
+        u.color = COLOR_BLACK
+    return count
 
 def print_path(g : Graph, s : Vertex, v : Vertex):
     '''
@@ -578,11 +644,11 @@ def test_bfs():
     gwithdir.veterxs = vwithdir
     gwithdir.edges.clear()
     gwithdir.edges.append(Edge(vwithdir[0], vwithdir[1], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[1], vwithdir[2], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[3], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[3], vwithdir[4], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[0], vwithdir[2], 1, DIRECTION_TO))
-    gwithdir.edges.append(Edge(vwithdir[1], vwithdir[3], 1, DIRECTION_TO))
-    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[1], 1, DIRECTION_TO))
-    gwithdir.edges.append(Edge(vwithdir[3], vwithdir[0], 1, DIRECTION_TO))
-    gwithdir.edges.append(Edge(vwithdir[4], vwithdir[3], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[4], 1, DIRECTION_TO))
     print('邻接表为')
     print(gwithdir.getadj())
     print('邻接矩阵为')
@@ -619,12 +685,47 @@ def test_dfs():
     print(gwithdir.getmatrix())
     dfs(gwithdir)
     print('')
+    del gwithdir
+
+def _print_inner_conllection(collection : list, end='\n'):
+    '''
+    打印列表内部内容
+    '''
+    print('[',end=end)
+    for i in range(len(collection)):
+        print(str(collection[i]), end=end)
+    print(']')
+
+def test_topological_sort():
+    '''
+    测试拓扑排序
+    '''
+    gwithdir = Graph()
+    vwithdir = [Vertex('a'), Vertex('b'), Vertex('c'),
+                Vertex('d'), Vertex('e')]
+    gwithdir.veterxs = vwithdir
+    gwithdir.edges.clear()
+    gwithdir.edges.append(Edge(vwithdir[0], vwithdir[1], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[0], vwithdir[3], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[1], vwithdir[3], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[1], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[3], vwithdir[0], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[4], vwithdir[3], 1, DIRECTION_FROM))
+    print('邻接表为')
+    print(gwithdir.getadj())
+    print('邻接矩阵为')
+    print(gwithdir.getmatrix())
+    sort_list = topological_sort(gwithdir)
+    _print_inner_conllection(sort_list)
+    print('')
+    print('a到e的路径个数为：', getpathnum_betweentwovertex(gwithdir, 'a', 'e'))
 
 def test():
     undirected_graph_test()
     directed_graph_test()
     test_bfs()
     test_dfs()
+    test_topological_sort()
 
 if __name__ == '__main__':
     test()
