@@ -394,7 +394,24 @@ class _DFS:
         self.__n = 0
         self.__adj = []
         self.__sort_list = []
+        self.__count = 0
 
+    def search_path(self, g: Graph, u: Vertex, k : Vertex):
+        '''
+        寻找图`g`中顶点`u`到`k`的路径
+        '''
+        uindex = 0
+        for i in range(self.__n):
+            if g.veterxs[i].key == u.key:
+                uindex = i
+                break   
+        for i in range(len(self.__adj[uindex])):
+            v = self.__adj[uindex][i]
+            if v.key == u.key:
+                self.__count += 1
+            else:
+                self.search_path(g, v, k)
+        
     def dfs_visit_non_recursive(self, g: Graph, u : Vertex):
         '''
         深度优先搜索从某个顶点开始(非递归)
@@ -467,6 +484,7 @@ class _DFS:
         self.__adj = g.getadj()
         self.__n = len(g.veterxs)
         self.__time = 0
+        self.__sort_list.clear()
         for i in range(self.__n):
             u = g.veterxs[i]
             u.color = COLOR_WHITE
@@ -474,7 +492,6 @@ class _DFS:
         for i in range(self.__n):
             u = g.veterxs[i]
             if u.color == COLOR_WHITE:
-                # self.dfs_visit_non_recursive(g, u)
                 self.dfs_visit(g, u)
     
     def topological_sort(self, g: Graph):
@@ -503,54 +520,36 @@ class _DFS:
         self.dfs(g)
         sort_list = self.__sort_list
         return sort_list
-        
+
+    def getpathnum_betweentwovertex(self, g: Graph, v1: Vertex, v2: Vertex):
+        '''
+        获取有向无回路图`g`中两个顶点`v1`和`v2`之间的路径数目 时间复杂度`Θ(V+E)`
+        '''
+        count = 0
+        g.reset_vertex_para()
+        adj = g.getadj()
+        n = len(g.veterxs)
+        if type(v1) is not Vertex:
+            key = v1
+            for i in range(len(g.veterxs)):
+                if g.veterxs[i].key == key:
+                    v1 = g.veterxs[i]
+        if type(v2) is not Vertex:
+            key = v2
+            for i in range(len(g.veterxs)):
+                if g.veterxs[i].key == key:
+                    v2 = g.veterxs[i]
+        self.__count = 0
+        self.__adj = g.getadj()
+        self.__n = len(g.veterxs)
+        self.__time = 0
+        self.search_path(g, v1, v2)
+        return self.__count
+
 __dfs_instance = _DFS()
 dfs = __dfs_instance.dfs
 topological_sort = __dfs_instance.topological_sort
-
-def getpathnum_betweentwovertex(g : Graph, v1 : Vertex, v2 : Vertex):
-    '''
-    获取有向无回路图`g`中两个顶点`v1`和`v2`之间的路径数目 时间复杂度`Θ(V+E)`
-    '''
-    count = 0
-    g.reset_vertex_para()
-    adj = g.getadj()  
-    n = len(g.veterxs)
-    if type(v1) is not Vertex:
-        key = v1
-        for i in range(len(g.veterxs)):
-            if g.veterxs[i].key == key:
-                v1 = g.veterxs[i]
-    if type(v2) is not Vertex:
-        key = v2
-        for i in range(len(g.veterxs)):
-            if g.veterxs[i].key == key:
-                v2 = g.veterxs[i]
-    s = v1
-    s.color = COLOR_GRAY
-    s.d = 0
-    s.f = 0
-    s.pi = None
-    q = []
-    q.append(s)
-    while len(q) != 0:
-        u = q.pop(0)
-        uindex = 0
-        for i in range(n):
-            if g.veterxs[i].key == u.key:
-                uindex = i
-                break
-        for i in range(len(adj[uindex])):
-            v = adj[uindex][i]
-            if v.color == COLOR_WHITE:
-                v.color = COLOR_GRAY
-                v.d = u.d + 1
-                v.pi = u
-                q.append(v)
-            if v.key == v2.key:
-                count += 1
-        u.color = COLOR_BLACK
-    return count
+getpathnum_betweentwovertex = __dfs_instance.getpathnum_betweentwovertex
 
 def print_path(g : Graph, s : Vertex, v : Vertex):
     '''
@@ -707,10 +706,11 @@ def test_topological_sort():
     gwithdir.edges.clear()
     gwithdir.edges.append(Edge(vwithdir[0], vwithdir[1], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[0], vwithdir[3], 1, DIRECTION_TO))
-    gwithdir.edges.append(Edge(vwithdir[1], vwithdir[3], 1, DIRECTION_TO))
-    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[1], 1, DIRECTION_TO))
-    gwithdir.edges.append(Edge(vwithdir[3], vwithdir[0], 1, DIRECTION_TO))
-    gwithdir.edges.append(Edge(vwithdir[4], vwithdir[3], 1, DIRECTION_FROM))
+    gwithdir.edges.append(Edge(vwithdir[1], vwithdir[2], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[3], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[3], vwithdir[4], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[0], vwithdir[2], 1, DIRECTION_TO))
+    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[4], 1, DIRECTION_TO))
     print('邻接表为')
     print(gwithdir.getadj())
     print('邻接矩阵为')
