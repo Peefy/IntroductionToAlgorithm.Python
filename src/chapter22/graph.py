@@ -407,7 +407,7 @@ class _DFS:
                 break   
         for i in range(len(self.__adj[uindex])):
             v = self.__adj[uindex][i]
-            if v.key == u.key:
+            if v.key == k.key:
                 self.__count += 1
             else:
                 self.search_path(g, v, k)
@@ -705,7 +705,6 @@ def test_topological_sort():
     gwithdir.veterxs = vwithdir
     gwithdir.edges.clear()
     gwithdir.edges.append(Edge(vwithdir[0], vwithdir[1], 1, DIRECTION_TO))
-    gwithdir.edges.append(Edge(vwithdir[0], vwithdir[3], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[1], vwithdir[2], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[2], vwithdir[3], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[3], vwithdir[4], 1, DIRECTION_TO))
