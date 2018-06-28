@@ -458,15 +458,32 @@ class Chapter22_5:
         '''
         print('chapter22.5 note as follow')
         print('22.5 强连通分支')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('深度优先搜索的一种经典应用：把一个有向图分解为各强连通分支',
+            '(Strong Connected Component SCC)')
+        print('很多有关有向图的算法都是从这种分解步骤开始的')
+        print('在分解之后，算法即在每一个强连通分支上独立地运行。')
+        print('最后，再根据各个分支之间的关系，将所有的解组合起来')
+        print('有向图G=(V,E)的一个强连通分支就是一个最大的顶点集合C属于V',
+            '对于C中的每一对顶点u和v,由u->v和v->u，亦即，顶点u和v是互相可达的')
+        print('图G=(V,E)的转置G^T=(V,E^T),E^T是由G中的边改变方向后所组成的')
+        print('建立G^T的所需时间为O(V+E)')
+        print('图G和图G^T具有相同的强连通分支')
+        _g.test_scc()
+        print('引理22.13 设C和C\'是有向图G=(V,E)两个不同的强连通分支，',
+              '设u,v∈C,设u\',v\'∈C\',并假设G中存在着一条通路u->u\',那么G中不可能还同时存在通路v\'->v')
+        print('引理22.14 设C和C\'为有向图G=(V,E)中的两个不同的强连通分支',
+            '假设有一条边(u,v)∈E,其中u∈C,v∈C\'，则f(C)>f(C\')')
+        print('练习22.5-1 当在一个图中')
+        print('练习22.5-2 ')
+        print('练习22.5-3 ')
+        print('练习22.5-4 ')
+        print('练习22.5-5 ')
+        print('练习22.5-6 ')
+        print('练习22.5-7 ')
+        print('思考题22-1 ')
+        print('思考题22-2 ')
+        print('思考题22-3 ')
+        print('思考题22-4 ')
         # python src/chapter22/chapter22note.py
         # python3 src/chapter22/chapter22note.py
 

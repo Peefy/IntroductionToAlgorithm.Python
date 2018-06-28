@@ -74,9 +74,46 @@ class Edge:
         self.vertex1 = vertex1
         self.vertex2 = vertex2
         self.distance = distance
+        self.weight = 1
 
     def __str__(self):
         return str((self.vertex1, self.vertex2, self.dir))
+
+    def __lt__(self, other):
+        if type(other) is Graph:
+            return self.weight < other.weight 
+        else:
+            return self.weight < other
+
+    def __gt__(self, other):
+        if type(other) is Graph:
+            return self.weight > other.weight 
+        else:
+            return self.weight > other
+
+    def __le__(self, other):
+        if type(other) is Graph:
+            return self.weight <= other.weight
+        else:
+            return self.weight <= other
+
+    def __ge__(self, other):
+        if type(other) is Graph:
+            return self.weight >= other.weight
+        else:
+            return self.weight >= other
+
+    def __eq__(self, other):
+        if type(other) is Graph:
+            return self.weight == other.weight
+        else:
+            return self.weight == other
+
+    def __ne__(self, other):
+        if type(other) is Graph:
+            return self.weight != other.weight
+        else:
+            return self.weight != other
 
 class Graph:
     '''
@@ -284,6 +321,16 @@ class Graph:
         self.matrix = mat
         return mat
 
+    def gettranspose(self):
+        '''
+        获取图`g`的转置
+        '''
+        g_rev = _deepcopy(self)
+        for i in range(len(g_rev.edges)):
+            lastdir = g_rev.edges[i].dir
+            g_rev.edges[i].dir = self.__get_rev_dir(lastdir)
+        return g_rev
+
     def __get_rev_dir(self, dir):
         if dir == DIRECTION_FROM:
             dir = DIRECTION_TO
@@ -354,6 +401,27 @@ class Graph:
             if sum(m[i]) == n - 1:
                 return True
         return False
+
+    @property
+    def has_cycle(self):
+        '''
+        判断图是否有环路
+        '''
+        return hascircuit(self)
+    
+    @property
+    def vertex_num(self):
+        '''
+        返回图中顶点数量
+        '''
+        return len(self.veterxs)
+
+    @property
+    def edge_num(self):
+        '''
+        返回图中边的数量
+        '''
+        return len(self.edges)
 
 def bfs(g : Graph, s : Vertex):
     '''
@@ -433,11 +501,13 @@ def bfs(g : Graph, s : Vertex):
 
 class _DFS:
     def __init__(self):
-        self.__time = 0
-        self.__n = 0
         self.__adj = []
         self.__sort_list = []
+        self.__time = 0
+        self.__n = 0
         self.__count = 0
+        self.__scc_count = 0
+        self.__scc_list = []
 
     def search_path(self, g: Graph, u: Vertex, k : Vertex):
         '''
@@ -592,14 +662,34 @@ class _DFS:
         self.search_path(g, v1, v2)
         return self.__count
 
+    def scc(self, g : Graph):
+        '''
+        获取图`g`的强连通分支 时间复杂度`Θ(V+E)`
+        '''
+        self.__scc_count = 0
+        self.__scc_list.clear()
+        n = len(g.veterxs)
+        g.reset_vertex_para()
+        list = self.topological_sort(g)
+        self.__scc_count += 1
+        g_rev = g.gettranspose()
+        g_rev.reset_vertex_para()
+        self.dfs(g_rev)
+        return self.__scc_list, self.__scc_count
+
 __dfs_instance = _DFS()
+# 深度优先搜索
 dfs = __dfs_instance.dfs
+# 拓扑排序
 topological_sort = __dfs_instance.topological_sort
+# 获得有向无环图的两个顶点间的路径个数
 getpathnum_betweentwovertex = __dfs_instance.getpathnum_betweentwovertex
+# 强连通分支
+scc = __dfs_instance.scc
 
 def hascircuit_vertex(g: Graph, v : Vertex):
     '''
-    判断一个无向图`g`中顶点`v`是否包含连接自己的回路 时间复杂度`O(1)`
+    判断一个无向图`g`中顶点`v`是否包含连接自己的回路 
     '''
     stack = []
     stack.append(v)
@@ -635,8 +725,9 @@ def print_path(g : Graph, s : Vertex, v : Vertex):
     '''
     输出图`g`中顶点`s`到`v`的最短路径上的所有顶点
 
-    假设已经运行了BFS来计算最短路径
     '''
+    g.reset_vertex_para()
+    bfs(g, s)
     if type(s) is not Vertex:
         key = s
         for i in range(len(g.veterxs)):
@@ -817,6 +908,31 @@ def test_hascircuit():
     gwithdir.edges.append(Edge(vwithdir[2], vwithdir[4]))
     print('是否包含环路：', hascircuit(gwithdir))
 
+def test_scc():
+    '''
+    测量强连通分支算法
+    '''
+    g = Graph()
+    g.veterxs.clear()
+    g.edges.clear()
+    v = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    g.addvertex(v)
+    g.addedge('a', 'b', DIRECTION_TO)
+    g.addedge('b', 'c', DIRECTION_TO)
+    g.addedge('c', 'd', DIRECTION_TO)
+    g.addedge('d', 'c', DIRECTION_TO)
+    g.addedge('e', 'a', DIRECTION_TO)
+    g.addedge('b', 'e', DIRECTION_TO)
+    g.addedge('b', 'f', DIRECTION_TO)
+    g.addedge('c', 'g', DIRECTION_TO)
+    g.addedge('d', 'h', DIRECTION_TO)
+    g.addedge('h', 'd', DIRECTION_TO)
+    g.addedge('e', 'f', DIRECTION_TO)
+    g.addedge('f', 'g', DIRECTION_TO)
+    g.addedge('g', 'f', DIRECTION_TO)
+    g.addedge('h', 'g', DIRECTION_TO)
+    scc(g)
+
 def test():
     undirected_graph_test()
     directed_graph_test()
@@ -824,6 +940,7 @@ def test():
     test_dfs()
     test_topological_sort()
     test_hascircuit()
+    test_scc()
 
 if __name__ == '__main__':
     test()
