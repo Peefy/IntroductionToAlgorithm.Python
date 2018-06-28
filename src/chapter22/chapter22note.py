@@ -430,11 +430,13 @@ class Chapter22_4:
         print('引理22.11 一个有向图G是无回路的，当且仅当对G进行深度优先搜索时没有得到反向边')
         print('练习22.4-1 略')
         print('练习22.4-2 因为是无回路有向图，在DFS深度优先搜索的基础上去掉颜色即可')
-        print('练习22.4-3 ')
-        print('练习22.4-4 ')
-        print('练习22.4-5 ')
-        print('')
-        print('')
+        _g.test_topological_sort()
+        print('练习22.4-3 给定的无向图G=(V,E)中是否包含一个回路.算法运行时间应该为O(V)')
+        _g.test_hascircuit()
+        print('练习22.4-4 证明：如果一个有向图G包含回路，则拓扑排序能产生一个顶点的排序序列')
+        print(' 可以最小化坏边的数目，所谓坏边，即那些与所生成的顶点序列不一致的边')
+        print('练习22.4-5 在一个有向无回路图G=(V,E)上，执行拓扑排序的另一种方法是重复地寻找一个人度为0的顶点')
+        print(' 将该顶点输出,并将该顶点及其所有的出边从图中删除')
         # python src/chapter22/chapter22note.py
         # python3 src/chapter22/chapter22note.py
 
