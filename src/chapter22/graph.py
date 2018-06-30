@@ -239,6 +239,7 @@ class Graph:
             vindex = self.veterxs.index(v)
         return (u, v)
 
+    @property
     def getadj(self):
         '''
         获取邻接表
@@ -286,6 +287,7 @@ class Graph:
         self.adj = adj
         return adj
 
+    @property
     def getmatrix(self):
         '''
         获取邻接矩阵,并且其是一个对称矩阵

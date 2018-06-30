@@ -132,9 +132,15 @@ class Graph:
         '''
         self.veterxs = vertexs
         self.edges = edges
-        self.adj = []
-        self.matrix = []
    
+    def clear(self):
+        '''
+        清除所有顶点和边
+        '''
+        self.veterxs = []
+        self.edges = []
+        self.matrix = []
+
     def hasdirection(self):
         '''
         图`g`是否是有向图
@@ -161,8 +167,6 @@ class Graph:
         v = self.veterxs_atkey(v)
         if v is None:
             return None
-        self.adj = self.getadj()
-        self.matrix = self.getmatrix()
         uindex = 0
         for i in range(len(self.veterxs)):
             if self.veterxs[i].key == v.key:
@@ -239,7 +243,8 @@ class Graph:
             vindex = self.veterxs.index(v)
         return (u, v)
 
-    def getadj(self):
+    @property
+    def adj(self):
         '''
         获取邻接表
         '''
@@ -283,10 +288,10 @@ class Graph:
                     if sub.count(val) == 0:
                         sub.append(val)               
             adj.append(sub)
-        self.adj = adj
         return adj
 
-    def getmatrix(self):
+    @property
+    def matrix(self):
         '''
         获取邻接矩阵,并且其是一个对称矩阵
         '''
@@ -451,9 +456,9 @@ def bfs(g : Graph, s : Vertex):
     g.edges.append(Edge(v[3], v[0]))
     g.edges.append(Edge(v[4], v[3]))
     print('邻接表为')
-    print(g.getadj())
+    print(g.adj)
     print('邻接矩阵为')
-    print(g.getmatrix())
+    print(g.matrix)
     for i in range(len(v)):
         bfs(g, v[i])
         print('{}到各点的距离为'.format(v[i]))
@@ -463,7 +468,7 @@ def bfs(g : Graph, s : Vertex):
     ```
     '''
     g.reset_vertex_para()
-    adj = g.getadj()
+    adj = g.adj
     # g.changeVEToClass()
     if type(s) is not Vertex:
         key = s
@@ -594,7 +599,7 @@ class _DFS:
         ```python
         ```
         '''
-        self.__adj = g.getadj()
+        self.__adj = g.adj
         self.__n = len(g.veterxs)
         self.__time = 0
         self.__sort_list.clear()
@@ -643,7 +648,7 @@ class _DFS:
             return 0
         count = 0
         g.reset_vertex_para()
-        adj = g.getadj()
+        adj = g.adj
         n = len(g.veterxs)
         if type(v1) is not Vertex:
             key = v1
@@ -656,7 +661,7 @@ class _DFS:
                 if g.veterxs[i].key == key:
                     v2 = g.veterxs[i]
         self.__count = 0
-        self.__adj = g.getadj()
+        self.__adj = g.adj
         self.__n = len(g.veterxs)
         self.__time = 0
         self.search_path(g, v1, v2)
@@ -755,9 +760,9 @@ def undirected_graph_test():
     g.edges = [('a', 'b'), ('a', 'c'), ('b', 'd'),
                ('b', 'e'), ('c', 'f'), ('c', 'g')]
     print('邻接表为')
-    print(g.getadj())
+    print(g.adj)
     print('邻接矩阵为')
-    print(g.getmatrix())
+    print(g.matrix)
 
 def directed_graph_test():
     '''
@@ -770,9 +775,9 @@ def directed_graph_test():
                ('3', '6', '→'), ('3', '5', '→'),
                ('5', '4', '→'), ('6', '6', '→')]
     print('邻接表为')
-    print(g.getadj())
+    print(g.adj)
     print('邻接矩阵为')
-    print(g.getmatrix())
+    print(g.matrix)
     B = g.buildBMatrix()
     print('关联矩阵为')
     print(B)
@@ -794,9 +799,9 @@ def test_bfs():
     g.edges.append(Edge(v[3], v[0]))
     g.edges.append(Edge(v[4], v[3]))
     print('邻接表为')
-    print(g.getadj())
+    print(g.adj)
     print('邻接矩阵为')
-    print(g.getmatrix())
+    print(g.matrix)
     for i in range(len(v)):
         bfs(g, v[i])
         print('{}到各点的距离为'.format(v[i]))
@@ -820,9 +825,9 @@ def test_bfs():
     gwithdir.edges.append(Edge(vwithdir[0], vwithdir[2], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[2], vwithdir[4], 1, DIRECTION_TO))
     print('邻接表为')
-    print(gwithdir.getadj())
+    print(gwithdir.adj)
     print('邻接矩阵为')
-    print(gwithdir.getmatrix())
+    print(gwithdir.matrix)
     for i in range(len(vwithdir)):
         bfs(gwithdir, vwithdir[i])
         print('{}到各点的距离为'.format(vwithdir[i]))
@@ -850,9 +855,9 @@ def test_dfs():
     gwithdir.edges.append(Edge(vwithdir[3], vwithdir[0], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[4], vwithdir[3], 1, DIRECTION_FROM))
     print('邻接表为')
-    print(gwithdir.getadj())
+    print(gwithdir.adj)
     print('邻接矩阵为')
-    print(gwithdir.getmatrix())
+    print(gwithdir.matrix)
     dfs(gwithdir)
     print('')
     del gwithdir
@@ -882,9 +887,9 @@ def test_topological_sort():
     gwithdir.edges.append(Edge(vwithdir[0], vwithdir[2], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[2], vwithdir[4], 1, DIRECTION_TO))
     print('邻接表为')
-    print(gwithdir.getadj())
+    print(gwithdir.adj)
     print('邻接矩阵为')
-    print(gwithdir.getmatrix())
+    print(gwithdir.matrix)
     sort_list = topological_sort(gwithdir)
     _print_inner_conllection(sort_list)
     print('')
@@ -934,6 +939,9 @@ def test_scc():
     scc(g)
 
 def test():
+    '''
+    测试函数
+    '''
     undirected_graph_test()
     directed_graph_test()
     test_bfs()
