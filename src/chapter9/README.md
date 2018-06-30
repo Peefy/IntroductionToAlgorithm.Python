@@ -43,7 +43,7 @@
         '''
         解决选择问题的分治算法,期望运行时间为`Θ(n)`
         '''
-        assert p < r      
+        assert p <= r      
         if len(A) == 0:
             return None
         if p == r:
@@ -71,6 +71,42 @@
         if len(A) == 0:
             return None
         return A[i - 1]
+
+    def partition(self, A: list, p: int, r: int) -> int:
+        x = A[r]
+        i = p - 1
+        j = p - 1
+        for j in range(p, r):
+            if A[j] <= x:
+                i = i + 1
+                A[i], A[j] = A[j], A[i]
+            if A[j] == x:
+                j = j + 1
+        A[i + 1], A[r] = A[r], A[i + 1]
+        if j == r:
+            return (p + r) // 2
+        return i + 1
+
+    def __select(self, A: list, p: int, r: int, i: int):
+        assert p <= r
+        if len(A) == 0:
+            return None
+        if p == r:
+            return A[p]
+        q = self.partition(A, p, r)
+        k = q - p + 1
+        if i == k:
+            return A[q]
+        elif i < k:
+            return self.__select(A, p, q - 1, i)
+        return self.__select(A, q + 1, r, i - k)
+
+    def select(self, A: list, i: int):
+        '''
+        期望运行时间为`Θ(n)`
+        '''
+        assert i <= len(A) and i > 0
+        return self.__select(A, 0, len(A) - 1, i)
 
 ```
 

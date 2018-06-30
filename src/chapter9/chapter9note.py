@@ -108,7 +108,7 @@ class Chapter9_2:
         '''
         解决选择问题的分治算法,期望运行时间为`Θ(n)`
         '''
-        assert p < r      
+        assert p <= r      
         if len(A) == 0:
             return None
         if p == r:
