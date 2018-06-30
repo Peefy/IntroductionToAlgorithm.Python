@@ -1,4 +1,12 @@
-
+---
+layout: post
+title: "用Python实现的图的基本算法"
+description: "用Python实现的图的基本算法"
+categories: [Python]
+tags: [python]
+redirect_from:
+  - /2018/06/30/
+---
 
 ## 图的基本算法
 
@@ -24,8 +32,9 @@
 
 对有向图或者无向图G=(V,E)进行拓扑排序后，结果为该图所有顶点的一个线性序列
 
-```python
+## 强连通分支
 
+```python
 
 import math as _math
 from copy import deepcopy as _deepcopy
@@ -102,9 +111,46 @@ class Edge:
         self.vertex1 = vertex1
         self.vertex2 = vertex2
         self.distance = distance
+        self.weight = 1
 
     def __str__(self):
         return str((self.vertex1, self.vertex2, self.dir))
+
+    def __lt__(self, other):
+        if type(other) is Graph:
+            return self.weight < other.weight 
+        else:
+            return self.weight < other
+
+    def __gt__(self, other):
+        if type(other) is Graph:
+            return self.weight > other.weight 
+        else:
+            return self.weight > other
+
+    def __le__(self, other):
+        if type(other) is Graph:
+            return self.weight <= other.weight
+        else:
+            return self.weight <= other
+
+    def __ge__(self, other):
+        if type(other) is Graph:
+            return self.weight >= other.weight
+        else:
+            return self.weight >= other
+
+    def __eq__(self, other):
+        if type(other) is Graph:
+            return self.weight == other.weight
+        else:
+            return self.weight == other
+
+    def __ne__(self, other):
+        if type(other) is Graph:
+            return self.weight != other.weight
+        else:
+            return self.weight != other
 
 class Graph:
     '''
@@ -126,6 +172,41 @@ class Graph:
         self.adj = []
         self.matrix = []
    
+    def hasdirection(self):
+        '''
+        图`g`是否是有向图
+        '''
+        dir = False
+        for i in range(len(self.edges)):
+            dir = dir or self.edges[i].dir != DIRECTION_NONE
+        return dir
+
+    def veterxs_atkey(self, key):
+        '''
+        从顶点序列`vertexs`中返回键值为`key`的顶点
+        '''
+        if type(key) is Vertex:
+            return key
+        for i in range(len(g.veterxs)):
+            if g.veterxs[i].key == key:
+                return g.veterxs[i]
+
+    def getvertexadj(self, v : Vertex):
+        '''
+        获取图中顶点`v`的邻接顶点序列
+        '''
+        v = self.veterxs_atkey(v)
+        if v is None:
+            return None
+        self.adj = self.getadj()
+        self.matrix = self.getmatrix()
+        uindex = 0
+        for i in range(len(self.veterxs)):
+            if self.veterxs[i].key == v.key:
+                uindex = i
+                break
+        return self.adj[uindex]
+
     def reset_vertex_para(self):
         '''
         复位所有顶点的参数
@@ -223,13 +304,21 @@ class Graph:
                     uindex = self.veterxs.index(u)
                     vindex = self.veterxs.index(v)
                 if dir == DIRECTION_TO and uindex == i:
-                    sub.append(self.veterxs[vindex])
+                    val = self.veterxs[vindex]
+                    if sub.count(val) == 0:
+                        sub.append(val)
                 elif dir == DIRECTION_FROM and vindex == i:
-                    sub.append(self.veterxs[uindex])
+                    val = self.veterxs[uindex]
+                    if sub.count(val) == 0:
+                        sub.append(val)
                 elif dir == DIRECTION_NONE and uindex == i:
-                    sub.append(self.veterxs[vindex])
-                # elif dir == DIRECTION_NONE and vindex == i:
-                #    sub.append(self.veterxs[uindex])               
+                    val = self.veterxs[vindex]
+                    if sub.count(val) == 0:
+                        sub.append(val)
+                elif dir == DIRECTION_NONE and vindex == i:
+                    val = self.veterxs[uindex]
+                    if sub.count(val) == 0:
+                        sub.append(val)               
             adj.append(sub)
         self.adj = adj
         return adj
@@ -268,6 +357,16 @@ class Graph:
                 mat[vindex, uindex] = 1
         self.matrix = mat
         return mat
+
+    def gettranspose(self):
+        '''
+        获取图`g`的转置
+        '''
+        g_rev = _deepcopy(self)
+        for i in range(len(g_rev.edges)):
+            lastdir = g_rev.edges[i].dir
+            g_rev.edges[i].dir = self.__get_rev_dir(lastdir)
+        return g_rev
 
     def __get_rev_dir(self, dir):
         if dir == DIRECTION_FROM:
@@ -339,6 +438,27 @@ class Graph:
             if sum(m[i]) == n - 1:
                 return True
         return False
+
+    @property
+    def has_cycle(self):
+        '''
+        判断图是否有环路
+        '''
+        return hascircuit(self)
+    
+    @property
+    def vertex_num(self):
+        '''
+        返回图中顶点数量
+        '''
+        return len(self.veterxs)
+
+    @property
+    def edge_num(self):
+        '''
+        返回图中边的数量
+        '''
+        return len(self.edges)
 
 def bfs(g : Graph, s : Vertex):
     '''
@@ -418,11 +538,13 @@ def bfs(g : Graph, s : Vertex):
 
 class _DFS:
     def __init__(self):
-        self.__time = 0
-        self.__n = 0
         self.__adj = []
         self.__sort_list = []
+        self.__time = 0
+        self.__n = 0
         self.__count = 0
+        self.__scc_count = 0
+        self.__scc_list = []
 
     def search_path(self, g: Graph, u: Vertex, k : Vertex):
         '''
@@ -553,6 +675,9 @@ class _DFS:
         '''
         获取有向无回路图`g`中两个顶点`v1`和`v2`之间的路径数目 时间复杂度`Θ(V+E)`
         '''
+        if g.hasdirection() == False:
+            print('para g 是无向图，不返回路径')
+            return 0
         count = 0
         g.reset_vertex_para()
         adj = g.getadj()
@@ -574,17 +699,72 @@ class _DFS:
         self.search_path(g, v1, v2)
         return self.__count
 
+    def scc(self, g : Graph):
+        '''
+        获取图`g`的强连通分支 时间复杂度`Θ(V+E)`
+        '''
+        self.__scc_count = 0
+        self.__scc_list.clear()
+        n = len(g.veterxs)
+        g.reset_vertex_para()
+        list = self.topological_sort(g)
+        self.__scc_count += 1
+        g_rev = g.gettranspose()
+        g_rev.reset_vertex_para()
+        self.dfs(g_rev)
+        return self.__scc_list, self.__scc_count
+
 __dfs_instance = _DFS()
+# 深度优先搜索
 dfs = __dfs_instance.dfs
+# 拓扑排序
 topological_sort = __dfs_instance.topological_sort
+# 获得有向无环图的两个顶点间的路径个数
 getpathnum_betweentwovertex = __dfs_instance.getpathnum_betweentwovertex
+# 强连通分支图
+scc = __dfs_instance.scc
+
+def hascircuit_vertex(g: Graph, v : Vertex):
+    '''
+    判断一个无向图`g`中顶点`v`是否包含连接自己的回路 
+    '''
+    stack = []
+    stack.append(v)
+    while len(stack) > 0:      
+        stack_v = stack.pop(0) 
+        v_adj = g.getvertexadj(stack_v)
+        stack_v.color = COLOR_GRAY
+        for i in range(len(v_adj)):
+            v_next = v_adj[i]
+            if v_next.color == COLOR_WHITE:
+                v_next.pi = stack_v
+                stack.append(v_next) 
+            if v_next.key == v.key and stack_v.pi is not None and stack_v.pi.key != v.key:
+                return True                
+        stack_v.color = COLOR_BLACK
+    return False
+
+def hascircuit(g : Graph):
+    '''
+    判断一个无向图`g`中是否包含回路 时间复杂度`O(V)`
+    '''
+    n = len(g.veterxs)
+    result = False
+    for i in range(n):
+        v = g.veterxs[i]
+        g.reset_vertex_para()
+        result = result or hascircuit_vertex(g, v)
+        if result == True:
+            return True
+    return result
 
 def print_path(g : Graph, s : Vertex, v : Vertex):
     '''
     输出图`g`中顶点`s`到`v`的最短路径上的所有顶点
 
-    假设已经运行了BFS来计算最短路径
     '''
+    g.reset_vertex_para()
+    bfs(g, s)
     if type(s) is not Vertex:
         key = s
         for i in range(len(g.veterxs)):
@@ -747,18 +927,64 @@ def test_topological_sort():
     print('')
     print('a到e的路径个数为：', getpathnum_betweentwovertex(gwithdir, 'a', 'e'))
 
+def test_hascircuit():
+    '''
+    测试是否包含环路函数
+    '''
+    gwithdir = Graph()
+    vwithdir = [Vertex('a'), Vertex('b'), Vertex('c'),
+                Vertex('d'), Vertex('e')]
+    gwithdir.veterxs = vwithdir
+    gwithdir.edges.clear()
+    gwithdir.edges.append(Edge(vwithdir[0], vwithdir[1]))
+    gwithdir.edges.append(Edge(vwithdir[1], vwithdir[2]))
+    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[3]))
+    gwithdir.edges.append(Edge(vwithdir[3], vwithdir[4]))
+    print('是否包含环路：', hascircuit(gwithdir))
+    gwithdir.edges.append(Edge(vwithdir[0], vwithdir[2]))
+    gwithdir.edges.append(Edge(vwithdir[2], vwithdir[4]))
+    print('是否包含环路：', hascircuit(gwithdir))
+
+def test_scc():
+    '''
+    测量强连通分支算法
+    '''
+    g = Graph()
+    g.veterxs.clear()
+    g.edges.clear()
+    v = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    g.addvertex(v)
+    g.addedge('a', 'b', DIRECTION_TO)
+    g.addedge('b', 'c', DIRECTION_TO)
+    g.addedge('c', 'd', DIRECTION_TO)
+    g.addedge('d', 'c', DIRECTION_TO)
+    g.addedge('e', 'a', DIRECTION_TO)
+    g.addedge('b', 'e', DIRECTION_TO)
+    g.addedge('b', 'f', DIRECTION_TO)
+    g.addedge('c', 'g', DIRECTION_TO)
+    g.addedge('d', 'h', DIRECTION_TO)
+    g.addedge('h', 'd', DIRECTION_TO)
+    g.addedge('e', 'f', DIRECTION_TO)
+    g.addedge('f', 'g', DIRECTION_TO)
+    g.addedge('g', 'f', DIRECTION_TO)
+    g.addedge('h', 'g', DIRECTION_TO)
+    scc(g)
+
 def test():
     undirected_graph_test()
     directed_graph_test()
     test_bfs()
     test_dfs()
     test_topological_sort()
+    test_hascircuit()
+    test_scc()
 
 if __name__ == '__main__':
     test()
 else:
     pass
 
+    pass    
 
 ```
 
