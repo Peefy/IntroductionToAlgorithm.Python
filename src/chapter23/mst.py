@@ -38,7 +38,7 @@ class _MST:
         最小生成树的Kruska算法 时间复杂度`O(ElgV)`
         Args
         ===
-        `g` : 图G=(V,E)
+        `g` : 图`G=(V,E)`
 
         Return
         ===
@@ -84,6 +84,19 @@ class _MST:
                 weight += e.weight
         return A, weight
 
+    def mst_prism(self, g, w, r):
+        '''
+        最小生成树的Prism算法 时间复杂度`O(ElgV)`
+        Args
+        ===
+        `g` : 图`G=(V,E)`
+
+        Return
+        ===
+        `(mst_list, w)` : 最小生成树列表和最小权重组成的`tuple`
+        '''
+        pass
+
 __mst_instance = _MST()
 generic_mst = __mst_instance.generic_mst
 mst_kruskal = __mst_instance.mst_kruskal
@@ -127,7 +140,7 @@ def test_mst_kruskal():
     g.addedgewithweight('i', 'g', 4)
     print('边和顶点的数量分别为:', g.edge_num, g.vertex_num)
     print('邻接表为')
-    _g._print_inner_conllection(g.adj)
+    g.printadj()
     print('邻接矩阵为')
     print(g.matrix)
     print('最小生成树为：')

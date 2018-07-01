@@ -172,6 +172,17 @@ class Graph:
                 break
         return self.adj[uindex]
 
+    def printadj(self):
+        '''
+        打印邻接表
+        '''
+        for v in self.veterxs:
+            list = self.getvertexadj(v)
+            print(v.key, end='→')
+            for e in list:
+                print(e.key, end=' ')
+            print('')
+        
     def reset_vertex_para(self):
         '''
         复位所有顶点的参数
