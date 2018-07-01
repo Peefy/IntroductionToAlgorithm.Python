@@ -51,7 +51,7 @@ class Edge:
     '''
     def __init__(self, vertex1 : Vertex = None, \
             vertex2 : Vertex = None, \
-            distance = 1, \
+            weight = 1, \
             dir = DIRECTION_NONE,
             ):
         '''
@@ -73,8 +73,7 @@ class Edge:
         self.dir = dir
         self.vertex1 = vertex1
         self.vertex2 = vertex2
-        self.distance = distance
-        self.weight = 1
+        self.weight = weight
 
     def __str__(self):
         return str((self.vertex1, self.vertex2, self.dir))
@@ -139,7 +138,6 @@ class Graph:
         '''
         self.veterxs = []
         self.edges = []
-        self.matrix = []
 
     def hasdirection(self):
         '''
@@ -184,6 +182,11 @@ class Graph:
     def addvertex(self, v):
         '''
         向图中添加结点`v`
+
+        Args
+        ===
+        `v` : Vertex | List<Vertex> | List<string>
+
         '''
         if type(v) is list:
             for node in v:
@@ -323,7 +326,6 @@ class Graph:
             else:
                 mat[uindex, vindex] = 1
                 mat[vindex, uindex] = 1
-        self.matrix = mat
         return mat
 
     def gettranspose(self):
@@ -400,7 +402,6 @@ class Graph:
         确定有向图`G=(V,E)`是否包含一个通用的汇(入度为|V|-1,出度为0的点)
         '''
         n = len(self.veterxs)
-        self.getmatrix()
         m = self.matrix
         for i in range(n):
             if sum(m[i]) == n - 1:
@@ -866,9 +867,12 @@ def _print_inner_conllection(collection : list, end='\n'):
     '''
     打印列表内部内容
     '''
-    print('[',end=end)
+    print('[',end='')
     for i in range(len(collection)):
-        print(str(collection[i]), end=end)
+        if type(collection[i]) is list: 
+            _print_inner_conllection(collection[i], end)
+        else:
+            print(str(collection[i]), end=end)
     print(']')
 
 def test_topological_sort():
