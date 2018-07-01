@@ -10,7 +10,7 @@ class _MST:
     def __init__(self, *args, **kwwords):
         pass
 
-    def generic_mst(self, g: _g.Graph, w):
+    def generic_mst(self, g: _g.Graph):
         '''
         通用最小生成树算法
 
@@ -37,7 +37,7 @@ class _MST:
         g.edges.sort()
         return A
 
-    def mst_kruskal(self, g: _g.Graph, w):
+    def mst_kruskal(self, g: _g.Graph):
         '''
         最小生成树的Kruska算法
         Args
@@ -48,6 +48,7 @@ class _MST:
         '''
         s = _s.Set()
         A = []
+        weight = 0
         for v in g.veterxs:
             s.make_set(v)
         g.edges.sort()
@@ -56,9 +57,10 @@ class _MST:
             uset = s.find(u)
             vset = s.find(v)
             if uset != vset:
-                A += [(u.key, v.key)]
+                A += [(u.key, v.key, e.weight)]
                 s.union(uset, vset)
-        return A
+                weight += e.weight
+        return A, weight
 
 __mst_instance = _MST()
 generic_mst = __mst_instance.generic_mst
@@ -78,7 +80,7 @@ def test_mst_generic():
     print(g.matrix)
     print('图G=(V,E)的集合为')
     _g._print_inner_conllection(g.edges)
-    print(generic_mst(g, w))
+    print(generic_mst(g))
     print('边按权重排序后图G=(V,E)的集合为')
     _g._print_inner_conllection(g.edges)
     del g
@@ -107,8 +109,8 @@ def test_mst_kruskal():
     print('邻接矩阵为')
     print(g.matrix)
     print('最小生成树为：')
-    mst_list = mst_kruskal(g, 1)
-    _g._print_inner_conllection(mst_list)
+    mst_list = mst_kruskal(g)
+    print(mst_list)
 
 def test():
     '''
