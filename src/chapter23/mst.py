@@ -1,10 +1,6 @@
 
-if __name__ == '__main__':
-    import graph as _g
-    import notintersectset as _s
-else:
-    from . import graph as _g
-    from . import notintersectset as _s
+import graph as _g
+import notintersectset as _s
 
 class _MST:
     def __init__(self, *args, **kwwords):
@@ -39,12 +35,38 @@ class _MST:
 
     def mst_kruskal(self, g: _g.Graph):
         '''
-        最小生成树的Kruska算法
+        最小生成树的Kruska算法 时间复杂度`O(ElgV)`
         Args
         ===
         `g` : 图G=(V,E)
 
-        `w` : 图的权重
+        Return
+        ===
+        `(mst_list, w)` : 最小生成树列表和最小权重组成的`tuple`
+
+        Example
+        ===
+        ```python
+        g = Graph()
+        g.clear()
+        g.addvertex(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'])
+        g.addedgewithweight('a', 'b', 4)
+        g.addedgewithweight('b', 'c', 8)
+        g.addedgewithweight('c', 'd', 7)
+        g.addedgewithweight('d', 'e', 9)
+        g.addedgewithweight('a', 'h', 8)
+        g.addedgewithweight('b', 'h', 11)
+        g.addedgewithweight('c', 'i', 2)
+        g.addedgewithweight('i', 'h', 7)
+        g.addedgewithweight('h', 'g', 1)
+        g.addedgewithweight('g', 'f', 2)
+        g.addedgewithweight('f', 'e', 10)
+        g.addedgewithweight('d', 'f', 14)
+        g.addedgewithweight('c', 'f', 4)
+        g.addedgewithweight('i', 'g', 4)
+        mst_kruskal(g)
+        >>> ([('h', 'g', 1), ('c', 'i', 2), ('g', 'f', 2), ('a', 'b', 4), ('c', 'f', 4), ('c', 'd', 7), ('b', 'c', 8), ('d', 'e', 9)], 37)
+        ```
         '''
         s = _s.Set()
         A = []

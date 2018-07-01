@@ -25,9 +25,9 @@ from numpy import arange as _arange
 from numpy import array as _array
 
 if __name__ == '__main__':
-    import graph as _g
+    import mst as _mst
 else: 
-    from . import graph as _g
+    from . import mst as _mst
 
 class Chapter23_1:
     '''
@@ -142,8 +142,9 @@ class Chapter23_2:
         print(' 设C1和C2表示边(u,v)连接的两棵树,因为(u,v)必是连接C1和其他某棵树的一条轻边',
             '所以由推论23.2可知,(u,v)对C1来说是安全边。Kruskal算法同时也是一种贪心算法',
             '因为在算法的每一步中,添加到森林中的边的权值都是尽可能小的')
-        print('')
-        print('')
+        _mst.test_mst_kruskal()
+        print(' Kruskal算法在图G=(V,E)上的运行时间取决于不相交集合数据结构是如何实现的')
+        print(' 使用*按秩结合*和*路径压缩*的启发式方法实现不相交集合森林，从渐进意义上来说是最快的方法')
         print('')
         print('')
         print('')
