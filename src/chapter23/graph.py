@@ -76,7 +76,7 @@ class Edge:
         self.weight = weight
 
     def __str__(self):
-        return str((self.vertex1, self.vertex2, self.dir))
+        return str((self.vertex1.key, self.vertex2.key, self.dir, self.weight))
 
     def __lt__(self, other):
         if type(other) is Graph:
@@ -200,6 +200,27 @@ class Graph:
             v = Vertex(key)
         self.veterxs.append(v)
 
+    def addedgewithweight(self, v1, v2, weight, dir = DIRECTION_NONE):
+        '''
+        向图中添加边`edge`
+
+        Args
+        ===
+        `v1` : 边的一个顶点
+
+        `v2` : 边的另一个顶点
+
+        `weight` : 边的权重
+
+        `dir` : 边的方向
+            DIRECTION_NONE : 没有方向
+            DIRECTION_TO : `vertex1` → `vertex2`
+            DIRECTION_FROM : `vertex1` ← `vertex2`
+            DIRECTION_BOTH : `vertex1` ←→ `vertex2`
+        '''
+        egde = Edge(Vertex(v1), Vertex(v2), weight, dir)
+        self.edges.append(egde)
+
     def addedge(self, v1, v2, dir = DIRECTION_NONE):
         '''
         向图中添加边`edge`
@@ -226,6 +247,11 @@ class Graph:
         Args
         ===
         `edge` : 边 
+
+        Return
+        ===
+        (u, v) : 
+
         '''
         n = len(self.veterxs)
         if type(edge) is Edge:
@@ -867,7 +893,7 @@ def _print_inner_conllection(collection : list, end='\n'):
     '''
     打印列表内部内容
     '''
-    print('[',end='')
+    print('[',end=end)
     for i in range(len(collection)):
         if type(collection[i]) is list: 
             _print_inner_conllection(collection[i], end)

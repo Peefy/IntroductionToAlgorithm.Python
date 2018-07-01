@@ -75,6 +75,13 @@ class Chapter23_1:
         print('无向图G=(V, E)的一个割(S, V-S)是对V的一个划分.当一条边(u,v)∈E的一个端点属于S，而另一个端点属于V-S',
             '则称边(u,v)通过割(S,V-S).如果一个边的集合A中没有边通过某一割','则说该割不妨害边集A')
         print('如果某条边的权值是通过一个割的所有边中最小的,则称该边为通过这个的割的一条轻边(light edge)')
+        print('GENERIC-MST')
+        print('  A = []')
+        print('  while A does not form a spanning tree')
+        print('    do find an edge (u,v) that is safe for A (保证不形成回路)')
+        print('       A <- A ∪ {(u, v)}')
+        print('  return A')
+        print('')
         print('识别安全边的一条规则：')
         print('定理23.1 设图G=(V,E)是一个无向连通图，并且在E上定义了一个具有实数值的加权函数w.',
             '设A是E的一个子集，它包含于G的某个最小生成树中.',
@@ -124,6 +131,18 @@ class Chapter23_2:
         '''
         print('chapter23.2 note as follow')
         print('23.2 Kruskai算法和Prim算法')
+        print('本节所介绍的两种最小生成树算法是对上一节介绍的通用算法的细化')
+        print('均采用了一个特定的规则来确定GENERIC-MST算法所描述的安全边')
+        print(' 在Kruskal算法中,集合A是一个森林,加入集合A中的安全边总是图中连接两个不同连通分支的最小权边')
+        print(' 在Prim算法中,集合A仅形成单棵树,',
+            '添加入集合A的安全边总是连接树与一个不在树中的顶点的最小权边')
+        print('Kruskal算法')
+        print(' 该算法找出森林中连接任意两棵树的所有边中,具有最小权值的边(u,v)作为安全边',
+            '并把它添加到正在生长的森林中')
+        print(' 设C1和C2表示边(u,v)连接的两棵树,因为(u,v)必是连接C1和其他某棵树的一条轻边',
+            '所以由推论23.2可知,(u,v)对C1来说是安全边。Kruskal算法同时也是一种贪心算法',
+            '因为在算法的每一步中,添加到森林中的边的权值都是尽可能小的')
+        print('')
         print('')
         print('')
         print('')
