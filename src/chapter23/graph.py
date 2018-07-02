@@ -31,6 +31,7 @@ class Vertex:
         self.d = _math.inf
         self.pi = None
         self.f = _math.inf
+        self.weightkey = 0
 
     def resetpara(self):
         '''
@@ -41,9 +42,53 @@ class Vertex:
         self.pi = None
         self.f = _math.inf
 
+    def __hash__(self):
+        code = self.color.__hash__()
+        code = code * 37 + self.key.__hash__()
+        code = code * 37 + self.pi.__hash__()
+        code = code * 37 + self.d.__hash__()
+        code = code * 37 + self.f.__hash__()
+        return code 
+
     def __str__(self):
         return '[key:{} color:{} d:{} f:{} pi:{}]'.format(self.key, \
             self.color, self.d, self.f, self.pi)
+
+    def __lt__(self, other):
+        if type(other) is Vertex:
+            return self.weightkey < other.weightkey
+        else:
+            return self.weightkey < other
+
+    def __gt__(self, other):
+        if type(other) is Vertex:
+            return self.weightkey > other.weightkey
+        else:
+            return self.weightkey > other
+
+    def __le__(self, other):
+        if type(other) is Vertex:
+            return self.weightkey <= other.weightkey
+        else:
+            return self.weightkey <= other
+
+    def __ge__(self, other):
+        if type(other) is Vertex:
+            return self.weightkey >= other.weightkey
+        else:
+            return self.weightkey >= other
+
+    def __eq__(self, other):
+        if type(other) is Vertex:
+            return self.weightkey == other.weightkey
+        else:
+            return self.weightkey == other
+
+    def __ne__(self, other):
+        if type(other) is Vertex:
+            return self.weightkey != other.weightkey
+        else:
+            return self.weightkey != other
 
 class Edge:
     '''
@@ -77,6 +122,13 @@ class Edge:
 
     def __str__(self):
         return str((self.vertex1.key, self.vertex2.key, self.dir, self.weight))
+
+    def __hash__(self):
+        code = self.dir.__hash__()
+        code = code * 37 + self.vertex1.__hash__()
+        code = code * 37 + self.vertex2.__hash__()
+        code = code * 37 + self.weight.__hash__()
+        return code
 
     def __lt__(self, other):
         if type(other) is Graph:
@@ -151,6 +203,11 @@ class Graph:
     def veterxs_atkey(self, key):
         '''
         从顶点序列`vertexs`中返回键值为`key`的顶点
+
+        Args
+        ===
+        `key` Vertex | int
+
         '''
         if type(key) is Vertex:
             return key
@@ -171,6 +228,19 @@ class Graph:
                 uindex = i
                 break
         return self.adj[uindex]
+
+    def getedge(self, v1 : Vertex, v2 : Vertex):
+        '''
+        根据两个顶点获取边，若两个点不相邻，返回None
+        '''
+        if type(v1) is not Vertex:
+            v1 = self.veterxs_atkey(v1)
+        if type(v2) is not Vertex:
+            v2 = self.veterxs_atkey(v2)
+        for edge in self.edges:
+            if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key:
+                return edge
+        return edge
 
     def printadj(self):
         '''

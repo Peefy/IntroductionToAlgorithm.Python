@@ -1,6 +1,8 @@
 
 import graph as _g
 import notintersectset as _s
+import math as _math
+from copy import deepcopy as _deepcopy
 
 class _MST:
     def __init__(self, *args, **kwwords):
@@ -33,7 +35,7 @@ class _MST:
         g.edges.sort()
         return A
 
-    def mst_kruskal(self, g: _g.Graph):
+    def mst_kruskal(self, g : _g.Graph):
         '''
         最小生成树的Kruska算法 时间复杂度`O(ElgV)`
         Args
@@ -42,7 +44,7 @@ class _MST:
 
         Return
         ===
-        `(mst_list, w)` : 最小生成树列表和最小权重组成的`tuple`
+        `(mst_list, weight)` : 最小生成树列表和最小权重组成的`tuple`
 
         Example
         ===
@@ -84,7 +86,7 @@ class _MST:
                 weight += e.weight
         return A, weight
 
-    def mst_prism(self, g, w, r):
+    def mst_prism(self, g : _g.Graph, r : _g.Vertex):
         '''
         最小生成树的Prism算法 时间复杂度`O(ElgV)`
         Args
@@ -93,13 +95,34 @@ class _MST:
 
         Return
         ===
-        `(mst_list, w)` : 最小生成树列表和最小权重组成的`tuple`
+        `weight` : 最小权重
         '''
-        pass
-
+        weight = 0
+        for u in g.veterxs:
+            u.weightkey = _math.inf
+            u.pi = None
+        if type(r) is not _g.Vertex:
+            r = g.veterxs_atkey(r)
+        else:
+            r = g.veterxs_atkey(r.key)
+        r.weightkey = 0
+        Q = _deepcopy(g.veterxs)
+        Q.sort(reverse=True)
+        while len(Q) > 0:
+            u = Q.pop()
+            adj = g.getvertexadj(u.key)
+            for v in adj:
+                edge = g.getedge(u, v)
+                if v in Q and edge.weight < v.weightkey:
+                    v.pi = u
+                    v.weightkey = edge.weight
+                    weight += edge.weight
+        return weight
+            
 __mst_instance = _MST()
 generic_mst = __mst_instance.generic_mst
 mst_kruskal = __mst_instance.mst_kruskal
+mst_prism = __mst_instance.mst_prism
 
 def test_mst_generic():
     w = 2
@@ -146,6 +169,35 @@ def test_mst_kruskal():
     print('最小生成树为：')
     mst_list = mst_kruskal(g)
     print(mst_list)
+    del g
+
+def test_mst_prism():
+    g = _g.Graph()
+    g.clear()
+    g.addvertex(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'])
+    g.addedgewithweight('a', 'b', 4)
+    g.addedgewithweight('b', 'c', 8)
+    g.addedgewithweight('c', 'd', 7)
+    g.addedgewithweight('d', 'e', 9)
+    g.addedgewithweight('a', 'h', 8)
+    g.addedgewithweight('b', 'h', 11)
+    g.addedgewithweight('c', 'i', 2)
+    g.addedgewithweight('i', 'h', 7)
+    g.addedgewithweight('h', 'g', 1)
+    g.addedgewithweight('g', 'f', 2)
+    g.addedgewithweight('f', 'e', 10)
+    g.addedgewithweight('d', 'f', 14)
+    g.addedgewithweight('c', 'f', 4)
+    g.addedgewithweight('i', 'g', 4)
+    print('边和顶点的数量分别为:', g.edge_num, g.vertex_num)
+    print('邻接表为')
+    g.printadj()
+    print('邻接矩阵为')
+    print(g.matrix)
+    print('最小生成树为：')
+    mst_list = mst_prism(g, 'd')
+    print(mst_list)
+    del g
 
 def test():
     '''
@@ -153,6 +205,7 @@ def test():
     '''
     test_mst_generic()
     test_mst_kruskal()
+    # test_mst_prism()
 
 if __name__ == '__main__':
     print('test as follows')
