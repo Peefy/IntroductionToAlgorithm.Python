@@ -219,6 +219,7 @@ class Graph:
         '''
         获取图中顶点`v`的邻接顶点序列
         '''
+        adj = self.getadj_from_matrix()
         v = self.veterxs_atkey(v)
         if v is None:
             return None
@@ -227,7 +228,7 @@ class Graph:
             if self.veterxs[i].key == v.key:
                 uindex = i
                 break
-        return self.adj[uindex]
+        return adj[uindex]
 
     def getedge(self, v1 : Vertex, v2 : Vertex):
         '''
@@ -353,6 +354,21 @@ class Graph:
             vindex = self.veterxs.index(v)
         return (u, v)
 
+    def getadj_from_matrix(self):
+        '''
+        从邻接矩阵获得邻接列表
+        '''
+        matrix = self.matrix
+        n = self.vertex_num
+        adj = []
+        for i in range(n):
+            sub = []
+            for j in range(n):
+                if matrix[i][j] == 1:
+                    sub.append(self.veterxs[j])
+            adj.append(sub)
+        return adj
+            
     @property
     def adj(self):
         '''

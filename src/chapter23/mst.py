@@ -86,8 +86,12 @@ class _MST:
                 weight += e.weight
         return A, weight
 
-    def __change_weightkey_in_queue(self, Q, v):
-        pass
+    def __change_weightkey_in_queue(self, Q, v, u):
+        for q in Q:
+            if q.key == v.key:
+                q.weightkey = v.weightkey
+                q.pi = u
+                break
 
     def mst_prism(self, g : _g.Graph, r : _g.Vertex):
         '''
@@ -108,20 +112,24 @@ class _MST:
             r = g.veterxs_atkey(r)
         else:
             r = g.veterxs_atkey(r.key)
-        r.weightkey = 0
-        Q = _deepcopy(g.veterxs)     
-        while len(Q) > 0:
-            Q.sort(reverse=True)
-            u = Q.pop()
-            adj = g.getvertexadj(u.key)
+        r.weightkey = 0    
+        Q = _deepcopy(g.veterxs)
+        total_adj = g.getadj_from_matrix()
+        while len(g.veterxs) > 0:
+            g.veterxs.sort(reverse=True)
+            u = g.veterxs.pop()
+            for i in range(len(Q)):
+                if Q[i].key == u.key:
+                    uindex = i
+                    break
+            adj = total_adj[uindex]
             for v in adj:
                 edge = g.getedge(u, v)
-                if v in Q and edge.weight < v.weightkey:
-                    v.pi = u
-                    v.weightkey = edge.weight
-                    weight += edge.weight
-                    
-        return weight
+                if v in g.veterxs and edge.weight < v.weightkey:
+                    v.pi = u    
+                    v.weightkey = edge.weight         
+        g.veterxs = Q 
+        return Q
             
 __mst_instance = _MST()
 generic_mst = __mst_instance.generic_mst
@@ -151,11 +159,11 @@ def test_mst_kruskal():
     g = _g.Graph()
     g.clear()
     g.addvertex(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'])
+    g.addedgewithweight('a', 'h', 8)
     g.addedgewithweight('a', 'b', 4)
     g.addedgewithweight('b', 'c', 8)
     g.addedgewithweight('c', 'd', 7)
-    g.addedgewithweight('d', 'e', 9)
-    g.addedgewithweight('a', 'h', 8)
+    g.addedgewithweight('d', 'e', 9)  
     g.addedgewithweight('b', 'h', 11)
     g.addedgewithweight('c', 'i', 2)
     g.addedgewithweight('i', 'h', 7)
@@ -180,11 +188,11 @@ def test_mst_prism():
     g.clear()
     g.addvertex(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'])
     g.addedgewithweight('a', 'b', 4)
+    g.addedgewithweight('b', 'h', 11)
     g.addedgewithweight('b', 'c', 8)
     g.addedgewithweight('c', 'd', 7)
     g.addedgewithweight('d', 'e', 9)
-    g.addedgewithweight('a', 'h', 8)
-    g.addedgewithweight('b', 'h', 11)
+    g.addedgewithweight('a', 'h', 8) 
     g.addedgewithweight('c', 'i', 2)
     g.addedgewithweight('i', 'h', 7)
     g.addedgewithweight('h', 'g', 1)
@@ -195,12 +203,16 @@ def test_mst_prism():
     g.addedgewithweight('i', 'g', 4)
     print('边和顶点的数量分别为:', g.edge_num, g.vertex_num)
     print('邻接表为')
-    print(g.adj)
+    g.printadj()
     print('邻接矩阵为')
     print(g.matrix)
     print('最小生成树为：')
     mst_list = mst_prism(g, 'a')
     print(mst_list)
+    weight = 0
+    for v in g.veterxs:
+        weight += v.weightkey
+    print(weight)
     del g
 
 def test():
