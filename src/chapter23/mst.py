@@ -86,6 +86,9 @@ class _MST:
                 weight += e.weight
         return A, weight
 
+    def __change_weightkey_in_queue(self, Q, v):
+        pass
+
     def mst_prism(self, g : _g.Graph, r : _g.Vertex):
         '''
         最小生成树的Prism算法 时间复杂度`O(ElgV)`
@@ -106,9 +109,9 @@ class _MST:
         else:
             r = g.veterxs_atkey(r.key)
         r.weightkey = 0
-        Q = _deepcopy(g.veterxs)
-        Q.sort(reverse=True)
+        Q = _deepcopy(g.veterxs)     
         while len(Q) > 0:
+            Q.sort(reverse=True)
             u = Q.pop()
             adj = g.getvertexadj(u.key)
             for v in adj:
@@ -117,6 +120,7 @@ class _MST:
                     v.pi = u
                     v.weightkey = edge.weight
                     weight += edge.weight
+                    
         return weight
             
 __mst_instance = _MST()
@@ -191,11 +195,11 @@ def test_mst_prism():
     g.addedgewithweight('i', 'g', 4)
     print('边和顶点的数量分别为:', g.edge_num, g.vertex_num)
     print('邻接表为')
-    g.printadj()
+    print(g.adj)
     print('邻接矩阵为')
     print(g.matrix)
     print('最小生成树为：')
-    mst_list = mst_prism(g, 'd')
+    mst_list = mst_prism(g, 'a')
     print(mst_list)
     del g
 
@@ -205,7 +209,7 @@ def test():
     '''
     test_mst_generic()
     test_mst_kruskal()
-    # test_mst_prism()
+    test_mst_prism()
 
 if __name__ == '__main__':
     print('test as follows')

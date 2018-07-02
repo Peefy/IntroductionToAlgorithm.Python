@@ -211,9 +211,9 @@ class Graph:
         '''
         if type(key) is Vertex:
             return key
-        for i in range(len(g.veterxs)):
-            if g.veterxs[i].key == key:
-                return g.veterxs[i]
+        for i in range(len(self.veterxs)):
+            if self.veterxs[i].key == key:
+                return self.veterxs[i]
 
     def getvertexadj(self, v : Vertex):
         '''
@@ -383,20 +383,28 @@ class Graph:
                     vindex = self.veterxs.index(v)
                 if dir == DIRECTION_TO and uindex == i:
                     val = self.veterxs[vindex]
-                    if sub.count(val) == 0:
-                        sub.append(val)
+                    for i in range(len(sub)):
+                        if sub[i].key == val.key:
+                            continue
+                    sub.append(val)
                 elif dir == DIRECTION_FROM and vindex == i:
                     val = self.veterxs[uindex]
-                    if sub.count(val) == 0:
-                        sub.append(val)
+                    for i in range(len(sub)):
+                        if sub[i].key == val.key:
+                            continue
+                    sub.append(val)
                 elif dir == DIRECTION_NONE and uindex == i:
                     val = self.veterxs[vindex]
-                    if sub.count(val) == 0:
-                        sub.append(val)
+                    for i in range(len(sub)):
+                        if sub[i].key == val.key:
+                            continue
+                    sub.append(val)
                 elif dir == DIRECTION_NONE and vindex == i:
                     val = self.veterxs[uindex]
-                    if sub.count(val) == 0:
-                        sub.append(val)               
+                    for i in range(len(sub)):
+                        if sub[i].key == val.key:
+                            continue
+                    sub.append(val)               
             adj.append(sub)
         return adj
 
