@@ -122,35 +122,121 @@ class _MST:
         for j in range(n):
             weight_min = _math.inf
             u = None
+            # 优先队列Q extract-min
             for v in g.veterxs:
                 if v.isvisit == False and v.weightkey < weight_min:
                     weight_min = v.weightkey
                     u = v
             u.isvisit = True
+            # 获取u的邻接表
             adj = g.getvertexadj(u)
-            weight += weight_min
-            
+            # 计算最小权重
+            weight += weight_min        
             for v in adj:
+                # 获取边
                 edge = g.getedge(u, v)
+                # 构造最小生成树
                 if weight_min != 0 and edge.weight == weight_min:
                     tree.append((v.key, u.key, weight_min))
+                # if v ∈ Q and w(u, v) < key[v]
                 if v.isvisit == False and edge.weight < v.weightkey:
                     v.pi = u
                     v.weightkey = edge.weight
+                    # 更新Vertex域 如果是引用则不需要，此处adj不是引用
                     for q in g.veterxs:
                         if q.key == v.key:
                             q.weightkey = v.weightkey
                             q.pi = v.pi
                             break
         return tree, weight
-       
+
+    def mst_dijkstra(self, g: _g.Graph, r: _g.Vertex):
+        '''
+        最小生成树的Prism算法 时间复杂度`O(ElgV)`
+        Args
+        ===
+        `g` : 图`G=(V,E)`
+
+        Return
+        ===
+        `weight` : 最小权重
+        '''
+        for u in g.veterxs:
+            u.isvisit = False
+            u.weightkey = _math.inf
+            u.pi = None
+        if type(r) is not _g.Vertex:
+            r = g.veterxs_atkey(r)
+        else:
+            r = g.veterxs_atkey(r.key)
+        r.weightkey = 0
+        total_adj = g.getadj_from_matrix()
+        weight = 0
+        n = g.vertex_num
+        weight_min = 0
+        k = 0
+        tree = []
+        for j in range(n):
+            weight_min = _math.inf
+            u = None
+            # 优先队列Q extract-min
+            for v in g.veterxs:
+                if v.isvisit == False and v.weightkey < weight_min:
+                    weight_min = v.weightkey
+                    u = v
+            u.isvisit = True
+            # 获取u的邻接表
+            adj = g.getvertexadj(u)
+            # 计算最小权重
+            weight += weight_min
+            for v in adj:
+                # 获取边
+                edge = g.getedge(u, v)
+                # 构造最小生成树
+                if weight_min != 0 and edge.weight == weight_min:
+                    tree.append((v.key, u.key, weight_min))
+                # if v ∈ Q and w(u, v) < key[v]
+                if v.isvisit == False and edge.weight < v.weightkey:
+                    v.pi = u
+                    v.weightkey = edge.weight
+                    # 更新Vertex域 如果是引用则不需要，此处adj不是引用
+                    for q in g.veterxs:
+                        if q.key == v.key:
+                            q.weightkey = v.weightkey
+                            q.pi = v.pi
+                            break
+        return tree, weight
+
 __mst_instance = _MST()
 generic_mst = __mst_instance.generic_mst
 mst_kruskal = __mst_instance.mst_kruskal
 mst_prism = __mst_instance.mst_prism
+mst_dijkstra = __mst_instance.mst_dijkstra
+
+def buildgraph():
+    '''
+    构造图
+    '''
+    g =  _g.Graph()
+    g.clear()
+    g.addvertex(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'])
+    g.addedgewithweight('a', 'h', 8)
+    g.addedgewithweight('a', 'b', 4)
+    g.addedgewithweight('b', 'c', 8)
+    g.addedgewithweight('c', 'd', 7)
+    g.addedgewithweight('d', 'e', 9)
+    g.addedgewithweight('b', 'h', 11)
+    g.addedgewithweight('c', 'i', 2)
+    g.addedgewithweight('i', 'h', 7)
+    g.addedgewithweight('h', 'g', 1)
+    g.addedgewithweight('g', 'f', 2)
+    g.addedgewithweight('f', 'e', 10)
+    g.addedgewithweight('d', 'f', 14)
+    g.addedgewithweight('c', 'f', 4)
+    g.addedgewithweight('i', 'g', 6)
+    return g
 
 def test_mst_generic():
-    w = 2
     g = _g.Graph()
     g.clear()
     g.addvertex(['a', 'b', 'c', 'd'])
@@ -169,23 +255,7 @@ def test_mst_generic():
     del g
 
 def test_mst_kruskal():
-    g = _g.Graph()
-    g.clear()
-    g.addvertex(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'])
-    g.addedgewithweight('a', 'h', 8)
-    g.addedgewithweight('a', 'b', 4)
-    g.addedgewithweight('b', 'c', 8)
-    g.addedgewithweight('c', 'd', 7)
-    g.addedgewithweight('d', 'e', 9)  
-    g.addedgewithweight('b', 'h', 11)
-    g.addedgewithweight('c', 'i', 2)
-    g.addedgewithweight('i', 'h', 7)
-    g.addedgewithweight('h', 'g', 1)
-    g.addedgewithweight('g', 'f', 2)
-    g.addedgewithweight('f', 'e', 10)
-    g.addedgewithweight('d', 'f', 14)
-    g.addedgewithweight('c', 'f', 4)
-    g.addedgewithweight('i', 'g', 6)
+    g = buildgraph()
     print('边和顶点的数量分别为:', g.edge_num, g.vertex_num)
     print('邻接表为')
     g.printadj()
@@ -197,23 +267,7 @@ def test_mst_kruskal():
     del g
 
 def test_mst_prism():
-    g = _g.Graph()
-    g.clear()
-    g.addvertex(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'])
-    g.addedgewithweight('a', 'b', 4)
-    g.addedgewithweight('b', 'h', 11)
-    g.addedgewithweight('b', 'c', 8)
-    g.addedgewithweight('c', 'd', 7)
-    g.addedgewithweight('d', 'e', 9)
-    g.addedgewithweight('a', 'h', 8) 
-    g.addedgewithweight('c', 'i', 2)
-    g.addedgewithweight('i', 'h', 7)
-    g.addedgewithweight('h', 'g', 1)
-    g.addedgewithweight('g', 'f', 2)
-    g.addedgewithweight('f', 'e', 10)
-    g.addedgewithweight('d', 'f', 14)
-    g.addedgewithweight('c', 'f', 4)
-    g.addedgewithweight('i', 'g', 6)
+    g = buildgraph()
     print('边和顶点的数量分别为:', g.edge_num, g.vertex_num)
     print('邻接表为')
     g.printadj()
@@ -224,6 +278,14 @@ def test_mst_prism():
     print(mst_list)
     del g
 
+def test_mst_dijkstra():
+    g = buildgraph()
+    print('邻接表为')
+    g.printadj()
+    print('最小生成树为：')
+    print(g.matrix)
+    del g
+
 def test():
     '''
     测试函数
@@ -231,6 +293,7 @@ def test():
     test_mst_generic()
     test_mst_kruskal()
     test_mst_prism()
+    test_mst_dijkstra()
 
 if __name__ == '__main__':
     print('test as follows')

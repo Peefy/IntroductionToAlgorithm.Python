@@ -8,7 +8,6 @@ Class Chapter23_1
 
 Class Chapter23_2
 
-Class Chapter23_3
 
 '''
 from __future__ import absolute_import, division, print_function
@@ -163,41 +162,33 @@ class Chapter23_2:
         print('按据约定,如果不存在这样的边,则key[v]=∞,pi[v]=None')
         print('当算法终止时,最小优先队列Q是空的,而G的最小生成树A则满足：')
         print(' A={(v,pi[v]):v∈V-{r}}')
+        print('Prism算法的性能,取决于优先队列Q是如何实现的,如果用二叉最小堆实现,其运行时间为O(V)',
+            '由于EXTRACT-MIN操作需要O(lgV)时间,所以对EXTRACT-MIN的全部调用所占用的之间为O(VlgV)')
+        print('通过使用斐波那契堆,Prism的算法渐进运行时间可得到进一步改善,',
+            '可在O(lgV)的平摊时间内完成EXTRACT-MIN操作,在O(1)的平摊时间里完成DECRESE-KEY操作')
+        print('因此,如果使用斐波那契堆来实现最小优先队列Q,Prism算法的运行时间可以改进为O(E+VlgV)')
+        print('练习23.2-1 根据对边进行排序不同，即使对同一输入图,Kruskal算法也可能得出不同的生成树',
+            '证明对G的每一棵最小生成树T,Kruskal算法中都存在一种方法来对边进行排序,使得算法返回的最小生成树为T')
+        print('练习23.2-2 假定图G=(V,E)用邻接矩阵表示,在这种条件下,给出Prism算法的运行时间为O(V^2)的实现')
+        print('练习23.2-3 ')
+        print('练习23.2-4 ')
+        print('练习23.2-5 ')
+        print('练习23.2-6 ')
+        print('练习23.2-7 ')
+        print('练习23.2-8 ')
+        print('思考题23-1 次最优的最小生成树')
+        print('思考题23-2 稀疏图的最小生成树')
+        print('思考题23-3 瓶颈生成树')
+        print('思考题23-4 其他最小生成树算法')
         print('')
         print('')
         print('')
         print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        # python src/chapter23/chapter23note.py
-        # python3 src/chapter23/chapter23note.py
-
-class Chapter23_3:
-    '''
-    chpater23.3 note and function
-    '''
-    def note(self):
-        '''
-        Summary
-        ====
-        Print chapter23.3 note
-
-        Example
-        ====
-        ```python
-        Chapter23_3().note()
-        ```
-        '''
-        print('chapter23.3 note as follow')
         # python src/chapter23/chapter23note.py
         # python3 src/chapter23/chapter23note.py
 
 chapter23_1 = Chapter23_1()
 chapter23_2 = Chapter23_2()
-chapter23_3 = Chapter23_3()
 
 def printchapter23note():
     '''
@@ -206,7 +197,6 @@ def printchapter23note():
     print('Run main : single chapter twenty-three!')  
     chapter23_1.note()
     chapter23_2.note()
-    chapter23_3.note()
 
 # python src/chapter23/chapter23note.py
 # python3 src/chapter23/chapter23note.py
