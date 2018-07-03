@@ -104,33 +104,42 @@ class _MST:
         ===
         `weight` : 最小权重
         '''
-        weight = 0
         for u in g.veterxs:
+            u.isvisit = False
             u.weightkey = _math.inf
             u.pi = None
         if type(r) is not _g.Vertex:
             r = g.veterxs_atkey(r)
         else:
             r = g.veterxs_atkey(r.key)
-        r.weightkey = 0    
-        Q = _deepcopy(g.veterxs)
+        r.weightkey = 0   
         total_adj = g.getadj_from_matrix()
-        while len(g.veterxs) > 0:
-            g.veterxs.sort(reverse=True)
-            u = g.veterxs.pop()
-            for i in range(len(Q)):
-                if Q[i].key == u.key:
-                    uindex = i
-                    break
-            adj = total_adj[uindex]
+        weight = 0
+        n = g.vertex_num
+        weight_min = 0
+        k = 0
+        for j in range(n):
+            weight_min = _math.inf
+            u = None
+            for v in g.veterxs:
+                if v.isvisit == False and v.weightkey < weight_min:
+                    weight_min = v.weightkey
+                    u = v
+            u.isvisit = True
+            adj = g.getvertexadj(u)
+            weight += weight_min
             for v in adj:
                 edge = g.getedge(u, v)
-                if v in g.veterxs and edge.weight < v.weightkey:
-                    v.pi = u    
-                    v.weightkey = edge.weight         
-        g.veterxs = Q 
-        return Q
-            
+                if v.isvisit == False and edge.weight < v.weightkey:
+                    v.pi = u
+                    v.weightkey = edge.weight
+                    for q in g.veterxs:
+                        if q.key == v.key:
+                            q.weightkey = v.weightkey
+                            q.pi = u
+                            break
+        return weight
+       
 __mst_instance = _MST()
 generic_mst = __mst_instance.generic_mst
 mst_kruskal = __mst_instance.mst_kruskal
@@ -172,7 +181,7 @@ def test_mst_kruskal():
     g.addedgewithweight('f', 'e', 10)
     g.addedgewithweight('d', 'f', 14)
     g.addedgewithweight('c', 'f', 4)
-    g.addedgewithweight('i', 'g', 4)
+    g.addedgewithweight('i', 'g', 6)
     print('边和顶点的数量分别为:', g.edge_num, g.vertex_num)
     print('邻接表为')
     g.printadj()
@@ -200,7 +209,7 @@ def test_mst_prism():
     g.addedgewithweight('f', 'e', 10)
     g.addedgewithweight('d', 'f', 14)
     g.addedgewithweight('c', 'f', 4)
-    g.addedgewithweight('i', 'g', 4)
+    g.addedgewithweight('i', 'g', 6)
     print('边和顶点的数量分别为:', g.edge_num, g.vertex_num)
     print('邻接表为')
     g.printadj()

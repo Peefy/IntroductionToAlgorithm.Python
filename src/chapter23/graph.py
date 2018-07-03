@@ -32,6 +32,7 @@ class Vertex:
         self.pi = None
         self.f = _math.inf
         self.weightkey = 0
+        self.isvisit = False
 
     def resetpara(self):
         '''
@@ -241,7 +242,9 @@ class Graph:
         for edge in self.edges:
             if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key:
                 return edge
-        return edge
+            elif edge.vertex2.key == v1.key and edge.vertex1.key == v2.key:
+                return edge
+        return None
 
     def printadj(self):
         '''
