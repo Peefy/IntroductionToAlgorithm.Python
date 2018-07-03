@@ -213,6 +213,8 @@ class Graph:
         if type(key) is Vertex:
             return key
         for i in range(len(self.veterxs)):
+            if type(self.veterxs[i]) is not Vertex:
+                self.veterxs[i] = Vertex(self.veterxs[i])
             if self.veterxs[i].key == key:
                 return self.veterxs[i]
 
@@ -220,8 +222,8 @@ class Graph:
         '''
         获取图中顶点`v`的邻接顶点序列
         '''
-        adj = self.getadj_from_matrix()
         v = self.veterxs_atkey(v)
+        adj = self.getadj_from_matrix()     
         if v is None:
             return None
         uindex = 0
@@ -251,10 +253,24 @@ class Graph:
         打印邻接表
         '''
         for v in self.veterxs:
+            v = self.veterxs_atkey(v)
+        for edge in self.edges:
+            if type(edge) is Edge:
+                pass
+            elif len(edge) == 2:
+                u, v = edge
+                edge = Edge(Vertex(u), Vertex(v))
+            else:
+                u, v, dir = edge
+                edge = Edge(Vertex(u), Vertex(v),dir=dir)
+        for v in self.veterxs:
             list = self.getvertexadj(v)
             print(v.key, end='→')
             for e in list:
-                print(e.key, end=' ')
+                if type(e) is Vertex:
+                    print(e.key, end=' ')
+                else:
+                    print(e, end=' ')
             print('')
         
     def reset_vertex_para(self):
@@ -376,7 +392,7 @@ class Graph:
     def adj(self):
         '''
         获取邻接表
-        '''
+        '''       
         adj = []
         n = len(self.veterxs)
         if n == 0:
@@ -895,7 +911,7 @@ def undirected_graph_test():
     g.edges = [('a', 'b'), ('a', 'c'), ('b', 'd'),
                ('b', 'e'), ('c', 'f'), ('c', 'g')]
     print('邻接表为')
-    print(g.adj)
+    g.printadj()
     print('邻接矩阵为')
     print(g.matrix)
 

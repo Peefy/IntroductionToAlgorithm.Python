@@ -118,6 +118,7 @@ class _MST:
         n = g.vertex_num
         weight_min = 0
         k = 0
+        tree = []
         for j in range(n):
             weight_min = _math.inf
             u = None
@@ -128,17 +129,20 @@ class _MST:
             u.isvisit = True
             adj = g.getvertexadj(u)
             weight += weight_min
+            
             for v in adj:
                 edge = g.getedge(u, v)
+                if weight_min != 0 and edge.weight == weight_min:
+                    tree.append((v.key, u.key, weight_min))
                 if v.isvisit == False and edge.weight < v.weightkey:
                     v.pi = u
                     v.weightkey = edge.weight
                     for q in g.veterxs:
                         if q.key == v.key:
                             q.weightkey = v.weightkey
-                            q.pi = u
+                            q.pi = v.pi
                             break
-        return weight
+        return tree, weight
        
 __mst_instance = _MST()
 generic_mst = __mst_instance.generic_mst
@@ -218,10 +222,6 @@ def test_mst_prism():
     print('最小生成树为：')
     mst_list = mst_prism(g, 'a')
     print(mst_list)
-    weight = 0
-    for v in g.veterxs:
-        weight += v.weightkey
-    print(weight)
     del g
 
 def test():
