@@ -61,7 +61,7 @@
             C[A[j]] = C[A[j]] - 1
         return B
 
-def getarraystr_subarray(self, A ,k):
+    def getarraystr_subarray(self, A ,k):
         '''
         取一个数组中每个元素第k位构成的子数组
 
@@ -158,6 +158,63 @@ def getarraystr_subarray(self, A ,k):
                 C[j] += B[i][j] * 10 ** i
             C[j] = C[j] - j
         return C 
+
+    def bucketsort(self, A):
+        '''
+        桶排序,期望时间复杂度`Θ(n)`(满足输入分布条件`[0,1)`的情况下)
+        需要`链表list`额外的数据结构和存储空间
+
+        Args
+        ===
+        `A` : 待排序的数组
+
+        Return
+        ===
+        `sortedarray` : 排序好的数组
+
+        Example
+        ===
+        ```python
+        >>> Chapter8_4().bucketsort([0.5, 0.4, 0.3, 0.2, 0.1])
+        >>> [0.1, 0.2, 0.3, 0.4, 0.5]
+        ```
+        '''
+        n = len(A)
+        B = []
+        for i in range(n):
+            B.insert(int(n * A[i]), A[i])
+        return self.insertsort(B)
+        
+    def __find_matching_kettle(self, kettles1, kettles2):
+        '''
+        思考题8.4，找到匹配的水壶，并返回匹配索引集合
+
+        Example
+        ===
+        ```python
+        >>> list(find_matching_kettle([1,2,3,4,5], [5,4,3,2,1]))
+        [(0, 4), (1, 3), (2, 2), (3, 1), (4, 0)]
+        ```
+        '''
+        assert len(kettles1) == len(kettles2)
+        n = len(kettles1)
+        for i in range(n):
+            for j in range(n):
+                if kettles1[i] == kettles2[j]:
+                    yield (i, j)
+
+    def find_matching_kettle(self, kettles1, kettles2):
+        '''
+        思考题8.4，找到匹配的水壶，并返回匹配索引集合
+
+        Example
+        ===
+        ```python
+        >>> list(find_matching_kettle([1,2,3,4,5], [5,4,3,2,1]))
+        [(0, 4), (1, 3), (2, 2), (3, 1), (4, 0)]
+        ```
+        '''      
+        return list(self.__find_matching_kettle(kettles1, kettles2))
 
 ```
 
