@@ -4,9 +4,9 @@
 # python3 src/chapter23/chapter23note.py
 '''
 
-Class Chapter23_1
+Class Chapter24_1
 
-Class Chapter23_2
+Class Chapter24_2
 
 
 '''

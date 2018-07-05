@@ -50,6 +50,8 @@
 
 * [Chapter23 最小生成树](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter23)
 
+* [Chapter24 单源最短路径](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src/chapter24)
+
 ## Requirement:
 
 * *Python3+ Sdk*

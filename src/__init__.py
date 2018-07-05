@@ -66,3 +66,5 @@ from .chapter21.chapter21note import printchapter21note
 from .chapter22.chapter22note import printchapter22note
 
 from .chapter23.chapter23note import printchapter23note
+
+from .chapter24.chapter24note import printchapter24note
