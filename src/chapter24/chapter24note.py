@@ -38,7 +38,15 @@ class Chapter24_1:
         Chapter24_1().note()
         ```
         '''
-        print('chapter24.1 note as follow')      
+        print('chapter24.1 note as follow')  
+        print('第24章 单源最短路径')
+        print('一种求最短路径的方式就是枚举出所有从芝加哥到波士顿的路线,',
+            '并对每条路线的长度求和,然后选择最短的一条')
+        print('在最短路径问题中,给出的是一个带权有向图G=(V,E),加权函数w:E->R为从边到实型权值的映射')
+        print('路径p=<v0,v1,...,vk>的权是指其组成边的所有权值之和')    
+        print('边的权值还可以被解释为其他的某种度量标准,而不一定是距离')
+        print('它常常被用来表示时间,费用,罚款,损失或者任何其他沿一',
+            '条路径线性积累的试图将其最小化的某个量')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
