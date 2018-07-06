@@ -47,6 +47,92 @@ class Chapter24_1:
         print('边的权值还可以被解释为其他的某种度量标准,而不一定是距离')
         print('它常常被用来表示时间,费用,罚款,损失或者任何其他沿一',
             '条路径线性积累的试图将其最小化的某个量')
+        # !广度优先搜索算法就是一种在无权图上执行的最短路径算法
+        print('广度优先搜索算法就是一种在无权图上执行的最短路径算法,',
+            '即在图的边都具有单位权值的图上的一种算法')
+        print('单源最短路径的变体')
+        print(' 已知图G=(V,E),希望找出从某给定源顶点s∈V到每个顶点v∈V的最短路径。')
+        print('很多其他问题都可用单源问题的算法来解决,其中包括下列变体')
+        print(' 1.单终点最短路径问题:找出从每个顶点v到指定终点t的最短路径')
+        print(' 2.单对顶点最短路径问题:对于某给定顶点u和v,找出从u和v的一条最短路径')
+        print('   如果解决了源点为u的单源问题,则这一问题也就获得解决')
+        print(' 3.对于每对顶点u和v,找出从u到v的最短路径')
+        print('   虽然将每个顶点作为源点,运行一次单源算法就可以解决这一问题,但通常可以更快地解决这一问题')
+        print('最短路径的最优子结构')
+        print('  最短路径算法通常依赖于一种性质,也就是一条两顶点间的最短路',
+            '径包含路径上其他的最短路径,这种最优子结构性质是动态规划和贪心算法是否适用的一个标记')
+        print('Dijkstra算法是一个贪心算法,而找出所有顶点对之间的最短路径的',
+            'Floyd-Warshall算法是一个动态规划算法')
+        print('引理24.1(最短路径的子路径是最短路径)对于一给定的带权有向图G=(V,E),所定义的权函数为w',
+            'E->R。设p=<v1,v2,..,vk>是从v1到vk的最短路径')
+        print('负权值边')
+        print(' 在单源最短路径问题的某些实例中,可能存在着权值为负值的边.',
+            '如果图G=(V,E)不包含从源s可达的负权回路,则对所有v∈V,最短路径的权的定义d(u,v)依然正确,',
+            '即使它是一个负值也是如此.但是,如果存在一条从s可达的负权回路,那么最短路径的权的定义就不能成立')
+        print('从s到该回路上的顶点之间就不存在最短路径,因为我们总是可以顺着已找出的\"最短\"路径,',
+            '再穿过负权值回路而获得一条权值更小的路径.',
+            '因此,如果从s到v的某路径中存在一条负权回路,就定义d(u,v)=-inf')
+        print('一些最短路径算法,如Dijstra算法,假定输入图中的所有边的权值都是非负的,如公路地图的例子',
+            '另一些算法,如Bellman-Ford算法,允许输入图中存在负权边,只要不存在从源点可达的负权回路')
+        print('特别地,如果存在负权回路,算法还可以检测并报告这种回路的存在')
+        print('一条最短路径能包含回路嘛?不能包含负权回路.也不会包含正权回路,因为从路径上移去回路后,',
+            '可以产生一个具有相同源点和终点、权值更小的路径')
+        print('最短路径的表示')
+        print('不仅希望算出最短路径的权,而且也希望得到最短路径设置pi属性,',
+            '以便使源于顶点v的前辈链表沿着从s到v的最短路径的相反方向排列')
+        print('对于一给定的v.pi=None的顶点v,',
+            '可以运用PRINT-PATH(G,s,v)输出从s到v的一条最短路径')
+        print('不过,在最短路径算法的执行过程中,无需用pi的值来指明最短路径。',
+            '正如广度优先搜索一样,是由pi值导出的前趋子图Gpi=(Vpi,Epi).这里,',
+            '定义顶点集Vpi为G中所有具有非空前趋的顶点集合,再加上源点s')
+        # !最短路径并不一定是唯一的,最短路径树亦是如此
+        print('最短路径并不一定是唯一的,最短路径树亦是如此')
+        print('松弛技术')
+        print(' 本章的算法用到了松弛(relaxation)技术.',
+            '对每个顶点v∈V,都设置一个属性d[v],用来描述从源点s到v',
+            '的最短路径上权值的上界,称为最短路径估计')
+        print('在松弛一条边(u,v)的过程中,要测试是否可以通过u,对找到的到v的最短路径进行改进',
+            '如果可以改进的话,则更新d[v]和pi[v].一次松弛操作可以减小最短路径估计的值d[v]',
+            '并更新v的前趋pi[v]')
+        print('本章每个算法都会调用INITIALIZE-SINGLE-SOURCE,然后重复对边进行松弛的过程',
+            '另外,松弛是改变最短路径和前趋的唯一方式')
+        print('本章中的算法之间的区别在于对每条边进行松弛操作的次数',
+            '以及对边执行松弛操作的次序有所不同')
+        print('在Dijkstra算法以及关于有向无回路图的最短路径算法中,对每条边执行一次松弛操作')
+        print('在Bellman-Ford算法中,对每条边要执行多次松弛操作')
+        print('最短路径以及松弛的性质(隐含地假设了图是调用INITIALIZE-SINGLE-SOURCE(G,s)进行初始化的,'
+            '且最短路径估计和前趋子图唯一的变化途径就是一系列的松弛步骤')
+        print('1.三角不等式(引理24.10)')
+        print('  对任意边(u,v)∈E,有d(s,v)<=d(s,u)+w(u,v)')
+        print('2.上界性质(引理24.11)')
+        print('  对任意顶点v∈V,有d[v]>=d(s,v),而且一旦d[v]达到d(s,v)值就不再改变')
+        print('3.无路径性质(推论24.12)')
+        print('  如果从s到v不存在路径,则总是有d[v]=d(s,v)=inf')
+        print('4.收敛性质(引理24.14)')
+        print('  如果s-u->v是图G某u,v∈V的最短路径,而且在松弛边(u,v)',
+            '之前的任何时间d[u]=d(s,u),则在操作之后总有d[v]=d(s,v)')
+        print('路径松弛性质(引理24.15)')
+        print('这个性质的保持并不受其他松弛操作的影响,',
+            '即使它们与p的边上的松弛操作混合在一起也是一样的')
+        print('前趋子图性质(引理24.17)')
+        print('  一旦对于所有v∈V,d[v]=d(s,v),前趋子图就是一个以s为根的最短路径树')
+        print('Bellman-Ford算法,该算法用来解决一般(边的权值可以为负)的单源最短路径问题')
+        print('Bellman-Ford算法非常简单,可以检测是否有从源点可达的负权回路')
+        print('在一个有向无环图中,在线性时间内计算出单源最短路径的算法')
+        print('Dijkstra算法,它的运行时间比Bellman-Ford算法低,但要求所有边的权值为非负')
+        print('使用Bellman-Ford算法来解决\"动态规划\"的一个特例')
+        print('24.5节证明了上面所陈述的最短路径和松弛的性质')
+        print('所有算法都假设有向图G用邻接表的形式存储,而且每条边上还存储了它的权值')
+        print('当遍历每一个邻接表时,可以对每条边在O(1)时间内确定其权值')
+        print('24.1 Bellman-Ford算法')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
@@ -67,6 +153,66 @@ class Chapter24_2:
         ```
         '''
         print('chapter24.2 note as follow')
+        # python src/chapter24/chapter24note.py
+        # python3 src/chapter24/chapter24note.py
+
+class Chapter24_3:
+    '''
+    chpater24.3 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter24.3 note
+
+        Example
+        ====
+        ```python
+        Chapter24_3().note()
+        ```
+        '''
+        print('chapter24.3 note as follow')
+        # python src/chapter24/chapter24note.py
+        # python3 src/chapter24/chapter24note.py
+
+class Chapter24_4:
+    '''
+    chpater24.4 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter24.4 note
+
+        Example
+        ====
+        ```python
+        Chapter24_4().note()
+        ```
+        '''
+        print('chapter24.4 note as follow')
+        # python src/chapter24/chapter24note.py
+        # python3 src/chapter24/chapter24note.py
+
+class Chapter24_5:
+    '''
+    chpater24.5 note and function
+    '''
+    def note(self):
+        '''
+        Summary
+        ====
+        Print chapter24.5 note
+
+        Example
+        ====
+        ```python
+        Chapter24_5().note()
+        ```
+        '''
+        print('chapter24.5 note as follow')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
