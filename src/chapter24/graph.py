@@ -218,6 +218,14 @@ class Graph:
             if self.veterxs[i].key == key:
                 return self.veterxs[i]
 
+    def changevertexval(self, key, val):
+        '''
+        改变
+        '''
+        for v in self.veterxs:
+            if v.key == key:
+                v.d = val
+        
     def getvertexadj(self, v : Vertex):
         '''
         获取图中顶点`v`的邻接顶点序列

@@ -125,9 +125,26 @@ class Chapter24_1:
         print('所有算法都假设有向图G用邻接表的形式存储,而且每条边上还存储了它的权值')
         print('当遍历每一个邻接表时,可以对每条边在O(1)时间内确定其权值')
         print('24.1 Bellman-Ford算法')
-        print('')
-        print('')
-        print('')
+        print('Bellmax-Ford算法能在一般的情况下(存在负边权的情况)下,解决单源最短路径问题',
+            '对于给定的带权有向图G=(V,E),其源点为s,加权函数为w')
+        print('Bellman-Ford算法后可以返回一个布尔值,表明图中是否存在着一个从源点可达的权为负的回路')
+        print('若存在这样的回路的话,算法说明该问题无解;若不存在这样的回路,算法将产生最短路径及其权值')
+        print('算法运用松弛技术,对每个顶点v∈V,逐步减小源s到v的最短路径的权的估计值d[v]直至其达到的实际最短路径的权d(s,v)')
+        print('算法返回布尔值TRUE,当且仅当图中不包含从源点可达的负权回路')
+        print('引理24.2 设G=(V,E)为带权有向图,其源点为s,权函数为w:E->R,',
+            '并且假定G中不包含从s点可达的负权回路')
+        print('推论24.3 设G=(V,E)为带权有向图,源顶点为s,加权函数为w,E->R.',
+            '对每一顶点v∈V,从s到v存在一条通路','当且仅当对G运行Bellman-Ford算法,算法终止时,有d[v]<∞')
+        print('定理24.4(Bellman-Ford算法的正确性),设G=(V,E)为带权有向图.源点为s,权函数为w：E->R',
+            '对该图运行Bellman-Ford算法.若G不包含s可达的负权回路,则算法返回TRUE',
+            '对所有顶点v∈V,有d[v]=d(s,v)成立.前趋子图Gpi是以s为根的最短路径树',
+            '如果G包含从s可达的负权回路,则算法返回FALSE')
+        print('练习24.1-1 以顶点z作为源点')
+        print('练习24.1-2 ')
+        print('练习24.1-3 ')
+        print('练习24.1-4 ')
+        print('练习24.1-5 ')
+        print('练习24.1-6 ')
         print('')
         print('')
         print('')
@@ -153,6 +170,7 @@ class Chapter24_2:
         ```
         '''
         print('chapter24.2 note as follow')
+        print('24.2 有向无回路图中的单源最短路径')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
