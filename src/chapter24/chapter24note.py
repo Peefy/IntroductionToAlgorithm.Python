@@ -190,13 +190,12 @@ class Chapter24_2:
             '如果边(u,v)进入顶点v而边(v,x)离开顶点v,则工作(u,v)必须在工作(v,x)之前完成')
         print('此dag的一个路径表示必须按一定顺序执行工作序列.关键路径是通过dag的一条最长路径,',
             '它对应于执行一个有序的工作序列的最长时间')
-        print('故那劲啊路径的权值是完成所有工作所需时间的下限')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('关键路径的权值是完成所有工作所需时间的下限')
+        print('练习24.2-1 如下')
+        _sp.test_dag_shortest_path()
+        print('练习24.2-2 略')
+        print('练习24.2-3 略')
+        print('练习24.2-4 给出一个高效算法统计有向无回路图中的全部路径数')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
@@ -217,6 +216,7 @@ class Chapter24_3:
         ```
         '''
         print('chapter24.3 note as follow')
+        print('Dijstra算法')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
