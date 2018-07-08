@@ -150,9 +150,9 @@ class Graph:
         '''
         if type(key) is Vertex:
             return key
-        for i in range(len(g.veterxs)):
-            if g.veterxs[i].key == key:
-                return g.veterxs[i]
+        for i in range(len(self.veterxs)):
+            if self.veterxs[i].key == key:
+                return self.veterxs[i]
 
     def getvertexadj(self, v : Vertex):
         '''
@@ -239,7 +239,6 @@ class Graph:
             vindex = self.veterxs.index(v)
         return (u, v)
 
-    @property
     def getadj(self):
         '''
         获取邻接表
@@ -287,7 +286,6 @@ class Graph:
         self.adj = adj
         return adj
 
-    @property
     def getmatrix(self):
         '''
         获取邻接矩阵,并且其是一个对称矩阵

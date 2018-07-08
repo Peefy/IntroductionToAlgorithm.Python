@@ -74,7 +74,7 @@ class Edge:
         self.vertex1 = vertex1
         self.vertex2 = vertex2
         self.distance = distance
-        self.weight = 1
+        self.weight = distance
 
     def __str__(self):
         return str((self.vertex1, self.vertex2, self.dir))
@@ -135,26 +135,9 @@ class Graph:
         self.adj = []
         self.matrix = []
    
-    def addedgewithweight(self, v1, v2, weight, dir=DIRECTION_NONE):
-        '''
-        向图中添加边`edge`
-
-        Args
-        ===
-        `v1` : 边的一个顶点
-
-        `v2` : 边的另一个顶点
-
-        `weight` : 边的权重
-
-        `dir` : 边的方向
-            DIRECTION_NONE : 没有方向
-            DIRECTION_TO : `vertex1` → `vertex2`
-            DIRECTION_FROM : `vertex1` ← `vertex2`
-            DIRECTION_BOTH : `vertex1` ←→ `vertex2`
-        '''
-        egde = Edge(Vertex(v1), Vertex(v2), weight, dir)
-        self.edges.append(egde)
+    def clear(self):
+        self.veterxs = []
+        self.edges = []
 
     def hasdirection(self):
         '''
@@ -170,10 +153,12 @@ class Graph:
         从顶点序列`vertexs`中返回键值为`key`的顶点
         '''
         if type(key) is Vertex:
-            return key
-        for i in range(len(g.veterxs)):
-            if g.veterxs[i].key == key:
-                return g.veterxs[i]
+            for i in range(len(self.veterxs)):
+                if self.veterxs[i].key == key.key:
+                    return self.veterxs[i]
+        for i in range(len(self.veterxs)):
+            if self.veterxs[i].key == key:
+                return self.veterxs[i]
 
     def getvertexadj(self, v : Vertex):
         '''
@@ -213,6 +198,42 @@ class Graph:
             key = v
             v = Vertex(key)
         self.veterxs.append(v)
+
+    def getedge(self, v1: Vertex, v2: Vertex):
+        '''
+        根据两个顶点获取边，若两个点不相邻，返回None
+        '''
+        if type(v1) is not Vertex:
+            v1 = self.veterxs_atkey(v1)
+        if type(v2) is not Vertex:
+            v2 = self.veterxs_atkey(v2)
+        for edge in self.edges:
+            if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key:
+                return edge
+            elif edge.vertex2.key == v1.key and edge.vertex1.key == v2.key:
+                return edge
+        return None
+    
+    def addedgewithweight(self, v1, v2, weight, dir=DIRECTION_NONE):
+        '''
+        向图中添加边`edge`
+
+        Args
+        ===
+        `v1` : 边的一个顶点
+
+        `v2` : 边的另一个顶点
+
+        `weight` : 边的权重
+
+        `dir` : 边的方向
+            DIRECTION_NONE : 没有方向
+            DIRECTION_TO : `vertex1` → `vertex2`
+            DIRECTION_FROM : `vertex1` ← `vertex2`
+            DIRECTION_BOTH : `vertex1` ←→ `vertex2`
+        '''
+        egde = Edge(Vertex(v1), Vertex(v2), weight, dir)
+        self.edges.append(egde)
 
     def addedge(self, v1, v2, dir = DIRECTION_NONE):
         '''

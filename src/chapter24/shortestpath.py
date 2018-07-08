@@ -64,12 +64,35 @@ class _ShortestPath:
             if v.d > u.d + edge.weight:
                 return False
         return True 
+    
+    def dag_shortest_path(self, g : _g.Graph, s : _g.Vertex):
+        '''
+        按顶点的拓扑序列对某加权dag图(有向无回路图)G=(V,E)的边进行松弛后
+        就可以在Θ(V+E)时间内计算出单源最短路径.
+
+        Args
+        ===
+        `g` : 有向无回路图G=(V,E) 
+
+        `s` : 源顶点
+
+        '''
+        sort_list = _g.topological_sort(g)
+        self.initialize_single_source(g, s)
+        for u in sort_list:
+            u = g.veterxs_atkey(u)
+            adj = g.getvertexadj(u)
+            for v in adj:
+                edge = g.getedge(u, v)
+                self.relax(u, v, edge.weight)
 
 __shortest_path_instance = _ShortestPath()
 bellman_ford = __shortest_path_instance.bellman_ford
+dag_shortest_path = __shortest_path_instance.dag_shortest_path
 
 def test_bellman_ford():
     g = _g.Graph()
+    g.clear()
     vertexs = [_g.Vertex('s'), _g.Vertex('t'), _g.Vertex(
         'x'), _g.Vertex('y'), _g.Vertex('z')]
     g.veterxs = vertexs
@@ -86,11 +109,32 @@ def test_bellman_ford():
     print(bellman_ford(g, vertexs[0]))
     del g
 
+def test_dag_shortest_path():
+    g = _g.Graph()
+    g.clear()
+    vertexs = [_g.Vertex('r'), _g.Vertex('s'), _g.Vertex('t'),
+        _g.Vertex('x'), _g.Vertex('y'), _g.Vertex('z')]
+    g.veterxs = vertexs
+    g.addedgewithweight('r', 's', 5, _g.DIRECTION_TO)
+    g.addedgewithweight('s', 't', 2, _g.DIRECTION_TO)
+    g.addedgewithweight('t', 'x', 7, _g.DIRECTION_TO)
+    g.addedgewithweight('x', 'y', -1, _g.DIRECTION_TO)
+    g.addedgewithweight('y', 'z', -2, _g.DIRECTION_TO)
+    g.addedgewithweight('r', 't', 3, _g.DIRECTION_TO)
+    g.addedgewithweight('s', 'x', 6, _g.DIRECTION_TO)
+    g.addedgewithweight('x', 'z', 1, _g.DIRECTION_TO)
+    g.addedgewithweight('t', 'y', 4, _g.DIRECTION_TO)
+    g.addedgewithweight('t', 'z', 2, _g.DIRECTION_TO)
+    g.reset_vertex_para()
+    dag_shortest_path(g, vertexs[0])
+    del g
+
 def test():
     '''
     测试函数
     '''
     test_bellman_ford()
+    test_dag_shortest_path()
 
 if __name__ == '__main__':
     test()

@@ -282,7 +282,7 @@ def test_mst_dijkstra():
     g = buildgraph()
     print('邻接表为')
     g.printadj()
-    print('最小生成树为：')
+    print('邻接矩阵为：')
     print(g.matrix)
     del g
 

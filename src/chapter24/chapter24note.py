@@ -179,6 +179,24 @@ class Chapter24_2:
         '''
         print('chapter24.2 note as follow')
         print('24.2 有向无回路图中的单源最短路径')
+        print('按顶点的拓扑序列对某加权dag图(有向无回路图)G=(V,E)的边进行松弛后',
+              '就可以在Θ(V+E)时间内计算出单源最短路径.在一个dag图中最短路径总是存在的',
+            '因为即使图中有权值为负的边，也不可能存在负权回路')
+        print('定理24.5 如果一个带权有向图G=(V,E)有源点s而且无回路',
+            '则在DAG-SHORTEST-PATHS终止时,对任意顶点v∈V,有d[v]=d(s,v),',
+            '且前趋子图Gpi是最短路径树')
+        print('DAG-SHORTEST-PATHS算法一个有趣的应用是在PERT图分析中确定关键路径',
+            '在PERT图中,边表示要完成的工作,边的权表示完成特定工作所需时间',
+            '如果边(u,v)进入顶点v而边(v,x)离开顶点v,则工作(u,v)必须在工作(v,x)之前完成')
+        print('此dag的一个路径表示必须按一定顺序执行工作序列.关键路径是通过dag的一条最长路径,',
+            '它对应于执行一个有序的工作序列的最长时间')
+        print('故那劲啊路径的权值是完成所有工作所需时间的下限')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
