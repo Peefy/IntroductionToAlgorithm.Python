@@ -31,8 +31,6 @@ class Vertex:
         self.d = _math.inf
         self.pi = None
         self.f = _math.inf
-        self.weightkey = 0
-        self.isvisit = False
 
     def resetpara(self):
         '''
@@ -43,53 +41,9 @@ class Vertex:
         self.pi = None
         self.f = _math.inf
 
-    def __hash__(self):
-        code = self.color.__hash__()
-        code = code * 37 + self.key.__hash__()
-        code = code * 37 + self.pi.__hash__()
-        code = code * 37 + self.d.__hash__()
-        code = code * 37 + self.f.__hash__()
-        return code 
-
     def __str__(self):
         return '[key:{} color:{} d:{} f:{} pi:{}]'.format(self.key, \
             self.color, self.d, self.f, self.pi)
-
-    def __lt__(self, other):
-        if type(other) is Vertex:
-            return self.weightkey < other.weightkey
-        else:
-            return self.weightkey < other
-
-    def __gt__(self, other):
-        if type(other) is Vertex:
-            return self.weightkey > other.weightkey
-        else:
-            return self.weightkey > other
-
-    def __le__(self, other):
-        if type(other) is Vertex:
-            return self.weightkey <= other.weightkey
-        else:
-            return self.weightkey <= other
-
-    def __ge__(self, other):
-        if type(other) is Vertex:
-            return self.weightkey >= other.weightkey
-        else:
-            return self.weightkey >= other
-
-    def __eq__(self, other):
-        if type(other) is Vertex:
-            return self.weightkey == other.weightkey
-        else:
-            return self.weightkey == other
-
-    def __ne__(self, other):
-        if type(other) is Vertex:
-            return self.weightkey != other.weightkey
-        else:
-            return self.weightkey != other
 
 class Edge:
     '''
@@ -97,7 +51,7 @@ class Edge:
     '''
     def __init__(self, vertex1 : Vertex = None, \
             vertex2 : Vertex = None, \
-            weight = 1, \
+            distance = 1, \
             dir = DIRECTION_NONE,
             ):
         '''
@@ -119,17 +73,11 @@ class Edge:
         self.dir = dir
         self.vertex1 = vertex1
         self.vertex2 = vertex2
-        self.weight = weight
+        self.distance = distance
+        self.weight = 1
 
     def __str__(self):
-        return str((self.vertex1.key, self.vertex2.key, self.dir, self.weight))
-
-    def __hash__(self):
-        code = self.dir.__hash__()
-        code = code * 37 + self.vertex1.__hash__()
-        code = code * 37 + self.vertex2.__hash__()
-        code = code * 37 + self.weight.__hash__()
-        return code
+        return str((self.vertex1, self.vertex2, self.dir))
 
     def __lt__(self, other):
         if type(other) is Graph:
@@ -184,132 +132,10 @@ class Graph:
         '''
         self.veterxs = vertexs
         self.edges = edges
+        self.adj = []
+        self.matrix = []
    
-    def clear(self):
-        '''
-        清除所有顶点和边
-        '''
-        self.veterxs = []
-        self.edges = []
-
-    def hasdirection(self):
-        '''
-        图`g`是否是有向图
-        '''
-        dir = False
-        for i in range(len(self.edges)):
-            dir = dir or self.edges[i].dir != DIRECTION_NONE
-        return dir
-
-    def veterxs_atkey(self, key):
-        '''
-        从顶点序列`vertexs`中返回键值为`key`的顶点
-
-        Args
-        ===
-        `key` Vertex | int
-
-        '''
-        if type(key) is Vertex:
-            return key
-        for i in range(len(self.veterxs)):
-            if type(self.veterxs[i]) is not Vertex:
-                self.veterxs[i] = Vertex(self.veterxs[i])
-            if self.veterxs[i].key == key:
-                return self.veterxs[i]
-
-    def changevertexval(self, key, val):
-        '''
-        改变
-        '''
-        for v in self.veterxs:
-            if v.key == key:
-                v.d = val
-        
-    def getvertexadj(self, v : Vertex):
-        '''
-        获取图中顶点`v`的邻接顶点序列
-        '''
-        v = self.veterxs_atkey(v)
-        adj = self.getadj_from_matrix()     
-        if v is None:
-            return None
-        uindex = 0
-        for i in range(len(self.veterxs)):
-            if self.veterxs[i].key == v.key:
-                uindex = i
-                break
-        return adj[uindex]
-
-    def getedge(self, v1 : Vertex, v2 : Vertex):
-        '''
-        根据两个顶点获取边，若两个点不相邻，返回None
-        '''
-        if type(v1) is not Vertex:
-            v1 = self.veterxs_atkey(v1)
-        if type(v2) is not Vertex:
-            v2 = self.veterxs_atkey(v2)
-        for edge in self.edges:
-            if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key:
-                return edge
-            elif edge.vertex2.key == v1.key and edge.vertex1.key == v2.key:
-                return edge
-        return None
-
-    def printadj(self):
-        '''
-        打印邻接表
-        '''
-        for v in self.veterxs:
-            v = self.veterxs_atkey(v)
-        for edge in self.edges:
-            if type(edge) is Edge:
-                pass
-            elif len(edge) == 2:
-                u, v = edge
-                edge = Edge(Vertex(u), Vertex(v))
-            else:
-                u, v, dir = edge
-                edge = Edge(Vertex(u), Vertex(v),dir=dir)
-        for v in self.veterxs:
-            list = self.getvertexadj(v)
-            print(v.key, end='→')
-            for e in list:
-                if type(e) is Vertex:
-                    print(e.key, end=' ')
-                else:
-                    print(e, end=' ')
-            print('')
-        
-    def reset_vertex_para(self):
-        '''
-        复位所有顶点的参数
-        '''
-        for i in range(len(self.veterxs)):
-            self.veterxs[i].resetpara()
-
-    def addvertex(self, v):
-        '''
-        向图中添加结点`v`
-
-        Args
-        ===
-        `v` : Vertex | List<Vertex> | List<string>
-
-        '''
-        if type(v) is list:
-            for node in v:
-                if type(node) is not Vertex:
-                    key = node
-                    node = Vertex(key)
-                    self.veterxs.append(node)
-            return
-        if type(v) is not Vertex:
-            key = v
-            v = Vertex(key)
-        self.veterxs.append(v)
-
-    def addedgewithweight(self, v1, v2, weight, dir = DIRECTION_NONE):
+    def addedgewithweight(self, v1, v2, weight, dir=DIRECTION_NONE):
         '''
         向图中添加边`edge`
 
@@ -329,6 +155,64 @@ class Graph:
         '''
         egde = Edge(Vertex(v1), Vertex(v2), weight, dir)
         self.edges.append(egde)
+
+    def hasdirection(self):
+        '''
+        图`g`是否是有向图
+        '''
+        dir = False
+        for i in range(len(self.edges)):
+            dir = dir or self.edges[i].dir != DIRECTION_NONE
+        return dir
+
+    def veterxs_atkey(self, key):
+        '''
+        从顶点序列`vertexs`中返回键值为`key`的顶点
+        '''
+        if type(key) is Vertex:
+            return key
+        for i in range(len(g.veterxs)):
+            if g.veterxs[i].key == key:
+                return g.veterxs[i]
+
+    def getvertexadj(self, v : Vertex):
+        '''
+        获取图中顶点`v`的邻接顶点序列
+        '''
+        v = self.veterxs_atkey(v)
+        if v is None:
+            return None
+        self.adj = self.getadj()
+        self.matrix = self.getmatrix()
+        uindex = 0
+        for i in range(len(self.veterxs)):
+            if self.veterxs[i].key == v.key:
+                uindex = i
+                break
+        return self.adj[uindex]
+
+    def reset_vertex_para(self):
+        '''
+        复位所有顶点的参数
+        '''
+        for i in range(len(self.veterxs)):
+            self.veterxs[i].resetpara()
+
+    def addvertex(self, v):
+        '''
+        向图中添加结点`v`
+        '''
+        if type(v) is list:
+            for node in v:
+                if type(node) is not Vertex:
+                    key = node
+                    node = Vertex(key)
+                    self.veterxs.append(node)
+            return
+        if type(v) is not Vertex:
+            key = v
+            v = Vertex(key)
+        self.veterxs.append(v)
 
     def addedge(self, v1, v2, dir = DIRECTION_NONE):
         '''
@@ -356,11 +240,6 @@ class Graph:
         Args
         ===
         `edge` : 边 
-
-        Return
-        ===
-        (u, v) : 
-
         '''
         n = len(self.veterxs)
         if type(edge) is Edge:
@@ -381,26 +260,10 @@ class Graph:
             vindex = self.veterxs.index(v)
         return (u, v)
 
-    def getadj_from_matrix(self):
-        '''
-        从邻接矩阵获得邻接列表
-        '''
-        matrix = self.matrix
-        n = self.vertex_num
-        adj = []
-        for i in range(n):
-            sub = []
-            for j in range(n):
-                if matrix[i][j] == 1:
-                    sub.append(self.veterxs[j])
-            adj.append(sub)
-        return adj
-            
-    @property
-    def adj(self):
+    def getadj(self):
         '''
         获取邻接表
-        '''       
+        '''
         adj = []
         n = len(self.veterxs)
         if n == 0:
@@ -426,33 +289,25 @@ class Graph:
                     vindex = self.veterxs.index(v)
                 if dir == DIRECTION_TO and uindex == i:
                     val = self.veterxs[vindex]
-                    for i in range(len(sub)):
-                        if sub[i].key == val.key:
-                            continue
-                    sub.append(val)
+                    if sub.count(val) == 0:
+                        sub.append(val)
                 elif dir == DIRECTION_FROM and vindex == i:
                     val = self.veterxs[uindex]
-                    for i in range(len(sub)):
-                        if sub[i].key == val.key:
-                            continue
-                    sub.append(val)
+                    if sub.count(val) == 0:
+                        sub.append(val)
                 elif dir == DIRECTION_NONE and uindex == i:
                     val = self.veterxs[vindex]
-                    for i in range(len(sub)):
-                        if sub[i].key == val.key:
-                            continue
-                    sub.append(val)
+                    if sub.count(val) == 0:
+                        sub.append(val)
                 elif dir == DIRECTION_NONE and vindex == i:
                     val = self.veterxs[uindex]
-                    for i in range(len(sub)):
-                        if sub[i].key == val.key:
-                            continue
-                    sub.append(val)               
+                    if sub.count(val) == 0:
+                        sub.append(val)               
             adj.append(sub)
+        self.adj = adj
         return adj
 
-    @property
-    def matrix(self):
+    def getmatrix(self):
         '''
         获取邻接矩阵,并且其是一个对称矩阵
         '''
@@ -484,6 +339,7 @@ class Graph:
             else:
                 mat[uindex, vindex] = 1
                 mat[vindex, uindex] = 1
+        self.matrix = mat
         return mat
 
     def gettranspose(self):
@@ -560,6 +416,7 @@ class Graph:
         确定有向图`G=(V,E)`是否包含一个通用的汇(入度为|V|-1,出度为0的点)
         '''
         n = len(self.veterxs)
+        self.getmatrix()
         m = self.matrix
         for i in range(n):
             if sum(m[i]) == n - 1:
@@ -615,9 +472,9 @@ def bfs(g : Graph, s : Vertex):
     g.edges.append(Edge(v[3], v[0]))
     g.edges.append(Edge(v[4], v[3]))
     print('邻接表为')
-    print(g.adj)
+    print(g.getadj())
     print('邻接矩阵为')
-    print(g.matrix)
+    print(g.getmatrix())
     for i in range(len(v)):
         bfs(g, v[i])
         print('{}到各点的距离为'.format(v[i]))
@@ -627,7 +484,7 @@ def bfs(g : Graph, s : Vertex):
     ```
     '''
     g.reset_vertex_para()
-    adj = g.adj
+    adj = g.getadj()
     # g.changeVEToClass()
     if type(s) is not Vertex:
         key = s
@@ -758,7 +615,7 @@ class _DFS:
         ```python
         ```
         '''
-        self.__adj = g.adj
+        self.__adj = g.getadj()
         self.__n = len(g.veterxs)
         self.__time = 0
         self.__sort_list.clear()
@@ -807,7 +664,7 @@ class _DFS:
             return 0
         count = 0
         g.reset_vertex_para()
-        adj = g.adj
+        adj = g.getadj()
         n = len(g.veterxs)
         if type(v1) is not Vertex:
             key = v1
@@ -820,7 +677,7 @@ class _DFS:
                 if g.veterxs[i].key == key:
                     v2 = g.veterxs[i]
         self.__count = 0
-        self.__adj = g.adj
+        self.__adj = g.getadj()
         self.__n = len(g.veterxs)
         self.__time = 0
         self.search_path(g, v1, v2)
@@ -919,9 +776,9 @@ def undirected_graph_test():
     g.edges = [('a', 'b'), ('a', 'c'), ('b', 'd'),
                ('b', 'e'), ('c', 'f'), ('c', 'g')]
     print('邻接表为')
-    g.printadj()
+    print(g.getadj())
     print('邻接矩阵为')
-    print(g.matrix)
+    print(g.getmatrix())
 
 def directed_graph_test():
     '''
@@ -934,9 +791,9 @@ def directed_graph_test():
                ('3', '6', '→'), ('3', '5', '→'),
                ('5', '4', '→'), ('6', '6', '→')]
     print('邻接表为')
-    print(g.adj)
+    print(g.getadj())
     print('邻接矩阵为')
-    print(g.matrix)
+    print(g.getmatrix())
     B = g.buildBMatrix()
     print('关联矩阵为')
     print(B)
@@ -958,9 +815,9 @@ def test_bfs():
     g.edges.append(Edge(v[3], v[0]))
     g.edges.append(Edge(v[4], v[3]))
     print('邻接表为')
-    print(g.adj)
+    print(g.getadj())
     print('邻接矩阵为')
-    print(g.matrix)
+    print(g.getmatrix())
     for i in range(len(v)):
         bfs(g, v[i])
         print('{}到各点的距离为'.format(v[i]))
@@ -984,9 +841,9 @@ def test_bfs():
     gwithdir.edges.append(Edge(vwithdir[0], vwithdir[2], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[2], vwithdir[4], 1, DIRECTION_TO))
     print('邻接表为')
-    print(gwithdir.adj)
+    print(gwithdir.getadj())
     print('邻接矩阵为')
-    print(gwithdir.matrix)
+    print(gwithdir.getmatrix())
     for i in range(len(vwithdir)):
         bfs(gwithdir, vwithdir[i])
         print('{}到各点的距离为'.format(vwithdir[i]))
@@ -1014,9 +871,9 @@ def test_dfs():
     gwithdir.edges.append(Edge(vwithdir[3], vwithdir[0], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[4], vwithdir[3], 1, DIRECTION_FROM))
     print('邻接表为')
-    print(gwithdir.adj)
+    print(gwithdir.getadj())
     print('邻接矩阵为')
-    print(gwithdir.matrix)
+    print(gwithdir.getmatrix())
     dfs(gwithdir)
     print('')
     del gwithdir
@@ -1027,10 +884,7 @@ def _print_inner_conllection(collection : list, end='\n'):
     '''
     print('[',end=end)
     for i in range(len(collection)):
-        if type(collection[i]) is list: 
-            _print_inner_conllection(collection[i], end)
-        else:
-            print(str(collection[i]), end=end)
+        print(str(collection[i]), end=end)
     print(']')
 
 def test_topological_sort():
@@ -1049,9 +903,9 @@ def test_topological_sort():
     gwithdir.edges.append(Edge(vwithdir[0], vwithdir[2], 1, DIRECTION_TO))
     gwithdir.edges.append(Edge(vwithdir[2], vwithdir[4], 1, DIRECTION_TO))
     print('邻接表为')
-    print(gwithdir.adj)
+    print(gwithdir.getadj())
     print('邻接矩阵为')
-    print(gwithdir.matrix)
+    print(gwithdir.getmatrix())
     sort_list = topological_sort(gwithdir)
     _print_inner_conllection(sort_list)
     print('')
@@ -1101,9 +955,6 @@ def test_scc():
     scc(g)
 
 def test():
-    '''
-    测试函数
-    '''
     undirected_graph_test()
     directed_graph_test()
     test_bfs()

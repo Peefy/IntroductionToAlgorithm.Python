@@ -70,7 +70,6 @@ bellman_ford = __shortest_path_instance.bellman_ford
 
 def test_bellman_ford():
     g = _g.Graph()
-    g.clear()
     vertexs = [_g.Vertex('s'), _g.Vertex('t'), _g.Vertex(
         'x'), _g.Vertex('y'), _g.Vertex('z')]
     g.veterxs = vertexs

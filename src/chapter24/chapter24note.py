@@ -22,6 +22,11 @@ import numpy as np
 from numpy import arange as _arange
 from numpy import array as _array
 
+if __name__ == '__main__':
+    import shortestpath as _sp
+else:
+    from . import shortestpath as _sp
+
 class Chapter24_1:
     '''
     chpater24.1 note and function
@@ -139,17 +144,20 @@ class Chapter24_1:
             '对该图运行Bellman-Ford算法.若G不包含s可达的负权回路,则算法返回TRUE',
             '对所有顶点v∈V,有d[v]=d(s,v)成立.前趋子图Gpi是以s为根的最短路径树',
             '如果G包含从s可达的负权回路,则算法返回FALSE')
-        print('练习24.1-1 以顶点z作为源点')
-        print('练习24.1-2 ')
-        print('练习24.1-3 ')
-        print('练习24.1-4 ')
-        print('练习24.1-5 ')
-        print('练习24.1-6 ')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('练习24.1-1 以顶点z作为源点,对图24-4所给出的有向图运行Bellman-Ford算法',
+            '每趟操作中,按照图中的相同顺序对边进行松弛,并表示出每趟过后d与pi的值',
+            '现在,将边(z,x)的权值变为4,再以s为源点运行此算法')
+        _sp.test_bellman_ford()
+        print('练习24.1-2 证明推论24.3')
+        print('练习24.1-3 对于给定的无负权回路的带权有向图G=(V,E),设在所有u,v∈V的顶点对中,',
+            'm为所有从u到为v的最短路径上边数最小值中的最大值(这里,最短路径是根据权值来说的,而不是边的数目)',
+            '可以对Bellman-Ford算法做简单的修改,则可在m+1趟后终止')
+        print('练习24.1-4 对Bellman-Ford算法进行比较,对任意顶点v,',
+            '当从源点到v的某些路径上存在一个负权回路,则置d[v]=-∞')
+        print('练习24.1-5 设G=(V,E)为一带权有向图,其权函数w:E->R。请给出一个O(VE)时间的算法',
+            '对每个顶点v∈V,找出d(v)=min{d(u,v)}')
+        print('练习24.1-6 假定一加权有向图G=(V,E)包含一负权回路.',
+            '请给出一个能够列出此回路上的顶点的高效算法')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
