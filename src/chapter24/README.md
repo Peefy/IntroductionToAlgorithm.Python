@@ -156,4 +156,4 @@ else:
 
 ```
 
-[Github Code](https://github.com/Peefy/CLRS_dugu_code-master/blob/master/src/chapter24)
+[Github Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/blob/master/src/chapter24)

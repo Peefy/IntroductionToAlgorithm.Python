@@ -1,10 +1,10 @@
-# CLRS_dugu_code-master
+# IntroductionToAlgorithm.Python
 
-🐎 *CLRS* book study of Peefy using Python and VS Code. 
+🐎 *Introduction To Algorithm* book study of Peefy using Python and VS Code. 
 
 ## [Blog](https://peefy.github.io/blog/tags/#python)
 
-## [Source Code](https://github.com/Peefy/CLRS_dugu_code-master/tree/master/src)
+## [Source Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src)
 
 ## Requirement
 
@@ -19,11 +19,11 @@
 
 ### Step 1
 
-> git clone https://github.com/Peefy/CLRS_dugu_code-master
+> git clone https://github.com/Peefy/IntroductionToAlgorithm.Python
 
 ### Step 2
 
-> cd CLRS_dugu_code-master
+> cd IntroductionToAlgorithm.Python
 
 ### Step 3
 

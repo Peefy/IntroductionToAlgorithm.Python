@@ -1,5 +1,5 @@
 '''
-This packet includes CLRS notes of each chapter
+This packet includes IntroductionToAlgorithm.Python notes of each chapter
 '''
 
 LAST_CHAPTER = 22
