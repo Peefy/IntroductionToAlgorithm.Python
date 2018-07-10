@@ -216,7 +216,19 @@ class Chapter24_3:
         ```
         '''
         print('chapter24.3 note as follow')
-        print('Dijstra算法')
+        print('Dijkstra算法')
+        print('Dijkstra算法解决了有向图G=(V,E)上带权的单源最短路径问题,但要求所有边的权值非负',
+            ',假定对每条边(u,v)∈E,有w(u,v)>=0')
+        print('一个实现的很好的Dijkstra算法比Bellman-Ford算法的运行时间要低')
+        print('Dijkstra算法中设置了一顶点集合S,从源点s到集合中的顶点的最终最短路径的权值均确定')
+        print('算法反复选择具有最短路径估计的顶点u∈V-S,并将u加入到S中,对u的所有出边进行松弛')
+        print('在下面的算法实现中,用到了顶点的最小优先队列Q,排序关键字为顶点的d值')
+        # !Dijkstra算法总是在V-S中选择“最轻”或“最近”的顶点插入集合S中,使用了贪心策略
+        print('Dijkstra算法总是在V-S中选择“最轻”或“最近”的顶点插入集合S中,使用了贪心策略')
+        print('定理24.6 Dijkstra算法的正确性 已知一带权有向图G=(V,E),',
+            '其加权函数w的值为非负,源点为s',
+            '对该图运行Dijkstra算法,则在算法终止时,对所有u∈V有d[u]=d(s,u)')
+        print('')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 

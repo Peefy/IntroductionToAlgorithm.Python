@@ -85,6 +85,22 @@ class _ShortestPath:
             for v in adj:
                 edge = g.getedge(u, v)
                 self.relax(u, v, edge.weight)
+            
+    def dijstra(self, g : _g.Graph, s : _g.Vertex):
+        '''
+        单源最短路径Dijstra算法
+        '''
+        self.initialize_single_source(g, s)
+        S = []
+        Q = g.veterxs
+        while len(Q) != 0:
+            Q.sort(reverse=True)
+            u = Q.pop()
+            S += [u]
+            adj = g.getvertexadj(u)
+            for v in adj:
+                edge = g.getedge(u, v)
+                self.relax(u, v, edge.weight)
 
 __shortest_path_instance = _ShortestPath()
 bellman_ford = __shortest_path_instance.bellman_ford
