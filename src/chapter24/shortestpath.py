@@ -98,13 +98,15 @@ class _ShortestPath:
             u = Q.pop()
             S += [u]
             adj = g.getvertexadj(u)
-            for v in adj:
-                edge = g.getedge(u, v)
-                self.relax(u, v, edge.weight)
+            if adj is not None:
+                for v in adj:
+                    edge = g.getedge(u, v)
+                    self.relax(u, v, edge.weight)
 
 __shortest_path_instance = _ShortestPath()
 bellman_ford = __shortest_path_instance.bellman_ford
 dag_shortest_path = __shortest_path_instance.dag_shortest_path
+dijstra = __shortest_path_instance.dijstra
 
 def test_bellman_ford():
     g = _g.Graph()
@@ -145,12 +147,33 @@ def test_dag_shortest_path():
     dag_shortest_path(g, vertexs[0])
     del g
 
+def test_dijstra():
+    g = _g.Graph()
+    g.clear()
+    vertexs = [_g.Vertex('r'), _g.Vertex('s'), _g.Vertex('t'),
+        _g.Vertex('x'), _g.Vertex('y'), _g.Vertex('z')]
+    g.veterxs = vertexs
+    g.addedgewithweight('r', 's', 5, _g.DIRECTION_TO)
+    g.addedgewithweight('s', 't', 2, _g.DIRECTION_TO)
+    g.addedgewithweight('t', 'x', 7, _g.DIRECTION_TO)
+    g.addedgewithweight('x', 'y', -1, _g.DIRECTION_TO)
+    g.addedgewithweight('y', 'z', -2, _g.DIRECTION_TO)
+    g.addedgewithweight('r', 't', 3, _g.DIRECTION_TO)
+    g.addedgewithweight('s', 'x', 6, _g.DIRECTION_TO)
+    g.addedgewithweight('x', 'z', 1, _g.DIRECTION_TO)
+    g.addedgewithweight('t', 'y', 4, _g.DIRECTION_TO)
+    g.addedgewithweight('t', 'z', 2, _g.DIRECTION_TO)
+    g.reset_vertex_para()
+    dijstra(g, vertexs[0])
+    del g
+
 def test():
     '''
     测试函数
     '''
     test_bellman_ford()
     test_dag_shortest_path()
+    test_dijstra()
 
 if __name__ == '__main__':
     test()

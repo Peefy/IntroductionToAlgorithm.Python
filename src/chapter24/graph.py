@@ -45,6 +45,54 @@ class Vertex:
         return '[key:{} color:{} d:{} f:{} pi:{}]'.format(self.key, \
             self.color, self.d, self.f, self.pi)
 
+    def __hash__(self):
+        code = self.color.__hash__()
+        code = code * 37 + self.key.__hash__()
+        code = code * 37 + self.pi.__hash__()
+        code = code * 37 + self.d.__hash__()
+        code = code * 37 + self.f.__hash__()
+        return code 
+
+    def __str__(self):
+        return '[key:{} color:{} d:{} f:{} pi:{}]'.format(self.key, \
+            self.color, self.d, self.f, self.pi)
+
+    def __lt__(self, other):
+        if type(other) is Vertex:
+            return self.d < other.d
+        else:
+            return self.d < other
+
+    def __gt__(self, other):
+        if type(other) is Vertex:
+            return self.d > other.d
+        else:
+            return self.d > other
+
+    def __le__(self, other):
+        if type(other) is Vertex:
+            return self.d <= other.d
+        else:
+            return self.d <= other
+
+    def __ge__(self, other):
+        if type(other) is Vertex:
+            return self.d >= other.d
+        else:
+            return self.d >= other
+
+    def __eq__(self, other):
+        if type(other) is Vertex:
+            return self.d == other.d
+        else:
+            return self.d == other
+
+    def __ne__(self, other):
+        if type(other) is Vertex:
+            return self.d != other.d
+        else:
+            return self.d != other
+
 class Edge:
     '''
     图的边，包含两个顶点

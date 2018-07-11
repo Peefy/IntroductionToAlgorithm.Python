@@ -228,7 +228,29 @@ class Chapter24_3:
         print('定理24.6 Dijkstra算法的正确性 已知一带权有向图G=(V,E),',
             '其加权函数w的值为非负,源点为s',
             '对该图运行Dijkstra算法,则在算法终止时,对所有u∈V有d[u]=d(s,u)')
-        print('')
+        print('推论24.7 已知一加权函数非负且源点为s的带权有向图G=(V,E),若在该图上运行Dijstra算法,',
+            '则在算法终止时,前趋子图Gpi是以s为根的最短路径树')
+        print('Dijkstra算法的运行时间依赖于最小优先队列的具体实现')
+        print(' 利用从1至|V|编好号的顶点，简单地将d[v]存入一个数组的第v项')
+        print(' 每一个INSERT和DECREASE-KEY的操作都是O(1)的时间,而每一个EXTRACT-MIN操作为O(V)时间')
+        print(' 总计的运行时间为O(V^2+E)=O(V^2)')
+        print('特别地,如果是稀疏图的情况,有E=o(V^2/lgV),在这种情况下,',
+            '利用二叉最小堆来实现最小优先队列是很有用的')
+        print(' 总计的运行时间为O((V+E)lgV)')
+        print('从历史的角度看,在Dijstra算法中,DECRESE-KEY的调用比EXTRACT-MIN的调用一般要多的多')
+        print('所以任何能够在不增加EXTRACT-MIN操作的平摊时间的同时')
+        print('从渐进意义上来说,都能获得比二叉堆更快的实现(比如斐波那契堆)')
+        print('Dijkstra算法和广度优先搜索算法以及计算最小生成树的Prim算法都有类似之处')
+        print('和广度优先算法的相似性在于,前者的集合S相当于后者的黑色顶点集合')
+        print('练习24.3-1 ')
+        _sp.test_dijstra()
+        print('练习24.3-2 给出一含有负权边的有向图的简单实例,说明Dijkstra算法对其会产生错误的结果')
+        print('练习24.3-3 ')
+        print('练习24.3-4 ')
+        print('练习24.3-5 ')
+        print('练习24.3-6 ')
+        print('练习24.3-7 ')
+        print('练习24.3-8 ')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
