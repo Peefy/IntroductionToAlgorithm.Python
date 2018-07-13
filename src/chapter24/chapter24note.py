@@ -23,8 +23,10 @@ from numpy import arange as _arange
 from numpy import array as _array
 
 if __name__ == '__main__':
+    import graph as _g
     import shortestpath as _sp
 else:
+    from . import graph as _g
     from . import shortestpath as _sp
 
 class Chapter24_1:
@@ -263,6 +265,15 @@ class Chapter24_4:
     '''
     chpater24.4 note and function
     '''
+    def solve_24_4_1(self):
+        '''
+        求解练习24.4-1
+        '''
+        g = _g.Graph()
+        vertexs = ['0', '1', '2', '3', '4', '5', '6']
+        g.veterxs = vertexs
+        g.addedgewithweight('0', '1')
+    
     def note(self):
         '''
         Summary
@@ -276,6 +287,57 @@ class Chapter24_4:
         ```
         '''
         print('chapter24.4 note as follow')
+        print('24.4 差分约束与最短路径')
+        print('一般的线性规划问题：要对一组线性不等式定义的线性函数进行优化')
+        print('简化为寻找单源最短路径的线性规划的一种特殊情形')
+        print('由此引出的单源最短路径问题可以运用Bellman-Ford算法来解决，进而解决原线性规划问题')
+        print('线性规划')
+        print('  一般的线性规划问题中，给定一个m*n的矩阵A,一个m维向量b和一个n维向量c',
+            '希望找出由n个元素组成的向量x,在由Ax<=b所给出的m个约束条件下,使目标函数最大')
+        print('单纯形法')
+        print('  并不总是能在输入规模的多项式时间内运行；',
+            '但是还有其他一些线性规划算法是可以以多项式时间运行的')
+        print('有时并不关心目标函数，仅仅是希望找出一个可行解,',
+            '即一个满足Ax<=b的向量x,或是确定不存在的可行解')
+        print('差分约束系统')
+        print('  在一个差分约束系统中，线性规划矩阵A的每一行包含一个1和一个-1',
+            'A的所有其他元素都为0.因此，由Ax<=b给出的约束条件是m个差分约束集合')
+        print('引理24.8 设x=(x1,x2,...,xn)是一个差分约束系统Ax<=b的一个解,d为任意常数',
+            '则x+d=(x1+d,x2+d,..,xn+d)也是该系统Ax<=b的解')
+        print('  差分约束系统出现在很多不同的应用领域中')
+        print('约束图')
+        print('  用图形理论观点来解释差分约束系统是很有益的。',
+            '在一理想的差分约束系统Ax<=b,m*n的线性规划矩阵A可被看作是n顶点,m条边的图的关联矩阵的转置')
+        print('  对于i=1,2,...,n图中每一个顶点vi对应着n个未知量的一个xi.',
+            '图中的每个有向边对应着关于两个未知量的m个不等式的其中一个')
+        print('更形式地,给定一个差分约束系统Ax<=b，相应的约束图是一个带权有向图G=(V,E),',
+            '其中V={v0,v1,...,vn}')
+        print('定理24.9 给定一差分系统Ax<=b，设G=(V,E)为其相应的约束图',
+            '如果G不包含负权回路，那么x=(d(v0,v1),d(v0,v2),d(v0,v3),...,d(v0,vn))')
+        print('是此系统的一可行解。如果G包含负权回路,那么此系统不存在可行解')
+        print('差分约束问题的求解')
+        print('  由定理24.9知可以采用Bellman-Ford算法对差分约束系统求解')
+        print('  在约束图中，从源点v0到其他所有其他顶点均存在边，因此约束图中任何负权回路均从v0可达',
+            '如果Bellman-Ford算法返回TRUE，则最短路径给出了此系统的一个可行解',
+            '如果Bellman-Ford算法返回FALSE，则差分约束系统无可行解')
+        print('关于n个未知量的m个约束条件的一个差分约束系统产生出一个具有n+1顶点和n+m条边的图',
+            '因此采用Bell-Ford算法,可以在O((n+1)(n+m)))时间内将系统解决')
+        print('可以对算法进行修改，可以使其运行时间变为O(nm),即使m远小于n')
+        print('练习24.4-1 对下列差分约束系统找出其可行解,或者说明不存在可行解',
+            '由差分约束不等式写出有向带权图，调用Bellman-Ford求解即可',
+            '不等式左边x1-x2表示由结点2指向结点1，不等式右边表示边的权')
+
+        print('练习24.4-2 ')
+        print('练习24.4-3 ')
+        print('练习24.4-4 ')
+        print('练习24.4-5 ')
+        print('练习24.4-6 ')
+        print('练习24.4-7 ')
+        print('练习24.4-8 ')
+        print('练习24.4-9 ')
+        print('练习24.4-10 ')
+        print('练习24.4-11 ')
+        print('练习24.4-12 ')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
