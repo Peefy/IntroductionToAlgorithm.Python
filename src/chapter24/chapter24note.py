@@ -270,10 +270,52 @@ class Chapter24_4:
         求解练习24.4-1
         '''
         g = _g.Graph()
+        g.clear()
         vertexs = ['0', '1', '2', '3', '4', '5', '6']
         g.veterxs = vertexs
-        g.addedgewithweight('0', '1')
+        g.addedgewithweight('0', '1', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('0', '2', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('0', '3', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('0', '4', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('0', '5', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('0', '6', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('1', '2', 1, _g.DIRECTION_FROM)
+        g.addedgewithweight('1', '4', -4, _g.DIRECTION_FROM)
+        g.addedgewithweight('2', '3', 2, _g.DIRECTION_FROM)
+        g.addedgewithweight('2', '5', 7, _g.DIRECTION_FROM)
+        g.addedgewithweight('2', '6', 5, _g.DIRECTION_FROM)
+        g.addedgewithweight('3', '6', 10, _g.DIRECTION_FROM)
+        g.addedgewithweight('4', '2', 2, _g.DIRECTION_FROM)
+        g.addedgewithweight('5', '1', -1, _g.DIRECTION_FROM)
+        g.addedgewithweight('5', '4', 3, _g.DIRECTION_FROM)
+        g.addedgewithweight('6', '3', -8, _g.DIRECTION_FROM)
+        print(_sp.bellman_ford(g, vertexs[0]))
+        del g
     
+    def solve_24_4_2(self):
+        '''
+        求解练习24.4-2
+        '''
+        g = _g.Graph()
+        g.clear()
+        vertexs = ['0', '1', '2', '3', '4', '5']
+        g.veterxs = vertexs
+        g.addedgewithweight('0', '1', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('0', '2', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('0', '3', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('0', '4', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('0', '5', 0, _g.DIRECTION_TO)
+        g.addedgewithweight('1', '2', 4, _g.DIRECTION_FROM)
+        g.addedgewithweight('1', '5', 5, _g.DIRECTION_FROM)
+        g.addedgewithweight('2', '4', -6, _g.DIRECTION_FROM)
+        g.addedgewithweight('3', '2', 1, _g.DIRECTION_FROM)
+        g.addedgewithweight('4', '1', 3, _g.DIRECTION_FROM)
+        g.addedgewithweight('4', '3', 5, _g.DIRECTION_FROM)
+        g.addedgewithweight('4', '5', 10, _g.DIRECTION_FROM)
+        g.addedgewithweight('5', '3', -4, _g.DIRECTION_FROM)
+        g.addedgewithweight('5', '4', -8, _g.DIRECTION_FROM)
+        print(_sp.bellman_ford(g, vertexs[0]))
+
     def note(self):
         '''
         Summary
@@ -326,18 +368,24 @@ class Chapter24_4:
         print('练习24.4-1 对下列差分约束系统找出其可行解,或者说明不存在可行解',
             '由差分约束不等式写出有向带权图，调用Bellman-Ford求解即可',
             '不等式左边x1-x2表示由结点2指向结点1，不等式右边表示边的权')
-
-        print('练习24.4-2 ')
-        print('练习24.4-3 ')
-        print('练习24.4-4 ')
-        print('练习24.4-5 ')
-        print('练习24.4-6 ')
-        print('练习24.4-7 ')
-        print('练习24.4-8 ')
-        print('练习24.4-9 ')
-        print('练习24.4-10 ')
-        print('练习24.4-11 ')
-        print('练习24.4-12 ')
+        self.solve_24_4_1()
+        print('练习24.4-2 对下列差分约束系统找出其可行解，或者说明不存在可行解')
+        self.solve_24_4_2()
+        print('练习24.4-3 在约束图中，从新顶点v0出发的最短路径的权是否可以为正数')
+        print('练习24.4-4 试用线性规划方法来表述单对顶点最短路径问题')
+        print('练习24.4-5 试说明如何对Bellman-Ford算法稍作修改，',
+            '使其在解关于n个未知量的m个不等式所定义的差分约束系统时，运行时间为O(mn)')
+        print('练习24.4-6 假定除了差分约束外，还需要处理相等约束',
+            '试说明Bellman-Ford算法如何作适当修改,以解决这个约束系统的变形')
+        print('练习24.4-7 试说明如何不用附加顶点v0而对约束图运行类Bellman-Ford算法,从而求得差分约束系统的解')
+        print('练习24.4-8 设Ax<=b是关于n个未知量的m个约束条件的差分约束系统',
+            '证明对其相应的约束图运行Bellman-Ford算法,可以求得满足Ax<=b,并且对所有的xi,有xi<=0')
+        print('练习24.4-9 证明Bellman-Ford算法在差分约束系统Ax<=b的约束图上运行时',
+            '使(max{xi}-min{xi})取得满足Ax<=b的最小值')
+        print('练习24.4-10 假设线性规划Ax<=b中，矩阵A的每一行对应于差分约束条件,即形如xi<=bk或者-xi<=bk的单变量的约束条件')
+        print('练习24.4-11 对所有b的元素均为实数，且所有未知量xi必须是整数的情形,写出一个有效算法,以求得差分的约束系统Ax<=b的解')
+        print('练习24.4-12 对所有b的元素均为实数且部分(并不一定是全部)未知量xi必须是整数的情形,',
+            '写出一个有效算法,以求得差分的约束系统Ax<=b')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
@@ -358,6 +406,12 @@ class Chapter24_5:
         ```
         '''
         print('chapter24.5 note as follow')
+        print('论证的几种正确性均依赖于三角不等式、上界性质、',
+            '无路径性质、收敛性质、路径松弛性质和前趋子图性质')
+        print('引理24.10(三角不等式) 设G=(V,E)为一带权有向图，其权函数w:E->R,源点为s',
+            '那么对于所有边(u,v)∈E,有d(s,v)<=d(s,u)+w(u,v)')
+        print('对最短路径估计的松弛的效果')
+        print('')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
