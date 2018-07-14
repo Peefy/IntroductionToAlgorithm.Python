@@ -52,6 +52,8 @@
 
 * [Chapter24 单源最短路径](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter24)
 
+* [Chapter25 每对顶点间的最短路径](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter25)
+
 ## Requirement:
 
 * *Python3+ Sdk*
