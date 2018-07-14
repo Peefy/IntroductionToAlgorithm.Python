@@ -1,18 +1,12 @@
 # coding:utf-8
 # usr/bin/python3
-# python src/chapter24/chapter24note.py
-# python3 src/chapter24/chapter24note.py
+# python src/chapter23/chapter23note.py
+# python3 src/chapter23/chapter23note.py
 '''
 
-Class Chapter24_1
+Class Chapter25_1
 
-Class Chapter24_2
-
-Class Chapter24_3
-
-Class Chapter24_4
-
-Class Chapter24_5
+Class Chapter25_2
 
 '''
 from __future__ import absolute_import, division, print_function
@@ -480,14 +474,14 @@ class Chapter24_5:
         print('思考题24-6 双调最短路径')
         print(' 如果一个序列首先单调递增，然后再单调递减，',
             '或者能够通过循环移位来单调递增再单调递减,这样的序列就是双调的')
+        print('')
+        print('')
+        print('')
         # python src/chapter24/chapter24note.py
         # python3 src/chapter24/chapter24note.py
 
 chapter24_1 = Chapter24_1()
 chapter24_2 = Chapter24_2()
-chapter24_3 = Chapter24_3()
-chapter24_4 = Chapter24_4()
-chapter24_5 = Chapter24_5()
 
 def printchapter24note():
     '''
