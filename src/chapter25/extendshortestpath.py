@@ -1,14 +1,9 @@
 
-
-
-## 每对顶点间的最短路径
-
-```python
-
 import graph as _g
 import math as _math
 from copy import deepcopy as _deepcopy
 from numpy import *
+import numpy as np
 
 class _ExtendShortestPath:
     def __init__(self, *args, **kwords):
@@ -32,9 +27,43 @@ class _ExtendShortestPath:
             L[m] = self.extend_shortest_paths(L[m - 1], W)
         return L[n - 2]
 
+    def faster_all_pairs_shortest_paths(self, W):
+        n = shape(W)[0] # rows of W
+        L_last = W
+        L_now = []
+        m = 1
+        while m < n - 1:
+            L_now = self.extend_shortest_paths(L_last, L_last)
+            m = 2 * m
+            L_last = L_now
+        return L_now
+
+    def getpimatrix(self, g, L, W):
+        n = shape(W)[0] # rows of W
+        pi = zeros((n, n), dtype=np.str)
+        index = 0
+        for i in range(n):
+            for j in range(n):
+                pi[i][j] = '∞'
+                if i == j:
+                    pi[i][j] = g.veterxs[i].key
+                else:
+                    if L[i][j] == _math.inf:
+                        pi[i][j] = '∞'
+                        continue
+                    if L[i][j] == W[i][j]:
+                        pi[i][j] = g.veterxs[j].key
+                        continue
+                    for k in range(n):
+                        if k != i and k !=j and L[i][j] == L[i][k] + L[k][j]:
+                            pi[i][j] = g.veterxs[k].key
+        return pi
+
 __esp_instance = _ExtendShortestPath()
 extend_shortest_paths = __esp_instance.extend_shortest_paths
 show_all_pairs_shortest_paths = __esp_instance.show_all_pairs_shortest_paths
+faster_all_pairs_shortest_paths = __esp_instance.faster_all_pairs_shortest_paths
+getpimatrix = __esp_instance.getpimatrix
 
 def test_show_all_pairs_shortest_paths():
     g = _g.Graph()
@@ -54,6 +83,12 @@ def test_show_all_pairs_shortest_paths():
     print(W)
     print('显示所有的最短路径')
     print(show_all_pairs_shortest_paths(W))
+    print('显示所有的最短路径(对数加速)')
+    L = faster_all_pairs_shortest_paths(W)
+    print(L)
+    print('pi矩阵为')
+    pi = getpimatrix(g, L, W)
+    print(pi)
 
 def test():
     test_show_all_pairs_shortest_paths()
@@ -63,8 +98,3 @@ if __name__ == '__main__':
 else:
     pass
 
-
-
-```
-
-[Github Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/blob/master/src/chapter25)

@@ -182,8 +182,13 @@ class Graph:
         self.edges = edges
         self.adj = []
         self.matrix = []
+        self.matrixwithweight = []
+        self.clear()
    
     def clear(self):
+        self.adj = []
+        self.matrix = []
+        self.matrixwithweight = []
         self.veterxs = []
         self.edges = []
 
@@ -376,9 +381,50 @@ class Graph:
         self.adj = adj
         return adj
 
+    def getmatrixwithweight(self):
+        '''
+        获取邻接矩阵,并且其是一个对称矩阵带有权值
+        '''
+        n = len(self.veterxs)
+        if n == 0:
+            return []
+        mat = _np.zeros((n, n))
+        for i in range(n):
+            for j in range(n):
+                if i == j:
+                    mat[i][j] = 0
+                else:
+                    mat[i][j] = _math.inf
+        for edge in self.edges:
+            dir = ' '
+            if type(edge) is Edge:
+                u, v, dir = edge.vertex1, edge.vertex2, edge.dir 
+                for k in range(n):
+                    if self.veterxs[k].key == u.key:
+                        uindex = k
+                    if self.veterxs[k].key == v.key:
+                        vindex = k
+            elif len(edge) == 2:
+                u, v = edge
+                uindex = self.veterxs.index(u)
+                vindex = self.veterxs.index(v)
+            else:
+                u, v, dir = edge
+                uindex = self.veterxs.index(u)
+                vindex = self.veterxs.index(v)                         
+            if dir == DIRECTION_TO:
+                mat[uindex, vindex] = edge.weight
+            elif dir == DIRECTION_FROM:
+                mat[vindex, uindex] = edge.weight
+            else:
+                mat[uindex, vindex] = edge.weight
+                mat[vindex, uindex] = edge.weight
+        self.matrix = mat
+        return mat
+
     def getmatrix(self):
         '''
-        获取邻接矩阵,并且其是一个对称矩阵
+        获取邻接矩阵
         '''
         n = len(self.veterxs)
         if n == 0:
