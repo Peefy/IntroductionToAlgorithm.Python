@@ -256,16 +256,29 @@ class Graph:
         '''
         根据两个顶点获取边，若两个点不相邻，返回None
         '''
-        if type(v1) is not Vertex:
-            v1 = self.veterxs_atkey(v1)
-        if type(v2) is not Vertex:
-            v2 = self.veterxs_atkey(v2)
-        for edge in self.edges:
-            if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key:
-                return edge
-            elif edge.vertex2.key == v1.key and edge.vertex1.key == v2.key:
-                return edge
-        return None
+        isdir = self.hasdirection()
+        if isdir == False:
+            if type(v1) is not Vertex:
+                v1 = self.veterxs_atkey(v1)
+            if type(v2) is not Vertex:
+                v2 = self.veterxs_atkey(v2)
+            for edge in self.edges:
+                if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key:
+                    return edge
+                elif edge.vertex2.key == v1.key and edge.vertex1.key == v2.key:
+                    return edge
+            return None
+        else:
+            if type(v1) is not Vertex:
+                v1 = self.veterxs_atkey(v1)
+            if type(v2) is not Vertex:
+                v2 = self.veterxs_atkey(v2)
+            for edge in self.edges:
+                if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key and edge.dir == DIRECTION_TO:
+                    return edge
+                elif edge.vertex2.key == v1.key and edge.vertex1.key == v2.key and edge.dir == DIRECTION_FROM:
+                    return edge
+            return None
     
     def addedgewithweight(self, v1, v2, weight, dir=DIRECTION_NONE):
         '''
@@ -287,6 +300,17 @@ class Graph:
         '''
         egde = Edge(Vertex(v1), Vertex(v2), weight, dir)
         self.edges.append(egde)
+
+    def addedgewithdir(self, v_from, v_to, weight = 1):
+        '''
+        向图中添加有向边`edge`
+        Args
+        ===
+        `v_from` Vertex | String : 边的起点
+
+        `v_to` Vertex | String : 边的终点
+        '''
+        self.addedgewithweight(v_from, v_to, weight,DIRECTION_TO)
 
     def addedge(self, v1, v2, dir = DIRECTION_NONE):
         '''
@@ -380,6 +404,24 @@ class Graph:
             adj.append(sub)
         self.adj = adj
         return adj
+
+    def getpimatrix(self):
+        '''
+        获取前趋`∏`矩阵
+        '''
+        mat = self.getmatrixwithweight()
+        m, n = _np.shape(mat)
+        pi_mat = _np.zeros_like(mat, dtype = _np.str)
+        for i in range(m):
+            for j in range(n):
+                if i == j:
+                    pi_mat[i][j] = 'None'
+                else:
+                    if mat[i][j] != _math.inf:
+                        pi_mat[i][j] = self.veterxs[i].key
+                    else:
+                        pi_mat[i][j] = 'None'
+        return pi_mat
 
     def getmatrixwithweight(self):
         '''

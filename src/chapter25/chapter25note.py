@@ -153,6 +153,50 @@ class Chapter25_2:
     '''
     chpater25.2 note and function
     '''
+    def solve_25_2_1(self):
+        '''
+        练习25.2-1
+        '''
+        g = _g.Graph()
+        vertexs = ['1', '2', '3', '4']
+        g.addvertex(vertexs)
+        g.addedge('4', '1', _g.DIRECTION_TO)
+        g.addedge('4', '3', _g.DIRECTION_TO)
+        g.addedge('2', '4', _g.DIRECTION_TO)
+        g.addedge('2', '3', _g.DIRECTION_TO)
+        g.addedge('3', '2', _g.DIRECTION_TO)
+        mat = g.getmatrixwithweight()
+        print('带权邻接矩阵')
+        print(mat)
+        D_last = mat
+        for i in range(g.vertex_num):
+            print('第%d次迭代' % i)
+            D = _esp.floyd_warshall_step(D_last, i)
+            print(D)
+            D_last = D
+
+    def solve_25_2_6(self):
+        '''
+        练习25.2-6
+        '''
+        g = _g.Graph()
+        vertexs = ['1', '2', '3', '4', '5']
+        g.addvertex(vertexs)
+        g.addedgewithdir('1', '2', 2)
+        g.addedgewithdir('2', '3', 5)
+        g.addedgewithdir('3', '4', 3)
+        g.addedgewithdir('3', '5', -4)
+        g.addedgewithdir('5', '2', -2)
+        mat = g.getmatrixwithweight()
+        print('带权邻接矩阵')
+        print(mat)
+        pi = g.getpimatrix()
+        D, P = _esp.floyd_warshall(mat, pi)
+        print('路径矩阵')
+        print(D)
+        print('前趋矩阵')
+        print(P)
+
     def note(self):
         '''
         Summary
@@ -167,6 +211,62 @@ class Chapter25_2:
         '''
         print('chapter25.2 note as follow')  
         print('Floyd-Warshall算法')
+        print('采取另一种动态规划方案,解决在一个有向图G=(V,E)上每对顶点间的最短路径问题')
+        print('Floyd-Warshall算法,其运行时间为Θ(V^3),允许存在权值为负的边,假设不存在权值为负的回路')
+        print('最短路径结构')
+        print('  在Floyd-Warshall算法中,利用最短路径结构中的另一个特征',
+            '不同于基于矩阵乘法的每对顶点算法中所用到的特征')
+        print('  该算法考虑最短路径上的中间顶点,其中简单路径p=<v1,v2,...,vl>',
+            '上的中间顶点是除v1和vl以外p上的任何一个顶点,任何属于集合{v2,v3,...,vl-1}的顶点')
+        print('  Floyd—Warshall算法主要基于以下观察.设G的顶点为V={1,2,...,n},对某个k考虑顶点的一个子集{1,2,...,k}',
+            '对任意一对顶点i,j∈V，考察从i到j且中间顶点皆属于集合{1,2,...,k}的所有路径')
+        print('  设p是其中一条最小权值路径(路径p是简单的),Floyd-Warshall算法利用了路径p与i到j之间的最短路径',
+            '(所有中间顶点都属于集合{1,2,...,k-1})之间的联系.这一联系依赖于k是否是路径p上的一个中间顶点')
+        print(' 分成两种情况：如果k不是路径p的中间顶点，则p的所有中间顶点皆在集合{1,2,...,k-1}中',
+            '如果k是路径p的中间顶点,那么可将p分解为i~k~j,由引理24.1可知,p1是从i到k的一条最短路径',
+            '且其所有中间顶点均属于集合{1,2,...,k-1}')
+        print('解决每对顶点间最短路径问题的一个递归解')
+        print('  令dij(k)为从顶点i到顶点j、且满足所有中间顶点皆属于集合{1,2,...,k}的一条最短路径的权值',
+            '当k=0,从顶点i到顶点j的路径中,没有编号大于0的中间顶点')
+        print('递归式')
+        print('  dij(k)=wij e.g. k = 0;  dij(k)=min(dij(k-1),dik(k-1),dkj(k-1)) e.g. k >= 1;')
+        print('  因为对于任意路径，所有的中间顶点都在集合{1,2,...,n}内,矩阵D(n)=dij(n)给出了最终解答',
+            '对所有的i,j∈V,有dij(n)=d(i,j)')
+        print('自底向上计算最短路径的权值')
+        _esp.test_floyd_warshall()
+        print('构造一条最短路径')
+        print('  在Floyd—Warshall算法中存在大量不同的方法来建立最短路径')
+        print('  一种途径是计算最短路径权值的矩阵D,然后根据矩阵D构造前趋矩阵pi。这一方法可以在O(n^3)时间内实现',
+            '给定前趋矩阵pi,可以使用过程PRINT-ALL-PAIRS-SHORTEST-PATH来输出一条给定最短路径上的顶点')
+        print('有向图的传递闭包')
+        print('  已知一有向图G=(V,E),顶点集合V={1,2,..,n},希望确定对所有顶点对i,j∈V',
+            '图G中是否都存在一条从i到j的路径.G的传递闭包定义为图G*=(V,E*)',
+            '其中E*={(i,j):图G中存在一条从i到j的路径}')
+        print('  在Θ(n^3)时间内计算出图的传递闭包的一种方法为对E中每条边赋以权值1,然后运行Floyd-Warshall算法',
+            '如果从顶点i到顶点j存在一条路径,则dij<n。否则,有dij=∞')
+        print('  另外还有一种类似的方法,可以在Θ(n^3)时间内计算出图G的传递闭包,在实际中可以节省时空需求',
+            '该方法要求把Floyd-Warshall算法中的min和+算术运算操作,用相应的逻辑运算∨(逻辑OR)和∧(逻辑AND)来代替)',
+            '对i,j,k=1,2,...,n,如果图G中从顶点i到顶点j存在一条通路,且其所有中间顶点均属于集合{1,2,...,k}',
+            '则定义tij(k)为1,否则tij(k)为0.我们把边(i,j)加入E*中当且仅当tij(n)=1',
+            '通过这种方法构造传递闭包G*=(V,E*)')
+        print('tij(k)的递归定义为',
+            'tij(0) = 0 e.g. 如果i!=j和(i,j)∉E',
+            'tij(0) = 1 e.g. 如果i=j或(i,j)∈E',
+            'k>=1, tij(k) = tij(k-1) or (tik(k-1) and tkj(k-1))')
+        _esp.test_transitive_closure()
+        print('练习25.2-1 代码如下')
+        self.solve_25_2_1()
+        print('练习25.2-2 略')
+        print('练习25.2-3 证明对所有的i∈V,前趋子图Gpi,i是以i为根的一颗最短路径树')
+        print('练习25.2-4 Floyd-Washall的空间复杂度可以从Θ(n^3)优化到Θ(n^2)，完成')
+        print('练习25.2-5 正确')
+        print('练习25.2-6 可以利用Floyd-Warshall算法的输出来检测是否存在负的回路',
+            '从最终前趋矩阵看出每个路径都相同，且为负权回路')
+        self.solve_25_2_6()
+        print('练习25.2-7 略')
+        print('练习25.2-8 写出一个运行时间为O(VE)的算法,计算有向图G=(V,E)的传递闭包')
+        print('练习25.2-9 假定一个有向无环图的传递闭包可以在f(|V|,|E|)时间内计算,其中f是|V|和|E|的单调递增函数',
+            '证明：计算一般有向图G=(V,E)的传递闭包G*=(V,E*)的时间为f(|V|,|E|)+O(V+E*)')
         # python src/chapter25/chapter25note.py
         # python3 src/chapter25/chapter25note.py
 
@@ -187,6 +287,15 @@ class Chapter25_3:
         ```
         '''
         print('chapter25.3 note as follow')  
+        print('25.3 稀疏图上的Johnson算法')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter25/chapter25note.py
         # python3 src/chapter25/chapter25note.py
 
