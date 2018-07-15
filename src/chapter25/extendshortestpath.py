@@ -1,8 +1,10 @@
 
-import graph as _g
 import math as _math
 from copy import deepcopy as _deepcopy
 import numpy as _np
+
+import graph as _g
+import shortestpath as _sp
 
 class _ExtendShortestPath:
     '''
@@ -134,6 +136,39 @@ class _ExtendShortestPath:
             t_last = t
         return t
 
+    def johnson(self, g : _g.Graph):
+        '''
+        根据图`g`的邻接表`adj`求最短路径对矩阵的`Johnson`算法
+        '''
+        new_g = _deepcopy(g)
+        s = _g.Vertex('0')
+        # V[G`] = V[G]∪{s}
+        new_g.addvertex(s)
+        # E[G`] = E[G]∪{(s,v),v∈V}
+        # w(s, v) = 0 for all v∈V[G]
+        for v in new_g.veterxs:
+            new_g.addedgewithdir(s, v, 0)
+        exist, weight = _sp.bellman_ford(new_g, s)
+        if exist == False:
+            print('the graph contains a negative-weight cycle')
+        else:
+            n = new_g.vertex_num
+            D = _np.zeros((n, n))
+            for v in new_g.veterxs:
+                v.d = weight
+            for edge in new_g.edges:
+                u, v = new_g.getvertexfromedge(edge)
+                edge.weight = edge.weight + u.d - v.d
+            for u in new_g.veterxs:
+                _sp.dijstra(new_g, u)
+                uindex = new_g.getvertexindex(u)
+                for v in new_g.veterxs:
+                    vindex = new_g.getvertexindex(v)
+                    edge = new_g.getedge(u, v)
+                    if edge is not None:
+                        D[uindex][vindex] = edge.weight + v.d - u.d
+            return D
+        
 __esp_instance = _ExtendShortestPath()
 
 extend_shortest_paths = __esp_instance.extend_shortest_paths
@@ -143,6 +178,7 @@ getpimatrix = __esp_instance.getpimatrix
 floyd_warshall_step = __esp_instance.floyd_warshall_step 
 floyd_warshall = __esp_instance.floyd_warshall
 transitive_closure = __esp_instance.transitive_closure
+johnson = __esp_instance.johnson
 
 def test_show_all_pairs_shortest_paths():
     g = _g.Graph()
@@ -210,10 +246,25 @@ def test_transitive_closure():
     print('传递闭包')
     print(t)
 
+def test_johnson():
+    g = _g.Graph()
+    vertexs = ['1', '2', '3', '4']
+    g.addvertex(vertexs)
+    g.addedge('4', '1', _g.DIRECTION_TO)
+    g.addedge('4', '3', _g.DIRECTION_TO)
+    g.addedge('2', '4', _g.DIRECTION_TO)
+    g.addedge('2', '3', _g.DIRECTION_TO)
+    g.addedge('3', '2', _g.DIRECTION_TO)
+    mat = g.getmatrix()
+    print('邻接矩阵')
+    print(mat)
+    print(johnson(g))
+
 def test():
     test_show_all_pairs_shortest_paths()
     test_floyd_warshall()
     test_transitive_closure()
+    test_johnson()
 
 if __name__ == '__main__':
     test()

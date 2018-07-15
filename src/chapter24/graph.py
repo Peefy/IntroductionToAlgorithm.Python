@@ -182,8 +182,13 @@ class Graph:
         self.edges = edges
         self.adj = []
         self.matrix = []
+        self.matrixwithweight = []
+        self.clear()
    
     def clear(self):
+        self.adj = []
+        self.matrix = []
+        self.matrixwithweight = []
         self.veterxs = []
         self.edges = []
 
@@ -251,16 +256,29 @@ class Graph:
         '''
         根据两个顶点获取边，若两个点不相邻，返回None
         '''
-        if type(v1) is not Vertex:
-            v1 = self.veterxs_atkey(v1)
-        if type(v2) is not Vertex:
-            v2 = self.veterxs_atkey(v2)
-        for edge in self.edges:
-            if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key:
-                return edge
-            elif edge.vertex2.key == v1.key and edge.vertex1.key == v2.key:
-                return edge
-        return None
+        isdir = self.hasdirection()
+        if isdir == False:
+            if type(v1) is not Vertex:
+                v1 = self.veterxs_atkey(v1)
+            if type(v2) is not Vertex:
+                v2 = self.veterxs_atkey(v2)
+            for edge in self.edges:
+                if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key:
+                    return edge
+                elif edge.vertex2.key == v1.key and edge.vertex1.key == v2.key:
+                    return edge
+            return None
+        else:
+            if type(v1) is not Vertex:
+                v1 = self.veterxs_atkey(v1)
+            if type(v2) is not Vertex:
+                v2 = self.veterxs_atkey(v2)
+            for edge in self.edges:
+                if edge.vertex1.key == v1.key and edge.vertex2.key == v2.key and edge.dir == DIRECTION_TO:
+                    return edge
+                elif edge.vertex2.key == v1.key and edge.vertex1.key == v2.key and edge.dir == DIRECTION_FROM:
+                    return edge
+            return None
     
     def addedgewithweight(self, v1, v2, weight, dir=DIRECTION_NONE):
         '''
@@ -280,8 +298,23 @@ class Graph:
             DIRECTION_FROM : `vertex1` ← `vertex2`
             DIRECTION_BOTH : `vertex1` ←→ `vertex2`
         '''
-        egde = Edge(Vertex(v1), Vertex(v2), weight, dir)
+        if type(v1) is not Vertex:
+            v1 = Vertex(v1)
+        if type(v2) is not Vertex:
+            v2 = Vertex(v2)
+        egde = Edge(v1, v2, weight, dir)
         self.edges.append(egde)
+
+    def addedgewithdir(self, v_from, v_to, weight = 1):
+        '''
+        向图中添加有向边`edge`
+        Args
+        ===
+        `v_from` Vertex | String : 边的起点
+
+        `v_to` Vertex | String : 边的终点
+        '''
+        self.addedgewithweight(v_from, v_to, weight,DIRECTION_TO)
 
     def addedge(self, v1, v2, dir = DIRECTION_NONE):
         '''
@@ -299,7 +332,11 @@ class Graph:
             DIRECTION_FROM : `vertex1` ← `vertex2`
             DIRECTION_BOTH : `vertex1` ←→ `vertex2`
         '''
-        egde = Edge(Vertex(v1), Vertex(v2), 1, dir)
+        if type(v1) is not Vertex:
+            v1 = Vertex(v1)
+        if type(v2) is not Vertex:
+            v2 = Vertex(v2)
+        egde = Edge(v1, v2, 1, dir)
         self.edges.append(egde)
 
     def getvertexfromedge(self, edge : Edge):
@@ -309,6 +346,11 @@ class Graph:
         Args
         ===
         `edge` : 边 
+
+        Return
+        ===
+        `(u, v)` : 两个顶点
+
         '''
         n = len(self.veterxs)
         if type(edge) is Edge:
@@ -376,9 +418,68 @@ class Graph:
         self.adj = adj
         return adj
 
+    def getpimatrix(self):
+        '''
+        获取前趋`∏`矩阵
+        '''
+        mat = self.getmatrixwithweight()
+        m, n = _np.shape(mat)
+        pi_mat = _np.zeros_like(mat, dtype = _np.str)
+        for i in range(m):
+            for j in range(n):
+                if i == j:
+                    pi_mat[i][j] = 'None'
+                else:
+                    if mat[i][j] != _math.inf:
+                        pi_mat[i][j] = self.veterxs[i].key
+                    else:
+                        pi_mat[i][j] = 'None'
+        return pi_mat
+
+    def getmatrixwithweight(self):
+        '''
+        获取邻接矩阵,并且其是一个对称矩阵带有权值
+        '''
+        n = len(self.veterxs)
+        if n == 0:
+            return []
+        mat = _np.zeros((n, n))
+        for i in range(n):
+            for j in range(n):
+                if i == j:
+                    mat[i][j] = 0
+                else:
+                    mat[i][j] = _math.inf
+        for edge in self.edges:
+            dir = ' '
+            if type(edge) is Edge:
+                u, v, dir = edge.vertex1, edge.vertex2, edge.dir 
+                for k in range(n):
+                    if self.veterxs[k].key == u.key:
+                        uindex = k
+                    if self.veterxs[k].key == v.key:
+                        vindex = k
+            elif len(edge) == 2:
+                u, v = edge
+                uindex = self.veterxs.index(u)
+                vindex = self.veterxs.index(v)
+            else:
+                u, v, dir = edge
+                uindex = self.veterxs.index(u)
+                vindex = self.veterxs.index(v)                         
+            if dir == DIRECTION_TO:
+                mat[uindex, vindex] = edge.weight
+            elif dir == DIRECTION_FROM:
+                mat[vindex, uindex] = edge.weight
+            else:
+                mat[uindex, vindex] = edge.weight
+                mat[vindex, uindex] = edge.weight
+        self.matrix = mat
+        return mat
+
     def getmatrix(self):
         '''
-        获取邻接矩阵,并且其是一个对称矩阵
+        获取邻接矩阵
         '''
         n = len(self.veterxs)
         if n == 0:

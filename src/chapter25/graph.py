@@ -252,6 +252,16 @@ class Graph:
             v = Vertex(key)
         self.veterxs.append(v)
 
+    def getvertexindex(self, v : Vertex):
+        '''
+        获取图中顶点`v``的索引
+        ''';
+        n = self.vertex_num
+        for i in range(n):
+            if v.key == self.veterxs[i].key:
+                return i
+        return None
+
     def getedge(self, v1: Vertex, v2: Vertex):
         '''
         根据两个顶点获取边，若两个点不相邻，返回None
@@ -298,7 +308,11 @@ class Graph:
             DIRECTION_FROM : `vertex1` ← `vertex2`
             DIRECTION_BOTH : `vertex1` ←→ `vertex2`
         '''
-        egde = Edge(Vertex(v1), Vertex(v2), weight, dir)
+        if type(v1) is not Vertex:
+            v1 = Vertex(v1)
+        if type(v2) is not Vertex:
+            v2 = Vertex(v2)
+        egde = Edge(v1, v2, weight, dir)
         self.edges.append(egde)
 
     def addedgewithdir(self, v_from, v_to, weight = 1):
@@ -328,7 +342,11 @@ class Graph:
             DIRECTION_FROM : `vertex1` ← `vertex2`
             DIRECTION_BOTH : `vertex1` ←→ `vertex2`
         '''
-        egde = Edge(Vertex(v1), Vertex(v2), 1, dir)
+        if type(v1) is not Vertex:
+            v1 = Vertex(v1)
+        if type(v2) is not Vertex:
+            v2 = Vertex(v2)
+        egde = Edge(v1, v2, 1, dir)
         self.edges.append(egde)
 
     def getvertexfromedge(self, edge : Edge):
@@ -338,6 +356,11 @@ class Graph:
         Args
         ===
         `edge` : 边 
+
+        Return
+        ===
+        `(u, v)` : 两个顶点
+
         '''
         n = len(self.veterxs)
         if type(edge) is Edge:
