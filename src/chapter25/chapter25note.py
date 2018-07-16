@@ -341,7 +341,6 @@ class Chapter25_3:
         print('  在图G=(V,E)中,如果对某常数0<ε<=1,有|E|=Θ(V^(1+ε)),则说G是ε稠密的')
         print('  通过在ε稠密图上的最短路径算法中应用d叉最小堆,',
             '能使算法的运行时间相当于基于斐波那契堆的算法的运行时间')
-        print('')
         # python src/chapter25/chapter25note.py
         # python3 src/chapter25/chapter25note.py
 
