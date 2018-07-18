@@ -54,6 +54,8 @@
 
 * [Chapter25 每对顶点间的最短路径](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter25)
 
+* [Chapter26 最大流](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter26)
+
 ## Requirement:
 
 * *Python3+ Sdk*
