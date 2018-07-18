@@ -30,10 +30,8 @@ from numpy import array as _array
 
 if __name__ == '__main__':
     import graph as _g
-    import extendshortestpath as _esp
 else:
     from . import graph as _g
-    from . import extendshortestpath as _esp
 
 class Chapter26_1:
     '''
@@ -52,6 +50,17 @@ class Chapter26_1:
         ```
         '''
         print('chapter26.1 note as follow')  
+        print('第26章 最大流')
+        print('为了求从一点到另一点的最短路径，可以把公路地图模型化为有向图')
+        print('可以把一个有向图理解为一个流网络,并运用它来回答有关物流方面的问题')
+        print('设想某物质从产生它的源点经过一个系统,流向消耗该物质的汇点(sink)这样一种过程')
+        print('源点以固定速度产生该物质,而汇点则用同样的速度消耗该物质.',
+            '从直观上看,系统中任何一点的物质的流为该物质在系统中运行的速度')
+        print('最大流问题是关于流网络的最简单的问题')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter26/chapter26note.py
         # python3 src/chapter26/chapter26note.py
 

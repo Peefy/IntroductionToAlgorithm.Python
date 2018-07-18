@@ -1,4 +1,12 @@
-
+---
+layout: post
+title: "用Python实现的每对顶点间的最短路径算法
+description: "用Python实现的每对顶点间的最短路径算法"
+categories: [Python]
+tags: [python]
+redirect_from:
+  - /2018/07/18
+---
 
 
 ## 每对顶点间的最短路径
@@ -62,8 +70,6 @@ if __name__ == '__main__':
     test()
 else:
     pass
-
-
 
 ```
 
