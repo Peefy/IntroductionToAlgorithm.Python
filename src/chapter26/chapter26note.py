@@ -29,9 +29,9 @@ from numpy import arange as _arange
 from numpy import array as _array
 
 if __name__ == '__main__':
-    import graph as _g
+    import flownetwork as _fn
 else:
-    from . import graph as _g
+    from . import flownetwork as _fn
 
 class Chapter26_1:
     '''

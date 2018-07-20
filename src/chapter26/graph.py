@@ -123,6 +123,8 @@ class Edge:
         self.vertex2 = vertex2
         self.distance = distance
         self.weight = distance
+        self.flowfromto = 0
+        self.flowtofrom = 0
 
     def __str__(self):
         return str((self.vertex1, self.vertex2, self.dir))
@@ -841,6 +843,9 @@ class _DFS:
         '''
         if g.hasdirection() == False:
             print('para g 是无向图，不返回路径')
+            return 0
+        if g.has_cycle == True:
+            print('para g 是有环图，不返回路径')
             return 0
         count = 0
         g.reset_vertex_para()
