@@ -22,7 +22,7 @@ class _FlowNetwork:
 
     def ford_fulkerson(self, g : Graph, s : Vertex, t : Vertex):
         '''
-        基本的Ford-Fulkerson算法
+        基本的`Ford-Fulkerson`算法
         '''
         for edge in g.edges:
             edge.flowtofrom = 0
@@ -30,7 +30,7 @@ class _FlowNetwork:
     
     def edmonds_karp(self, g : Graph, s : Vertex, t : Vertex):
         '''
-        使用广度优先搜索实现增广路径`p`计算的Edmonds-Karp算法
+        使用广度优先搜索实现增广路径`p`计算的`Edmonds-Karp`算法
         '''
         for edge in g.edges:
             edge.flowtofrom = 0
@@ -62,7 +62,7 @@ def _buildtestgraph():
 
 def test_ford_fulkerson():
     '''
-    测试基本的Ford-Fulkerson算法
+    测试基本的`Ford-Fulkerson`算法
     '''
     g = _buildtestgraph()
     print('邻接矩阵为')
@@ -70,7 +70,7 @@ def test_ford_fulkerson():
 
 def test_edmonds_karp():
     '''
-    测试Edmonds-Karp算法
+    测试`Edmonds-Karp`算法
     '''
     g = _buildtestgraph()
     print('邻接矩阵为')

@@ -142,6 +142,7 @@ class Chapter26_2:
         ```
         '''
         print('chapter26.2 note as follow')  
+        print('Ford-Fulkerson方法')
         print('解决最大流问题的Ford-Fulkerson方法,包含具有不同运行时间的几种实现')
         print('Ford-Fulkerson方法依赖于三种重要思想')
         print(' 残留网络,增广路径,割')
@@ -253,7 +254,35 @@ class Chapter26_3:
         ```
         '''
         print('chapter26.3 note as follow')  
-        print('最大二分匹配')
+        print('26.3 最大二分匹配')
+        print('一些组合问题可以很容易地转换为最大流问题.26.1节中的多源点,多汇点最大流问题就是一个例子')
+        print('如在一个二分图中寻找最大匹配.为了解决这一问题,将利用Ford-Fulkerson方法提供的完整性性质')
+        print('可以应用Ford-Fulkerson方法在O(VE)时间内解决图G=(V,E)的最大二分匹配问题')
+        print('最大二分匹配问题')
+        print('  给定一个无向图G=(V,E),一个匹配(matching)是一个边的子集合,且满足对所有的顶点v∈V,M中至多一条边与v关联',
+            '如果M中某条边与v关联,则说顶点v∈V被匹配,否则说v是无匹配的.最大匹配是最大势的匹配,也就是说,是满足对任意匹配M`',
+            '有|M|>=|M`|的匹配M')
+        print('  假定顶点集合可被划分为V=L∨R,其中L和R是不相交的,且E中的所有边的一个端点在R中,另一端点在L中',
+            '进一步假设V中的每个顶点至少有一条关联的边')
+        print('  二分图的最大匹配问题有着许多世纪的应用.例如,把一个机器集合L和要同时执行的任务集合R相匹配。',
+            'E中有边(u,v),就说明一台特定机器u∈L能够完成一项特定任务v∈R,最大匹配可以为尽可能多的机器提供任务')
+        print('寻找最大二分匹配')
+        print('  利用Ford-Fulkerson方法可以在关于|V|和|E|的多项式时间内,找出无向二分图G=(V,E)的最大匹配',
+            '解决这一问题的关键技巧在于建立一个流网络,其中流对应于匹配')
+        print('  对二分图G的相应流网络G`=(V`,E`)定义如下,设源点s和汇点t是不属于V的新顶点')
+        print('V`=V∪{s,t}.如果G的顶点划分为V=L∪R,G`的有向边为E的边,从L指向R,再加上V条新边:')
+        print('E`={(s,u):u∈L}∪{(u,v):u∈L,v∈R,(u,v)∈E}∪{(v,t):v∈R}')
+        print('在结束构造工作之前,在E`中的每条边赋予单位容量.因为V中的每个顶点至少有一条关联边',
+            '|E|>=|V|/2.因此|E|<=|E`|=|E|+|V|<=3|E|,则|E`|=Θ(E)')
+        print('引理26.10 设G=(V,E)是一个二分图,其定点划分为V=L∪R,设G`=(V`,E`)是它相应的流网络',
+            '如果M是G的匹配,则G`中存在一个整数值的流f,且|f|=|M|.',
+            '相反地,如果f是G`的整数值流,则G中存在一匹配M满足|M|=|f|')
+        print('在一个二分图中')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter26/chapter26note.py
         # python3 src/chapter26/chapter26note.py
 
