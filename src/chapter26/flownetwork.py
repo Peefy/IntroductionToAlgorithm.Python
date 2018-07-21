@@ -21,6 +21,12 @@ class _FlowNetwork:
         for edge in g.edges:
             edge.flowtofrom = 0
             edge.flowfromto = 0
+    
+    def edmonds-karp(self, g : Graph, s : Vertex, t : Vertex):
+        '''
+        使用广度优先搜索实现增广路径`p`计算的Edmonds-Karp算法
+        '''
+        pass
 
 __fn_instance = _FlowNetwork()
 

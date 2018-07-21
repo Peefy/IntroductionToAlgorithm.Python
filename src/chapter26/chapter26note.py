@@ -203,13 +203,27 @@ class Chapter26_2:
         print('在实际中碰到的大多数最大流的问题中其容量经常为整数,如果容量为有理数,则经过适当的比例转换,都可以使它们变为整数')
         print('在这一假设下,Ford-Fulkerson的一种简易实现的运行时间为O(E|f*|)')
         print('Edmonds-Karp算法')
-        print('  如果在Ford-Fulkerson算法使用广度优先搜索来实现对增广路径p的计算')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('  如果在Ford-Fulkerson算法使用广度优先搜索来实现对增广路径p的计算',
+            '即如果增广路径是残留网格中从s到t的最短路径(其中每条边为单位距离或权)',
+            '则能够改进FORD-FULKERSON的界,这种方法称为Edmonds-Karp算法,运行时间为O(VE^2)')
+        print('引理26.8 如果对具有源点s和汇点t的流网络G=(V,E)运行Edmonds-Karp算法,则对所有顶点v∈V-{s,t}',
+            '残留网络Gf中的最短路径长度df(u,v)随着每个流的增加而单调递增')
+        print('定理26.9 如果对具有源点s和汇点t的一个流网络G=(V,E)运行Edmonds-Karp算法,对流进行增加的全部次数为O(VE)')
+        print('  在一个残留网络Gf中,如果对其增广路径p的残留容量是边(u,v)的残留容量,即,如果cf(p)=cf(u,v),则说边(u,v)对增广路径p是关键的',
+            '在沿增广路径对流进行增加后,该路径上的任何关键边便从残留网络中消失')
+        print('  在增广路径上至少有一条边必为关键边.|E|条边中的每一条都可能至多|V|/2-1次地成为关键边')
+        print('用于在用广度优先搜索寻找增广路径时,FORD-FULKERSON中的每次迭代都可以在O(E)的运行时间内完成',
+            '所以Edmonds-Karp算法的全部运行时间为O(V^2E).压入与重标记算法能够达到更好的界')
+        print('练习26.2-1 斜杠左边表示流,右边表示容量;流是19,容量是')
+        print('练习26.2-2 ')
+        print('练习26.2-3 ')
+        print('练习26.2-4 ')
+        print('练习26.2-5 ')
+        print('练习26.2-6 ')
+        print('练习26.2-7 ')
+        print('练习26.2-8 ')
+        print('练习26.2-9 ')
+        print('练习26.2-10 ')
         print('')
         print('')
         print('')
@@ -233,6 +247,7 @@ class Chapter26_3:
         ```
         '''
         print('chapter26.3 note as follow')  
+        print('最大二分匹配')
         # python src/chapter26/chapter26note.py
         # python3 src/chapter26/chapter26note.py
 
