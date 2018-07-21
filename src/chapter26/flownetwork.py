@@ -2,7 +2,7 @@
 import math as _math
 from copy import deepcopy as _deepcopy
 
-from graph import *
+from graph import * 
 
 class _FlowNetwork:
     '''
@@ -26,11 +26,14 @@ class _FlowNetwork:
         '''
         使用广度优先搜索实现增广路径`p`计算的Edmonds-Karp算法
         '''
-        pass
+        for edge in g.edges:
+            edge.flowtofrom = 0
+            edge.flowfromto = 0
 
 __fn_instance = _FlowNetwork()
 
 ford_fulkerson = __fn_instance.ford_fulkerson
+edmonds-karp = __fn_instance.ford_fulkerson
 
 def _buildtestgraph():
     '''
