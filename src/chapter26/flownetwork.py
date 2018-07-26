@@ -36,10 +36,49 @@ class _FlowNetwork:
             edge.flowtofrom = 0
             edge.flowfromto = 0
 
+    def relabel(self, u :Vertex):
+        '''
+        重标记算法 标记顶点`u`
+        '''
+        pass
+    
+    def initialize_preflow(self, g : Graph, s : Vertex):
+        '''
+        一般性压入与重标记算法
+
+        Args
+        ===
+        `g` : 图`G=(V,E)`
+
+        `s` : 源顶点`s`
+
+        '''
+        for u in g.veterxs:
+            u.h = 0
+            u.e = 0
+        for edge in g.edges:
+            edge.flowfromto = 0
+            edge.flowtofrom = 0
+        s.h = g.vertex_num
+        adj = g.getvertexadj(s)
+        for u in adj:
+            edge = g.getedge(s, u)
+            edge.flowfromto = edge.capcity
+            edge.flowtofrom = -edge.capcity
+            u.e = edge.capcity
+            s.e = s.e - edge.capcity
+
+    def generic_push_relabel(self, g : Graph, s : Vertex):
+        '''
+        基本压入重标记算法
+        '''
+        self.initialize_preflow(g, s)
+
 __fn_instance = _FlowNetwork()
 
 ford_fulkerson = __fn_instance.ford_fulkerson
 edmonds_karp = __fn_instance.edmonds_karp
+generic_push_relabel = __fn_instance.generic_push_relabel
 
 def _buildtestgraph():
     '''

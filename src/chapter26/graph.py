@@ -31,6 +31,8 @@ class Vertex:
         self.d = _math.inf
         self.pi = None
         self.f = _math.inf
+        self.e = 0
+        self.h = 0
 
     def resetpara(self):
         '''
@@ -185,6 +187,7 @@ class Graph:
         self.adj = []
         self.matrix = []
         self.matrixwithweight = []
+        self.capcity = 0
         self.clear()
    
     def clear(self):
