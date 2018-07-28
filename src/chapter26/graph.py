@@ -33,6 +33,10 @@ class Vertex:
         self.f = _math.inf
         self.e = 0
         self.h = 0
+        self.N = None
+        self.current = None
+        self.next_neighbor = None
+        self.haed = None
 
     def resetpara(self):
         '''
@@ -42,6 +46,8 @@ class Vertex:
         self.d = _math.inf
         self.pi = None
         self.f = _math.inf
+        self.e = 0
+        self.h = 0
 
     def __str__(self):
         return '[key:{} color:{} d:{} f:{} pi:{}]'.format(self.key, \

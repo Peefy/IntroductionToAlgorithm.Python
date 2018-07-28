@@ -79,6 +79,44 @@ class _FlowNetwork:
         基本压入重标记算法
         '''
         self.initialize_preflow(g, s)
+    
+    def push(self, u : Vertex, v : Vertex):
+        '''
+        压入算法
+        '''
+        pass
+
+    def discharge(self, g : Graph, u : Vertex):
+        '''
+        溢出顶点`u`的排除
+        '''
+        while u.e > 0:
+            v = u.current
+            if v == None:
+                self.relabel(u)
+                u.current = u.N.head
+            elif g.getedge(u, v).flowfromto > 0 and u.h == v.h + 1:
+                self.push(u, v)
+            else:
+                u.current = v.next_neighbor
+
+    def relabel_to_front(self, g : Graph, s : Vertex, t : Vertex):
+        '''
+        重标记与前移算法
+        '''
+        self.initialize_preflow(g, s)
+        L = topological_sort(g)
+        for u in g.veterxs:
+            u.current = u.N.head
+        index = 0
+        while index < len(L):
+            u = L[index]
+            old_height = u.h
+            self.discharge(g, u)
+            if u.h > old_height:
+                q = L.pop(index)
+                L.insert(0, q)
+            index += 1
 
 __fn_instance = _FlowNetwork()
 
