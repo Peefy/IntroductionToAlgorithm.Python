@@ -1,4 +1,10 @@
+"""
+module flownetwork
+===
 
+contains alrotithm with max flow
+
+"""
 import math as _math
 from copy import deepcopy as _deepcopy
 
