@@ -56,6 +56,8 @@
 
 * [Chapter26 最大流](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter26)
 
+* [Chapter27 算法研究问题选编](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter26)
+
 ## Requirement:
 
 * *Python3+ Sdk*
