@@ -1,3 +1,17 @@
+---
+layout: post
+title: "用Python实现的流网络最大流算法(未完全实现)"
+description: "用Python实现的流网络最大流算法(未完全实现)"
+categories: [Python]
+tags: [python]
+redirect_from:
+  - /2018/07/29
+---
+
+
+## 每对顶点间的最短路径
+
+```python
 """
 module flownetwork
 ===
@@ -94,7 +108,8 @@ class _FlowNetwork:
             v = u.current
             if v == None:
                 self.relabel(u)
-                u.current = u.N.head
+                # head[N]
+                u.current = u.N[0]
             elif g.getedge(u, v).flowfromto > 0 and u.h == v.h + 1:
                 self.push(u, v)
             else:
@@ -102,12 +117,13 @@ class _FlowNetwork:
 
     def relabel_to_front(self, g : Graph, s : Vertex, t : Vertex):
         '''
-        重标记与前移算法
+        重标记与前移算法 时间复杂度`O(V^3)`
         '''
         self.initialize_preflow(g, s)
         L = topological_sort(g)
         for u in g.veterxs:
-            u.current = u.N.head
+            # head[N]
+            u.current = u.N[0]
         index = 0
         while index < len(L):
             u = L[index]
@@ -170,3 +186,7 @@ if __name__ == '__main__':
     test()
 else:
     pass
+
+````
+
+[Github Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/blob/master/src/chapter26)
