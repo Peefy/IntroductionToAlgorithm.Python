@@ -63,7 +63,16 @@ class Chapter27_1:
         print('第31章 数论的算法：最大公因数的欧几里得算法；',
             '求解模运算的线性方程组解法，求解一个数的幂对另一个数的模的算法',
             'RSA公用密钥加密系统，Miller-Rabin随机算法素数测试,有效地找出大的素数；整数分解因数')
-        print('第32章')
+        print('第32章 在一段给定的正文字符串中，找出给定模式的字符串的全部出现位置')
+        print('第33章 计算几何学')
+        print('第34章 NP完全问题')
+        print('第35章 运用近似算法有效地找出NP完全问题的近似解')
+        print('第27章 排序网络')
+        print('串行计算机(RAM计算机)')
+        print('')
+        print('')
+        print('')
+        print('')
         print('')
         # python src/chapter27/chapter27note.py
         # python3 src/chapter27/chapter27note.py
