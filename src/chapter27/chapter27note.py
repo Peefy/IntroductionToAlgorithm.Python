@@ -96,11 +96,12 @@ class Chapter27_1:
         print('练习27.1-3 向一个比较器后,所得的比较网络可能不再是排序网络了')
         print('练习27.1-4 证明任何具有n个输入的排序网路的深度至少为lgn')
         print('练习27.1-5 证明任何排序网络中的比较器的数目至少为Ω(nlgn)')
-        print('练习27.1-6 ')
-        print('练习27.1-7 ')
-        print('练习27.1-8 ')
-        print('')
-        print('')
+        print('练习27.1-6 说明排序网络的结构与插入排序有何关系')
+        print('练习27.1-7 可以把C个比较器和n个输入的比较网络表示为取值范围从1到n,c对整数组成的一张表',
+            '如果两对整数中包含同一整数,则在网络中相应的比较器排序由整数对的次序决定',
+            '并描述一个运行时间为O(n+C)的串行算法来计算比较网络的深度')
+        print('练习27.1-8 颠倒型比较器,这种比较器在其底部线路中产生最大输出值',
+            '试说明如何把c个标准或颠倒的比较器组成的任意网络,转换为仅包含c个标准比较器的排序网络,证明所给出的转换方法是正确的')
         # python src/chapter27/chapter27note.py
         # python3 src/chapter27/chapter27note.py
 
@@ -121,6 +122,14 @@ class Chapter27_2:
         ```
         '''
         print('chapter27.2 note as follow')  
+        print('27.2 0-1原理')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter27/chapter27note.py
         # python3 src/chapter27/chapter27note.py
 
