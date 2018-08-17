@@ -187,11 +187,12 @@ class Chapter27_3:
             '该网络能对由任意数组成的双调序列进行排序')
         print('练习27.3-1 n=1,存在1个;n=2时存在2个;n=3时存在2个;n=4时存在6个;n=5时存在12个')
         print('  结论存在m个由0和1组成的双调序列 m=n if n <= 2; m=(n-1)(n-2) if n >= 3')
-        print('练习27.3-2 证明当n')
-        print('练习27.3-3 ')
-        print('练习27.3-4 ')
-        print('练习27.3-5 ')
-        print('练习27.3-6 ')
+        print('练习27.3-2 证明当n为2的幂时,BITONIC-SORTER[n]包含Θ(nlgn)个比较器')
+        print('练习27.3-3 说明当输入数n不是2的幂时,如何构造一个深度为O(lgn)的双调排序器')
+        print('练习27.3-4 如果某半清洁器的输入是一个由任意数组成的双调序列,证明输出端满足下列性质:',
+            '输出的上半部分和下半部分都是双调的,上半部分中的每个元素至少与下半部分中的每个元素一样小')
+        print('练习27.3-5 考察两个由0和1组成的序列.证明如果其中一个序列的每个元素至少和另一个序列中每个元素一样小,则两个序列中有一个序列是清洁的')
+        print('练习27.3-6 证明与0-1原则类似的关于双调排序网络的结论：一个能对任何0和1组成的双调序列进行排序的比较网络,也能对任何由任意数字组成双调序列进行排序')
         # python src/chapter27/chapter27note.py
         # python3 src/chapter27/chapter27note.py
 
@@ -212,6 +213,18 @@ class Chapter27_4:
         ```
         '''
         print('chapter27.4 note as follow')  
+        print('27.4 合并网络')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter27/chapter27note.py
         # python3 src/chapter27/chapter27note.py
 
