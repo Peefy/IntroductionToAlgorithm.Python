@@ -9,83 +9,83 @@ import src
 from src.test import testAll
 
 if __name__ == '__main__':
-    ## Test required packet
+    # Test required packet
     testAll()
-    ## output all src files
+    # output all src files
     print(src.__all__)
-    ## Chapter 1
+    # Chapter 1
     src.Chapter1().note()
-    ## Chapter 2 (2.1 2.2)
+    # Chapter 2 (2.1 2.2)
     src.Chapter2().note()
-    ## Chapter 2 (2.3)
+    # Chapter 2 (2.3)
     src.Chapter2_3().note()
-    ## Chapter 3 (3.1)
+    # Chapter 3 (3.1)
     src.Chapter3_1().note()
-    ## Chapter 3 (3.2)
+    # Chapter 3 (3.2)
     src.Chapter3_2().note()
-    ## Chapter 4 (4.1)
+    # Chapter 4 (4.1)
     src.Chapter4_1().note()
-    ## Chapter 4 (4.2)
+    # Chapter 4 (4.2)
     src.Chapter4_2().note()
-    ## Chapter 4 (4.3)
+    # Chapter 4 (4.3)
     src.Chapter4_3().note()
-    ## Chapter 4 (4.4)
+    # Chapter 4 (4.4)
     src.Chapter4_4().note()
-    ## Chapter 5 (5.1)
+    # Chapter 5 (5.1)
     src.Chapter5_1().note()
-    ## Chapter 5 (5.2)
+    # Chapter 5 (5.2)
     src.Chapter5_2().note()
-    ## Chapter 5 (5.3)
+    # Chapter 5 (5.3)
     src.Chapter5_3().note()
-    ## Chapter 5 (5.4)
+    # Chapter 5 (5.4)
     src.Chapter5_4().note()
-    ## Chapter 6 
+    # Chapter 6
     src.chapter6_printall()
-    ## chapter 7
+    # chapter 7
     src.printchapter7note()
-    ## chapter8
+    # chapter8
     src.printchapter8note()
-    ## chapter9
+    # chapter9
     src.printchapter9note()
-    ## chapter10
+    # chapter10
     src.printchapter10note()
-    ## chapter11
+    # chapter11
     src.printchapter11note()
-    ## chapter12
+    # chapter12
     src.printchapter12note()
-    ## chapter13
+    # chapter13
     src.printchapter13note()
-    ## chapter14
+    # chapter14
     src.printchapter14note()
-    ## chapter15
+    # chapter15
     src.printchapter15note()
-    ## chapter16
+    # chapter16
     src.printchapter16note()
-    ## chapter17
+    # chapter17
     src.printchapter17note()
-    ## chapter18
+    # chapter18
     src.printchapter18note()
-    ## chapter19
+    # chapter19
     src.printchapter19note()
-    ## chapter20
+    # chapter20
     src.printchapter20note()
-    ## chapter21
+    # chapter21
     src.printchapter21note()
-    ## chapter22
+    # chapter22
     src.printchapter22note()
-    ## chapter22
+    # chapter22
     src.printchapter22note()
-    ## chapter23
+    # chapter23
     src.printchapter23note()
-    ## chapter24
+    # chapter24
     src.printchapter24note()
-    ## chapter25
+    # chapter25
     src.printchapter25note()
-    ## chapter26
+    # chapter26
     src.printchapter26note()
-    ## chapter27
+    # chapter27
     src.printchapter27note()
-    ## chapter28
+    # chapter28
     src.printchapter28note()
 else:
     pass

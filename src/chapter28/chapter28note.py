@@ -19,11 +19,6 @@ from __future__ import absolute_import, division, print_function
 
 import numpy as np
 
-if __name__ == '__main__':
-    pass
-else:
-    pass
-
 class Chapter28_1:
     """
     chpater28.1 note and function
@@ -144,6 +139,7 @@ def printchapter28note():
 
 # python src/chapter28/chapter28note.py
 # python3 src/chapter28/chapter28note.py
+
 if __name__ == '__main__':  
     printchapter28note()
 else:
