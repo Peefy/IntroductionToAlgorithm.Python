@@ -2,7 +2,7 @@
 This packet includes IntroductionToAlgorithm.Python notes of each chapter
 '''
 
-LAST_CHAPTER = 27
+LAST_CHAPTER = 28
 
 __all__ = ['Chapter1', 'Chapter2', 'Chapter2_3',
            'Chapter3_1', 'Chapter3_2', 'Chapter4_1', 
@@ -74,3 +74,5 @@ from .chapter25.chapter25note import printchapter25note
 from .chapter26.chapter26note import printchapter26note
 
 from .chapter27.chapter27note import printchapter27note
+
+from .chapter28.chapter28note import printchapter28note
