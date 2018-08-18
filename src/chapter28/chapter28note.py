@@ -36,7 +36,31 @@ class Chapter28_1:
         ```
         """
         print('chapter28.1 note as follow')
-        m = np.array([1, 2, 3])
+        print('28.1 矩阵的性质')
+        print('矩阵运算在科学计算中非常重要')
+        print('矩阵是数字的一个矩阵阵列,在python中使用np.matrix[[1,2],[3,4]]')
+        m = np.matrix([[1, 2, 3], [4, 5, 6]])
+        print('一个2行3列的矩阵', m)
+        print('矩阵和向量')
+        print('单位矩阵')
+        print('零矩阵')
+        print('对角矩阵')
+        print('三对角矩阵')
+        print('上三角矩阵')
+        print('下三角矩阵')
+        print('置换矩阵')
+        print('对称矩阵')
+        print('矩阵乘法满足结合律,矩阵乘法对假发满足分配律')
+        print('矩阵的F范数和2范数')
+        print('向量的2范数')
+        print('矩阵的逆,秩和行列式')
+        print('定理28.1 一个方阵满秩当且仅当它为非奇异矩阵')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter28/chapter28note.py
         # python3 src/chapter28/chapter28note.py
 
