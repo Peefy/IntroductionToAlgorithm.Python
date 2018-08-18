@@ -2,7 +2,7 @@
 # usr/bin/python3
 # python src/chapter28/chapter28note.py
 # python3 src/chapter28/chapter28note.py
-'''
+"""
 
 Class Chapter28_1
 
@@ -14,19 +14,10 @@ Class Chapter28_4
 
 Class Chapter28_5
 
-'''
+"""
 from __future__ import absolute_import, division, print_function
 
-import math as _math
-import random as _random
-import time as _time
-from copy import copy as _copy
-from copy import deepcopy as _deepcopy
-from random import randint as _randint
-
 import numpy as np
-from numpy import arange as _arange
-from numpy import array as _array
 
 if __name__ == '__main__':
     pass
@@ -34,11 +25,11 @@ else:
     pass
 
 class Chapter28_1:
-    '''
+    """
     chpater28.1 note and function
-    '''
+    """
     def note(self):
-        '''
+        """
         Summary
         ====
         Print chapter28.1 note
@@ -48,8 +39,9 @@ class Chapter28_1:
         ```python
         Chapter28_1().note()
         ```
-        '''
-        print('chapter28.1 note as follow')  
+        """
+        print('chapter28.1 note as follow')
+        m = np.array([1, 2, 3])
         # python src/chapter28/chapter28note.py
         # python3 src/chapter28/chapter28note.py
 
@@ -143,7 +135,7 @@ def printchapter28note():
     '''
     print chapter28 note.
     '''
-    print('Run main : single chapter twenty-eight!')  
+    print('Run main : single chapter twenty-eight!')
     chapter28_1.note()
     chapter28_2.note()
     chapter28_3.note()
