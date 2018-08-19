@@ -17,8 +17,6 @@ Class Chapter28_5
 """
 from __future__ import absolute_import, division, print_function
 
-import numpy as np
-
 class Chapter28_1:
     """
     chpater28.1 note and function
@@ -39,8 +37,6 @@ class Chapter28_1:
         print('28.1 矩阵的性质')
         print('矩阵运算在科学计算中非常重要')
         print('矩阵是数字的一个矩阵阵列,在python中使用np.matrix[[1,2],[3,4]]')
-        m = np.matrix([[1, 2, 3], [4, 5, 6]])
-        print('一个2行3列的矩阵', m)
         print('矩阵和向量')
         print('单位矩阵')
         print('零矩阵')
@@ -151,6 +147,20 @@ class Chapter28_3:
         ```
         '''
         print('chapter28.3 note as follow')  
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter28/chapter28note.py
         # python3 src/chapter28/chapter28note.py
 
@@ -171,6 +181,20 @@ class Chapter28_4:
         ```
         '''
         print('chapter28.4 note as follow')  
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter28/chapter28note.py
         # python3 src/chapter28/chapter28note.py
 
@@ -190,7 +214,23 @@ class Chapter28_5:
         Chapter28_5().note()
         ```
         '''
-        print('chapter28.5 note as follow')  
+        print('chapter28.5 note as follow') 
+        print('') 
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter28/chapter28note.py
         # python3 src/chapter28/chapter28note.py
 
