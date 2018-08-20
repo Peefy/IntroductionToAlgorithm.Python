@@ -17,6 +17,8 @@ Class Chapter28_5
 """
 from __future__ import absolute_import, division, print_function
 
+import numpy as np
+
 class Chapter28_1:
     """
     chpater28.1 note and function
@@ -121,12 +123,18 @@ class Chapter28_2:
         print('  3) Strassen算法不像简单方法那样具有数值稳定性')
         print('  4) 在递归层次中生成的子矩阵要消耗空间')
         # !Strassen方法的关键就是对矩阵乘法作分治递归
-        print('练习28.2-1 ')
-        print('练习28.2-2 ')
-        print('练习28.2-3 ')
-        print('练习28.2-4 ')
-        print('练习28.2-5 ')
-        print('练习28.2-6 ')
+        print('练习28.2-1 运用Strassen算法计算矩阵的乘积')
+        print('矩阵的乘积为:')
+        print(np.matrix([[1, 3], [5, 7]]) * np.matrix([[8, 4], [6, 2]])) 
+        print('练习28.2-2 如果n不是2的整数幂,应该如何修改Strassen算法,求出两个n*n矩阵的乘积',
+            '证明修改后的算法的运行时间为Θ(n^lg7)')
+        print('练习28.2-3 如果使用k次乘法(假定乘法不满足交换律)就能计算出两个3*3矩阵的乘积',
+            '就能在o(n^lg7)时间内计算出两个n*n矩阵的乘积,满足上述条件的最大的k值是多少')
+        print('练习28.2-4 V.Pan发现了一种使用132464次乘法的求68*68矩阵乘积的方法',
+            '一种使用143640次乘法的求70*70矩阵乘积的方法',
+            '一种使用155424次乘法的求72*72矩阵乘积的方法')
+        print('练习28.2-5 用Strassen算法算法作为子程序,能在多长时间内计算出一个kn*n矩阵与一个n*kn矩阵的乘积')
+        print('练习28.2-6 略')
         # python src/chapter28/chapter28note.py
         # python3 src/chapter28/chapter28note.py
 
