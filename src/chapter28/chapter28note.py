@@ -7,7 +7,7 @@
 Class Chapter28_1
 
 Class Chapter28_2
-
+++
 Class Chapter28_3
 
 Class Chapter28_4
@@ -142,7 +142,8 @@ class Chapter28_2:
             '一种使用143640次乘法的求70*70矩阵乘积的方法',
             '一种使用155424次乘法的求72*72矩阵乘积的方法')
         print('练习28.2-5 用Strassen算法算法作为子程序,能在多长时间内计算出一个kn*n矩阵与一个n*kn矩阵的乘积')
-        print('练习28.2-6 略')
+        print('练习28.2-6 说明如何仅用三次实数乘法运算,就可以计复数a+bi与c+di的乘积.该算法应该把a,b,c和d作为输入,',
+            '并分别生成实部ac-bd和虚部ad+bc的值') 
         # python src/chapter28/chapter28note.py
         # python3 src/chapter28/chapter28note.py
 
@@ -167,20 +168,35 @@ class Chapter28_3:
         ```
         '''
         print('chapter28.3 note as follow')  
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('28.3 求解线性方程组')
+        print('对一组同时成立的线性方程组Ax=b求解时很多应用中都会出现的基本问题。一个线性系统可以表述为一个矩阵方程',
+            '其中每个矩阵或者向量元素都属于一个域,如果实数域R')
+        print('LUP分解求解线性方程组')
+        print('LUP分解的思想就是找出三个n*n矩阵L,U和P,满足PA=LU')
+        print('  其中L是一个单位下三角矩阵,U是一个上三角矩阵,P是一个置换矩阵')
+        print('每一个非奇异矩阵A都有这样一种分解')
+        print('对矩阵A进行LUP分解的优点是当相应矩阵为三角矩阵(如矩阵L和U),更容易求解线性系统')
+        print('在计算出A的LUP分解后,就可以用如下方式对三角线性系统进行求解,也就获得了Ax=b的解')
+        print('对Ax=b的两边同时乘以P,就得到等价的方程组PAx=Pb,得到LUx=Pb')
+        print('正向替换与逆向替换')
+        print('  如果已知L,P和b,用正向替换可以在Θ(n^2)的时间内求解下三角线性系统',
+            '用一个数组pi[1..n]来表示置换P')
+        print('LU分解的计算')
+        print('  把执行LU分解的过程称为高斯消元法.先从其他方程中减去第一个方程的倍数',
+            '以便把那些方程中的第一个变量消去')
+        print('  继续上述过程,直至系统变为一个上三角矩阵形式,这个矩阵都是U.矩阵L是由使得变量被消去的行的乘数所组成')
+        print('LUP分解的计算')
+        print('  一般情况下,为了求线性方程组Ax=b的解,必须在A的非对角线元素中选主元以避免除数为0',
+            '除数不仅不能为0,也不能很小(即使A是非奇异的),否则就会在计算中导致数值不稳定.因此,所选的主元必须是一个较大的值')
+        print('  LUP分解的数学基础与LU分解相似。已知一个n*n非奇异矩阵A,并希望计算出一个置换矩阵P,一个单位下三角矩阵L和一个上三角矩阵U,并满足条件PA=LU')
+        print('练习28.3-1 运用正向替换法求解下列方程组')
+        print('练习28.3-2 求出下列矩阵的LU分解')
+        print('练习28.3-3 运用LUP分解来求解下列方程组')
+        print('练习28.3-4 试描述一个对角矩阵的LUP分解')
+        print('练习28.3-5 试描述一个置换矩阵A的LUP分解,并证明它是唯一的')
+        print('练习28.3-6 证明：对所有n>=1,存在具有LU分解的奇异的n*n矩阵')
+        print('练习28.3-7 在LU-DECOMPOSITION中,当k=n时是否有必要执行最外层的for循环迭代?',
+            '在LUP-DECOMPOSITION中的情况又是怎样?')
         # python src/chapter28/chapter28note.py
         # python3 src/chapter28/chapter28note.py
 
