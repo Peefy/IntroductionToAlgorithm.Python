@@ -21,8 +21,12 @@ import numpy as np
 
 class Chapter28_1:
     """
-    chpater28.1 note and function
+    chapter28.1 note and function
     """
+
+    def __init__(self):
+        pass
+
     def note(self):
         """
         Summary
@@ -86,9 +90,13 @@ class Chapter28_1:
         # python3 src/chapter28/chapter28note.py
 
 class Chapter28_2:
-    '''
-    chpater28.2 note and function
-    '''
+    """
+    chapter28.2 note and function
+    """
+
+    def __init__(self):
+        pass
+
     def note(self):
         '''
         Summary
@@ -139,9 +147,13 @@ class Chapter28_2:
         # python3 src/chapter28/chapter28note.py
 
 class Chapter28_3:
-    '''
-    chpater28.3 note and function
-    '''
+    """
+    chapter28.3 note and function
+    """
+
+    def __init__(self):
+        pass
+
     def note(self):
         '''
         Summary
@@ -173,11 +185,11 @@ class Chapter28_3:
         # python3 src/chapter28/chapter28note.py
 
 class Chapter28_4:
-    '''
+    """
     chpater28.4 note and function
-    '''
+    """
     def note(self):
-        '''
+        """
         Summary
         ====
         Print chapter28.4 note
@@ -187,7 +199,7 @@ class Chapter28_4:
         ```python
         Chapter28_4().note()
         ```
-        '''
+        """
         print('chapter28.4 note as follow')  
         print('')
         print('')
@@ -207,11 +219,11 @@ class Chapter28_4:
         # python3 src/chapter28/chapter28note.py
 
 class Chapter28_5:
-    '''
-    chpater28.5 note and function
-    '''
+    """
+    chapter28.5 note and function
+    """
     def note(self):
-        '''
+        """
         Summary
         ====
         Print chapter28.5 note
@@ -221,7 +233,7 @@ class Chapter28_5:
         ```python
         Chapter28_5().note()
         ```
-        '''
+        """
         print('chapter28.5 note as follow') 
         print('') 
         print('')
@@ -249,9 +261,9 @@ chapter28_4 = Chapter28_4()
 chapter28_5 = Chapter28_5()
 
 def printchapter28note():
-    '''
+    """
     print chapter28 note.
-    '''
+    """
     print('Run main : single chapter twenty-eight!')
     chapter28_1.note()
     chapter28_2.note()
