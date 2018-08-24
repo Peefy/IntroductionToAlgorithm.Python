@@ -7,7 +7,7 @@
 Class Chapter28_1
 
 Class Chapter28_2
-++
+
 Class Chapter28_3
 
 Class Chapter28_4

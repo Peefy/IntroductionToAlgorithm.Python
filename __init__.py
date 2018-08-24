@@ -5,5 +5,9 @@
 # python main.py
 # python3 main.py
 
+<<<<<<< HEAD
 # pdf.475
+=======
+# pdf.485
+>>>>>>> 3e2e923034d95ee4fdcb4846671aaf30d0f502cc
 
