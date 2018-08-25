@@ -202,7 +202,7 @@ class Chapter28_3:
 
 class Chapter28_4:
     """
-    chpater28.4 note and function
+    chapter28.4 note and function
     """
     def note(self):
         """
