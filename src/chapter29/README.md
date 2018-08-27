@@ -14,4 +14,4 @@
 
 ```
 
-[Github Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/blob/master/src/chapter28)
+[Github Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/blob/master/src/chapter29)
