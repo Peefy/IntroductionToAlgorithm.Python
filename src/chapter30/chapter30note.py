@@ -37,6 +37,12 @@ class Chapter30_1:
         ```
         """
         print('chapter30.1 note as follow')
+        print('两个n次多项式相加的花不达标方法所需的时间为Θ(n),而相乘的简单方法所需的时间为Θ(n^2)')
+        print('在本章中,将快速傅里叶变换FFT方法是如何使多项式相乘的运行时间降低为Θ(nlgn)')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter30/chapter30note.py
         # python3 src/chapter30/chapter30note.py
 
