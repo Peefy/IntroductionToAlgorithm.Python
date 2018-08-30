@@ -60,6 +60,10 @@
 
 * [Chapter28 矩阵运算](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter28)
 
+* [Chapter29 线性规划](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter29)
+
+* [Chapter30 多项式与快速傅里叶变换](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter30)
+
 ## Requirement:
 
 * *Python3+ Sdk*
