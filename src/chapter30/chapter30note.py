@@ -135,6 +135,39 @@ class Chapter30_2:
         ```
         """
         print('chapter30.2 note as follow')
+        print('DFT与FFT')
+        print('如果使用单位复根的话,就可以在Θ(nlgn)时间内完成求值与插值运算')
+        print('单位复根')
+        print('  n次单位复根是满足w^n=1的复数w.n次单位复根刚好有n个,它们是e^(2∏ik/n),k=0,1,...,n-1')
+        print('  欧拉公式e^(iu)=cos(u)+isin(u)')
+        print('单位复根的性质')
+        print('  (1) 相消引理')
+        print('  (2) 折半引理')
+        print('  (3) 求和引理')
+        print('折半引理是递归的FFT算法的基础，1个元素的DFT就是该元素自身')
+        print('递归的FFT算法RECURSIVE-FFT的运行时间,除了递归调用外,每条命令执行所需的时间为Θ(n)',
+            'n为输入向量的长度.因此,关于运行时间有下列递归式:')
+        print('  T(n)=2T(n/2)+Θ(n)=Θ(nlgn)')
+        print('因此,运用快速傅里叶变换,可以在Θ(nlgn)的时间内,求出次数界为n的多项式在n次单位复根处的值')
+        print('对单位复根进行插值')
+        print('  把一个多项式从点值表示转化成系数表示,进而完成多项式乘法方案.按如下方式进行插值：',
+            '把DFT写成一个矩阵方程,然后再检查其逆矩阵的形式')
+        print('  可以把DFT写成矩阵积y=Vna,其中Vn是由wn的适当幂组成的一个范德蒙德矩阵')
+        print('定理30.7 对j,k=0,1,...,n-1,Vn^-1的(j,k)处的元素为wn^(-kj)/n')
+        print('定理30.8 (卷积定理)对任意两个长度为n的向量a和向量b,其中n是2的幂',
+            'a＊b=DFT^(-1)(2n)(DFT2n(a)·DFT2n(b))',
+            '其中向量a和b用0扩充使其长度达到2n,“·”表示2个2n个元素组成的向量的点乘')
+        print('练习30.2-1 略')
+        print('练习30.2-2 计算向量(0,1,2,3)的DFT')
+        print('练习30.2-3 使用运行时间在Θ(nlgn)的方案重做练习30.1-1')
+        print('练习30.2-4 写出在Θ(nlgn)的运行时间内计算出DFT^(-1)n的伪代码')
+        print('练习30.2-5 试着把FFT过程推广到n是3的幂的情形,写出其运行时间的递归式并求解该式')
+        print('练习30.2-6 假定不是在复数域上执行n个元素的FFT(n为偶数),而是在整数模m所生成的环Zm上执行FFT',
+            '其中m=2^(tn/2)+1,并且t是任意正整数.对模m,用w=2^t来代替wn作为主n次单位根.证明:在该系统中DFT与逆DFT有良定义')
+        print('练习30.2-7 已知一组值z0,z1,...,zn-1(可能有重复),说明如何求出仅在z0,z1,...,zn-1处(可能有重复)值为0的次数界为n的多项式P(x)的系数',
+            '所给出的过程的运行时间应该是O(nlg^2n),(提示：当且仅当P(x)是(x-zj)的倍数时,多项式P(x)在zj处的值为0)')
+        print('练习30.2-8 DFT是线性调频变换的一种特殊情况(z=wn).证明:对任意复数z,可以在O(nlgn)的时间内求出线性调频变换的值',
+            '可以把线性调频变换看作为卷积')
         # python src/chapter30/chapter30note.py
         # python3 src/chapter30/chapter30note.py
 
@@ -158,6 +191,21 @@ class Chapter30_3:
         ```
         """
         print('chapter30.3 note as follow')
+        print('30.3 有效的FFT实现')
+        print('由于DFT的实际应用(如信号处理)需要极高的速度,所以本节将讨论两种有效的FFT实现方法.')
+        print('运行时间为Θ(nlgn)的FFT算法的迭代实现方法隐含的常数要比递归实现方法中的常数小',
+            '将深入分析迭代实现方法,设计出一个有效的并行FFT电路')
+        print('ITERATIVE-FFT中要用到BIT-REVERSE-COPY算法,位转置算法')
+        print('调用BIT-REVERSE-COPY的运行时间当然是0(nlgn),因为迭代了n次,并且可以在O(lgn)时间内,',
+            '对一个在0到n-1之间的lgn位整数进行反向操作(在实际应用中,通常事先就知道了n的初值,所以可以计算出一张表,求出每个k的rev(k))')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter30/chapter30note.py
         # python3 src/chapter30/chapter30note.py
 
