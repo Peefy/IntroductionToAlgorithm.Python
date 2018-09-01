@@ -64,6 +64,8 @@
 
 * [Chapter30 多项式与快速傅里叶变换](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter30)
 
+* [Chapter31 有关数论的算法](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter31)
+
 ## Requirement:
 
 * *Python3+ Sdk*
