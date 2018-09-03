@@ -27,6 +27,7 @@ class _NumberTheory:
         ```
 
         """
+        assert a >= 0 and b >= 0
         if a == 0 and b == 0:
             return 0
         return 0
