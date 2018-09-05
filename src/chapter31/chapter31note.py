@@ -28,6 +28,11 @@ from __future__ import absolute_import, division, print_function
 import math
 import numpy as np
 
+if __name__ == '__main__':
+    import numtheory as _nt
+else:
+    from . import numtheory as _nt
+
 class Chapter31_1:
     """
     chapter31.1 note and function
@@ -159,8 +164,18 @@ class Chapter31_2:
         print('其中使用了零指数,使得素数集合p1,p2,...,pr对于a和b相同')
         print('  gcd(a,b)=p1^min(e1,f1) p2^min(e2,f2) ...pr^min(er,fr)')
         print('目前已知的最好的分解因子算法也不能达到多项式的运行时间,因此,根据这种方法来计算最大公约数,不大可能获得一种有效的算法')
-        print('')
-        print('')
+        print('定理31.9 (GCD递归定理) 对任意负整数a和任意的正整数b')
+        print(' gcd(a,b)=gcd(b, a mod b)')
+        print('欧几里得算法')
+        print(_nt.euclid(30, 21))
+        print('欧几里得算法的运行时间')
+        print('  最坏情况下,可以把欧几里得算法看成输入a与b的大小的函数。不失一般性,假定a>b>=0',
+            '这个假设的合理性是基于下述观察的:如果b>a>=0,则EUCLID(a,b)立即会递归调用EUCLID(b, a),即如果第一个自变量小于第二个自变量',
+            '则EUCLID进行一次递归调用以使两个自变量兑换,然后继续往下执行.类似地,如果b=a>0,则过程在进行一次递归调用后就终止执行,因为a mod b=0')
+        print('引理31.10 如果a>b>=1并且EUCLID(a, b)执行了k>=1次递归调用,则a>=Fk+2,b>=Fk+1')
+        print('定理31.11 (Lame定理) 对任意整数k>=1,如果a>b>=1且b<Fk+1,则EUCLID(a, b)的递归调用次数少于k次')
+        print('由于Fk约为v^k/sqrt(5),其中v是定义的黄金分割率(1+sqrt(5))/2,所以EUCLID执行中的递归调用次数O(lgb)',
+            '如果过程EUCLID作用于两个b位数,则它执行O(b)次算术和O(b^3)次位操作')
         print('')
         print('')
         print('')

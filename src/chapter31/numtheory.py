@@ -32,6 +32,14 @@ class _NumberTheory:
             return 0
         return 0
 
+    def euclid(self, a, b):
+        '''
+        欧几里得算法
+        '''
+        if b == 0:
+            return a
+        return self.euclid(b, a % b)
+
     def ismutualprime(self, a : int, b : int):
         """
         判断两个数是不是互质数
@@ -46,6 +54,7 @@ class _NumberTheory:
 __number_theory_instance = _NumberTheory()
 
 gcd = __number_theory_instance.gcd
+euclid = __number_theory_instance.euclid
 ismutualprime = __number_theory_instance.ismutualprime
 
 if __name__ == '__main__':
