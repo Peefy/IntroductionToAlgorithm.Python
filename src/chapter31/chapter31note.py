@@ -176,12 +176,26 @@ class Chapter31_2:
         print('定理31.11 (Lame定理) 对任意整数k>=1,如果a>b>=1且b<Fk+1,则EUCLID(a, b)的递归调用次数少于k次')
         print('由于Fk约为v^k/sqrt(5),其中v是定义的黄金分割率(1+sqrt(5))/2,所以EUCLID执行中的递归调用次数O(lgb)',
             '如果过程EUCLID作用于两个b位数,则它执行O(b)次算术和O(b^3)次位操作')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('欧几里得算法的推广形式')
+        print('  现在来重写欧几里得算法以计算出其他的有用信息.特别地,推广该算法,使它能计算出满足下列条件的整系数x和y:d=gcd(a, b)=ax+by')
+        print('  注意,x与y可能为0或负数.以后会发现这些系数对计算模乘法的逆是非常有用的,过程EXTENDED-EUCLID的输入为一对非负整数,返回一个满足上式的三元式(d,x,y)')
+        print(_nt.euclid(30, 21))
+        print('练习31.2-1 略')
+        print('练习31.2-2 答案如下')
+        print(_nt.extend_euclid(899, 493))
+        print('练习31.2-3 证明对所有整数a, k, n; gcd(a, n) = gcd(a+kn, n)')
+        print('练习31.2-4 仅用常量大小的存储空间(即仅存储常数个整数值)把过程EUCLID改写成迭代形式')
+        print('练习31.2-5 如果a>b>=0,证明EUCLID(a, b)至多执行了1+logvb次递归调用.把这个界改进为1+logv(b / gcd(a, b))')
+        print('练习31.2-6 过程EXTEND-EUCLID(Fk+1, Fk)返回1')
+        print(_nt.extend_euclid(11, 8))
+        print(_nt.extend_euclid(19, 11))
+        print('练习31.2-7 用递归等式gcd(a0, a1,...,an)=gcd(a0, gcd(a1,...,an))来定义多余两个变量的gcd函数',
+            '证明gcd函数的返回值与其自变量的次序无关,说明如何找出满足gcd(a0,a1,...,an)=a0x0+a1x1+..+anxn的整数x0,x1,...,xn',
+            '证明所给出的算法执行的除法运算次数为O(n+lg(max{a0,a1,...,an}))')
+        print('练习31.2-8 定义1cm(a0,a1,...,an)是n个整数a1,a2,...,an的最小公倍数,即每个ai的倍数中的最小非负整数',
+            '说明如何用(两个自变量)gcd函数作为子程序以有效地计算出1cm(a1,a2,...,an)')
+        print('练习31.2-9 证明n1,n2,n3和n4是两两互质的当且仅当gcd(n1n2,n3n4)=gcd(n1n3,n2n4)=1',
+            '更一般地,证明n1,n2,...,nk是两两互质的,当且仅当从ni中导出的[lgk]对数互为质数')
         # python src/chapter31/chapter31note.py
         # python3 src/chapter31/chapter31note.py
 
@@ -205,6 +219,25 @@ class Chapter31_3:
         ```
         """
         print('chapter31.3 note as follow')
+        print('31.3 模运算')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter31/chapter31note.py
         # python3 src/chapter31/chapter31note.py
 
