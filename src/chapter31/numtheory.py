@@ -1,6 +1,12 @@
 
 class _NumberTheory:
+    """
+    数论相关算法集合
+    """
     def __init__(self):
+        """
+        数论相关算法集合
+        """
         pass
 
     def gcd(self, a : int, b : int):
@@ -33,17 +39,17 @@ class _NumberTheory:
         return 0
 
     def euclid(self, a, b):
-        '''
+        """
         欧几里得算法
-        '''
+        """
         if b == 0:
             return a
         return self.euclid(b, a % b)
 
     def extend_euclid(self, a, b):
-        '''
+        """
         推广欧几里得算法
-        '''
+        """
         if b == 0:
             return (a, 1, 0)
         (d_ , x_, y_) = self.extend_euclid(b, a % b)
@@ -61,17 +67,37 @@ class _NumberTheory:
         """
         return self.gcd(a, b) == 1
 
+    def modular_linear_equation_solver(self, a, b, n):
+        """
+        求模线性方程组
+        """ 
+        d, x, y = self.extend_euclid(a, n)
+        if d or b:
+            x0 = x * (b / d) % n
+            for i in range(d):
+                print((x0 + i * (n / d)) % n)
+        else:
+            print('no solotion')
+
 __number_theory_instance = _NumberTheory()
 
 gcd = __number_theory_instance.gcd
 euclid = __number_theory_instance.euclid
 extend_euclid = __number_theory_instance.extend_euclid
 ismutualprime = __number_theory_instance.ismutualprime
+modular_linear_equation_solver = __number_theory_instance.modular_linear_equation_solver
 
-if __name__ == '__main__':
+def test():
+    """
+    测试函数
+    """
     print(gcd(24, 30))
     print(euclid(24, 30))
     print(extend_euclid(24, 30))
     print(gcd(24, 30))
+    print(modular_linear_equation_solver(14, 30, 100))
+
+if __name__ == '__main__':
+    test()
 else:
     pass

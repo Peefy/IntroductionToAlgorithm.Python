@@ -269,6 +269,27 @@ class Chapter31_4:
         ```
         """
         print('chapter31.4 note as follow')
+        print('31.4 求解模线性方程')
+        print('考虑求解下列方程的问题:ax=b(mod n)')
+        print('其中a>0,n>0.这个问题有若干种应用;例如RSA公钥密码系统中,寻找密钥过程的一部分。假设已知a,b和n,希望求出所有满足式的对模n的x值',
+            '可能没有解,也可能有一个或多个解')
+        print('设<a>表示由a生成的Zn的子群.由于<a>={a(x):x>0}={ax mod n:x>0},所以方程有一个解当且仅当b∈<a>。',
+            '拉格朗日定理告诉我们,|<a>|必定是n的约数,下列定义准确地刻画了<a>的特性')
+        print('定理31.20 对任意整数a和n,如果d=gcd(a,n),则在Zn中')
+        print('推论31.21 方程ax=b (mod n)对于未知量x有解,当且仅当gcd(a,n)|b')
+        print('推论31.22 方程ax=b (mod n)或者对模n有d个不同的解,其中d=gcd(a, n),或者无解')
+        print('定理31.23 设d=gcd(a,n),假定对整数x‘和y’,有d+ax‘+ny‘。如果d|b,则方程ax=b(mod b)有一个解的值为x0,满足',
+            'x0=x’(b/d) mod n')
+        print('定理31.24 假设方程ax=b (mod n)有解(即有d|b,其中d=gcd(a,n))x0是该方程的任意一个解,',
+            '则该方程对模n恰有d个不同的解,分别为:xi=x0+i(n/d0)(i=1,2,...,d-1)')
+        print('MODULAR-LINEAR-EQUATION-SOLVER执行O(lgn+gcd(a, n))次算术运算.因为EXTENDED-EUCLID需要执行O(lgn)次算术运算')
+        print('推论31.25 对任意n>1,如果gcd(a, n)=1,则方程ax=b(mod n)对模n有唯一解')
+        print('推论31.26 对任意n>1,如果gcd(a, n)=1,则方程ax=1(mod n)对模n有唯一解')
+        print('练习31.4-1 求出方程35x=10(mod 50)的所有解')
+        _nt.modular_linear_equation_solver(35, 10, 50)
+        print('练习31.4-2 证明：当gcd(a, n)=1,由方程ax=ay(mod n)可得x=y(mod n).通过一个反例gcd(a, n)>1的情况来证明条件gcd(a,n)=1是必要的')
+        print('练习31.4-3 考察下列对过程MODULAR-LINEAR-EQUATION-SOLVER的第3行修改')
+        print('练习31.4-4 略')
         # python src/chapter31/chapter31note.py
         # python3 src/chapter31/chapter31note.py
 
