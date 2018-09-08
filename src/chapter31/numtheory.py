@@ -79,6 +79,24 @@ class _NumberTheory:
         else:
             print('no solotion')
 
+    def modular_exponentiation(self, a, b, n):
+        """
+        运用反复平方法求数的幂
+        """
+        c = 0
+        d = 1
+        bit = bin(b)
+        bit = bit[2::]
+        bit_list = [int(c) for c in bit]
+        d_list = []
+        for b in bit_list:
+            c = 2 * c
+            d = (d * d) % n
+            if b == 1:
+                c += 1
+                d = (d * a) % n
+        return d
+
 __number_theory_instance = _NumberTheory()
 
 gcd = __number_theory_instance.gcd
@@ -86,6 +104,7 @@ euclid = __number_theory_instance.euclid
 extend_euclid = __number_theory_instance.extend_euclid
 ismutualprime = __number_theory_instance.ismutualprime
 modular_linear_equation_solver = __number_theory_instance.modular_linear_equation_solver
+modular_exponentiation = __number_theory_instance.modular_exponentiation
 
 def test():
     """
@@ -96,6 +115,7 @@ def test():
     print(extend_euclid(24, 30))
     print(gcd(24, 30))
     print(modular_linear_equation_solver(14, 30, 100))
+    print(modular_exponentiation(7, 560, 561))
 
 if __name__ == '__main__':
     test()

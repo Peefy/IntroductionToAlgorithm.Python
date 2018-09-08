@@ -371,16 +371,9 @@ class Chapter31_6:
             '当用二进制来表示b时,采用反复平方法,可以有效地解决这个问题')
         print('  设<bk,bk-1,...,b1,b0>是b的二进制表示.(亦即,二进制表示有k+1位长,bk为最高有效位,b0为最低有效位))')
         print('  下列过程随着c的值从0到b成倍增长,最终计算出a^c mod n')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('练习31.6-1 试画出一张表以说明Z11中每个元素的阶.找出最小的原根g并计算出一张表,要求写出所有x∈Z11,相应的ind11.g(x)的值')
+        print('练习31.6-2 写出一个模取值幂算法,要求该算法检查b的各位的顺序为从右向左,而不是从左向右')
+        print('练习31.6-3 假设已知phi(n),试说明如何运用过程MODULAR-EXPONENTIATION计算出对任意a∈Zn,a^(-1) mod n')
         # python src/chapter31/chapter31note.py
         # python3 src/chapter31/chapter31note.py
 
