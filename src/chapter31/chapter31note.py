@@ -356,6 +356,31 @@ class Chapter31_6:
         ```
         """
         print('chapter31.6 note as follow')
+        print('31.6 元素的幂')
+        print('正如考虑一个已知元素a对模n的倍数一样,常常自然地考虑对模n的a的幂组成的序列,其中a∈Zn:a0,a1,a2,a3,...')
+        print('定理31.30 (欧拉定理) 对于任意整数n>1,a^phi(n)=1 (mod n)对所有a∈Zn都成立')
+        print('定理31.31 (费马定理) 如果p是素数,则a^(p-1)=1 (mod p)对所有a∈Zp都成立')
+        print('定理31.32 对所有素数p>2和所有正整数e,满足Zn为循环群的n(n > 1)值为2,4,p^e,2p^e')
+        print('定理31.33 (离散对数定理) 如果g是Zn*的一个原根,则等式g^x=g^y(mod n)成立,当且仅当等式x=y(mod phi(n))成立')
+        print('定理31.34 如果p是一个奇素数且e>=1,则方程x^2=1(mod p^e)')
+        print('推论31.35 如果对模n存在1的非平凡平方根,则n是合数')
+        print('运用反复平方法求数的幂')
+        print('  数论计算中经常出现一种运算,就是求一个数的幂对另外一个数的模的运算,也称为模取幂',
+            '更准确地说,希望找出一种有效的方法来计算a^b mod n的值,其中a,b为非负整数,n为正整数',
+            '在许多素数测试子程序和RSA公开密钥加密系统中,模取幂运算是一种很重要的运算',
+            '当用二进制来表示b时,采用反复平方法,可以有效地解决这个问题')
+        print('  设<bk,bk-1,...,b1,b0>是b的二进制表示.(亦即,二进制表示有k+1位长,bk为最高有效位,b0为最低有效位))')
+        print('  下列过程随着c的值从0到b成倍增长,最终计算出a^c mod n')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter31/chapter31note.py
         # python3 src/chapter31/chapter31note.py
 
