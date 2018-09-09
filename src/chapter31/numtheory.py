@@ -1,4 +1,6 @@
 
+import random as _rand
+
 class _NumberTheory:
     """
     数论相关算法集合
@@ -96,6 +98,40 @@ class _NumberTheory:
                 c += 1
                 d = (d * a) % n
         return d
+    
+    def witness(self, a, n):
+        """
+        WIRNESS测试函数
+        """
+        bit_str = bin(n - 1)
+        t = 0
+        length = len(bit_str)
+        for i in range(length - 1, -1, -1):
+            if bit_str[i] == '0':
+                t += 1
+            else:
+                break
+        bit_str = bit_str[0:length - t]
+        u = int(bit_str, 2)
+        x = [0] * (t + 1)
+        x[0] = self.modular_exponentiation(a, u, n)
+        for i in range(1, t + 1):
+            x[i] = (x[i - 1] ** 2) % n
+            if x[i] == 1 and x[i - 1] != 1 and x[i - 1] != (n - 1):
+                return True
+        if x[t] != 1:
+            return True
+        return False
+
+    def miller_rabin(self, n, s):
+        """
+        Miller-Rabin随机性素数测试方法
+        """
+        for j in range(1, s + 1):
+            a = _rand.randint(1, n - 1)
+            if self.witness(a, n):
+                return "Composite"
+        return "Prime"
 
 __number_theory_instance = _NumberTheory()
 
@@ -105,6 +141,7 @@ extend_euclid = __number_theory_instance.extend_euclid
 ismutualprime = __number_theory_instance.ismutualprime
 modular_linear_equation_solver = __number_theory_instance.modular_linear_equation_solver
 modular_exponentiation = __number_theory_instance.modular_exponentiation
+miller_rabin = __number_theory_instance.miller_rabin
 
 def test():
     """
@@ -116,6 +153,7 @@ def test():
     print(gcd(24, 30))
     print(modular_linear_equation_solver(14, 30, 100))
     print(modular_exponentiation(7, 560, 561))
+    print(miller_rabin(561, 10))
 
 if __name__ == '__main__':
     test()
