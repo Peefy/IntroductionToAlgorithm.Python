@@ -66,6 +66,8 @@
 
 * [Chapter31 有关数论的算法](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter31)
 
+* [Chapter31 字符串匹配](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter32)
+
 ## Requirement:
 
 * *Python3+ Sdk*
