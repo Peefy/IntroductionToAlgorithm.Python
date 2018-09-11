@@ -38,7 +38,7 @@ class _NumberTheory:
         assert a >= 0 and b >= 0
         if a == 0 and b == 0:
             return 0
-        return 0
+        return self.euclid(a, b)
 
     def euclid(self, a, b):
         """
@@ -133,6 +133,29 @@ class _NumberTheory:
                 return "Composite"
         return "Prime"
 
+    def pollard_rho(self, n):
+        """
+        整数的因子分解 Pollard的rho启发式方法
+
+        Args
+        ===
+        `n` : 被分解的数字
+
+        """
+        i = 1
+        x = _rand.randint(0, n - 1)
+        y = x
+        k = 2
+        while True:
+            i += 1
+            x = (x ** 2 - 1) % n
+            d = self.gcd(y - x, n)
+            if d != 1 and d != n:
+                print(d)
+            if i == k:
+                y = x
+                k = 2 * k
+
 __number_theory_instance = _NumberTheory()
 
 gcd = __number_theory_instance.gcd
@@ -142,6 +165,7 @@ ismutualprime = __number_theory_instance.ismutualprime
 modular_linear_equation_solver = __number_theory_instance.modular_linear_equation_solver
 modular_exponentiation = __number_theory_instance.modular_exponentiation
 miller_rabin = __number_theory_instance.miller_rabin
+pollard_rho = __number_theory_instance.pollard_rho
 
 def test():
     """
@@ -154,6 +178,7 @@ def test():
     print(modular_linear_equation_solver(14, 30, 100))
     print(modular_exponentiation(7, 560, 561))
     print(miller_rabin(561, 10))
+    print(pollard_rho(12))
 
 if __name__ == '__main__':
     test()
