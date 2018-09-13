@@ -19,6 +19,8 @@ import math
 import re
 import numpy as np
 
+import stringmatch as sm
+
 if __name__ == '__main__':
     pass
 else:
@@ -73,14 +75,22 @@ class Chapter32_1:
         print('引理32.1(重叠后缀定理)假设x,y和z是满足x>z和y<z的三个字符串.如果|x|<=|y|,则x>y;如果|x|>=|y|,则y>x;如果|x|=|y|,则x=y')
         print('  本章中允许把比较两个等长的字符串是否相等的操作当做原语操作.如果对字符串的比较是从左往右进行,并且发现一个不匹配字符时比较就终止,',
             '则假设这样一个测试过程所需的时间是关于所发现的匹配字符数目的线性函数')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('32.1 朴素的字符串匹配算法')
+        print('朴素的字符串匹配算法:它用一个循环来找出所有有效位移,该循环对n-m+1可能的每一个s值检查条件P[1..m]=T[s+1..s+m]')
+        print('这种朴素的字符串匹配过程可以形象地看成用一个包含模式的“模板”沿文本滑动,同时对每个位移注意模板上的字符是否与文本的相应字符相等')
+        print('NATIVE-STRING-MATCHER的运行时间为Θ((m-m+1)m)')
+        print('在本章中还要介绍一种算法,它的最坏情况预处理时间为Θ(m),最坏情况匹配时间为Θ(n)')
+        print('练习31.1-1 解答过程如下：')
+        P = '0001'
+        T = '000010001010001'
+        sm.native_string_matcher(T, P)
+        print('练习31.1-2 假设模式P中的所有字符都是不同的。试说明如何对一段n个字符的文本T加速过程NATIVE-STRING-MATCHER的执行速度,',
+            '使其运行时间达到O(n)')
+        print('练习31.1-3 假设模式P和文本T是长度分别为m和n的随机选取的字符串,其字符串属于d个元素的字母表∑={0,1,...,d-1},其中d>=2',
+            '证明朴素算法第4行中隐含的循环所执行的字符比较的预计次数为')
+        print('   (n-m+1)(1-d**-m)/(1-d**-1)<=2(n-m+1)')
+        print('练习31.1-4 假设允许模式P中包含一个间隔字符◇,该字符可以与任意的字符串匹配(甚至可以与长度为0的字符串匹配)',
+            '例如,模式ab◇ba◇c')
         # python src/chapter32/chapter32note.py
         # python3 src/chapter32/chapter32note.py
 
@@ -104,7 +114,7 @@ class Chapter32_2:
         ```
         """
         print('chapter32.2 note as follow')
-        print('')
+        print('Rabin-Karp算法')
         print('')
         print('')
         print('')
