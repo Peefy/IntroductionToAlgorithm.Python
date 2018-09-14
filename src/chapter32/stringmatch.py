@@ -27,8 +27,28 @@ class _StringMatch:
             if P[0:m] == T[s:s + m]:
                 print('Pattern occurs with shift %d' % s)
     
+    def rabin_karp_matcher(self, T : str, P : str, d, q):
+        """
+        Rabin-Karp字符串匹配算法
+        """
+        n = len(T)
+        m = len(P)
+        h = d ** (m - 1) % q
+        p = 0
+        t = 0
+        for i in range(0, m):
+            p = (d * p + ord(P[i]) - ord('0')) % q
+            t = (d * t + ord(T[i]) - ord('0')) % q
+        for s in range(0, n - m + 1):
+            if p == t:
+                if P[0:m] == T[s:s + m]:
+                    print('Pattern occurs with shift %d' % s)
+                if s < n - m:
+                    t = (d * (t - (ord(T[s]) - ord('0')) * h) + ord(T[s + m]) - ord('0')) % p
+    
 _inst = _StringMatch()
 native_string_matcher = _inst.native_string_matcher
+rabin_karp_matcher = _inst.rabin_karp_matcher
 
 def test():
     """
