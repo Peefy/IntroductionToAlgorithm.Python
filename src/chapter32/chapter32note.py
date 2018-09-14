@@ -128,18 +128,17 @@ class Chapter32_2:
         print('  p=P[m]+10(P[m-1]+10(P[m-2]+...+10(P[2]+10P[1])...))')
         print('类似地,也可以在Θ(m)的时间内,根据T[1..m]计算出t0的值')
         print('为了在Θ(n-m)的时间内计算出剩余的值t1,t2,...,tn-m,可以在常数时间内根据ts计算出ts+1,这是因为霍纳法则')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('RABIN-KARP-MATCHER的预处理时间Θ(m),其匹配时间在最坏情况下为Θ((n-m+1)m),因为Rabin-Karp算法与朴素的字符串匹配算法一样,对每个有效位移进行显示验证',
+            '如果P=a^m并且T=a^n,则验证所需的时间为Θ((n-m+1)m),因为n-m+1可能的位移中每一个都是有效位移')
+        print('在许多实际作用中,有效位移数很少(如只有常数c个),因此,算法的期望匹配时间为O((n-m+1)+cm)=O(n+m),',
+            '再加上处理伪命中点所需的时间.假设减少模q的值就像是从∑*到Zq上的一个随机映射,基于这种假设,进行启发性分析',
+            '要正式证明这个假设是比较困难的,但是有一种可行的方法,就是假定q是从适当大的整数中随机得出的.可以预计伪命中的次数为O(n/q)',
+            '因为可以估计出任意的ts对模q等价于p的概率为1/q.')
+        print('Rabin-Karp算法的期望运行时间为:O(n)+O(m(v+n/q))')
+        print('练习32.2-1 ')
+        print('练习32.2-2 ')
+        print('练习32.2-3 ')
+        print('练习32.2-4 ') 
         # python src/chapter32/chapter32note.py
         # python3 src/chapter32/chapter32note.py
 
@@ -163,6 +162,20 @@ class Chapter32_3:
         ```
         """
         print('chapter32.3 note as follow')
+        print('32.3 利用有限自动机进行字符串匹配')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter32/chapter32note.py
         # python3 src/chapter32/chapter32note.py
 
