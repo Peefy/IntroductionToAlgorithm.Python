@@ -234,10 +234,14 @@ class Chapter32_4:
         """
         print('chapter32.4 note as follow')
         print('32.4 Knuth-Morris-Pratt算法')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('Knuth、Morris和Pratt三人设计的线性时间字符串匹配算法。这个算法不用计算变迁函数d,匹配时间为Θ(n),只要用到辅助函数pi[1,m]',
+            '它是在Θ(m)时间内,根据模式预先计算出来的.数组pi使得我们可以按需要,“现场”有效地计算(在平摊意义上来说)变迁函数d.',
+            '粗略地说,对任意状态q=0,1,...,m和任意字符a∈∑,pi[q]的值包含了与a无关但在计算d(q,a)时需要的信息',
+            '由于数组pi只有m个元素,而d有Θ(m|∑|个值,所以通过预先计算pi而不是d,使得时间减少了一个|∑|因子)')
+        print('关于模式的前缀函数')
+        print('  模式的前缀函数pi包含有模式与其自身的位移进行匹配的信息.这些信息可用于避免在朴素的字符串匹配算法中,对无位移进行测试,',
+            '也可以避免在字符串匹配自动机中,对d的预先计算过程')
+        print('KMP-MATCHER的大部分过程都是在模仿FINITE-AUTOMATON-MATCHER.KMP-MATCHER调用了一个辅助过程COMPUTE-PREFIX-FUNCTION来计算pi')
         print('')
         print('')
         print('')

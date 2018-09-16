@@ -50,7 +50,7 @@ class _StringMatch:
         """
         变迁函数d
         """
-        pass
+        return q
 
     def finite_automaton_matcher(self, T, d, m):
         """
@@ -75,12 +75,20 @@ class _StringMatch:
                     k -= 1
                 epsilon = k
         return epsilon
+    
+    def kmp_matcher(self, T, P):
+        """
+        Knuth-Morris-Pratt字符串匹配算法
+        """
+        pass
 
 _inst = _StringMatch()
+
 native_string_matcher = _inst.native_string_matcher
 rabin_karp_matcher = _inst.rabin_karp_matcher
 finite_automaton_matcher = _inst.finite_automaton_matcher
 compute_transition_function = _inst.compute_transition_function
+kmp_matcher = _inst.kmp_matcher
 
 def test():
     """
