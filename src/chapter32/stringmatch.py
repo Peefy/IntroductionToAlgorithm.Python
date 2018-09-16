@@ -46,7 +46,7 @@ class _StringMatch:
             if s < n - m:
                 t = (d * (t - (ord(T[s]) - ord('0')) * h) + ord(T[s + m]) - ord('0')) % p
     
-    def transition_function(self, T, d, m):
+    def transition_function(self, q, Ti):
         """
         变迁函数d
         """
@@ -56,12 +56,31 @@ class _StringMatch:
         """
         字符串匹配自动机的简易过程
         """
-        pass
+        n = len(T)
+        q = 0
+        for i in range(n):
+            q = self.transition_function(q, T[i])
+            if q == m:
+                print('Pattern occurs with shift %d' % (i - m))
+
+    def compute_transition_function(self, P, sigma):
+        """
+        下列过程根据一个给定模式`P[1..m]`来计算变迁函数`epsilon`, 运行时间为`O(m^3|∑|)`
+        """
+        m = len(P)
+        for q in range(m + 1):
+            for a in sigma:
+                k = min(m + 1, q + 2)
+                while P[k] != P[q]:
+                    k -= 1
+                epsilon = k
+        return epsilon
 
 _inst = _StringMatch()
 native_string_matcher = _inst.native_string_matcher
 rabin_karp_matcher = _inst.rabin_karp_matcher
 finite_automaton_matcher = _inst.finite_automaton_matcher
+compute_transition_function = _inst.compute_transition_function
 
 def test():
     """

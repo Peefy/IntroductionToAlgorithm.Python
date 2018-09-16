@@ -195,18 +195,21 @@ class Chapter32_3:
         print('  为了详细说明与给定模式P[1..m]相应的字符串匹配自动机,首先定义一个辅助函数a,称为相应P的后缀函数。',
             '函数a是一个从∑*到{0,1,...,m}上定义的映射,a(x)是x的后缀P的最长前缀的长度：a(x)=max{k:Pk>x}')
         print('  为了清楚地说明字符串匹配自动机的操作过程,给出一个简单而有效的程序,用来模拟这样一个自动机(用它的变迁函数d来表示),在输入文本T[1..n]中,',
-            '寻找长度为m的模式P的出现位置的过程,对于长度为m的模式的任意字符串匹配自动机来说,状态Q为{0,1,...,m},初始状态为0,位移的接收态是状态m')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+            '寻找长度为m的模式P的出现位置的过程,对于长度为m的模式的任意字符串匹配自动机来说,状态Q为{0,1,...,m},初始状态为0,唯一的接收态是状态m')
+        print('  由FINITE-AUTOMATON-MATCHER的简单循环结构可以看出,对于一个长度为n的文本字符串,它的匹配时间为Θ(n)',
+            '但是,这一匹配时间没有包括计算变迁函数d所需要的预处理时间.将在证明FINITE-AUTOMATON-MATCHER的正确性以后,再来讨论这一问题')
+        print('  考察自动机在输入文本T[1..n]上进行的操作.将证明自动机扫过字符T[i]后,其状态为d(Ti).因为d(Ti)=m当且仅当P>Ti,',
+            '所以自动机处于接收状态m,当且仅当模式P已经被扫描过,为了证明这个结论,要用到下面两条关于后缀函数o的引理')
+        print('引理32.2 (后缀函数不等式) 对任意字符串x和字符a,有o(xa)>=o(x)+1')
+        print('引理32.3 (后缀函数递归引理) 对任意x和字符a,如果q=o(x),则o(xa)=o(Pqa)')
+        print('定理32.4 如果∮是字符串匹配自动机关于给定模式P的终态函数,T[1..n]是自动机的输入文本,对i=0,1,...,n,有∮(Ti)=o(Ti)')
+        print('计算变迁函数')
+        print('练习32.3-1 对模式P=aabab构造出相应的字符串匹配自动机,并说明它在文本字符串T=aaababaabaababaab上的操作过程')
+        print(sm.finite_automaton_matcher('aaababaabaababaab', 10, 8))
+        print('练习32.3-2 对字母表∑={a, b},画出与模式ababbabbababbababbabb相应的字符串匹配自动机状态转换图')
+        print('练习32.3-3 如果由Pk>Pq蕴含着k=0或k=q,则称模式P是不可重叠的.试描述与不可重叠模式相应的字符串匹配自动机的状态转换图')
+        print('练习32.3-4 已知两个模式P和P`,试描述如何构造一个有限自动机,使之能确定其中任意一个模式的所有出现位置.要求尽量使自动机的状态数最小')
+        print('练习32.3-5 已知一个包括间隔字符的某模式P,说明如何构造一个有限自动机,使其在O(n)的时间内,找出P在文本T中的一次出现位置,其中n=|T|')
         # python src/chapter32/chapter32note.py
         # python3 src/chapter32/chapter32note.py
 
@@ -230,6 +233,20 @@ class Chapter32_4:
         ```
         """
         print('chapter32.4 note as follow')
+        print('32.4 Knuth-Morris-Pratt算法')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter32/chapter32note.py
         # python3 src/chapter32/chapter32note.py
 
