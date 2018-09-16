@@ -46,9 +46,22 @@ class _StringMatch:
             if s < n - m:
                 t = (d * (t - (ord(T[s]) - ord('0')) * h) + ord(T[s + m]) - ord('0')) % p
     
+    def transition_function(self, T, d, m):
+        """
+        变迁函数d
+        """
+        pass
+
+    def finite_automaton_matcher(self, T, d, m):
+        """
+        字符串匹配自动机的简易过程
+        """
+        pass
+
 _inst = _StringMatch()
 native_string_matcher = _inst.native_string_matcher
 rabin_karp_matcher = _inst.rabin_karp_matcher
+finite_automaton_matcher = _inst.finite_automaton_matcher
 
 def test():
     """
