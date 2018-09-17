@@ -19,12 +19,10 @@ import math
 import re
 import numpy as np
 
-import stringmatch as sm
-
 if __name__ == '__main__':
-    pass
+    import stringmatch as sm
 else:
-    pass
+    from . import stringmatch as sm
 
 class Chapter32_1:
     """

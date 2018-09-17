@@ -84,3 +84,5 @@ from .chapter30.chapter30note import printchapter30note
 from .chapter31.chapter31note import printchapter31note
 
 from .chapter32.chapter32note import printchapter32note
+
+from .chapter33.chapter33note import printchapter33note

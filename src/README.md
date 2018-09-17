@@ -66,7 +66,9 @@
 
 * [Chapter31 有关数论的算法](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter31)
 
-* [Chapter31 字符串匹配](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter32)
+* [Chapter32 字符串匹配](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter32)
+
+* [Chapter33 计算几何学](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter33)
 
 ## Requirement:
 
