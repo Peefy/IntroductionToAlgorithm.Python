@@ -242,15 +242,31 @@ class Chapter32_4:
         print('  模式的前缀函数pi包含有模式与其自身的位移进行匹配的信息.这些信息可用于避免在朴素的字符串匹配算法中,对无位移进行测试,',
             '也可以避免在字符串匹配自动机中,对d的预先计算过程')
         print('KMP-MATCHER的大部分过程都是在模仿FINITE-AUTOMATON-MATCHER.KMP-MATCHER调用了一个辅助过程COMPUTE-PREFIX-FUNCTION来计算pi')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('运行时间分析')
+        print('  运用平摊分析方法进行分析后可知,过程COMPUTE-PREFIX-FUNCTION的运行时间为Θ(m)')
+        print('  在类似的平摊分析中,如果用q的值作为势函数,则KMP-MATCHER的匹配时间为Θ(n)',
+            '与FINITE-AUTOMATON-MATCHER相比,通过运用pi而不是d,可使对模式进行预处理所需的时间由O(m|∑|)下降为Θ(m),同时保持实际的匹配时间为Θ(n)')
+        print('前缀函数计算的正确性')
+        print('  通过对前缀函数pi进行迭代,就能够列举出是某给定前缀Pq的后缀的所有前缀Pk,设',
+            'pi*[q]={pi[q],pi(2)[q],pi(3)[q],...,pi(t)[q]}')
+        print('引理32.5 (前缀函数迭代定理) 设P是长度为m的模式,其前缀函数为pi,对q=1,2,...,m,有pi*[q]={k:k<q且Pk>Pq}')
+        print('引理32.6 设P是长度为m的模式,pi是P的前缀函数.对q=1,2,...,m,如果pi[q]>0,则pi[q]-1∈pi*[q-1]')
+        print('推论32.7 设P是长度为m的模式,pi是P的前缀函数,对q=2,3,...,m')
+        print('KMP算法的正确性')
+        print('  过程KMP-MATCHER可以看做是过程FINITE-AUTOMATON-MATCHER的一次重新实现')
+        print('练习32.4-1 当字母表为∑={a,b},计算相应于模式ababbabbabbababbabb的前缀函数pi')
+        print('练习32.4-2 给出关于q的函数pi*[q]的规模的上界.举例说明所给出的上界是严格的')
+        print('练习32.4-3 试说明如何通过检查字符串PT的pi函数,来确定模式P在文本T中的出现位置(由P和T并置形成的长度为m+n的字符串)')
+        print('练习32.4-4 试说明如何通过以下方式对过程KMP-MATCHER进行改进:把第7行(不是第12行中)出现的pi替换为pi‘.对q=1,2,...,m的递归定义如下：')
+        print('练习32.4-5 写出一个线性时间的算法,','以确定文本T是否是另一个字符串T‘的循环旋转,例如arc和car是彼此的循环旋转')
+        print('练习32.4-6 给出一个有效的算法,计算出相应于某给定模式P的字符串匹配自动机的变迁函数d',
+            '所给出的算法的运行时间应该是O(m|∑|).(提示：证明:如果q=m或P[q+1]!=a,则d(q,a)=d(pi[q],a))')
+        print('思考题32-1 基于重复因子的字符串匹配')
+        print('  设yi表示字符串y与其自身并置i次所得的结果.例如(ab)^3=ababab.如果对某个字符串y∈∑*和某个r>0有x=y^r,则称字符串x∈∑*具有重复因子r.',
+            '设p(x)表示满足x具有重复因子r的最大值')
+        print('  (a) 写出一个有效算法以计算出p(Pi)(i=1,2,...,m),算法的输入为模式P[1..m].算法的运行时间是多少？')
+        print('  (b) 对任何模式p[1..m],设p(P)定义为max(1<=i<=m)p(Pi).证明：如果从长度为m的所有二进制字符串所组成的集中随机地选择模式P,则p*(P)的期望值是O(1)')
+        print('  (c) 论证下列字符串匹配算法可以在O(p*(P)n+m)的运行时间内,正确地找出模式P在文本T[1..n]中的所有出现位置')
         # python src/chapter32/chapter32note.py
         # python3 src/chapter32/chapter32note.py
 

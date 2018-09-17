@@ -17,6 +17,7 @@ class _StringMatch:
         Args
         ===
         `T` : str
+
         `P` : str
         """
         n = len(T)
@@ -106,6 +107,29 @@ class _StringMatch:
                 if q == m:
                     print('Pattern occurs with shift %d' (i - m))
                     q = pi[q]
+
+    def repeat_factor(self, s):
+        """
+        求字符串中的重复因子
+        """
+        return list(map(lambda c : ord(c) ,s))
+
+    def repetition_matcher(self, P, T):
+        """
+        """
+        m = len(P)
+        n = len(T)
+        k = 1 + max(self.repeat_factor(P))
+        q = 0
+        s = 0
+        while s <= n - m:
+            if T[s + q + 1] == P[q + 1]:
+                q += 1
+                if q == m:
+                    print('Pattern occurs with shift %d' % s)
+            if q == m or T[s + q + 1] != P[q + 1]:
+                s = s + max(1, q // k)
+                q = 0
 
 _inst = _StringMatch()
 
