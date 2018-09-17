@@ -76,11 +76,36 @@ class _StringMatch:
                 epsilon = k
         return epsilon
     
+    def compute_ptefix_function(self, P):
+        """
+        """
+        m = len(P)
+        pi = [0] * m
+        k = 0
+        for q in range(1, m):
+            while k > 0 and P[k + 1] != P[q]:
+                k = pi[k]
+            if P[k + 1] == P[q]:
+                k += 1
+            pi[q] = k
+        return pi
+
     def kmp_matcher(self, T, P):
         """
         Knuth-Morris-Pratt字符串匹配算法
         """
-        pass
+        n = len(T)
+        m = len(P)
+        pi = self.compute_ptefix_function(P)
+        q = 0
+        for i in range(n):
+            while q >= 0 and P[q + 1] != T[i]:
+                q = pi[q]
+                if P[q + 1] == T[i]:
+                    q = q + 1
+                if q == m:
+                    print('Pattern occurs with shift %d' (i - m))
+                    q = pi[q]
 
 _inst = _StringMatch()
 
@@ -98,6 +123,7 @@ def test():
     native_string_matcher('abc', 'dccabcd')
     native_string_matcher('3141592653589793', '26')
     rabin_karp_matcher('3141592653589793', '26', 10, 11)
+    kmp_matcher('aabbcc', 'bb')
 
 if __name__ == '__main__':
     test()
