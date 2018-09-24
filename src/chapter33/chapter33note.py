@@ -203,11 +203,12 @@ class Chapter33_3:
         """
         print('chapter33.3 note as follow')
         print('33.3 寻找凸包')
-        print('')
-        print('')
-        print('')
-        print('')
-        print('')
+        print('点集Q的凸包是一个最小的凸多边形P,满足Q的每个点或者在P的边界上，或者在P的内部')
+        print('用CH(Q)表示Q的凸包')
+        print('两种算法用于计算包含n个点的点集的凸包,第一种算法称为Graham扫描法,运行时间为O(nlgn),',
+            '第二种是Jarvis步进法,运行时间为O(nh),h为凸包中的顶点数')
+        print('CH(Q)的每一个顶点都是Q中的点,两种算法都用了这种性质,来决定应该保留Q中的哪些点作为凸包的顶点,以及应该去掉Q中的哪些点')
+        print('事实上,有好几种方法都能在O(nlgn)时间内计算凸包,两种算法都运用了旋转扫描的技术')
         print('')
         print('')
         print('')
@@ -241,6 +242,18 @@ class Chapter33_4:
         ```
         """
         print('chapter33.4 note as follow')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
         # python src/chapter33/chapter33note.py
         # python3 src/chapter33/chapter33note.py
 
