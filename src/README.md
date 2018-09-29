@@ -70,6 +70,8 @@
 
 * [Chapter33 计算几何学](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter33)
 
+* [Chapter34 NP完全性](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter34)
+
 ## Requirement:
 
 * *Python3+ Sdk*
