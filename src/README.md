@@ -72,6 +72,8 @@
 
 * [Chapter34 NP完全性](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter34)
 
+* [Chapter34 近似算法](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter35)
+
 ## Requirement:
 
 * *Python3+ Sdk*

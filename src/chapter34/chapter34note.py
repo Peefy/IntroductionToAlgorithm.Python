@@ -539,8 +539,8 @@ def printchapter34note():
     chapter34_4.note()
     chapter34_5.note()
 
-# python src/chapter33/chapter33note.py
-# python3 src/chapter33/chapter33note.py
+# python src/chapter34/chapter34note.py
+# python3 src/chapter34/chapter34note.py
 
 if __name__ == '__main__':  
     printchapter34note()
