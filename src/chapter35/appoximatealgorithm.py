@@ -69,6 +69,7 @@ def test():
     test_approx_vertex_cover()
     print(trim([10, 11, 12, 15, 20, 21, 22, 23, 24, 29], 0.1))
     print(approx_subset_sum([104, 102, 201, 101], 308, 0.4))
+    print(approx_subset_sum([104, 102, 201, 101, 100, 20, 123], 450, 0.4))
 
 if __name__ == '__main__':
     test()
