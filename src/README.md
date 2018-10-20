@@ -66,7 +66,13 @@
 
 * [Chapter31 有关数论的算法](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter31)
 
-* [Chapter31 字符串匹配](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter32)
+* [Chapter32 字符串匹配](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter32)
+
+* [Chapter33 计算几何学](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter33)
+
+* [Chapter34 NP完全性](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter34)
+
+* [Chapter35 近似算法](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter35)
 
 ## Requirement:
 
@@ -95,7 +101,7 @@ Then enjoy it.
 
 ## Tip
 
-If you like it or it may help.Thanks for **Fork** and **Star**!
+If you like it or it may help. Thanks for **Fork** and **Star**!
 
 And it is better to use Jupyter Notebook!
 

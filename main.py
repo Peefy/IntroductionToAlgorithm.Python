@@ -93,6 +93,14 @@ if __name__ == '__main__':
     src.printchapter30note()
     # chapter31
     src.printchapter31note()
+    # chapter32
+    src.printchapter32note()
+    # chapter33
+    src.printchapter33note()
+    # chapter34
+    src.printchapter34note()
+    # chapter35
+    src.printchapter35note()
 else:
     pass
 

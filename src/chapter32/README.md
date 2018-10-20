@@ -14,187 +14,155 @@ redirect_from:
 
 ```python
 
-
 import random as _rand
 
-class _NumberTheory:
+class _StringMatch:
     """
-    数论相关算法集合
+    字符串匹配相关算法
     """
     def __init__(self):
         """
-        数论相关算法集合
+        字符串匹配相关算法
         """
         pass
 
-    def gcd(self, a : int, b : int):
+    def native_string_matcher(self, T : str, P : str):
         """
-        Summary
-        ====
-        求两个数的最大公约数
-
+        朴素字符串匹配
         Args
         ===
-        `a`: 数字1
+        `T` : str
 
-        `b`: 数字2
-
-        Return
-        ===
-        `num` : 最大公约数
-
-        Example
-        ===
-        ```python
-        >>> gcd(24, 30)
-        >>> 6
-        ```
-
+        `P` : str
         """
-        assert a >= 0 and b >= 0
-        if a == 0 and b == 0:
-            return 0
-        return self.euclid(a, b)
-
-    def euclid(self, a, b):
-        """
-        欧几里得算法
-        """
-        if b == 0:
-            return a
-        return self.euclid(b, a % b)
-
-    def extend_euclid(self, a, b):
-        """
-        推广欧几里得算法
-        """
-        if b == 0:
-            return (a, 1, 0)
-        (d_ , x_, y_) = self.extend_euclid(b, a % b)
-        d, x, y = d_, y_, x_ - (a // b) * y_
-        return (d, x, y)
-
-    def ismutualprime(self, a : int, b : int):
-        """
-        判断两个数是不是互质数
-        Args
-        ===
-        `a`: 数字1
-
-        `b`: 数字2
-        """
-        return self.gcd(a, b) == 1
-
-    def modular_linear_equation_solver(self, a, b, n):
-        """
-        求模线性方程组
-        """ 
-        d, x, y = self.extend_euclid(a, n)
-        if d or b:
-            x0 = x * (b / d) % n
-            for i in range(d):
-                print((x0 + i * (n / d)) % n)
-        else:
-            print('no solotion')
-
-    def modular_exponentiation(self, a, b, n):
-        """
-        运用反复平方法求数的幂
-        """
-        c = 0
-        d = 1
-        bit = bin(b)
-        bit = bit[2::]
-        bit_list = [int(c) for c in bit]
-        d_list = []
-        for b in bit_list:
-            c = 2 * c
-            d = (d * d) % n
-            if b == 1:
-                c += 1
-                d = (d * a) % n
-        return d
+        n = len(T)
+        m = len(P)
+        if n < m:
+            self.native_string_matcher(P, T)
+        for s in range(n - m + 1):
+            if P[0:m] == T[s:s + m]:
+                print('Pattern occurs with shift %d' % s)
     
-    def witness(self, a, n):
+    def rabin_karp_matcher(self, T : str, P : str, d, q):
         """
-        WIRNESS测试函数
+        Rabin-Karp字符串匹配算法
         """
-        bit_str = bin(n - 1)
+        n = len(T)
+        m = len(P)
+        h = d ** (m - 1) % q
+        p = 0
         t = 0
-        length = len(bit_str)
-        for i in range(length - 1, -1, -1):
-            if bit_str[i] == '0':
-                t += 1
-            else:
-                break
-        bit_str = bit_str[0:length - t]
-        u = int(bit_str, 2)
-        x = [0] * (t + 1)
-        x[0] = self.modular_exponentiation(a, u, n)
-        for i in range(1, t + 1):
-            x[i] = (x[i - 1] ** 2) % n
-            if x[i] == 1 and x[i - 1] != 1 and x[i - 1] != (n - 1):
-                return True
-        if x[t] != 1:
-            return True
-        return False
-
-    def miller_rabin(self, n, s):
+        for i in range(0, m):
+            p = (d * p + ord(P[i]) - ord('0')) % q
+            t = (d * t + ord(T[i]) - ord('0')) % q
+        for s in range(0, n - m + 1):
+            if p == t:
+                if P[0:m] == T[s:s + m]:
+                    print('Pattern occurs with shift %d' % s)
+            if s < n - m:
+                t = (d * (t - (ord(T[s]) - ord('0')) * h) + ord(T[s + m]) - ord('0')) % p
+    
+    def transition_function(self, q, Ti):
         """
-        Miller-Rabin随机性素数测试方法
+        变迁函数d
         """
-        for j in range(1, s + 1):
-            a = _rand.randint(1, n - 1)
-            if self.witness(a, n):
-                return "Composite"
-        return "Prime"
+        return q
 
-    def pollard_rho(self, n):
+    def finite_automaton_matcher(self, T, d, m):
         """
-        整数的因子分解 Pollard的rho启发式方法
-
-        Args
-        ===
-        `n` : 被分解的数字
-
+        字符串匹配自动机的简易过程
         """
-        i = 1
-        x = _rand.randint(0, n - 1)
-        y = x
-        k = 2
-        while True:
-            i += 1
-            x = (x ** 2 - 1) % n
-            d = self.gcd(y - x, n)
-            if d != 1 and d != n:
-                print(d)
-            if i == k:
-                y = x
-                k = 2 * k
+        n = len(T)
+        q = 0
+        for i in range(n):
+            q = self.transition_function(q, T[i])
+            if q == m:
+                print('Pattern occurs with shift %d' % (i - m))
 
-__number_theory_instance = _NumberTheory()
+    def compute_transition_function(self, P, sigma):
+        """
+        下列过程根据一个给定模式`P[1..m]`来计算变迁函数`epsilon`, 运行时间为`O(m^3|∑|)`
+        """
+        m = len(P)
+        for q in range(m + 1):
+            for a in sigma:
+                k = min(m + 1, q + 2)
+                while P[k] != P[q]:
+                    k -= 1
+                epsilon = k
+        return epsilon
+    
+    def compute_ptefix_function(self, P):
+        """
+        """
+        m = len(P)
+        pi = [0] * m
+        k = 0
+        for q in range(1, m):
+            while k > 0 and P[k + 1] != P[q]:
+                k = pi[k]
+            if P[k + 1] == P[q]:
+                k += 1
+            pi[q] = k
+        return pi
 
-gcd = __number_theory_instance.gcd
-euclid = __number_theory_instance.euclid
-extend_euclid = __number_theory_instance.extend_euclid
-ismutualprime = __number_theory_instance.ismutualprime
-modular_linear_equation_solver = __number_theory_instance.modular_linear_equation_solver
-modular_exponentiation = __number_theory_instance.modular_exponentiation
-miller_rabin = __number_theory_instance.miller_rabin
-pollard_rho = __number_theory_instance.pollard_rho
+    def kmp_matcher(self, T, P):
+        """
+        Knuth-Morris-Pratt字符串匹配算法
+        """
+        n = len(T)
+        m = len(P)
+        pi = self.compute_ptefix_function(P)
+        q = 0
+        for i in range(n):
+            while q >= 0 and P[q + 1] != T[i]:
+                q = pi[q]
+                if P[q + 1] == T[i]:
+                    q = q + 1
+                if q == m:
+                    print('Pattern occurs with shift %d' (i - m))
+                    q = pi[q]
+
+    def repeat_factor(self, s):
+        """
+        求字符串中的重复因子
+        """
+        return list(map(lambda c : ord(c) ,s))
+
+    def repetition_matcher(self, P, T):
+        """
+        """
+        m = len(P)
+        n = len(T)
+        k = 1 + max(self.repeat_factor(P))
+        q = 0
+        s = 0
+        while s <= n - m:
+            if T[s + q + 1] == P[q + 1]:
+                q += 1
+                if q == m:
+                    print('Pattern occurs with shift %d' % s)
+            if q == m or T[s + q + 1] != P[q + 1]:
+                s = s + max(1, q // k)
+                q = 0
+
+_inst = _StringMatch()
+
+native_string_matcher = _inst.native_string_matcher
+rabin_karp_matcher = _inst.rabin_karp_matcher
+finite_automaton_matcher = _inst.finite_automaton_matcher
+compute_transition_function = _inst.compute_transition_function
+kmp_matcher = _inst.kmp_matcher
 
 def test():
     """
     测试函数
     """
-    print(gcd(24, 30))
-    print(euclid(24, 30))
-    print(extend_euclid(24, 30))
-    print(gcd(24, 30))
-    print(modular_linear_equation_solver(14, 30, 100))
-    print(modular_exponentiation(7, 560, 561))
-    print(miller_rabin(561, 10))
-    print(pollard_rho(12))
+    native_string_matcher('eeabaaee', 'abaa')
+    native_string_matcher('abc', 'dccabcd')
+    native_string_matcher('3141592653589793', '26')
+    rabin_karp_matcher('3141592653589793', '26', 10, 11)
+    kmp_matcher('aabbcc', 'bb')
 
 if __name__ == '__main__':
     test()
@@ -204,4 +172,4 @@ else:
 
 ```
 
-[Github Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/blob/master/src/chapter31)
+[Github Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/blob/master/src/chapter32)
