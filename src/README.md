@@ -12,7 +12,7 @@
 
 * [Chapter4 递归式](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter4)
 
-* [Chapter5 概率分析和随机算法](https://github.com/Peefy/IntroductionToAlgorithm.Pythonr/tree/master/src/chapter5)
+* [Chapter5 概率分析和随机算法](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter5)
 
 * [Chapter6 堆排序](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter6)
 
