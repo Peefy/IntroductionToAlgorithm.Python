@@ -10,6 +10,8 @@ redirect_from:
 
 # Sorting Algorithms（排序算法）
 
+<img src="https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/dugulib/sort.png"/>
+
 ## *Fisrt*
 
 冒泡排序 `O(n^2)`     
@@ -508,6 +510,29 @@ def bubblesort(self, array : list) -> list:
         '''
         return __stoogesort(A, 0, len(A) - 1)
 ```
+
+### *希尔排序* `O(nlgn)` 
+
+```python
+
+def shellsort(self, A : list):
+    """
+    希尔排序 时间复杂度为:O(nlogn) 原地排序
+    """
+    n = len(A)
+    fraction = n // 2
+    while fraction > 0:
+        for i in range(fraction, n):
+            for j in range(i - fraction, -1, -fraction):
+                if A[j] > A[j + fraction]:
+                    A[j], A[j + fraction] = A[j + fraction], A[j]
+                else:
+                    break
+        fraction //= 2
+    return A
+
+```
+
 
 
 [Github Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/dugulib)

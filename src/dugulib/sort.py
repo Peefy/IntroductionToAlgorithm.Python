@@ -492,6 +492,22 @@ class Sort:
         '''
         return __stoogesort(A, 0, len(A) - 1)
 
+    def shellsort(self, A : list):
+        """
+        希尔排序 时间复杂度为:O(nlogn) 原地排序
+        """
+        n = len(A)
+        fraction = n // 2
+        while fraction > 0:
+            for i in range(fraction, n):
+                for j in range(i - fraction, -1, -fraction):
+                    if A[j] > A[j + fraction]:
+                        A[j], A[j + fraction] = A[j + fraction], A[j]
+                    else:
+                        break
+            fraction //= 2
+        return A
+
     def countingsort2(self, A):
         '''
         计数排序，无需比较，非原地排序，时间复杂度`Θ(n)`
@@ -714,6 +730,7 @@ mergesort = _inst.mergesort
 heapsort = _inst.heapsort
 quicksort = _inst.quicksort
 stoogesort = _inst.stoogesort
+shellsort = _inst.shellsort
 
 def test():
     '''
@@ -735,6 +752,7 @@ def test():
     print(mergesort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print(heapsort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print(quicksort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
+    print(shellsort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print('module sort test successful!!')
 
 if __name__ == '__main__':
