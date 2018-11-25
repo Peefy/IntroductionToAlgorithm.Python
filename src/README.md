@@ -2,7 +2,7 @@
 
 *Introduction To Algorithm* book study of Peefy.
 
-算法导论 **Introduction to Algorithms**
+## 算法导论 **Introduction to Algorithms**
 
 * [Chapter1 算法在计算中的作用](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter1)
 
@@ -73,6 +73,12 @@
 * [Chapter34 NP完全性](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter34)
 
 * [Chapter35 近似算法](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/chapter35)
+
+## 算法汇总
+
+* [排序算法汇总](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/dugulib)
+
+* [图算法汇总](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/graph.py)
 
 ## Requirement:
 
