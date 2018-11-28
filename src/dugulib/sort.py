@@ -726,8 +726,8 @@ def quicksort_oneline(arr):
     return arr if len(arr) < 2 else (quicksort_oneline([i for i in arr[1:] if i <= arr[0]]) + [arr[0]] + quicksort_oneline([i for i in arr[1:] if i > arr[0]]))
 
 def mergesort_fivelines(arr):
-    if len(arr) < 3:
-        return arr if len(arr) == 1 else (arr[::-1] if arr[0] > arr[-1] else arr)
+    if len(arr) < 2:
+        return arr 
     else: 
         left = mergesort_fivelines(arr[0 : len(arr) // 2])
         right = mergesort_fivelines(arr[len(arr) // 2:])
