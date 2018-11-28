@@ -725,13 +725,29 @@ class Sort:
 def quicksort_oneline(arr):
     return arr if len(arr) < 2 else (quicksort_oneline([i for i in arr[1:] if i <= arr[0]]) + [arr[0]] + quicksort_oneline([i for i in arr[1:] if i > arr[0]]))
 
-def mergesort_fivelines(arr):
+def merge(a, b):
+    ret = []
+    i = j = 0
+    while len(a) >= i + 1 and len(b) >= j + 1:
+        if a[i] <= b[j]:
+            ret.append(a[i])
+            i += 1
+        else:
+            ret.append(b[j])
+            j += 1
+    if len(a) > i:
+        ret += a[i:]
+    if len(b) > j:
+        ret += b[j:]
+    return ret
+
+def mergesort_easy(arr):
     if len(arr) < 2:
         return arr 
     else: 
-        left = mergesort_fivelines(arr[0 : len(arr) // 2])
-        right = mergesort_fivelines(arr[len(arr) // 2:])
-        return right + left if left[-1] > right[-1] else left + right
+        left = mergesort_easy(arr[0 : len(arr) // 2])
+        right = mergesort_easy(arr[len(arr) // 2:])
+        return merge(left, right)
 
 _inst = Sort()
 insertsort = _inst.insertsort
@@ -765,7 +781,7 @@ def test():
     print(quicksort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print(shellsort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print(quicksort_oneline([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
-    print(mergesort_fivelines([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
+    print(mergesort_easy([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print('module sort test successful!!')
 
 if __name__ == '__main__':

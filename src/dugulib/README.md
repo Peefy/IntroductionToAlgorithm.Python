@@ -309,17 +309,33 @@ def bubblesort(self, array : list) -> list:
         return self.__mergeSort(array, 0, len(array) - 1)
 ```
 
-### 合并排序的五行代码实现 `O(nlgn)`  
+### 合并排序的简易实现 `O(nlgn)`  
 
 ```python
 
-def mergesort_fivelines(arr):
+def merge(a, b):
+    ret = []
+    i = j = 0
+    while len(a) >= i + 1 and len(b) >= j + 1:
+        if a[i] <= b[j]:
+            ret.append(a[i])
+            i += 1
+        else:
+            ret.append(b[j])
+            j += 1
+    if len(a) > i:
+        ret += a[i:]
+    if len(b) > j:
+        ret += b[j:]
+    return ret
+
+def mergesort_easy(arr):
     if len(arr) < 2:
         return arr 
     else: 
-        left = mergesort_fivelines(arr[0 : len(arr) // 2])
-        right = mergesort_fivelines(arr[len(arr) // 2:])
-        return right + left if left[-1] > right[-1] else left + right
+        left = mergesort_easy(arr[0 : len(arr) // 2])
+        right = mergesort_easy(arr[len(arr) // 2:])
+        return merge(left, right)
 
 ```
 
