@@ -487,6 +487,15 @@ def bubblesort(self, array : list) -> list:
 
 ```
 
+### 非原地快排的一行代码实现
+
+```python
+
+def quicksort_oneline(arr):
+    return arr if len(arr) < 2 else (quicksort_oneline([i for i in arr[1:] if i <= arr[0]]) + [arr[0]] + quicksort_oneline([i for i in arr[1:] if i > arr[0]]))
+
+```
+
 ### *Stooge排序* `O(n^2.7)`
 
 ```python
@@ -532,7 +541,5 @@ def shellsort(self, A : list):
     return A
 
 ```
-
-
 
 [Github Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/dugulib)

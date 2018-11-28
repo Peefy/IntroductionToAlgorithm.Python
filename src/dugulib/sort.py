@@ -722,6 +722,9 @@ class Sort:
         '''
         return list(self.__find_matching_kettle(kettles1, kettles2))
 
+def quicksort_oneline(arr):
+    return arr if len(arr) < 2 else (quicksort_oneline([i for i in arr[1:] if i <= arr[0]]) + [arr[0]] + quicksort_oneline([i for i in arr[1:] if i > arr[0]]))
+
 _inst = Sort()
 insertsort = _inst.insertsort
 selectsort = _inst.selectsort
@@ -753,6 +756,7 @@ def test():
     print(heapsort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print(quicksort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print(shellsort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
+    print(quicksort_oneline([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print('module sort test successful!!')
 
 if __name__ == '__main__':
