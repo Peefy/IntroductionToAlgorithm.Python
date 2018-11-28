@@ -309,6 +309,20 @@ def bubblesort(self, array : list) -> list:
         return self.__mergeSort(array, 0, len(array) - 1)
 ```
 
+### *5行代码的合并排序* `O(nlgn)`  
+
+```python
+
+def mergesort_fivelines(arr):
+    if len(arr) < 3:
+        return arr if len(arr) == 1 else (arr[::-1] if arr[0] > arr[-1] else arr)
+    else: 
+        left = mergesort_fivelines(arr[0 : len(arr) // 2])
+        right = mergesort_fivelines(arr[len(arr) // 2:])
+        return right + left if left[-1] > right[-1] else left + right
+
+```
+
 ### *二叉堆排序* `O(nlgn)`  
 
 ```python

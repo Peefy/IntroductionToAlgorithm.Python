@@ -725,6 +725,14 @@ class Sort:
 def quicksort_oneline(arr):
     return arr if len(arr) < 2 else (quicksort_oneline([i for i in arr[1:] if i <= arr[0]]) + [arr[0]] + quicksort_oneline([i for i in arr[1:] if i > arr[0]]))
 
+def mergesort_fivelines(arr):
+    if len(arr) < 3:
+        return arr if len(arr) == 1 else (arr[::-1] if arr[0] > arr[-1] else arr)
+    else: 
+        left = mergesort_fivelines(arr[0 : len(arr) // 2])
+        right = mergesort_fivelines(arr[len(arr) // 2:])
+        return right + left if left[-1] > right[-1] else left + right
+
 _inst = Sort()
 insertsort = _inst.insertsort
 selectsort = _inst.selectsort
@@ -757,6 +765,7 @@ def test():
     print(quicksort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print(shellsort([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print(quicksort_oneline([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
+    print(mergesort_fivelines([8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0]))
     print('module sort test successful!!')
 
 if __name__ == '__main__':
