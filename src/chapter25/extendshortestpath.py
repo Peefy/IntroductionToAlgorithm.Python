@@ -205,6 +205,9 @@ def test_show_all_pairs_shortest_paths():
     pi = getpimatrix(g, L, W)
     print(pi)
 
+    print(show_all_pairs_shortest_paths([[0,5,4],[_math.inf, 0, 7], [1, _math.inf, 0]]))
+    print(show_all_pairs_shortest_paths([[0,5,4],[-1, 0, 7], [1, -1, 0]]))
+
 def test_floyd_warshall():
     g = _g.Graph()
     vertexs = ['1', '2', '3', '4', '5']
