@@ -78,7 +78,7 @@
 
 * [排序算法汇总](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/dugulib)
 
-* [图算法汇总](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/graph.py)
+* [图算法汇总](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/dugulib/graph.py)
 
 ## Requirement:
 
