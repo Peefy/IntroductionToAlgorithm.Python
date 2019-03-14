@@ -80,6 +80,8 @@
 
 * [图算法汇总](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/dugulib/graph.py)
 
+* [二叉树算法汇总](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src/dugulib/tree.py)
+
 ## Requirement:
 
 * *Python3+ Sdk*
