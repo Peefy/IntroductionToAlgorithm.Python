@@ -6,6 +6,10 @@
 
 ## [Source Code](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/src)
 
+## [Note(Code Version)](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/doc/NOTECODE.md)
+
+## [Note(Txt Version)](https://github.com/Peefy/IntroductionToAlgorithm.Python/tree/master/doc/NOTE.md)
+
 ## Requirement
 
 * *Python3.5+ Sdk*
